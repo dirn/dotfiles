@@ -63,19 +63,6 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias "$method"="lwp-request -m '$method'"
 done
 
-# Move around
-alias godev='cd ~/development'
-alias gocbs='cd ~/development/cbs'
-
-# Utilities
-alias makecbsdata='python manage.py dumpdata cbs.Timezone cbs.Market --indent 2 > ~/development/cbs/django/django-cbs/cbs/fixtures/initial_data.json'
-alias sassit='sass --watch . --style compressed'
-alias sphinxit='sphinx-build -b html . build/'
-
-# Application shortcuts
-alias mate="'/Applications/TextMate.app/Contents/SharedSupport/Support/bin/mate'"
-alias subl="'/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl'"
-
 # Virtualenv
 alias stop='deactivate'
 

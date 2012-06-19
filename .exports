@@ -1,6 +1,3 @@
-export VIP_DEPLOY_GIT_PATH='/Users/dirn/development/cbs/deploy/cache/'
-export VIP_DEPLOY_SVN_PATH='/Users/dirn/development/cbs/vip/'
-
 export PATH=$PATH:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin
 
 export NODE_PATH='/usr/local/lib/node'
