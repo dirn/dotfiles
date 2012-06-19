@@ -73,13 +73,14 @@ alias sassit='sass --watch . --style compressed'
 alias sphinxit='sphinx-build -b html . build/'
 
 # Application shortcuts
+alias mate="'/Applications/TextMate.app/Contents/SharedSupport/Support/bin/mate'"
 alias subl="'/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl'"
 
 # Virtualenv
 alias stop='deactivate'
 
 # PHP nonsense
-alias pear='php /usr/lib/php/pear/pearcmd.php' 
+alias pear='php /usr/lib/php/pear/pearcmd.php'
 alias pecl='php /usr/lib/php/pear/peclcmd.php'
 
 # Reload the .bash_profile
