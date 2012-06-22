@@ -1,0 +1,24 @@
+[user]
+	name = Andy Dirnberger
+	email = dirn@dirnonline.com
+[credential]
+	helper = osxkeychain
+[alias]
+	ci = commit
+	co = checkout
+	rb = rebate
+	st = status
+	graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	rewind = reset --soft HEAD~`
+	switch = !legit switch \"$@\"
+	branches = !legit branches
+	sprout = !legit sprout \"$@\"
+	unpublish = !legit unpublish \"$@\"
+	harvest = !legit harvest \"$@\"
+	sync = !legit sync \"$@\"
+	publish = !legit publish \"$@\"
+	graft = !legit graft \"$@\"
+[color]
+	ui = true
+[core]
+	editor = nano
