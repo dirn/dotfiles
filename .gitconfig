@@ -22,3 +22,5 @@
 	ui = true
 [core]
 	editor = nano
+[mergetool]
+	keepBackup = true
