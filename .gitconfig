@@ -19,6 +19,8 @@
 	publish = !legit publish \"$@\"
 	graft = !legit graft \"$@\"
 	amend = commit --amend
+    patch = commit --patch -v
+    locate = ls-tree --name-only -r HEAD
 [color]
 	ui = true
 [core]
