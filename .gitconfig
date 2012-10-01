@@ -18,6 +18,7 @@
 	sync = !legit sync \"$@\"
 	publish = !legit publish \"$@\"
 	graft = !legit graft \"$@\"
+	amend = commit --amend
 [color]
 	ui = true
 [core]
