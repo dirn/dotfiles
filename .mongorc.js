@@ -1,0 +1,3 @@
+prompt = function() {
+    return '(' + db + ')> ';
+};
