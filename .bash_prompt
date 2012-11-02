@@ -15,12 +15,6 @@ if [ -f /opt/local/etc/bash_completion ]; then
 fi
 
 #PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\] \$ '
-function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo " *"
-}
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ [\1$(parse_git_dirty)]/"
-}
 #export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[36m\]\w\[\e[35m\]$(parse_git_branch)\[\033[00m\] \$ '
 
 # @gf3’s Sexy Bash Prompt, inspired by “Extravagant Zsh Prompt”
@@ -69,7 +63,10 @@ export BOLD
 export RESET
 
 function parse_git_dirty() {
-	[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+    # Git >= 1.8, see https://github.com/git/git/commit/50bd8b7eb960ff7a646195e0751b48a0e57e03ad
+    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working directory clean" ]] && echo "*"
+    # Git < 1.8
+    # [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
 }
 
 function parse_git_branch() {
