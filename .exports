@@ -1,4 +1,4 @@
-export PATH=/usr/local/bin:/Applications/Postgres.app/Contents/MacOS/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/share/python:/Applications/Postgres.app/Contents/MacOS/bin:$PATH
 
 export NODE_PATH='/usr/local/lib/node'
 
