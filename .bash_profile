@@ -30,4 +30,5 @@ complete -W "NSGlobalDomain" defaults
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
 source /usr/local/etc/bash_completion.d/git-completion.bash
+source /usr/local/etc/bash_completion.d/django_bash_completion
 source /usr/local/bin/virtualenvwrapper.sh
