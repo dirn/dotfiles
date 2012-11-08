@@ -21,9 +21,12 @@
 	amend = commit --amend
     patch = commit --patch -v
     locate = ls-tree --name-only -r HEAD
+    restore = !git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
 [color]
 	ui = true
 [core]
 	editor = nano
 [mergetool]
 	keepBackup = true
+[heroku]
+	account = me
