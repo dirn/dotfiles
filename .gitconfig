@@ -22,6 +22,7 @@
     patch = commit --patch -v
     locate = ls-tree --name-only -r HEAD
     restore = !git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
+    missing = !git log --no-merges "$1" ^"$2"
 [color]
 	ui = true
 [core]
