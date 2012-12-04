@@ -4,8 +4,10 @@
 [credential]
 	helper = osxkeychain
 [alias]
+    br = branch
 	ci = commit
 	co = checkout
+    cp = cherry-pick
 	rb = rebate
 	st = status
 	graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
@@ -23,6 +25,13 @@
     locate = ls-tree --name-only -r HEAD
     restore = !git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
     missing = !git log --no-merges "$1" ^"$2"
+    ls = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --numstat
+    when = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --date=relative
+    pretty = log --oneline --decorate
+    modified = !git ll -1
+    last = diff --cached HEAD^
+    aliases = !git config -l | grep alias | cut -c 7-
 [color]
 	ui = true
 [core]
