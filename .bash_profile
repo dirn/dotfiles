@@ -31,4 +31,4 @@ complete -W "NSGlobalDomain" defaults
 
 source /usr/local/etc/bash_completion.d/git-completion.bash
 source /usr/local/etc/bash_completion.d/django_bash_completion
-source /usr/local/bin/virtualenvwrapper.sh
+source /usr/local/share/python/virtualenvwrapper.sh
