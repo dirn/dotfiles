@@ -3,6 +3,12 @@ function md() {
 	mkdir -p "$@" && cd "$@"
 }
 
+# Change the current window's title
+function xtitle() {
+    unset PROMPT_COMMAND
+    echo -ne "\033]0;$@\007"
+}
+
 # Use Git’s colored diff when available
 hash git &>/dev/null
 if [ $? -eq 0 ]; then
