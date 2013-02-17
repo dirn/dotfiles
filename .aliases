@@ -66,9 +66,5 @@ done
 # Virtualenv
 alias stop='deactivate'
 
-# PHP nonsense
-alias pear='php /usr/lib/php/pear/pearcmd.php'
-alias pecl='php /usr/lib/php/pear/peclcmd.php'
-
 # Reload the .bash_profile
 alias resource='source ~/.bash_profile'
