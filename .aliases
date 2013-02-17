@@ -22,7 +22,6 @@ fi
 alias sudo='sudo '
 
 # Get OS X Software Updates, update Homebrew itself, and upgrade installed Homebrew packages
-#alias update='sudo softwareupdate -i -a; brew update; brew upgrade'
 alias update='brew update; brew upgrade'
 
 # IP addresses
