@@ -12,8 +12,8 @@
 	st = status
 	graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 	rewind = reset --soft HEAD~1
-	diaf = reset --hard HEAD
-	fml = push --force
+	fml = reset --hard HEAD
+	sigh = push --force
 	switch = !legit switch \"$@\"
 	branches = !legit branches
 	sprout = !legit sprout \"$@\"
