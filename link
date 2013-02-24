@@ -8,7 +8,7 @@ def link(origin, destination):
 
 
 if __name__ == '__main__':
-    HOME = os.path.expanduser('~')
+    home = os.path.expanduser('~')
     excludes = ('.DS_Store', '.gitmodules')
 
     for file in os.listdir('.'):
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         if not os.path.isfile(file):
             continue
 
-        destination_file = os.path.join(HOME, file)
+        destination_file = os.path.join(home, file)
 
         if os.path.exists(destination_file):
             print '{} already exists'.format(file)
