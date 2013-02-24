@@ -9,7 +9,7 @@ def link(origin, destination):
 
 if __name__ == '__main__':
     HOME = os.path.expanduser('~')
-    excludes = ('.DS_Store',)
+    excludes = ('.DS_Store', '.gitmodules')
 
     for file in os.listdir('.'):
         if not file.startswith('.'):
