@@ -18,7 +18,7 @@ if __name__ == '__main__':
         if file in excludes:
             continue
 
-        if not os.path.isfile(file):
+        if not (os.path.isfile(file) or os.path.islink(file)):
             continue
 
         destination_file = os.path.join(home, file)
