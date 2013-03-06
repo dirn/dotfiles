@@ -37,7 +37,7 @@
 [color]
 	ui = true
 [core]
-	editor = nano
+	editor = vim
 [mergetool]
 	keepBackup = false
 [heroku]
