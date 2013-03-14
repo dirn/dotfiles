@@ -75,3 +75,8 @@ function codepoint() {
 	perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))"
 	echo # newline
 }
+
+# Spell check a file
+function spellcheck() {
+    aspell --run-together-limit=3 -C list < "$1" | sort -f | uniq -ci | sort
+}
