@@ -68,3 +68,6 @@ alias mongo-start='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.p
 
 # Reload the .bash_profile
 alias resource='source ~/.bash_profile'
+
+# Use hub instead of Git directly
+alias git='hub'
