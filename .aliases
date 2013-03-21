@@ -68,3 +68,6 @@ alias mongo-start='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.p
 
 # Use hub instead of Git directly
 alias git='hub'
+
+# Use Rhino
+alias js='rhino'
