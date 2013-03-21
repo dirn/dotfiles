@@ -48,3 +48,5 @@ export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENV_USE_DISTRIBUTE=true
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 source virtualenvwrapper_lazy.sh
+
+eval "$(rbenv init -)"
