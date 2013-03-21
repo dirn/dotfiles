@@ -37,7 +37,7 @@ plugins=(heroku nyan)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/share/npm/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/share/npm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 
 for file in ~/.{extra,exports,aliases,functions}; do
     [ -r "$file" ] && source "$file"
