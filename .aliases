@@ -66,8 +66,5 @@ alias stop='deactivate'
 alias mongo-stop='launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist'
 alias mongo-start='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist'
 
-# Reload the .bash_profile
-alias resource='source ~/.bash_profile'
-
 # Use hub instead of Git directly
 alias git='hub'
