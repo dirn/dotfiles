@@ -78,6 +78,9 @@ if has("autocmd")
     \   exe "normal! g`\"" |
     \ endif
 
+  " Trim trailing whitespace on save
+  autocmd BufWritePre <buffer> :%s/\s\+$//e
+
   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
   augroup END
