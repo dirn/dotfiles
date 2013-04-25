@@ -11,6 +11,7 @@ Bundle 'gmarik/vundle'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 " --- Plugins ---
+Bundle 'nvie/vim-flake8'
 Bundle 'tpope/vim-fugitive'
 
 " --- Configuration
@@ -126,3 +127,15 @@ augroup filetypes
     " Reload .vimrc if changes are made to it
     autocmd BufWritePost .vimrc source $MYVIMRC
 augroup END
+
+" --- Plugin configuration ---
+
+" --- vim-flake8 ---
+let g:flake8_ignore="W391"
+
+if has('autocmd')
+    augroup flake8
+        " Automatically run flake8 on save
+        autocmd BufWritePost *.py call Flake8()
+    augroup END
+endif
