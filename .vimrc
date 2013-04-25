@@ -1,104 +1,128 @@
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2008 Dec 17
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
-
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
-
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
+" --- Vundle ---
+filetype off
+set runtimepath+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
-set colorcolumn=73,80       " show rules after 72 and 79
-set spell
+Bundle 'gmarik/vundle'
 
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
+" --- Themes ---
+Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
+" --- Plugins ---
+Bundle 'tpope/vim-fugitive'
 
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
-
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  " Also don't do it when the mark is in the first line, that is the default
-  " position when opening a file.
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-
-  " Trim trailing whitespace on save
-  autocmd BufWritePre <buffer> :%s/\s\+$//e
-
-  au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-
-  augroup END
-
-else
-
-  set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
-endif
-
+" --- Configuration
 syntax on
-filetype indent plugin on
-au FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+filetype plugin indent on
+
+set encoding=utf8
+set lazyredraw                  " no redraw during macros (much faster)
+set linebreak
+set nowrap
+set report=0                    " :cmd always shows changed line count
+set textwidth=79
+
+" --- Guides ---
+set cursorline                  " highlight current line
+set showmatch                   " show matching brackets ...
+set matchpairs+=<:>
+set matchtime=5                 " ... for 5 seconds
+
+" Show a rule
+if exists('&colorcolumn')
+    highlight ColorColumn guibg=Red
+    set colorcolumn=+1
+endif
+
+" --- History ---
+set history=256
+
+" --- Appearance ---
+set background=dark
+
+if &t_Co > 8
+    set t_Co=256
+    colorscheme tomorrow-night-bright
+endif
+
+set laststatus=2                " also show status line
+set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
+
+set display+=lastline
+set listchars=tab:▸\ ,eol:¬
+
+set ruler                       " show the cursor position
+
+set scrolloff=2                 " lines above and below the current line
+set sidescrolloff=2
+
+set number                      " show line numbers
+
+" --- Behavior ---
+set confirm
+
+set backspace=indent,eol,start  " allow backspacing everywhere in edit mode
+
+set spell                       " use spell check
+
+set timeoutlen=500
+
+" --- Search ---
+set ignorecase                  " make search case insensitive ...
+set smartcase                   " ... unless an uppercase character is used
+set incsearch
+set hlsearch
+
+" --- Whitespace ---
+set autoindent
+
+set expandtab                   " spaces > tabs
+set shiftround                  " indents to a multiple of shiftwidth
+set shiftwidth=4
+set softtabstop=4
+set tabstop=8
+
+" --- Mappings ---
+nmap <c-u> mzeb<c-v>eU`z        " make word uppercase
+nmap <c-l> mzeb<c-v>eu`z        " make word lowercase
+
+" --- Typos ---
+:iabbrev functino function      " this one has plagued me for years
+
+" --- Autocmds ---
+if has('autocmd') && has('eval')
+    augroup misc
+        au!
+
+        " Trim trailing whitespace on save
+        autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+        " Jump to the last known cursor position if it's valid (from the docs)
+        autocmd BufReadPost *
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal g`\"" |
+            \ endif
+    augroup END
+endif
+
+" --- Filetypes ---
+augroup filetypes
+    au!
+
+    " --- Git ---
+    " Put cursor back at beginning of commit message
+    autocmd BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+    " Commit messages should only be 72 characters, not 79
+    autocmd BufEnter COMMIT_EDITMSG setlocal colorcolumn=73
+    autocmd BufEnter COMMIT_EDITMSG setlocal textwidth=72
+
+    " --- Python ---
+    " Long comments and strings should only be 72 characters, not 79
+    autocmd BufEnter *.py setlocal colorcolumn=73,80
+
+    " --- .vimrc
+    " Reload .vimrc if changes are made to it
+    autocmd BufWritePost .vimrc source $MYVIMRC
+augroup END
