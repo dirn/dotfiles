@@ -86,8 +86,10 @@ set softtabstop=4
 set tabstop=8
 
 " --- Mappings ---
-nmap <c-u> mzeb<c-v>eU`z        " make word uppercase
-nmap <c-l> mzeb<c-v>eu`z        " make word lowercase
+" Make word uppercase
+nnoremap          <c-u>             mzeb<c-v>eU`z
+" Make word lowercase
+nnoremap          <c-l>             mzeb<c-v>eu`z
 
 " --- Typos ---
 :iabbrev functino function      " this one has plagued me for years
