@@ -91,6 +91,13 @@ nnoremap          <c-u>             mzeb<c-v>eU`z
 " Make word lowercase
 nnoremap          <c-l>             mzeb<c-v>eu`z
 
+" Don't use the cursor keys
+for prefix in ['i', 'n', 'v']
+    for key in ['<up>', '<right>', '<down>', '<left>']
+        exe prefix . 'noremap ' . key . ' <nop>'
+    endfor
+endfor
+
 " --- Typos ---
 :iabbrev functino function      " this one has plagued me for years
 
