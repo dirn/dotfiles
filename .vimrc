@@ -48,7 +48,7 @@ if &t_Co > 8
     colorscheme tomorrow-night-bright
 endif
 
-set laststatus=2                " also show status line
+set laststatus=2                " always show status line
 set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
 
 set display+=lastline
