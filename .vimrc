@@ -144,6 +144,8 @@ let g:flake8_ignore="W391"
 
 if has('autocmd')
     augroup flake8
+        au!
+
         " Automatically run flake8 on save
         autocmd BufWritePost *.py call Flake8()
     augroup END
