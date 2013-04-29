@@ -87,9 +87,9 @@ set tabstop=8
 
 " --- Mappings ---
 " Make word uppercase
-nnoremap          <c-u>             mzeb<c-v>eU`z
+nnoremap          <c-u>             gUiw
 " Make word lowercase
-nnoremap          <c-l>             mzeb<c-v>eu`z
+nnoremap          <c-l>             guiw
 
 " Don't use the cursor keys
 for prefix in ['i', 'n', 'v']
