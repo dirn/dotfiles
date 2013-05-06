@@ -91,12 +91,18 @@ nnoremap          <c-u>             gUiw
 " Make word lowercase
 nnoremap          <c-l>             guiw
 
+" Exit insert mode
+inoremap          jk                <esc>
+
 " Don't use the cursor keys
 for prefix in ['i', 'n', 'v']
     for key in ['<up>', '<right>', '<down>', '<left>']
         exe prefix . 'noremap ' . key . ' <nop>'
     endfor
 endfor
+
+" Retrain my brain
+inoremap          <esc>             <nop>
 
 " --- Typos ---
 :iabbrev functino function      " this one has plagued me for years
