@@ -156,3 +156,18 @@ if has('autocmd')
         autocmd BufWritePost *.py call Flake8()
     augroup END
 endif
+
+" --- Learn Vimscript the Hard Way ---
+let mapleader=","
+let maplocalleader="\\"
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap H 0
+nnoremap L $
+nnoremap pb :exe "rightbelow vsplit " . bufname('#')<cr>
+
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
