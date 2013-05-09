@@ -11,6 +11,7 @@ Bundle 'gmarik/vundle'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 " --- Plugins ---
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'nvie/vim-flake8'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
@@ -50,7 +51,6 @@ if &t_Co > 8
 endif
 
 set laststatus=2                " always show status line
-set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
 
 set display+=lastline
 set listchars=tab:▸\ ,eol:¬
@@ -166,6 +166,9 @@ let g:NERDTreeShowBookmarks=1
 let g:NERDTreeShowHidden=1
 
 nnoremap <leader>fs :NERDTreeToggle<cr>
+
+" --- Powerline ---
+let g:Powerline_symbols='unicode'
 
 " --- Learn Vimscript the Hard Way ---
 let mapleader=","
