@@ -13,6 +13,7 @@ Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 " --- Plugins ---
 Bundle 'nvie/vim-flake8'
 Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/nerdtree'
 
 " --- Configuration
 syntax on
@@ -156,6 +157,15 @@ if has('autocmd')
         autocmd BufWritePost *.py call Flake8()
     augroup END
 endif
+
+" --- NERD Tree ---
+let g:NERDTreeChDirMode=2
+let g:NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$', '\.git$', '\.egg\-info', '\.coverage', '\.tox', '.DS_Store']
+let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\~$']
+let g:NERDTreeShowBookmarks=1
+let g:NERDTreeShowHidden=1
+
+nnoremap <leader>fs :NERDTreeToggle<cr>
 
 " --- Learn Vimscript the Hard Way ---
 let mapleader=","
