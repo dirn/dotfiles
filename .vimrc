@@ -100,6 +100,9 @@ nnoremap          <c-u>             mqgUiw`q
 " Make word lowercase
 nnoremap          <c-l>             mqguiw`q
 
+" Clear search
+nnoremap <silent> <leader>cl        :let @/=''<cr>
+
 " Exit insert mode
 inoremap          jk                <esc>
 
