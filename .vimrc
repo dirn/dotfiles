@@ -12,6 +12,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 " --- Plugins ---
+Bundle 'airblade/vim-gitgutter'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'nvie/vim-flake8'
 Bundle 'tpope/vim-fugitive'
@@ -176,6 +177,12 @@ nnoremap <leader>fs :NERDTreeToggle<cr>
 
 " --- Powerline ---
 let g:Powerline_symbols='unicode'
+
+" --- Git Gutter ---
+highlight clear SignColumn  " same as the row number column
+highlight GitGutterAddDefault          guifg=Green  guibg=NONE  ctermfg=DarkGreen   ctermbg=NONE
+highlight GitGutterChangeDefault       guifg=Yellow guibg=NONE  ctermfg=DarkYellow  ctermbg=NONE
+highlight GitGutterDeleteDefault       guifg=Red    guibg=NONE  ctermfg=DarkRed     ctermbg=NONE
 
 " --- Learn Vimscript the Hard Way ---
 let mapleader=","
