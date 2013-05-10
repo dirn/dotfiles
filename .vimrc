@@ -48,7 +48,7 @@ set history=256
 " --- Appearance ---
 set background=dark
 
-if &t_Co > 8
+if has('gui_running') || &t_Co > 8
     set t_Co=256
 
     colorscheme solarized
