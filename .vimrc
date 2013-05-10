@@ -28,6 +28,8 @@ set nowrap
 set report=0                    " :cmd always shows changed line count
 set textwidth=79
 
+set mouse=a                     " turn on mouse support
+
 " --- Guides ---
 set cursorline                  " highlight current line
 set showmatch                   " show matching brackets ...
