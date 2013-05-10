@@ -96,9 +96,9 @@ set tabstop=8
 
 " --- Mappings ---
 " Make word uppercase
-nnoremap          <c-u>             gUiw
+nnoremap          <c-u>             mqgUiw`q
 " Make word lowercase
-nnoremap          <c-l>             guiw
+nnoremap          <c-l>             mqguiw`q
 
 " Exit insert mode
 inoremap          jk                <esc>
