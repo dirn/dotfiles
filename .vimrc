@@ -8,6 +8,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " --- Themes ---
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 " --- Plugins ---
@@ -47,7 +48,11 @@ set background=dark
 
 if &t_Co > 8
     set t_Co=256
-    colorscheme tomorrow-night-bright
+
+    colorscheme solarized
+    let g:solarized_termcolors=256
+    let g:solarized_visibility="high"
+    let g:solarized_contrast="high"
 endif
 
 set laststatus=2                " always show status line
