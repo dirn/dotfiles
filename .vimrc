@@ -17,6 +17,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'nvie/vim-flake8'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
 
 " --- Configuration
 syntax on
