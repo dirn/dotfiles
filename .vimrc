@@ -13,6 +13,7 @@ Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 " --- Plugins ---
 Bundle 'airblade/vim-gitgutter'
+Bundle 'davidhalter/jedi-vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'nvie/vim-flake8'
 Bundle 'tpope/vim-fugitive'
