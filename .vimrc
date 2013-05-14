@@ -155,6 +155,9 @@ augroup filetypes
     " --- .vimrc ---
     " Reload .vimrc if changes are made to it
     autocmd BufWritePost .vimrc source $MYVIMRC
+
+    " --- YAML ---
+    autocmd BufEnter *.yml setlocal shiftwidth=2 softtabstop=2
 augroup END
 
 " --- Plugin configuration ---
