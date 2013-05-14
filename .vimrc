@@ -152,7 +152,7 @@ augroup filetypes
     " Long comments and strings should only be 72 characters, not 79
     autocmd BufEnter *.py setlocal colorcolumn=73,80
 
-    " --- .vimrc
+    " --- .vimrc ---
     " Reload .vimrc if changes are made to it
     autocmd BufWritePost .vimrc source $MYVIMRC
 augroup END
