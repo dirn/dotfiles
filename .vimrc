@@ -151,6 +151,7 @@ augroup filetypes
     " --- Python ---
     " Long comments and strings should only be 72 characters, not 79
     autocmd BufEnter *.py setlocal colorcolumn=73,80
+    autocmd BufEnter *.py inoremap <buffer> <c-b> import bpdb; bpdb.set_trace()
 
     " --- .vimrc ---
     " Reload .vimrc if changes are made to it
