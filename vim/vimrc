@@ -1,35 +1,21 @@
 set nocompatible
 
-" --- Vundle ---
-filetype off
-set runtimepath+=~/.vim/bundle/vundle/
-call vundle#rc()
+" --- Pathogen ---
+call pathogen#infect()
 
-Bundle 'gmarik/vundle'
-
-" --- Themes ---
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-
-" --- Plugins ---
-Bundle 'airblade/vim-gitgutter'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'nvie/vim-flake8'
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-
-" --- Configuration
+" --- Configuration ---
 syntax on
 filetype plugin indent on
+
+let mapleader=','
+let maplocalleader='\\'
 
 set encoding=utf8
 set lazyredraw                  " no redraw during macros (much faster)
 set linebreak
 set nowrap
 set report=0                    " :cmd always shows changed line count
-set textwidth=79
+set textwidth=80
 
 set mouse=a                     " turn on mouse support
 
@@ -141,39 +127,12 @@ endif
 augroup filetypes
     autocmd!
 
-    " --- Git ---
-    " Put cursor back at beginning of commit message
-    autocmd BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-    " Commit messages should only be 72 characters, not 79
-    autocmd BufEnter COMMIT_EDITMSG setlocal colorcolumn=73
-    autocmd BufEnter COMMIT_EDITMSG setlocal textwidth=72
-
-    " --- Python ---
-    " Long comments and strings should only be 72 characters, not 79
-    autocmd BufEnter *.py setlocal colorcolumn=73,80
-    autocmd BufEnter *.py inoremap <buffer> <c-b> import bpdb; bpdb.set_trace()
-
     " --- .vimrc ---
     " Reload .vimrc if changes are made to it
     autocmd BufWritePost .vimrc source $MYVIMRC
-
-    " --- YAML ---
-    autocmd BufEnter *.yml setlocal shiftwidth=2 softtabstop=2
 augroup END
 
 " --- Plugin configuration ---
-
-" --- vim-flake8 ---
-let g:flake8_ignore="W391"
-
-if has('autocmd')
-    augroup flake8
-        autocmd!
-
-        " Automatically run flake8 on save
-        autocmd BufWritePost *.py call Flake8()
-    augroup END
-endif
 
 " --- NERD Tree ---
 let g:NERDTreeChDirMode=2
@@ -194,8 +153,6 @@ highlight GitGutterChangeDefault       guifg=Yellow guibg=NONE  ctermfg=DarkYell
 highlight GitGutterDeleteDefault       guifg=Red    guibg=NONE  ctermfg=DarkRed     ctermbg=NONE
 
 " --- Learn Vimscript the Hard Way ---
-let mapleader=","
-let maplocalleader="\\"
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap H 0
@@ -206,4 +163,3 @@ augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
-
