@@ -111,7 +111,7 @@ inoremap          jk                <esc>
 " Don't use the cursor keys
 for prefix in ['i', 'n', 'v']
     for key in ['<up>', '<right>', '<down>', '<left>']
-        exe prefix . 'noremap ' . key . ' <nop>'
+        execute prefix . 'noremap ' . key . ' <nop>'
     endfor
 endfor
 
@@ -124,7 +124,7 @@ inoremap          <esc>             <nop>
 " --- Autocmds ---
 if has('autocmd') && has('eval')
     augroup misc
-        au!
+        autocmd!
 
         " Trim trailing whitespace on save
         autocmd BufWritePre <buffer> :%s/\s\+$//e
@@ -132,14 +132,14 @@ if has('autocmd') && has('eval')
         " Jump to the last known cursor position if it's valid (from the docs)
         autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
-            \   exe "normal g`\"" |
+            \   execute "normal g`\"" |
             \ endif
     augroup END
 endif
 
 " --- Filetypes ---
 augroup filetypes
-    au!
+    autocmd!
 
     " --- Git ---
     " Put cursor back at beginning of commit message
@@ -168,7 +168,7 @@ let g:flake8_ignore="W391"
 
 if has('autocmd')
     augroup flake8
-        au!
+        autocmd!
 
         " Automatically run flake8 on save
         autocmd BufWritePost *.py call Flake8()
