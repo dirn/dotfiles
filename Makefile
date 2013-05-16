@@ -1,5 +1,5 @@
 install: install-vim install-git install-zsh install-ssh \
-	 install-terminal-settings
+	 install-terminal-settings install-virtualenvwrapper
 
 install-git:
 	rm -f ~/.gitconfig
@@ -19,6 +19,10 @@ install-vim:
 	rm -rf ~/.vim ~/.vimrc
 	ln -s `pwd`/vim ~/.vim
 	ln -s ~/.vim/vimrc ~/.vimrc
+
+install-virtualenvwrapper:
+	rm -f ~/.virtualenvs/postmkvirtualenv
+	ln -s `pwd`/virtualenvs/postmkvirtualenv ~/.virtualenvs/postmkvirtualenv
 
 install-zsh:
 	rm -f ~/.aliases
