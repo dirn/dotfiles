@@ -34,6 +34,7 @@ install-mongo:
 	(cd mongo/submodules/mongo-hacker && $(MAKE) install)
 
 install-pip:
+	+@[ -d $(~/.pip $@) ] || mkdir -p $(~/.pip $@)
 	rm -f ~/.pip/pip.conf
 	ln -s `pwd`/pip/pip.conf ~/.pip/pip.conf
 
@@ -58,6 +59,7 @@ install-vim:
 	ln -s ~/.vim/vimrc ~/.vimrc
 
 install-virtualenvwrapper:
+	+@[ -d $(~/.virtualenvs $@) ] || mkdir -p $(~/.virtualenvs $@)
 	rm -f ~/.virtualenvs/postmkvirtualenv
 	ln -s `pwd`/virtualenvs/postmkvirtualenv ~/.virtualenvs/postmkvirtualenv
 
