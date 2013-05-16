@@ -44,6 +44,10 @@ if has('gui_running') || &t_Co > 8
     let g:solarized_termcolors=256
     let g:solarized_visibility="high"
     let g:solarized_contrast="high"
+
+    if has('gui_running')
+        set guifont=Ubuntu\ Mono:h16
+    endif
 endif
 
 set laststatus=2                " always show status line
