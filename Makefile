@@ -1,3 +1,6 @@
+bootstrap: install install-homebrew install-homebrew-extras \
+	   install-homebrew-packages install-python install-heroku
+
 install: install-vim install-git install-zsh install-ssh \
 	 install-terminal-settings install-virtualenvwrapper install-mongo
 
