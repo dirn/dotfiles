@@ -8,6 +8,22 @@ install-git:
 install-homebrew:
 	-curl -fsSkL raw.github.com/mxcl/homebrew/go | ruby
 
+install-homebrew-extras:
+	# Taps
+	-brew tap homebrew/versions
+	-brew tap phinze/homebrew-cask
+	brew install brew-cask
+	# Services
+	gem install lunchy
+
+install-homebrew-packages:
+	# Homebrew packages
+	brew install python25 python26 python python32 python3 pypy
+	brew install git hub imagemagick legit memcached mercurial mongodb \
+		     node postgresql readline rhino ruby sqlite vim wget
+	# spell check
+	brew install aspell --with-lang-en
+
 install-mongo:
 	(cd mongo/submodules/mongo-hacker && $(MAKE) install)
 
