@@ -31,6 +31,11 @@ install-pip:
 	rm -f ~/.pip/pip.conf
 	ln -s `pwd`/pip/pip.conf ~/.pip/pip.conf
 
+install-python:
+	# easy_install will try to install the pip folder
+	(cd git && easy_install pip)
+	pip install bpython fabric sphinx virtualenv virtualenvwrapper
+
 install-ssh:
 	rm -f ~/.ssh/config
 	ln -s `pwd`/ssh/config ~/.ssh/config
