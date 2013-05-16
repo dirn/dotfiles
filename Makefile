@@ -5,6 +5,9 @@ install-git:
 	rm -f ~/.gitconfig
 	ln -s `pwd`/git/gitconfig ~/.gitconfig
 
+install-homebrew:
+	-curl -fsSkL raw.github.com/mxcl/homebrew/go | ruby
+
 install-mongo:
 	(cd mongo/submodules/mongo-hacker && $(MAKE) install)
 
