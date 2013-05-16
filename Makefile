@@ -8,6 +8,10 @@ install-git:
 install-mongo:
 	(cd mongo/submodules/mongo-hacker && $(MAKE) install)
 
+install-pip:
+	rm -f ~/.pip/pip.conf
+	ln -s `pwd`/pip/pip.conf ~/.pip/pip.conf
+
 install-ssh:
 	rm -f ~/.ssh/config
 	ln -s `pwd`/ssh/config ~/.ssh/config
