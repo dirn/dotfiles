@@ -1,0 +1,17 @@
+# AWS IP addresses are transitory and get reused. There is no point in keeping
+# them around. This also saves the trouble of having to specify `ubuntu` as the
+# username.
+
+Host *.amazonaws.com
+  User ubuntu
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+
+# Heroku
+# Hosts can be added for use with Heroku Accounts. See
+# https://github.com/ddollar/heroku-accounts.
+
+Host heroku.me
+  HostName heroku.com
+  IdentityFile /Users/dirn/.ssh/id_rsa
+  IdentitiesOnly yes

@@ -1,8 +1,12 @@
-install: install-vim install-git install-zsh
+install: install-vim install-git install-zsh install-ssh
 
 install-git:
 	rm -f ~/.gitconfig
 	ln -s `pwd`/git/gitconfig ~/.gitconfig
+
+install-ssh:
+	rm -f ~/.ssh/config
+	ln -s `pwd`/ssh/config ~/.ssh/config
 
 install-vim:
 	rm -rf ~/.vim ~/.vimrc
