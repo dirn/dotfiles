@@ -47,6 +47,7 @@ if has('gui_running') || &t_Co > 8
 
     if has('gui_running')
         set guifont=Ubuntu\ Mono:h16
+        set lines=85 columns=250
     endif
 endif
 
