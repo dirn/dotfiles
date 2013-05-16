@@ -1,9 +1,12 @@
 install: install-vim install-git install-zsh install-ssh \
-	 install-terminal-settings install-virtualenvwrapper
+	 install-terminal-settings install-virtualenvwrapper install-mongo
 
 install-git:
 	rm -f ~/.gitconfig
 	ln -s `pwd`/git/gitconfig ~/.gitconfig
+
+install-mongo:
+	(cd mongo/submodules/mongo-hacker && $(MAKE) install)
 
 install-ssh:
 	rm -f ~/.ssh/config

@@ -1,5 +1,5 @@
-[submodule "mongo-hacker"]
-	path = mongo-hacker
+[submodule "mongo/submodules/mongo-hacker"]
+	path = mongo/submodules/mongo-hacker
 	url = https://github.com/TylerBrock/mongo-hacker.git
 [submodule "vim/submodules/vim-pathogen"]
 	path = vim/submodules/vim-pathogen
