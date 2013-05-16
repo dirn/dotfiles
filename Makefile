@@ -5,6 +5,9 @@ install-git:
 	rm -f ~/.gitconfig
 	ln -s `pwd`/git/gitconfig ~/.gitconfig
 
+install-heroku:
+	curl https://toolbelt.heroku.com/install.sh | sh
+
 install-homebrew:
 	-curl -fsSkL raw.github.com/mxcl/homebrew/go | ruby
 
