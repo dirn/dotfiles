@@ -1,44 +1,44 @@
 [user]
-	name = Andy Dirnberger
-	email = dirn@dirnonline.com
+    name = Andy Dirnberger
+    email = dirn@dirnonline.com
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 [alias]
-	br = branch
-	ci = commit
-	co = checkout
-	cp = cherry-pick
-	rb = rebate
-	st = status
-	graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-	rewind = reset --soft HEAD~1
-	fml = reset --hard HEAD
-	sigh = push --force
-	switch = !legit switch \"$@\"
-	branches = !legit branches
-	sprout = !legit sprout \"$@\"
-	unpublish = !legit unpublish \"$@\"
-	harvest = !legit harvest \"$@\"
-	sync = !legit sync \"$@\"
-	publish = !legit publish \"$@\"
-	graft = !legit graft \"$@\"
-	amend = commit --amend
-	patch = commit --patch -v
-	locate = ls-tree --name-only -r HEAD
-	restore = !git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
-	missing = !git log --no-merges "$1" ^"$2"
-	ls = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate
-	ll = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --numstat
-	when = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --date=relative
-	pretty = log --oneline --decorate
-	modified = !git ll -1
-	last = diff --cached HEAD^
-	aliases = !git config -l | grep alias | cut -c 7-
+    br = branch
+    ci = commit
+    co = checkout
+    cp = cherry-pick
+    rb = rebate
+    st = status
+    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+    rewind = reset --soft HEAD~1
+    fml = reset --hard HEAD
+    sigh = push --force
+    switch = !legit switch \"$@\"
+    branches = !legit branches
+    sprout = !legit sprout \"$@\"
+    unpublish = !legit unpublish \"$@\"
+    harvest = !legit harvest \"$@\"
+    sync = !legit sync \"$@\"
+    publish = !legit publish \"$@\"
+    graft = !legit graft \"$@\"
+    amend = commit --amend
+    patch = commit --patch -v
+    locate = ls-tree --name-only -r HEAD
+    restore = !git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
+    missing = !git log --no-merges "$1" ^"$2"
+    ls = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --numstat
+    when = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --date=relative
+    pretty = log --oneline --decorate
+    modified = !git ll -1
+    last = diff --cached HEAD^
+    aliases = !git config -l | grep alias | cut -c 7-
 [color]
-	ui = true
+    ui = true
 [core]
-	editor = vim
+    editor = vim
 [mergetool]
-	keepBackup = false
+    keepBackup = false
 [heroku]
-	account = me
+    account = me
