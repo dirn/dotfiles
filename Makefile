@@ -49,7 +49,8 @@ install-ssh:
 
 install-terminal-settings:
 ifeq ($(shell uname),Darwin)
-	cp ~/Library/Preferences/com.apple.Terminal.plist terminal/old-settings.bak
+	cp ~/Library/Preferences/com.apple.Terminal.plist \
+	    terminal/old-settings.bak
 	cp terminal/com.apple.Terminal.plist ~/Library/Preferences
 endif
 
