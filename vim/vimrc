@@ -101,6 +101,9 @@ nnoremap <silent> <leader>cl        :nohlsearch<cr>
 " Exit insert mode
 inoremap          jk                <esc>
 
+" Keystroke savers
+nnoremap          ;                 :
+
 " Don't use the cursor keys
 for prefix in ['i', 'n', 'v']
     for key in ['<up>', '<right>', '<down>', '<left>']
