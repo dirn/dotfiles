@@ -96,7 +96,7 @@ nnoremap          <c-u>             mqgUiw`q
 nnoremap          <c-l>             mqguiw`q
 
 " Clear search
-nnoremap <silent> <leader>cl        :let @/=''<cr>
+nnoremap <silent> <leader>cl        :nohlsearch<cr>
 
 " Exit insert mode
 inoremap          jk                <esc>
