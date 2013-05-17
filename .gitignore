@@ -2,15 +2,3 @@
 *.swp
 .DS*
 *.bak
-
-# snipMate ships with a lot of files that go in a lot of places. Rather than
-# copying them over and over, I'm setting up symlinks through the Makefile. As
-# far as Git is concerned, though, these are new things that should be tracked
-# through the repository. That would just be silly, so ignore them all.
-vim/after/plugin/snipMate.vim
-vim/autoload/snipMate.vim
-vim/doc/snipMate.vim
-vim/ftplugin/html_snip_helper.vim
-vim/plugin/snipMate.vim
-vim/snippets
-vim/syntax/snippet.vim
