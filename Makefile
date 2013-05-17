@@ -34,7 +34,7 @@ install-mongo:
 	(cd mongo/submodules/mongo-hacker && $(MAKE) install)
 
 install-pip:
-	+@[ -d $(~/.pip $@) ] || mkdir -p $(~/.pip $@)
+	+@mkdir -p ~/.pip
 	rm -f ~/.pip/pip.conf
 	ln -s `pwd`/pip/pip.conf ~/.pip/pip.conf
 
@@ -58,9 +58,34 @@ install-vim:
 	rm -rf ~/.vim ~/.vimrc
 	ln -s `pwd`/vim ~/.vim
 	ln -s ~/.vim/vimrc ~/.vimrc
+	@# snipMate
+	+@mkdir -p ~/.vim/after/plugin
+	rm -f ~/.vim/after/plugin/snipMate.vim
+	ln -s ~/.vim/bundle/snipmate.vim/after/plugin/snipMate.vim \
+	    ~/.vim/after/plugin/snipMate.vim
+	rm -f ~/.vim/autoload/snipMate.vim
+	ln -s ~/.vim/bundle/snipmate.vim/autoload/snipMate.vim \
+	    ~/.vim/autoload/snipMate.vim
+	+@mkdir -p ~/.vim/doc
+	rm -f ~/.vim/doc/snipMate.vim
+	ln -s ~/.vim/bundle/snipmate.vim/doc/snipMate.vim \
+	    ~/.vim/doc/snipMate.vim
+	rm -f ~/.vim/ftplugin/html_snip_helper.vim
+	ln -s ~/.vim/bundle/snipmate.vim/ftplugin/html_snip_helper.vim \
+	    ~/.vim/ftplugin/html_snip_helper.vim
+	+@mkdir -p ~/.vim/plugin
+	rm -f ~/.vim/plugin/snipMate.vim
+	ln -s ~/.vim/bundle/snipmate.vim/plugin/snipMate.vim \
+	    ~/.vim/plugin/snipMate.vim
+	rm -rf ~/.vim/snippets
+	ln -s ~/.vim/bundle/snipmate.vim/snippets ~/.vim/snippets
+	+@mkdir -p ~/.vim/syntax
+	rm -f ~/.vim/syntax/snippet.vim
+	ln -s ~/.vim/bundle/snipmate.vim/syntax/snippet.vim \
+	    ~/.vim/syntax/snippet.vim
 
 install-virtualenvwrapper:
-	+@[ -d $(~/.virtualenvs $@) ] || mkdir -p $(~/.virtualenvs $@)
+	+@mkdir -p ~/.virtualenvs
 	rm -f ~/.virtualenvs/postmkvirtualenv
 	ln -s `pwd`/virtualenvs/postmkvirtualenv ~/.virtualenvs/postmkvirtualenv
 
