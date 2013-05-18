@@ -47,7 +47,6 @@ if has('gui_running') || &t_Co > 8
 
     if has('gui_running')
         set guifont=Ubuntu\ Mono\ derivative\ Powerline:h16
-        "set guifont=PragmataPro:h16
         set lines=85 columns=280
     endif
 endif
