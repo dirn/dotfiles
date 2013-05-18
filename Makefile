@@ -25,8 +25,9 @@ install-homebrew-extras:
 install-homebrew-packages:
 	# Homebrew packages
 	brew install python25 python26 python python32 python3 pypy
-	brew install git hub imagemagick legit memcached mercurial mongodb \
-		     node postgresql readline rhino ruby sqlite vim wget
+	brew install git hub imagemagick legit macvim memcached mercurial \
+		     mongodb node postgresql readline redis rhino ruby sqlite \
+		     vim wget
 	# spell check
 	brew install aspell --with-lang-en
 
