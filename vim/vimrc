@@ -90,24 +90,24 @@ set tabstop=8
 
 " --- Mappings ---
 " Make word uppercase
-nnoremap          <c-u>             mqgUiw`q
+nnoremap <c-u> mzgUiw`z
 " Make word lowercase
-nnoremap          <c-l>             mqguiw`q
+nnoremap <c-l> mzguiw`z
 
 " Clear search
-nnoremap <silent> <leader>cl        :nohlsearch<cr>
+nnoremap <silent> <leader>cl :nohlsearch<cr>
 
 " Exit insert mode
-inoremap          jk                <esc>
+inoremap jk <esc> 
 
 " Keystroke savers
-nnoremap          ;                 :
+nnoremap ; :
 
 " Quickly change windows
-nnoremap          <c-h>             <c-w>h
-nnoremap          <c-j>             <c-w>j
-nnoremap          <c-k>             <c-w>k
-nnoremap          <c-l>             <c-w>l
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 
 " Don't use the cursor keys
 for prefix in ['i', 'n', 'v']
@@ -117,7 +117,7 @@ for prefix in ['i', 'n', 'v']
 endfor
 
 " Retrain my brain
-inoremap          <esc>             <nop>
+inoremap <esc> <nop>
 
 " --- Typos ---
 :iabbrev functino function      " this one has plagued me for years
