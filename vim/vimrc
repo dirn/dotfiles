@@ -121,6 +121,7 @@ inoremap <esc> <nop>
 
 " --- Typos ---
 :iabbrev functino function      " this one has plagued me for years
+:iabbrev verison version
 
 " --- Autocmds ---
 if has('autocmd') && has('eval')
