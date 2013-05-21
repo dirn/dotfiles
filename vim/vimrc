@@ -132,14 +132,22 @@ if has('autocmd') && has('eval')
     augroup misc
         autocmd!
 
-        " Trim trailing whitespace on save
-        autocmd BufWritePre <buffer> :%s/\s\+$//e
-
         " Jump to the last known cursor position if it's valid (from the docs)
         autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
             \   execute "normal g`\"" |
             \ endif
+    augroup END
+
+    augroup whitespace
+        function! TrimWhitespace()
+            %s/\s\+$//e
+        endfunction
+
+        autocmd FileWritePre * :call TrimWhitespace()
+        autocmd FileAppendPre * :call TrimWhitespace()
+        autocmd FilterWritePre * :call TrimWhitespace()
+        autocmd BufWritePre * :call TrimWhitespace()
     augroup END
 endif
 
