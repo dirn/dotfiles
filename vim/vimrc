@@ -100,6 +100,10 @@ nnoremap <silent> <leader>cl :nohlsearch<cr>
 " Exit insert mode
 inoremap jk <esc> 
 
+" Navigation
+nnoremap H 0
+nnoremap L $
+
 " Keystroke savers
 nnoremap ; :
 
@@ -172,8 +176,6 @@ highlight GitGutterDeleteDefault       guifg=Red    guibg=NONE  ctermfg=DarkRed 
 " --- Learn Vimscript the Hard Way ---
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap H 0
-nnoremap L $
 nnoremap pb :exe "rightbelow vsplit " . bufname('#')<cr>
 
 augroup filetype_vim
