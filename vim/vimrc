@@ -98,7 +98,7 @@ nnoremap <c-l> mzguiw`z
 nnoremap <silent> <leader>cl :nohlsearch<cr>
 
 " Exit insert mode
-inoremap jk <esc> 
+inoremap jk <esc>
 
 " Navigation
 nnoremap H 0
@@ -106,6 +106,7 @@ nnoremap L $
 
 " Keystroke savers
 nnoremap ; :
+vnoremap ; :
 
 " Quickly change windows
 nnoremap <c-h> <c-w>h
