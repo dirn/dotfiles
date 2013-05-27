@@ -41,7 +41,7 @@ if has('gui_running') || &t_Co > 8
     set t_Co=256
 
     colorscheme solarized
-    let g:solarized_termcolors=256
+    let g:solarized_termcolors=&t_Co
     let g:solarized_visibility="high"
     let g:solarized_contrast="high"
 
