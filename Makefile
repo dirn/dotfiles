@@ -2,7 +2,8 @@ bootstrap: install install-homebrew install-homebrew-extras \
 	   install-homebrew-packages install-python install-heroku
 
 install: install-vim install-git install-zsh install-ssh \
-	 install-terminal-settings install-virtualenvwrapper install-mongo
+	 install-terminal-settings install-virtualenvwrapper install-mongo \
+	 install-tmux
 
 install-git:
 	rm -f ~/.gitconfig
@@ -26,10 +27,13 @@ install-homebrew-packages:
 	# Homebrew packages
 	brew install python25 python26 python python32 python3 pypy
 	brew install git hub imagemagick legit macvim memcached mercurial \
-		     mongodb node postgresql readline redis rhino ruby sqlite \
+		     mongodb node postgresql readline \
+		     reattach-to-user-namespace redis rhino ruby sqlite tmux \
 		     vim wget
 	# Spell check
 	brew install aspell --with-lang-en
+	# Make tmux awesomer
+	gem install tmuxinator
 
 install-mongo:
 	(cd mongo/submodules/mongo-hacker && $(MAKE) install)
@@ -54,6 +58,10 @@ ifeq ($(shell uname),Darwin)
 	    terminal/old-settings.bak
 	cp terminal/com.apple.Terminal.plist ~/Library/Preferences
 endif
+
+install-tmux:
+	rm -f ~/.tmux.conf
+	ln -s `pwd`/tmux/tmux.conf ~/.tmux.conf
 
 install-vim:
 	rm -rf ~/.vim ~/.vimrc
