@@ -28,7 +28,7 @@ install-homebrew-packages:
 	brew install git hub imagemagick legit macvim memcached mercurial \
 		     mongodb node postgresql readline redis rhino ruby sqlite \
 		     vim wget
-	# spell check
+	# Spell check
 	brew install aspell --with-lang-en
 
 install-mongo:
