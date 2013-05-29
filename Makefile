@@ -26,10 +26,10 @@ install-homebrew-extras:
 install-homebrew-packages:
 	# Homebrew packages
 	brew install python25 python26 python python32 python3 pypy
-	brew install git hub imagemagick legit macvim memcached mercurial \
-		     mongodb node postgresql readline \
-		     reattach-to-user-namespace redis rhino ruby sqlite tmux \
-		     vim wget
+	-brew install git hub imagemagick legit macvim memcached mercurial \
+		      mongodb node postgresql readline \
+		      reattach-to-user-namespace redis rhino ruby sqlite tmux \
+		      vim wget
 	# Spell check
 	brew install aspell --with-lang-en
 	# Make tmux awesomer
