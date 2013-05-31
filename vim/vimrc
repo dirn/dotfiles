@@ -163,6 +163,9 @@ augroup END
 
 " --- Plugin configuration ---
 
+" --- ctrlp ---
+set wildignore+=*.pyc,*/*.egg-info/*
+
 " --- NERD Tree ---
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$', '\.git$', '\.egg\-info', '\.coverage', '\.tox', '.DS_Store']
