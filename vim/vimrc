@@ -114,6 +114,12 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+" FileType switching
+nnoremap <leader>Tp :set ft=python<cr>
+nnoremap <leader>Th :set ft=html<cr>
+nnoremap <leader>Tj :set ft=jinja<cr>
+nnoremap <leader>Tr :set ft=rst<cr>
+
 " Don't use the cursor keys
 for prefix in ['i', 'n', 'v']
     for key in ['<up>', '<right>', '<down>', '<left>']
