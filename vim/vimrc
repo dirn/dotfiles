@@ -97,6 +97,12 @@ nnoremap <c-l> mzguiw`z
 " Clear search
 nnoremap <silent> <leader><space> :nohlsearch<cr>
 
+" Quotes
+" Wrap a word in single quotes
+nnoremap <leader>' ciw'<c-R>"'<esc>
+" Wrap a word in double quotes
+nnoremap <leader>" ciw"<c-R>""<esc>
+
 " Exit insert mode
 inoremap jk <esc>
 
