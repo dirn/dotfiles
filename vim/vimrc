@@ -95,7 +95,7 @@ nnoremap <c-u> mzgUiw`z
 nnoremap <c-l> mzguiw`z
 
 " Clear search
-nnoremap <silent> <leader>cl :nohlsearch<cr>
+nnoremap <silent> <leader><space> :nohlsearch<cr>
 
 " Exit insert mode
 inoremap jk <esc>
