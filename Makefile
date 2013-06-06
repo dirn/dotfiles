@@ -36,7 +36,8 @@ install-homebrew-packages:
 	gem install tmuxinator
 
 install-mongo:
-	(cd mongo/submodules/mongo-hacker && $(MAKE) install)
+	rm mongo/submodules/mongo-hacker/mongo_hacker.js
+	(cd mongo/submodules/mongo-hacker && $(MAKE))
 
 install-pip:
 	+@[ -d $(~/.pip $@) ] || mkdir -p $(~/.pip $@)
