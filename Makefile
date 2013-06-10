@@ -47,7 +47,7 @@ install-pip:
 install-python:
 	# easy_install will try to install the pip folder
 	(cd git && easy_install pip)
-	pip install bpython fabric sphinx virtualenv virtualenvwrapper
+	pip install bpython fabric pip-tools sphinx virtualenv virtualenvwrapper
 
 install-ssh:
 	rm -f ~/.ssh/config
