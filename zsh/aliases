@@ -60,7 +60,7 @@ done
 alias stop='deactivate'
 
 # Use hub instead of Git directly
-alias git='hub'
+eval "$(hub alias -s)"
 
 # Use Rhino
 alias js='rhino'
