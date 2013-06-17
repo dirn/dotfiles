@@ -1,5 +1,6 @@
 bootstrap: install install-homebrew install-homebrew-extras \
-	   install-homebrew-packages install-python install-heroku
+	   install-homebrew-packages install-python install-heroku \
+	   install-prezto
 
 install: install-vim install-git install-zsh install-ssh \
 	 install-terminal-settings install-virtualenvwrapper install-mongo \
@@ -44,6 +45,10 @@ install-pip:
 	rm -f ~/.pip/pip.conf
 	ln -s `pwd`/pip/pip.conf ~/.pip/pip.conf
 
+install-prezto:
+	rm -rf ~/.zprezto
+	ln -s `pwd`/zsh/submodules/prezto ~/.zprezto
+
 install-python:
 	# easy_install will try to install the pip folder
 	(cd git && easy_install pip)
@@ -78,10 +83,20 @@ install-zsh:
 	rm -f ~/.aliases
 	rm -f ~/.exports
 	rm -f ~/.functions
+	rm -f ~/.zlogin
+	rm -f ~/.zlogout
+	rm -f ~/.zpreztorc
+	rm -f ~/.zprofile
+	rm -f ~/.zshenv
 	rm -f ~/.zshrc
 	ln -s `pwd`/zsh/aliases ~/.aliases
 	ln -s `pwd`/zsh/exports ~/.exports
 	ln -s `pwd`/zsh/functions ~/.functions
+	ln -s ~/.zprezto/runcoms/zlogin ~/.zlogin
+	ln -s ~/.zprezto/runcoms/zlogout ~/.zlogout
+	ln -s `pwd`/zsh/zpreztorc ~/.zpreztorc
+	ln -s ~/.zprezto/runcoms/zprofile ~/.zprofile
+	ln -s ~/.zprezto/runcoms/zshev ~/.zshenv
 	ln -s `pwd`/zsh/zshrc ~/.zshrc
 
 dump-terminal-settings:

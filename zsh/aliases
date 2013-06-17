@@ -1,3 +1,6 @@
+# Easier navigation
+alias ...="cd ../.."
+
 # Listings
 alias ll='ls -lhF'
 alias la='ls -lahF'
