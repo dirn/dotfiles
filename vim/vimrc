@@ -140,6 +140,9 @@ inoremap <esc> <nop>
 :iabbrev functino function      " this one has plagued me for years
 :iabbrev verison version
 
+:iabbrev :shrug: ¯\_(ツ)_/¯
+:iabbrev :tableflip: (╯°□°)╯︵ ┻━┻
+
 " --- Autocmds ---
 if has('autocmd') && has('eval')
     augroup misc
