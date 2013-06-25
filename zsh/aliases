@@ -64,3 +64,6 @@ eval "$(hub alias -s)"
 
 # Use Rhino
 alias js='rhino'
+
+# tmuxinator gets me most of the way there, but...
+alias dmux='tmux kill-session -t'
