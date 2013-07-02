@@ -93,5 +93,4 @@ install-zsh:
 
 update-submodules:
 	git submodule foreach git pull origin master
-	# Also update submodules with submodules
-	(cd zsh/submodules/prezto && git submodule foreach git pull origin master)
+	git submodule update --init --recursive
