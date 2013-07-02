@@ -3,8 +3,7 @@ bootstrap: install install-homebrew install-homebrew-extras \
 	   install-prezto
 
 install: install-vim install-git install-zsh install-ssh \
-	 install-terminal-settings install-virtualenvwrapper install-mongo \
-	 install-tmux
+	 install-virtualenvwrapper install-mongo install-tmux
 
 install-git:
 	rm -f ~/.gitconfig
@@ -58,13 +57,6 @@ install-ssh:
 	rm -f ~/.ssh/config
 	ln -s `pwd`/ssh/config ~/.ssh/config
 
-install-terminal-settings:
-ifeq ($(shell uname),Darwin)
-	cp ~/Library/Preferences/com.apple.Terminal.plist \
-	    terminal/old-settings.bak
-	cp terminal/com.apple.Terminal.plist ~/Library/Preferences
-endif
-
 install-tmux:
 	rm -f ~/.tmux.conf
 	ln -s `pwd`/tmux/tmux.conf ~/.tmux.conf
@@ -98,7 +90,3 @@ install-zsh:
 	ln -s ~/.zprezto/runcoms/zprofile ~/.zprofile
 	ln -s ~/.zprezto/runcoms/zshev ~/.zshenv
 	ln -s `pwd`/zsh/zshrc ~/.zshrc
-
-dump-terminal-settings:
-	cp ~/Library/Preferences/com.apple.Terminal.plist terminal
-	plutil -convert xml1 terminal/com.apple.Terminal.plist
