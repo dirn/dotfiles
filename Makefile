@@ -90,3 +90,8 @@ install-zsh:
 	ln -s ~/.zprezto/runcoms/zprofile ~/.zprofile
 	ln -s ~/.zprezto/runcoms/zshev ~/.zshenv
 	ln -s `pwd`/zsh/zshrc ~/.zshrc
+
+update-submodules:
+	git submodule foreach git pull origin master
+	# Also update submodules with submodules
+	(cd zsh/submodules/prezto && git submodule foreach git pull origin master)
