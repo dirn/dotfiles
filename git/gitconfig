@@ -40,5 +40,7 @@
     editor = vim
 [mergetool]
     keepBackup = false
+[diff]
+    algorithm = patience
 [push]
     default = simple
