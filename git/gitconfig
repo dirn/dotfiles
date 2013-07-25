@@ -40,3 +40,5 @@
     editor = vim
 [mergetool]
     keepBackup = false
+[push]
+    default = simple
