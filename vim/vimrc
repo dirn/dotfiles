@@ -202,6 +202,11 @@ highlight GitGutterAddDefault          guifg=Green  guibg=NONE  ctermfg=DarkGree
 highlight GitGutterChangeDefault       guifg=Yellow guibg=NONE  ctermfg=DarkYellow  ctermbg=NONE
 highlight GitGutterDeleteDefault       guifg=Red    guibg=NONE  ctermfg=DarkRed     ctermbg=NONE
 
+" --- Gist Vim ---
+let g:gist_clip_command='pbcopy'
+let g:gist_detect_filetype=1
+let g:gist_open_browser_after_post=1
+
 " --- Learn Vimscript the Hard Way ---
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
