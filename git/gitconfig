@@ -44,3 +44,5 @@
     algorithm = patience
 [push]
     default = simple
+[github]
+    user = dirn
