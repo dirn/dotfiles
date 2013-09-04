@@ -49,3 +49,6 @@
 [submodule "zsh/submodules/prezto"]
 	path = zsh/submodules/prezto
 	url = https://github.com/sorin-ionescu/prezto.git
+[submodule "vim/bundle/gist-vim"]
+	path = vim/bundle/gist-vim
+	url = https://github.com/mattn/gist-vim.git
