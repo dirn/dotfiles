@@ -55,3 +55,6 @@
 [submodule "vim/bundle/vim-jinja"]
 	path = vim/bundle/vim-jinja
 	url = https://github.com/mitsuhiko/vim-jinja.git
+[submodule "vim/bundle/vitality.vim"]
+	path = vim/bundle/vitality.vim
+	url = https://github.com/sjl/vitality.vim.git
