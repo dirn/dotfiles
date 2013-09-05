@@ -1,7 +1,7 @@
 set nocompatible
 
 " --- Pathogen ---
-call pathogen#infect()
+execute pathogen#infect()
 
 " --- Configuration ---
 syntax on
