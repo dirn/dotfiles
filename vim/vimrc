@@ -123,7 +123,7 @@ nnoremap <c-l> <c-w>l
 " FileType switching
 nnoremap <leader>Tp :set ft=python<cr>
 nnoremap <leader>Th :set ft=html<cr>
-nnoremap <leader>Tj :set ft=jinja<cr>
+nnoremap <leader>Tj :set ft=htmljinja<cr>
 nnoremap <leader>Tr :set ft=rst<cr>
 
 " Don't use the cursor keys
@@ -171,7 +171,7 @@ endif
 augroup filetypes
     autocmd!
 
-    autocmd FileType html,htmldjango,jinja,ruby,xml,yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType html,htmldjango,htmljinja,ruby,xml,yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
     " --- .vimrc ---
     " Reload .vimrc if changes are made to it
