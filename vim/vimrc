@@ -255,3 +255,8 @@ nnoremap <leader>gst :Gstatus<cr>
 
 " --- Syntastic ---
 let g:syntastic_check_on_open = 1
+
+" --- Clam ---
+nnoremap ! :Clam<space>
+vnoremap ! :ClamVisual<space>
+let g:clam_autoreturn=1

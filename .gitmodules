@@ -58,3 +58,6 @@
 [submodule "vim/bundle/vitality.vim"]
 	path = vim/bundle/vitality.vim
 	url = https://github.com/sjl/vitality.vim.git
+[submodule "vim/bundles/clam.vim"]
+	path = vim/bundles/clam.vim
+	url = https://github.com/sjl/clam.vim.git
