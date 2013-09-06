@@ -260,3 +260,10 @@ let g:syntastic_check_on_open = 1
 nnoremap ! :Clam<space>
 vnoremap ! :ClamVisual<space>
 let g:clam_autoreturn=1
+
+" --- Gundo ---
+let g:gundo_preview_bottom = 1
+let g:gundo_tree_statusline = "gundo"
+let g:gundo_preview_statusline = "gundo preview"
+
+nnoremap <leader>gu :GundoToggle<cr>
