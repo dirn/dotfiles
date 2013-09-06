@@ -24,6 +24,8 @@ set cursorline                  " highlight current line
 set showmatch                   " show matching brackets ...
 set matchpairs+=<:>
 set matchtime=5                 " ... for 5 seconds
+" Conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Show a rule
 if exists('&colorcolumn')
@@ -64,10 +66,15 @@ set sidescrolloff=2
 
 set number                      " show line numbers
 
+set title                       " show the filename in the window's title
+
 " --- Behavior ---
 set confirm
 
 set backspace=indent,eol,start  " allow backspacing everywhere in edit mode
+
+set complete=.,w,b,u,t          " this should be the default, but just in case
+set completeopt=longest,menuone,preview
 
 set spell                       " use spell check
 
@@ -91,11 +98,18 @@ set tabstop=8
 " --- Mappings ---
 " Make word uppercase
 nnoremap <c-u> mzgUiw`z
-" Make word lowercase
-nnoremap <c-l> mzguiw`z
+" Make word lowercase (down, because <c-l> is used for navigation)
+nnoremap <c-d> mzguiw`z
 
 " Clear search
 nnoremap <silent> <leader><space> :nohlsearch<cr>
+
+" Reindent a file
+nnoremap <silent> <leader><tab> gg=G
+
+" Select (charwise) the contents of the current line, excluding indentation.
+" Great for pasting Python lines into REPLs.
+nnoremap vv ^vg_
 
 " Quotes
 " Wrap a word in single quotes
@@ -109,10 +123,15 @@ inoremap jk <esc>
 " Navigation
 nnoremap H 0
 nnoremap L $
+vnoremap L g_
 
 " Keystroke savers
 nnoremap ; :
 vnoremap ; :
+
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " Quickly change windows
 nnoremap <c-h> <c-w>h
@@ -148,6 +167,9 @@ if has('autocmd') && has('eval')
     augroup misc
         autocmd!
 
+        " Resize splits
+        autocmd VimResized * :wincmd =
+
         " Jump to the last known cursor position if it's valid (from the docs)
         autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -181,7 +203,14 @@ augroup END
 " --- Plugin configuration ---
 
 " --- ctrlp ---
+let g:ctrlp_dont_split = 'NERD_tree_2'
 set wildignore+=*.pyc,*/*.egg-info/*
+set wildignore+=migrations                      " bye, bye Django migrations
+set wildignore+=.git,.hg
+set wildignore+=*.orig
+set wildignore+=*.jpg,*.jpeg,*.gif,*.png
+set wildignore+=*.mp3
+set wildignore+=*.sw?                           " Vim swap files
 
 " --- NERD Tree ---
 let g:NERDTreeChDirMode=2
@@ -216,3 +245,13 @@ augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
+
+" --- Fugitive ---
+nnoremap <leader>gci :Gcommit<cr>
+nnoremap <leader>gco :Gcheckout<cr>
+nnoremap <leader>gmv :Gmove<cr>
+nnoremap <leader>grm :Gremove<cr>
+nnoremap <leader>gst :Gstatus<cr>
+
+" --- Syntastic ---
+let g:syntastic_check_on_open = 1
