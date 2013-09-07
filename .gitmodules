@@ -58,9 +58,9 @@
 [submodule "vim/bundle/vitality.vim"]
 	path = vim/bundle/vitality.vim
 	url = https://github.com/sjl/vitality.vim.git
-[submodule "vim/bundles/clam.vim"]
-	path = vim/bundles/clam.vim
-	url = https://github.com/sjl/clam.vim.git
 [submodule "vim/bundle/gundo.vim"]
 	path = vim/bundle/gundo.vim
 	url = https://github.com/sjl/gundo.vim.git
+[submodule "vim/bundle/clam.vim"]
+	path = vim/bundle/clam.vim
+	url = https://github.com/sjl/clam.vim.git
