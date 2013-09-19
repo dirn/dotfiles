@@ -64,3 +64,6 @@
 [submodule "vim/bundle/clam.vim"]
 	path = vim/bundle/clam.vim
 	url = https://github.com/sjl/clam.vim.git
+[submodule "vim/bundle/vim-commentary"]
+	path = vim/bundle/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
