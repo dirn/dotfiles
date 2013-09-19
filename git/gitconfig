@@ -38,8 +38,12 @@
     ui = true
 [core]
     editor = vim
+[merge]
+    tool = fugitive
 [mergetool]
     keepBackup = false
+[mergetool "fugitive"]
+    cmd = mvim -f -c \"Gdiff\" \"$MERGED\"
 [diff]
     algorithm = patience
 [push]

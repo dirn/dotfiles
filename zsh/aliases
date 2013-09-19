@@ -67,3 +67,10 @@ alias js='rhino'
 
 # tmuxinator gets me most of the way there, but...
 alias dmux='tmux kill-session -t'
+
+# I usually use MacVim so I'm used to typing mvim. When MacVim isn't available,
+# though, I'd like to fallback on Vim.
+which mvim &> /dev/null
+if [[ $? -ne 0 ]]; then
+    alias mvim='vim'
+fi
