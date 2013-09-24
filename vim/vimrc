@@ -111,12 +111,6 @@ nnoremap <silent> <leader><tab> gg=G
 " Great for pasting Python lines into REPLs.
 nnoremap vv ^vg_
 
-" Quotes
-" Wrap a word in single quotes
-nnoremap <leader>' ciw'<c-R>"'<esc>
-" Wrap a word in double quotes
-nnoremap <leader>" ciw"<c-R>""<esc>
-
 " Exit insert mode
 inoremap jk <esc>
 
