@@ -3,7 +3,7 @@ bootstrap: install install-homebrew install-homebrew-extras \
 	   install-prezto
 
 install: install-vim install-git install-zsh install-ssh \
-	 install-virtualenvwrapper install-mongo install-tmux
+	 install-pylint install-virtualenvwrapper install-mongo install-tmux
 
 install-git:
 	rm -f ~/.gitconfig
@@ -48,10 +48,15 @@ install-prezto:
 	rm -rf ~/.zprezto
 	ln -s `pwd`/zsh/submodules/prezto ~/.zprezto
 
+install-pylint:
+	rm -f ~/.pylintrc
+	ln -s `pwd`/python/pylintrc ~/.pylintrc
+
 install-python:
 	# easy_install will try to install the pip folder
 	(cd git && easy_install pip)
-	pip install bpython fabric pip-tools sphinx virtualenv virtualenvwrapper
+	pip install bpython fabric flake8 pep8 pep257 pip-tools pyflakes \
+	    pylint sphinx virtualenv virtualenvwrapper
 
 install-ssh:
 	rm -f ~/.ssh/config
