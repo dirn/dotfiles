@@ -73,3 +73,6 @@
 [submodule "vim/submodules/argonaut.vim"]
 	path = vim/submodules/argonaut.vim
 	url = https://github.com/effkay/argonaut.vim.git
+[submodule "vim/bundle/tabular"]
+	path = vim/bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
