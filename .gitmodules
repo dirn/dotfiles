@@ -76,3 +76,6 @@
 [submodule "vim/bundle/tabular"]
 	path = vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
+[submodule "vim/bundle/webapi-vim"]
+	path = vim/bundle/webapi-vim
+	url = https://github.com/mattn/webapi-vim.git
