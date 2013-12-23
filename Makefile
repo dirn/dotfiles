@@ -48,6 +48,10 @@ install-pip:
 	rm -f ~/.pip/pip.conf
 	ln -s `pwd`/pip/pip.conf ~/.pip/pip.conf
 
+install-psql:
+	rm -f ~/.psqlrc
+	ln -s `pwd`/postgresql/psqlrc ~/.psqlrc
+
 install-prezto:
 	rm -rf ~/.zprezto
 	ln -s `pwd`/zsh/submodules/prezto ~/.zprezto
