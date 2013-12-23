@@ -1,6 +1,6 @@
 bootstrap: install install-homebrew install-homebrew-extras \
 	   install-homebrew-packages install-python install-heroku \
-	   install-prezto
+	   install-prezto install-weechat
 
 install: install-vim install-git install-zsh install-ssh \
 	 install-pylint install-virtualenvwrapper install-mongo install-tmux
@@ -36,6 +36,8 @@ install-homebrew-packages:
 	brew install macvim --with-python3
 	# Make tmux awesomer
 	gem install tmuxinator
+	# IRC
+	brew install weechat --with-aspell --with-perl --with-python --with-ruby
 
 install-mongo:
 	-rm mongo/submodules/mongo-hacker/mongo_hacker.js
