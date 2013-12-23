@@ -42,7 +42,7 @@ set background=dark
 if has('gui_running') || &t_Co > 8
     set t_Co=256
 
-    colorscheme argonaut
+    colorscheme molokai
 
     if has('gui_running')
         set guifont=Ubuntu\ Mono\ derivative\ Powerline:h16

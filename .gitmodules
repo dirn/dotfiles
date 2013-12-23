@@ -79,3 +79,6 @@
 [submodule "vim/bundle/webapi-vim"]
 	path = vim/bundle/webapi-vim
 	url = https://github.com/mattn/webapi-vim.git
+[submodule "vim/submodules/molokai"]
+	path = vim/submodules/molokai
+	url = https://github.com/tomasr/molokai.git
