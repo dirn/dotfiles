@@ -85,3 +85,6 @@
 [submodule "vim/bundle/vim-tmux-navigator"]
 	path = vim/bundle/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "vim/bundle/strftimedammit.vim"]
+	path = vim/bundle/strftimedammit.vim
+	url = https://github.com/sjl/strftimedammit.vim.git
