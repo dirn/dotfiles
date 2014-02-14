@@ -88,3 +88,6 @@
 [submodule "vim/bundle/strftimedammit.vim"]
 	path = vim/bundle/strftimedammit.vim
 	url = https://github.com/sjl/strftimedammit.vim.git
+[submodule "vim/bundle/vim-repeat"]
+	path = vim/bundle/vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
