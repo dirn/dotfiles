@@ -197,7 +197,6 @@ augroup END
 " --- ctrlp ---
 let g:ctrlp_dont_split = 'NERD_tree_2'
 set wildignore+=*.pyc,*/*.egg-info/*
-set wildignore+=migrations                      " bye, bye Django migrations
 set wildignore+=.git,.hg
 set wildignore+=*.orig
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png
