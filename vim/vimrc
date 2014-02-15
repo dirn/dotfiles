@@ -42,7 +42,8 @@ set background=dark
 if has('gui_running') || &t_Co > 8
     set t_Co=256
 
-    colorscheme molokai
+    let base16colorspace=256  " Access colors present in 256 colorspace
+    colorscheme base16-monokai
 
     if has('gui_running')
         set guifont=Ubuntu\ Mono\ derivative\ Powerline:h16
