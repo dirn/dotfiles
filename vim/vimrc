@@ -205,7 +205,7 @@ set wildignore+=*.sw?                           " Vim swap files
 
 " --- NERD Tree ---
 let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '^__pycache__$', '\.swp$', '\.git$', '\.egg\-info', '\.coverage', '\.tox', '.DS_Store']
+let g:NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '^__pycache__$', '\.swp$', '\.git$', '\.egg', '\.egg\-info', '\.coverage', '\.tox', '.DS_Store', '.sass-cache']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:NERDTreeShowHidden=1
