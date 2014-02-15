@@ -185,7 +185,7 @@ endif
 augroup filetypes
     autocmd!
 
-    autocmd FileType html,htmldjango,htmljinja,ruby,xml,yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType css,html,htmldjango,htmljinja,ruby,scss,xml,yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
     " --- .vimrc ---
     " Reload .vimrc if changes are made to it
