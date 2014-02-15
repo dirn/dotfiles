@@ -25,3 +25,8 @@ export PIP_VIRTUALENV_BASE=$WORKON_HOME
 source virtualenvwrapper_lazy.sh
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+
+# Base16 Shell
+BASE16_SCHEME="monokai"
+BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_SCHEME.dark.sh"
+[[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
