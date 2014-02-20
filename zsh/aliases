@@ -59,8 +59,10 @@ done
 # Virtualenv
 alias stop='deactivate'
 
-# Use hub instead of Git directly
-eval "$(hub alias -s)"
+# Use gh instead of Git directly
+eval "$(gh alias -s)"
+# Use gitsh with gh
+alias gsh='gitsh --git $(which gh)'
 
 # Use Rhino
 alias js='rhino'
