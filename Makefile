@@ -13,7 +13,7 @@ install-heroku:
 	curl https://toolbelt.heroku.com/install.sh | sh
 
 install-homebrew:
-	-curl -fsSkL raw.github.com/mxcl/homebrew/go | ruby
+	-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 install-homebrew-extras:
 	# Taps
