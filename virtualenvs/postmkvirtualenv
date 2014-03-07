@@ -1,2 +1,2 @@
 #!/bin/zsh
-pip install bpython flake8
+pip install bpython flake8-docstrings
