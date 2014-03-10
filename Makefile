@@ -64,7 +64,7 @@ install-pylint:
 install-python:
 	# easy_install will try to install the pip folder
 	(cd git && easy_install pip)
-	pip install bpython fabric flake8 pep8 pep257 pip-tools pyflakes \
+	pip install bpython devpi fabric flake8 pep8 pep257 pip-tools pyflakes \
 	    pylint sphinx virtualenv virtualenvwrapper
 	# powerline currently isn't available on PyPI
 	pip install git+git://github.com/Lokaltog/powerline
