@@ -7,8 +7,9 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
-let mapleader=','
-let maplocalleader='\\'
+let mapleader = "\<Space>"
+map <space> <nop>
+let maplocalleader = "\\"
 
 set encoding=utf8
 set lazyredraw                  " no redraw during macros (much faster)
