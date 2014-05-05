@@ -149,6 +149,7 @@ map S <Plug>(ExchangeLine)
 " Open a new tab. This remaps jumping to the next tag, but I don't use those.
 nnoremap <c-t> :tabnew<cr>
 inoremap <c-t> <esc>:tabnew<cr>
+
 " FileType switching
 nnoremap <leader>Tp :set ft=python<cr>
 nnoremap <leader>Th :set ft=html<cr>
