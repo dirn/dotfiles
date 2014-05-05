@@ -131,6 +131,12 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+" Swap selected regions (vim-exchange)
+" I never use s anyway.
+map s <Plug>(Exchange)
+map sxx <Plug>(ExchangeClear)
+map S <Plug>(ExchangeLine)
+
 " Open a new tab. This remaps jumping to the next tag, but I don't use those.
 nnoremap <c-t> :tabnew<cr>
 inoremap <c-t> <esc>:tabnew<cr>

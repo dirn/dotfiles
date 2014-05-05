@@ -94,3 +94,6 @@
 [submodule "vim/submodules/base16-vim"]
 	path = vim/submodules/base16-vim
 	url = https://github.com/chriskempson/base16-vim.git
+[submodule "vim/bundle/vim-exchange"]
+	path = vim/bundle/vim-exchange
+	url = https://github.com/tommcdo/vim-exchange.git
