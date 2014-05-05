@@ -43,7 +43,7 @@ set background=dark
 if has('gui_running') || &t_Co > 8
     set t_Co=256
 
-    let base16colorspace=256  " Access colors present in 256 colorspace
+    let base16colorspace = 256  " Access colors present in 256 colorspace
     colorscheme base16-monokai
 
     if has('gui_running')
@@ -222,16 +222,16 @@ set wildignore+=*.mp3
 set wildignore+=*.sw?                           " Vim swap files
 
 " --- NERD Tree ---
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '^__pycache__$', '\.swp$', '\.git$', '\.egg', '\.egg\-info', '\.coverage', '\.tox', '.DS_Store', '.sass-cache']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\~$']
-let g:NERDTreeShowBookmarks=1
-let g:NERDTreeShowHidden=1
+let g:NERDTreeChDirMode = 2
+let g:NERDTreeIgnore = ['\.vim$', '\~$', '\.pyc$', '^__pycache__$', '\.swp$', '\.git$', '\.egg', '\.egg\-info', '\.coverage', '\.tox', '.DS_Store', '.sass-cache']
+let g:NERDTreeSortOrder = ['^__\.py$', '\/$', '*', '\.swp$', '\~$']
+let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeShowHidden = 1
 
 nnoremap <leader>fs :NERDTreeToggle<cr>
 
 " --- Powerline ---
-let g:Powerline_symbols='unicode'
+let g:Powerline_symbols = 'unicode'
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " --- Git Gutter ---
@@ -241,9 +241,9 @@ highlight GitGutterChangeDefault       guifg=Yellow guibg=NONE  ctermfg=DarkYell
 highlight GitGutterDeleteDefault       guifg=Red    guibg=NONE  ctermfg=DarkRed     ctermbg=NONE
 
 " --- Gist Vim ---
-let g:gist_clip_command='pbcopy'
-let g:gist_detect_filetype=1
-let g:gist_open_browser_after_post=1
+let g:gist_clip_command = 'pbcopy'
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
 
 " --- Learn Vimscript the Hard Way ---
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -268,7 +268,7 @@ let g:syntastic_check_on_open = 1
 " --- Clam ---
 nnoremap ! :Clam<space>
 vnoremap ! :ClamVisual<space>
-let g:clam_autoreturn=1
+let g:clam_autoreturn = 1
 
 " --- Gundo ---
 let g:gundo_preview_bottom = 1
