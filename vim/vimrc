@@ -132,6 +132,10 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+" Quickly change tabs
+nnoremap <s-h> gT
+nnoremap <s-l> gt
+
 " Copy and paste using the system clipboard
 vnoremap <leader>y "+y
 vnoremap <leader>d "+d
