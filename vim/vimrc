@@ -171,7 +171,8 @@ endfor
 inoremap <esc> <nop>
 
 " --- Typos ---
-:iabbrev functino function      " this one has plagued me for years
+" this one has plagued me for years
+:iabbrev functino function
 :iabbrev verison version
 
 :iabbrev :shrug: ¯\_(ツ)_/¯
