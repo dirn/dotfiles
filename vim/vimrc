@@ -145,6 +145,7 @@ set spell                       " use spell check
 set timeoutlen=500
 
 " --- Search ---
+set gdefault                    " replace with g by default
 set ignorecase                  " make search case insensitive ...
 set smartcase                   " ... unless an uppercase character is used
 set incsearch
