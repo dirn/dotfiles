@@ -1,15 +1,80 @@
 set nocompatible
 
+let mapleader = "\<Space>"
+let maplocalleader = ","
+
 " --- Pathogen ---
-execute pathogen#infect()
+" execute pathogen#infect()
+
+" --- NeoBundle ---
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Inception
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle      'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+
+" --- Themes ---
+NeoBundle       'altercation/vim-colors-solarized'
+NeoBundle       'chriskempson/base16-vim'
+
+" --- File types ---
+NeoBundleLazy   'mitsuhiko/vim-jinja',              {'autoload': {'filetypes': ['html', 'jinja']}}
+NeoBundle       'mitsuhiko/vim-jinja'
+NeoBundle       'sheerun/vim-polyglot'
+
+" --- Plugins ---
+NeoBundle       'rking/ag.vim'
+NeoBundle       'sjl/clam.vim'
+NeoBundleLazy   'alfredodeza/coveragepy.vim',       {'autoload': {'filetypes': ['python']}}
+NeoBundle       'kien/ctrlp.vim'
+NeoBundle       'rizzatti/dash.vim'
+NeoBundle       'mattn/webapi-vim'
+NeoBundle       'mattn/gist-vim'
+NeoBundle       'sjl/gundo.vim'
+" NeoBundle       'Shougo/neocomplete'
+NeoBundle       'scrooloose/nerdtree'
+NeoBundle       'Lokaltog/powerline'
+NeoBundleLazy   'alfredodeza/pytest.vim',           {'autoload': {'filetypes': ['python']}}
+NeoBundle       'sjl/strftimedammit.vim',           {'autoload': {'commands': ['help']}}
+NeoBundle       'scrooloose/syntastic'
+NeoBundleLazy   'godlygeek/tabular',                {'autoload': {'commands': ['Tabularize']}}
+NeoBundle       'tpope/vim-commentary'
+NeoBundle       'tommcdo/vim-exchange'
+NeoBundle       'tpope/vim-fugitive'
+NeoBundle       'airblade/vim-gitgutter'
+NeoBundle       'tpope/vim-repeat'
+NeoBundle       'tpope/vim-sensible'
+NeoBundle       'tomtom/tlib_vim'
+NeoBundle       'MarcWeber/vim-addon-mw-utils'
+NeoBundle       'garbas/vim-snipmate'
+NeoBundle       'honza/vim-snippets'
+NeoBundle       'tpope/vim-surround'
+
+" --- Tmux support ---
+if executable('tmux')
+    NeoBundle   'christoomey/vim-tmux-navigator'
+    NeoBundle   'sjl/vitality.vim'
+    " NeoBundle   'wellle/tmux-complete.vim'
+endif
+
+call neobundle#end()
 
 " --- Configuration ---
 syntax on
 filetype plugin indent on
 
-let mapleader = "\<Space>"
-map <space> <nop>
-let maplocalleader = ","
+" Check for plugins
+NeoBundleCheck
 
 set encoding=utf8
 set lazyredraw                  " no redraw during macros (much faster)
@@ -298,3 +363,6 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
+
+" --- Tmux complete ---
+" let g:tmuxcomplete#trigger = ''
