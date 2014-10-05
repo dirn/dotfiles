@@ -12,12 +12,19 @@ fi
 
 # Customize to your needs...
 
-export PATH=/usr/local/bin:/usr/local/share/npm/bin:/usr/local/opt/ruby/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
-
 for file in ~/.{extra,exports,aliases,functions}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
+
+export PATH=/usr/local/bin
+export PATH=$PATH:/usr/local/share/npm/bin
+export PATH=$PATH:/usr/local/opt/ruby/bin
+export PATH=$PATH:/usr/bin
+export PATH=$PATH:/bin
+export PATH=$PATH:/usr/sbin
+export PATH=$PATH:/sbin
+export PATH=$PATH:/opt/X11/bin
 
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENV_USE_DISTRIBUTE=true
