@@ -1,91 +1,132 @@
-bootstrap: install install-homebrew install-homebrew-extras \
-	   install-homebrew-packages install-python install-heroku \
-	   install-prezto install-weechat
+bootstrap: install-homebrew \
+	   install
 
-install: install-vim install-git install-zsh install-ssh \
-	 install-pylint install-virtualenvwrapper install-mongo install-tmux
+install: install-languages \
+	 install-databases \
+	 install-irc \
+	 install-ssh \
+	 install-utils \
+	 install-vcs \
+	 install-vim \
+	 install-zsh
+
+install-databases: install-postgresql \
+	install-mongo \
+	install-sqlite
+
+install-docker:
+	brew install boot2docker
+	brew install docker
+	brew install fig
 
 install-git:
+	# CLI
+	brew install git
+	-brew tap jingweno/gh
+	brew install gh
+	-brew tap thoughtbot/formulae
+	brew install gitsh
+	# Config
 	rm -f ~/.gitconfig
 	ln -s `pwd`/git/gitconfig ~/.gitconfig
 
-install-heroku:
-	curl https://toolbelt.heroku.com/install.sh | sh
+install-go:
+	brew install go
 
 install-homebrew:
 	-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
-install-homebrew-extras:
-	# Taps
-	-brew tap homebrew/versions
-	-brew tap jingweno/gh
-	-brew tap phinze/homebrew-cask
-	brew install brew-cask
-	# Services
-	gem install lunchy
-
-install-homebrew-packages:
-	# Homebrew packages
-	brew install python25 python26 python python32 python3 pypy
-	-brew install gh git imagemagick legit memcached mercurial mongodb \
-	    node postgresql readline reattach-to-user-namespace redis rhino \
-	    ruby sqlite tmux wget
+install-irc: install-ruby
 	# Spell check
 	brew install aspell --with-lang-en
-	# Vim with Python 3 support
-	brew install vim --with-python3
-	brew install macvim --with-python3
-	# Make tmux awesomer
-	gem install tmuxinator
-	# IRC
 	brew install weechat --with-aspell --with-perl --with-python --with-ruby
+	gem install terminal-notifier
+
+install-javascript:
+	brew install v8
+
+install-languages: install-python \
+	install-go \
+	install-ruby \
+	install-javascript
+
+install-mercurial:
+	brew install hg
 
 install-mongo:
+	brew install mongodb # For CLI access
+	# Config
 	-rm mongo/submodules/mongo-hacker/mongo_hacker.js
 	(cd mongo/submodules/mongo-hacker && $(MAKE))
 
-install-pip:
-	+@[ -d $(~/.pip $@) ] || mkdir -p $(~/.pip $@)
-	rm -f ~/.pip/pip.conf
-	ln -s `pwd`/pip/pip.conf ~/.pip/pip.conf
-
-install-psql:
+install-postgresql:
+	brew install postgresql # For CLI access
+	# Config
 	rm -f ~/.psqlrc
 	ln -s `pwd`/postgresql/psqlrc ~/.psqlrc
 
-install-prezto:
-	rm -rf ~/.zprezto
-	ln -s `pwd`/zsh/submodules/prezto ~/.zprezto
-
-install-pylint:
-	rm -f ~/.pylintrc
-	ln -s `pwd`/python/pylintrc ~/.pylintrc
-
 install-python:
-	# easy_install will try to install the pip folder
-	(cd git && easy_install pip)
-	pip install bpython devpi fabric flake8 pep8 pep257 pip-tools pyflakes \
-	    pylint sphinx virtualenv virtualenvwrapper
-	# powerline currently isn't available on PyPI
-	pip install git+git://github.com/Lokaltog/powerline
+	# Python
+	brew install pyenv
+	brew install pyenv-virtualenvwrapper
+	brew install readline
+	# pyenv version
+	rm -f ~/.python-version
+	ln -s `pwd`/python/python-version ~/.python-version
+	# Pip
+	+@[ -d $(~/.pip $@) ] || mkdir -p $(~/.pip $@)
+	rm -f ~/.pip/pip.conf
+	ln -s `pwd`/pip/pip.conf ~/.pip/pip.conf
+	# virtualenvwrapper
+	+@[ -d $(~/.virtualenvs $@) ] || mkdir -p $(~/.virtualenvs $@)
+	rm -f ~/.virtualenvs/postmkvirtualenv
+	ln -s `pwd`/virtualenvs/postmkvirtualenv ~/.virtualenvs/postmkvirtualenv
+	# Utilities
+	pip install bpython devpi fabric sphinx tox
+	# Linters
+	pip install flake8 pyflakes pep8 pep257 flake8-docstrings pylint
+	# Miscellaneous
+	pip install powerline-status
+
+install-ruby:
+	brew install rbenv
+	brew install ruby-build
+	# rbenv version
+	rm -f ~/.rbenv/version
+	ln -s `pwd`/rbenv/version ~/.rbenv/version
 
 install-ssh:
 	rm -f ~/.ssh/config
 	ln -s `pwd`/ssh/config ~/.ssh/config
 
-install-tmux:
+install-tmux: install-ruby
+	# Tmux
+	brew install tmux
+	brew install reattach-to-user-namespace
+	# Config
 	rm -f ~/.tmux.conf
 	ln -s `pwd`/tmux/tmux.conf ~/.tmux.conf
+	# Make tmux awesomer
+	gem install tmuxinator
+
+install-utils: install-docker \
+	       install-tmux
+	brew install ag
+	brew install tree
+	brew install wget
+
+install-vcs: install-git
+	     install-mercurial
 
 install-vim:
+	brew install vim --with-python3 --with-lua
+	brew install macvim --with-python3 --with-lua
+	# Spell check
+	brew install aspell --with-lang-en
+	# Config
 	rm -rf ~/.vim ~/.vimrc
 	ln -s `pwd`/vim ~/.vim
 	ln -s ~/.vim/vimrc ~/.vimrc
-
-install-virtualenvwrapper:
-	+@[ -d $(~/.virtualenvs $@) ] || mkdir -p $(~/.virtualenvs $@)
-	rm -f ~/.virtualenvs/postmkvirtualenv
-	ln -s `pwd`/virtualenvs/postmkvirtualenv ~/.virtualenvs/postmkvirtualenv
 
 install-zsh:
 	rm -f ~/.aliases
@@ -100,6 +141,9 @@ install-zsh:
 	ln -s `pwd`/zsh/aliases ~/.aliases
 	ln -s `pwd`/zsh/exports ~/.exports
 	ln -s `pwd`/zsh/functions ~/.functions
+	# prezto
+	rm -rf ~/.zprezto
+	ln -s `pwd`/zsh/submodules/prezto ~/.zprezto
 	ln -s ~/.zprezto/runcoms/zlogin ~/.zlogin
 	ln -s ~/.zprezto/runcoms/zlogout ~/.zlogout
 	ln -s `pwd`/zsh/zpreztorc ~/.zpreztorc

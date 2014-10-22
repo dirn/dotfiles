@@ -50,7 +50,7 @@ alias rot13='tr a-zA-Z n-za-mN-ZA-M'
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-	alias "$method"="lwp-request -m '$method'"
+    alias "$method"="lwp-request -m '$method'"
 done
 
 # Virtualenv
@@ -62,7 +62,7 @@ eval "$(gh alias -s)"
 alias gsh='gitsh --git $(which gh)'
 
 # Use Rhino
-alias js='rhino'
+alias js='v8'
 
 # tmuxinator gets me most of the way there, but...
 alias dmux='tmux kill-session -t'

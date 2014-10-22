@@ -1,5 +1,3 @@
-export NODE_PATH='/usr/local/lib/node'
-
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
 # Highlight section titles in manual pages
@@ -9,3 +7,10 @@ export LESS_TERMCAP_md="$ORANGE"
 export HISTSIZE=32768
 
 export EDITOR='mvim'
+
+# Python
+export WORKON_HOME=$HOME/.virtualenvs
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+
+# Docker
+export DOCKER_HOST=tcp://192.168.59.103:2375

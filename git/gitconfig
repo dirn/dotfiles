@@ -1,6 +1,8 @@
 [user]
     name = Andy Dirnberger
     email = dirn@dirnonline.com
+[github]
+    user = dirn
 [credential]
     helper = osxkeychain
 [alias]
@@ -14,14 +16,6 @@
     rewind = reset --soft HEAD~1
     fml = reset --hard HEAD
     sigh = push --force
-    switch = !legit switch \"$@\"
-    branches = !legit branches
-    sprout = !legit sprout \"$@\"
-    unpublish = !legit unpublish \"$@\"
-    harvest = !legit harvest \"$@\"
-    sync = !legit sync \"$@\"
-    publish = !legit publish \"$@\"
-    graft = !legit graft \"$@\"
     amend = commit --amend
     patch = commit --patch -v
     locate = ls-tree --name-only -r HEAD
@@ -38,15 +32,22 @@
     ui = true
 [core]
     editor = vim
-[merge]
-    tool = fugitive
-[mergetool]
-    keepBackup = false
-[mergetool "fugitive"]
-    cmd = mvim -f -c \"Gdiff\" \"$MERGED\"
-[diff]
-    algorithm = patience
 [push]
     default = simple
-[github]
-    user = dirn
+[merge]
+    tool = Kaleidoscope
+[mergetool]
+    keepBackup = false
+    prompt = false
+[mergetool "fugitive"]
+    cmd = mvim -f -c \"Gdiff\" \"$MERGED\"
+[mergetool "Kaleidoscope"]
+    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+    trustExitCode = true
+[diff]
+    algorithm = patience
+    tool = Kaleidoscope
+[difftool]
+    prompt = false
+[difftool "Kaleidoscope"]
+    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"

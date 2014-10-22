@@ -303,6 +303,9 @@ let g:NERDTreeShowHidden = 1
 nnoremap <leader>fs :NERDTreeToggle<cr>
 
 " --- Powerline ---
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
 let g:Powerline_symbols = 'unicode'
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
