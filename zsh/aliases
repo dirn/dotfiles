@@ -61,9 +61,6 @@ eval "$(gh alias -s)"
 # Use gitsh with gh
 alias gsh='gitsh --git $(which gh)'
 
-# Use Rhino
-alias js='v8'
-
 # tmuxinator gets me most of the way there, but...
 alias dmux='tmux kill-session -t'
 
