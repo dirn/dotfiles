@@ -10,7 +10,7 @@
     ci = commit
     co = checkout
     cp = cherry-pick
-    rb = rebate
+    rb = rebase
     st = status
     graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     rewind = reset --soft HEAD~1
