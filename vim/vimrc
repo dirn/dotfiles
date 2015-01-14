@@ -29,7 +29,6 @@ NeoBundle       'chriskempson/base16-vim'
 
 " --- File types ---
 NeoBundleLazy   'mitsuhiko/vim-jinja',              {'autoload': {'filetypes': ['html', 'jinja']}}
-NeoBundle       'mitsuhiko/vim-jinja'
 NeoBundle       'sheerun/vim-polyglot'
 
 " --- Plugins ---
