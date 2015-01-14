@@ -35,6 +35,7 @@ NeoBundle       'pangloss/vim-javascript',          {'autoload': {'filetypes': [
 NeoBundle       'fatih/vim-go',                     {'autoload': {'filetypes': ['go']}}
 
 " --- Plugins ---
+NeoBundle       'jmcantrell/vim-virtualenv',        {'autoload': {'filetypes': ['python']}}
 NeoBundle       'rking/ag.vim'
 NeoBundle       'sjl/clam.vim'
 NeoBundleLazy   'alfredodeza/coveragepy.vim',       {'autoload': {'filetypes': ['python']}}
