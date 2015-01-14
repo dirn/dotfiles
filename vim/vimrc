@@ -99,9 +99,6 @@ if exists('&colorcolumn')
     set colorcolumn=+1
 endif
 
-" --- History ---
-set history=256
-
 " --- Appearance ---
 set background=dark
 
@@ -117,16 +114,9 @@ if has('gui_running') || &t_Co > 8
     endif
 endif
 
-set laststatus=2                " always show status line
 set noshowmode                  " hide the mode text, Powerline shows it
 
-set display+=lastline
 set listchars=tab:▸\ ,eol:¬
-
-set ruler                       " show the cursor position
-
-set scrolloff=2                 " lines above and below the current line
-set sidescrolloff=2
 
 set number                      " show line numbers
 
@@ -135,24 +125,18 @@ set title                       " show the filename in the window's title
 " --- Behavior ---
 set confirm
 
-set backspace=indent,eol,start  " allow backspacing everywhere in edit mode
-
 set complete=.,w,b,u,t          " this should be the default, but just in case
 set completeopt=longest,menuone,preview
 
 set spell                       " use spell check
 
-set timeoutlen=500
-
 " --- Search ---
 set gdefault                    " replace with g by default
 set ignorecase                  " make search case insensitive ...
 set smartcase                   " ... unless an uppercase character is used
-set incsearch
 set hlsearch
 
 " --- Whitespace ---
-set autoindent
 
 set expandtab                   " spaces > tabs
 set shiftround                  " indents to a multiple of shiftwidth
