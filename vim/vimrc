@@ -134,6 +134,12 @@ set completeopt=longest,menuone,preview
 
 set spell                       " use spell check
 
+" Open splits to the right and bottom.
+set splitbelow                  " this feels weird with Fugitive
+set splitright
+
+set diffopt+=vertical           " always use vertical diffs
+
 " --- Search ---
 set gdefault                    " replace with g by default
 set ignorecase                  " make search case insensitive ...
