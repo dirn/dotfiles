@@ -41,6 +41,7 @@ NeoBundle       'mattn/webapi-vim'
 NeoBundle       'mattn/gist-vim'
 NeoBundle       'sjl/gundo.vim'
 " NeoBundle       'Shougo/neocomplete'
+NeoBundle       'haya14busa/incsearch.vim'
 NeoBundle       'scrooloose/nerdtree'
 NeoBundle       'bling/vim-airline'
 NeoBundleLazy   'alfredodeza/pytest.vim',           {'autoload': {'filetypes': ['python']}}
@@ -148,9 +149,6 @@ set tabstop=8
 nnoremap <c-u> mzgUiw`z
 " Make word lowercase (down, because <c-l> is used for navigation)
 nnoremap <c-d> mzguiw`z
-
-" Clear search
-nnoremap <silent> <leader><space> :nohlsearch<cr>
 
 " Reindent a file
 nnoremap <silent> <leader><tab> gg=G
@@ -353,3 +351,15 @@ endfunction
 
 " --- Tmux complete ---
 " let g:tmuxcomplete#trigger = ''
+
+" --- incsearch ---
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+let g:incsearch#auto_nohlsearch = 1
+map n <Plug>(incsearch-nohl-n)
+map N <Plug>(incsearch-nohl-N)
+map * <Plug>(incsearch-nohl-*)
+map # <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
