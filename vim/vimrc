@@ -36,7 +36,7 @@ NeoBundle       'sheerun/vim-polyglot'
 NeoBundle       'rking/ag.vim'
 NeoBundle       'sjl/clam.vim'
 NeoBundleLazy   'alfredodeza/coveragepy.vim',       {'autoload': {'filetypes': ['python']}}
-NeoBundle       'kien/ctrlp.vim'
+NeoBundle       'ctrlpvim/ctrlp.vim'
 NeoBundle       'rizzatti/dash.vim'
 NeoBundle       'mattn/webapi-vim'
 NeoBundle       'mattn/gist-vim'
