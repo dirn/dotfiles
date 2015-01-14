@@ -59,6 +59,7 @@ NeoBundle       'MarcWeber/vim-addon-mw-utils'
 NeoBundle       'garbas/vim-snipmate'
 NeoBundle       'honza/vim-snippets'
 NeoBundle       'tpope/vim-surround'
+NeoBundle       'Lokaltog/vim-easymotion'
 
 " --- Tmux support ---
 if executable('tmux')
@@ -166,6 +167,7 @@ nnoremap L $
 vnoremap L g_
 
 " Keystroke savers
+" vim-easymotion takes care of losing ;
 nnoremap ; :
 vnoremap ; :
 
