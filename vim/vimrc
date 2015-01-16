@@ -183,11 +183,6 @@ nnoremap vv ^vg_
 " Exit insert mode
 inoremap jk <esc>
 
-" Navigation
-nnoremap H 0
-nnoremap L $
-vnoremap L g_
-
 " Keystroke savers
 " vim-easymotion takes care of losing ;
 nnoremap ; :
