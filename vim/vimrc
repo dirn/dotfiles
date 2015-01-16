@@ -116,7 +116,7 @@ if has('gui_running') || &t_Co > 8
     colorscheme base16-monokai
 
     if has('gui_running')
-        set guifont=Ubuntu\ Mono\ derivative\ Powerline:h16
+        set guifont=Fira\ Mono\ for\ Powerline:h16
         set lines=85 columns=280
     endif
 endif
