@@ -64,6 +64,7 @@ NeoBundle       'garbas/vim-snipmate'
 NeoBundle       'honza/vim-snippets'
 NeoBundle       'tpope/vim-surround'
 NeoBundle       'Lokaltog/vim-easymotion'
+NeoBundle       'pbrisbin/vim-mkdir'
 
 " --- Tmux support ---
 if executable('tmux')
