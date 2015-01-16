@@ -65,6 +65,7 @@ NeoBundle       'honza/vim-snippets'
 NeoBundle       'tpope/vim-surround'
 NeoBundle       'Lokaltog/vim-easymotion'
 NeoBundle       'pbrisbin/vim-mkdir'
+NeoBundle       'EinfachToll/DidYouMean'
 
 " --- Tmux support ---
 if executable('tmux')
