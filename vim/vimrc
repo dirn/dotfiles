@@ -25,7 +25,6 @@ NeoBundle      'Shougo/vimproc', {
 
 " --- Themes ---
 NeoBundle       'altercation/vim-colors-solarized'
-NeoBundle       'chriskempson/base16-vim'
 
 " --- File types ---
 NeoBundleLazy   'mitsuhiko/vim-jinja',              {'autoload': {'filetypes': ['html', 'jinja']}}
@@ -107,13 +106,14 @@ if exists('&colorcolumn')
 endif
 
 " --- Appearance ---
-set background=dark
+set background=light
 
 if has('gui_running') || &t_Co > 8
     set t_Co=256
 
-    let base16colorspace = 256  " Access colors present in 256 colorspace
-    colorscheme base16-monokai
+    let g:solarized_termcolors = 256
+    let g:solarized_termtrans = 1
+    colorscheme solarized
 
     if has('gui_running')
         set guifont=Fira\ Mono\ for\ Powerline:h16

@@ -104,7 +104,9 @@ install-tmux: install-ruby
 	brew install tmux
 	brew install reattach-to-user-namespace
 	# Config
+	rm -f ~/.tmux.battery.sh
 	rm -f ~/.tmux.conf
+	ln -s `pwd`/tmux/tmux.battery.sh ~/.tmux.battery.sh
 	ln -s `pwd`/tmux/tmux.conf ~/.tmux.conf
 	# Make tmux awesomer
 	gem install tmuxinator
