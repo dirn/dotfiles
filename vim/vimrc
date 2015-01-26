@@ -67,6 +67,7 @@ NeoBundle       'pbrisbin/vim-mkdir'
 NeoBundle       'EinfachToll/DidYouMean'
 
 NeoBundle       'EinfachToll/DidYouMean'
+NeoBundle       'pbrisbin/vim-mkdir'
 
 " --- Tmux support ---
 if executable('tmux')
