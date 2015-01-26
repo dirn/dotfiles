@@ -66,6 +66,8 @@ NeoBundle       'Lokaltog/vim-easymotion'
 NeoBundle       'pbrisbin/vim-mkdir'
 NeoBundle       'EinfachToll/DidYouMean'
 
+NeoBundle       'EinfachToll/DidYouMean'
+
 " --- Tmux support ---
 if executable('tmux')
     NeoBundle   'christoomey/vim-tmux-navigator'
