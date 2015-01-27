@@ -32,6 +32,7 @@
     ui = true
 [core]
     editor = vim
+    excludesfile = ~/.gitignoreglobal
 [push]
     default = simple
 [merge]

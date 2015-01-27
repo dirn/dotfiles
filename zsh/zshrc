@@ -12,11 +12,6 @@ fi
 
 # Customize to your needs...
 
-for file in ~/.{extra,exports,aliases,functions}; do
-    [ -r "$file" ] && source "$file"
-done
-unset file
-
 export PATH=/usr/local/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:/usr/bin
@@ -25,13 +20,7 @@ export PATH=$PATH:/usr/sbin
 export PATH=$PATH:/sbin
 export PATH=$PATH:/opt/X11/bin
 
-if which pyenv > /dev/null; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-    pyenv virtualenvwrapper_lazy
-fi
-
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+for file in ~/.{extra,exports,aliases,functions}; do
+    [ -r "$file" ] && source "$file"
+done
+unset file

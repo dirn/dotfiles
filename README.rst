@@ -2,15 +2,39 @@
 Hello there!
 ############
 
-Thanks for checking out my dotfiles. If you want to use them, installation is
-easy::
+Thanks for checking out my dotfiles. If you want to use them, feel free to clone
+and repo and play around. If you want to setup up your computer with some useful
+(at least to me) stuff, they can take care of that for you. Installation is
+easy. Here's what you'll need to get started:
 
-    $ git clone --recursive https://github.com/dirn/dotfiles.git
-    $ cd dotfiles
-    $ make install
+* Xcode
+* `Xcode command line tools`_
+* `An SSH key registered with GitHub`_
+* `pip`_
 
-This will clone my dotfiles and pull down all of the submodules. After that's
-done, it will handle setting up all of the synlinks.
+.. _Xcode command line tools: https://developer.apple.com/library/ios/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_OS_X_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_
+.. _An SSH key registered with GitHub: https://help.github.com/articles/generating-ssh-keys/
+.. _pip: https://pip.pypa.io/en/latest/installing.html
+
+Once you have these, setup is::
+
+    $ git clone --recursive https://github.com/ansible/ansible.git
+    $ cd ./ansible
+    $ source ./hacking/env-setup
+    $ pip install --user PyYAML Jinja2
+
+This will install a version of Ansible that you can use for the initial run of
+the playbook::
+
+    $ curl -1 https://raw.githubusercontent.com/dirn/dotfiles/master/playbook.yml > /tmp/playbook.yml
+    $ ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local /tmp/playbook.yml
+
+After the initial run, the playbook can be run again with::
+
+    $ play
+
+The playbook will install Ansible so you don't need to keep the cloned
+repository around anymore.
 
 Caution
 #######

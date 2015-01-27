@@ -1,7 +1,3 @@
-*~
-*.swp
-.DS*
-*.bak
-
-# Plugins installed by NeoBundle
-vim/bundle
+weechat/logs
+weechat/sec.conf
+weechat/weechat.log
