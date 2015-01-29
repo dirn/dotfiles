@@ -140,6 +140,8 @@ set completeopt=longest,menuone,preview
 
 set spell                       " use spell check
 
+set nofoldenable                " stop folding things!
+
 " Open splits to the right and bottom.
 set splitbelow                  " this feels weird with Fugitive
 set splitright
