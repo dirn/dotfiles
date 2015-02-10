@@ -5,7 +5,7 @@ battery() {
   battery_symbol_count=$2
   if [ $battery_symbol_count = "auto" ]; then
     columns=$(tmux display -p '#{client_width}' || echo 80)
-    if [ $columns > 80 ]; then
+    if [ $columns -gt 80 ]; then
       battery_symbol_count=10
     else
       battery_symbol_count=5
