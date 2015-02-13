@@ -3,9 +3,6 @@ set nocompatible
 let mapleader = "\<Space>"
 let maplocalleader = ","
 
-" --- Pathogen ---
-" execute pathogen#infect()
-
 " --- NeoBundle ---
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
