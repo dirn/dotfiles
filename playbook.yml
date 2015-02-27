@@ -6,8 +6,8 @@
     dotfiles: "{{ ansible }}/dotfiles"
     rc_file: ~/.extra
     pyenv: /Users/{{ ansible_ssh_user }}/.pyenv
-    python_version: 3.4.2
-    python_versions: [2.6.9, 2.7.9, 3.3.6, 3.4.2, pypy-2.5.0, pypy3-2.4.0]
+    python_version: 3.4.3
+    python_versions: [2.6.9, 2.7.9, 3.3.6, 3.4.3, pypy-2.5.0, pypy3-2.4.0]
     python_xp_version: 2.7.9
     ruby_version: 2.2.0
     ruby_versions: [2.0.0-p598, 2.1.5, 2.2.0]
@@ -271,13 +271,22 @@
         - version: 2.7.9 # First for stuff that installs with Python
           insert_at: before
           pattern: BOF
-        - version: 3.4.2
+        - version: 3.4.3
           insert_at: after
           pattern: 2.7.9
         - version: 2.6.9
         - version: 3.3.6
         - version: pypy-2.5.0
         - version: pypy3-2.4.0
+      tags: python
+
+    - name: Exclude old global Python versions
+      lineinfile: >
+        dest={{ pyenv }}/version
+        state=absent
+        line={{ item }}
+      with_items:
+        - 3.4.2
       tags: python
 
     - name: Set local Python versions
@@ -288,16 +297,25 @@
         insert{{ item.insert_at|default('after') }}={{ item.pattern|default('EOF') }}
         line={{ item.version }}
       with_items:
-        - version: 3.4.2
+        - version: 3.4.3
           insert_at: before
           pattern: BOF
         - version: 2.7.9
           insert_at: after
-          pattern: 3.4.2
+          pattern: 3.4.3
         - version: 2.6.9
         - version: 3.3.6
         - version: pypy-2.5.0
         - version: pypy3-2.4.0
+      tags: python
+
+    - name: Exclude old local Python versions
+      lineinfile: >
+        dest=~/.python-version
+        state=absent
+        line={{ item }}
+      with_items:
+        - 3.4.2
       tags: python
 
     # Install and link devpi first so other pip tasks can use it.
