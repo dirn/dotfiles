@@ -91,6 +91,7 @@
       tags: osx
 
     # Homebrew
+
     - name: Download Homebrew's installer
       git: repo=git@github.com:Homebrew/install.git dest={{ ansible }}/homebrew-installer
 
@@ -179,7 +180,6 @@
         - export DOCKER_CERT_PATH=/Users/{{ ansible_ssh_user }}/.boot2docker/certs/boot2docker-vm
         - export DOCKER_TLS_VERIFY=yes
       tags: docker
-
 
     # Git
 
