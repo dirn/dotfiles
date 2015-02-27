@@ -62,6 +62,7 @@ NeoBundle       'tpope/vim-surround'
 NeoBundle       'Lokaltog/vim-easymotion'
 NeoBundle       'pbrisbin/vim-mkdir'
 NeoBundle       'chase/vim-ansible-yaml'
+NeoBundle       'majutsushi/tagbar'
 
 " --- Tmux support ---
 if executable('tmux')
