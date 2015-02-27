@@ -63,8 +63,6 @@ NeoBundle       'Lokaltog/vim-easymotion'
 NeoBundle       'pbrisbin/vim-mkdir'
 NeoBundle       'chase/vim-ansible-yaml'
 
-NeoBundle       'pbrisbin/vim-mkdir'
-
 " --- Tmux support ---
 if executable('tmux')
     NeoBundle   'christoomey/vim-tmux-navigator'
