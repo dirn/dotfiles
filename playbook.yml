@@ -130,6 +130,7 @@
     - name: Check shell
       shell: echo $SHELL
       register: shell_name
+      changed_when: shell_name.stdout != '/usr/local/bin/zsh'
       tags: zsh
 
     - name: Use Homebrew's Zsh
