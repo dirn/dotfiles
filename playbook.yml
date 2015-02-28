@@ -334,6 +334,7 @@
 
     - name: Start devpi
       command: ~/.local/bin/devpi-server --start
+      tags: python
 
     - name: Configure Pip to use devpi
       lineinfile: >
