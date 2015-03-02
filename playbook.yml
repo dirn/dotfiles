@@ -13,6 +13,35 @@
     ruby_versions: [2.0.0-p598, 2.1.5, 2.2.0]
     venv: ~/.pyenv/versions/{{ python_version }}/bin/pyvenv
 
+    osx_config:
+      dock:
+        # Dock: dim hidden apps
+        - domain: com.apple.dock
+          key: showhidden
+        # Dock: icon size
+        - domain: com.apple.dock
+          key: tilesize
+          type: int
+          value: '42'
+        # Dock: position
+        - domain: com.apple.dock
+          key: orientation
+          type: string
+          value: left
+      finder:
+        # Finder: empty Trash securely
+        - domain: com.apple.finder
+          key: EmptyTrashSecurely
+      misc:
+        # enable natural scrolling
+        - domain: NSGlobalDomain
+          key: com.apple.swipescrolldirection
+        # Universal Access: use Ctrl (^) key to zoom
+        - domain: com.apple.universalaccess
+          key: HIDScrollZoomModifierMask
+          type: int
+          value: '262144'
+
   tasks:
     # Dotfiles
 
@@ -53,40 +82,53 @@
         state=present
         line="alias play=\"ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml\""
 
-    - name: Configure OS X
-      command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
-      with_items:
-        # Dock: dim hidden apps
-        - domain: com.apple.dock
-          key: showhidden
-        # Dock: icon size
-        - domain: com.apple.dock
-          key: tilesize
-          type: int
-          value: 42
-        # Dock: position
-        - domain: com.apple.dock
-          key: orientation
-          type: string
-          value: left
-        # Finder: empty Trash securely
-        - domain: com.apple.finder
-          key: EmptyTrashSecurely
-        # enable natural scrolling
-        - domain: NSGlobalDomain
-          key: com.apple.swipescrolldirection
-        # Universal Access: use Ctrl (^) key to zoom
-        - domain: com.apple.universalaccess
-          key: HIDScrollZoomModifierMask
-          type: int
-          value: 262144
+    - name: Check the Dock configuration
+      command: defaults read {{ item.domain }} {{ item.key }}
+      register: dock
+      changed_when: dock.stdout != item.value|default('1')
+      with_items: osx_config.dock
       tags: osx
 
-    - name: Restart OS X components
-      command: killall {{ item }}
-      with_items:
-        - Dock
-        - Finder
+    - name: Configure the Dock
+      command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
+      when: dock.changed
+      with_items: osx_config.dock
+      tags: osx
+
+    - name: Restart the Dock
+      command: killall Dock
+      when: dock.changed
+      tags: osx
+
+    - name: Check the Finder configuration
+      command: defaults read {{ item.domain }} {{ item.key }}
+      register: finder
+      changed_when: finder.stdout != item.value|default('1')
+      with_items: osx_config.finder
+      tags: osx
+
+    - name: Configure Finder
+      command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
+      when: finder.changed
+      with_items: osx_config.finder
+      tags: osx
+
+    - name: Restart Finder
+      command: killall Finder
+      when: finder.changed
+      tags: osx
+
+    - name: Check the OS X configuration
+      command: defaults read {{ item.domain }} {{ item.key }}
+      register: misc
+      changed_when: misc.stdout != item.value|default('1')
+      with_items: osx_config.misc
+      tags: osx
+
+    - name: Configure OS X
+      command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
+      when: misc.changed
+      with_items: osx_config.misc
       tags: osx
 
     # Homebrew
@@ -134,6 +176,7 @@
 
     - name: Use Homebrew's Zsh
       shell: chsh -s /usr/local/bin/zsh
+      register: zsh_test
       when: shell_name.stdout != '/usr/local/bin/zsh'
       tags: zsh
 
