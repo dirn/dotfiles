@@ -338,7 +338,7 @@
       changed_when: devpi.stdout.startswith('starting background')
       tags: python
 
-    - name: Configure Pip to use devpi
+    - name: Configure pip to use devpi
       lineinfile: >
         dest=~/.pip/pip.conf
         state=present
@@ -374,7 +374,7 @@
         - venv: twine
       tags: python
 
-    - name: Install Pip libraries (2.7)
+    - name: Install pip libraries (2.7)
       pip: name={{ item }} executable={{ pyenv }}/versions/{{ python_xp_version }}/bin/pip state=latest
       with_items:
         - bpython
@@ -383,7 +383,7 @@
         - setuptools
       tags: python
 
-    - name: Install Pip libraries (3.4)
+    - name: Install pip libraries (3.4)
       pip: name={{ item }} executable={{ pyenv }}/versions/{{ python_version }}/bin/pip state=latest
       with_items:
         - bpython
@@ -551,7 +551,7 @@
       changed_when: false
       tags: weechat
 
-    - name: Install WeeChat Pip libraries
+    - name: Install WeeChat pip libraries
       pip: name=pync executable=/usr/local/bin/pip2 extra_args=--user state=latest
       tags: weechat
 
