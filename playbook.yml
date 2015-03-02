@@ -24,7 +24,6 @@
 
     - name: Ensure the local bin folder exists
       file: path=~/.local/bin state=directory
-      tags: solo
 
     - name: Download dotfiles
       git: repo=git@github.com:dirn/dotfiles.git dest={{ dotfiles }} force=no
@@ -547,7 +546,7 @@
       with_items:
         - "[install]"
         - prefix=
-      tags: python
+      tags: weechat
 
     - name: Install WeeChat Pip libraries
       pip: name=pync executable=/usr/local/bin/pip2 extra_args=--user state=latest
@@ -556,6 +555,7 @@
     # Leaving this around would use pip to try to install things to /lib.
     - name: Reenable global disutils prefix
       file: path=~/.pydistutils.cfg state=absent
+      tags: weechat
 
     - name: Link WeeChat's dotfiles
       file: src={{ dotfiles }}/weechat dest=~/.weechat state=link
