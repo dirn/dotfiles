@@ -1,9 +1,7 @@
 # AWS IP addresses are transitory and get reused. There is no point in keeping
 # them around. This also saves the trouble of having to specify `ubuntu` as the
 # username.
-
 Host *.amazonaws.com
   User ubuntu
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
-
