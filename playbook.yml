@@ -334,6 +334,8 @@
 
     - name: Start devpi
       command: ~/.local/bin/devpi-server --start
+      register: devpi
+      changed_when: devpi.stdout.startswith('starting background')
       tags: python
 
     - name: Configure Pip to use devpi
@@ -546,6 +548,7 @@
       with_items:
         - "[install]"
         - prefix=
+      changed_when: false
       tags: weechat
 
     - name: Install WeeChat Pip libraries
@@ -555,6 +558,7 @@
     # Leaving this around would use pip to try to install things to /lib.
     - name: Reenable global disutils prefix
       file: path=~/.pydistutils.cfg state=absent
+      changed_when: false
       tags: weechat
 
     - name: Link WeeChat's dotfiles
