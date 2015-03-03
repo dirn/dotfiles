@@ -209,7 +209,7 @@
       with_items:
         - boot2docker
         - docker
-        - fig
+        - docker-compose
       tags: docker
 
     - name: Configure Docker
