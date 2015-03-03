@@ -54,6 +54,7 @@
     - name: Download dotfiles
       git: repo=git@github.com:dirn/dotfiles.git dest={{ dotfiles }} force=no
       ignore_errors: yes
+      tags: dotfiles
 
     # Beautification
 
