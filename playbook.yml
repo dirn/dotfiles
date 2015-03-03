@@ -529,7 +529,12 @@
       tags: vim
 
     - name: Link Vim's dotfiles
-      file: src={{ dotfiles }}/vim/vimrc dest=~/.vimrc state=link
+      file: src={{ dotfiles }}/vim/{{ item.src }} dest=~/{{ item.dest }} state=link
+      with_items:
+        - src: vimrc
+          dest: .vimrc
+        - src: ftplugin
+          dest: .vim/ftplugin
       tags: vim
 
     - name: Link NeoVim's dotfiles
