@@ -1,0 +1,19 @@
+- name: Check enable zoom with ctrl (^) key
+  command: defaults read com.apple.universalaccess HIDScrollZoomModifierMask
+  changed_when: enable_ctrl_zoom.stdout != '262144'
+  register: enable_ctrl_zoom
+  ignore_errors: yes
+
+- name: Set enable zoom with ctrl (^) key
+  command: defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+  when: enable_ctrl_zoom|changed
+
+- name: Check enable scroll to zoom
+  command: defaults read com.apple.universalaccess closeViewScrollWheelToggle
+  changed_when: enable_scroll_zoom.stdout != '1'
+  register: enable_scroll_zoom
+  ignore_errors: yes
+
+- name: Set enable scroll to zoom
+  command: defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool 'YES'
+  when: enable_scroll_zoom|changed

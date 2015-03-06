@@ -1,0 +1,9 @@
+- name: Check enable natural scroll
+  command: defaults read NSGlobalDomain com.apple.swipescrolldirection
+  changed_when: enable_natural_scroll.stdout != '1'
+  register: enable_natural_scroll
+  ignore_errors: yes
+
+- name: Set enable natural scroll
+  command: defaults write NSGlobalDomain com.apple.swipescrolldirection -bool 'YES'
+  when: enable_natural_scroll|changed

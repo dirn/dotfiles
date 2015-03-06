@@ -1,0 +1,13 @@
+- name: Install
+  homebrew: name=tmux state=present
+
+- include: "{{ dotfiles }}/roles/ruby/tasks/rbenv/gem.yml"
+  vars:
+    version: "{{ ruby_version }}"
+    name: tmuxinator
+
+- name: Link dotfiles
+  file: src={{ dotfiles }}/tmux/{{ item }} dest=~/.{{ item }} state=link
+  with_items:
+    - tmux.conf
+    - tmux.battery.sh

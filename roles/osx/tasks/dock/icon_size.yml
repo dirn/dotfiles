@@ -1,0 +1,10 @@
+- name: Check icon size
+  command: defaults read com.apple.dock tilesize
+  changed_when: icon_size.stdout != size
+  register: icon_size
+  ignore_errors: yes
+
+- name: Set icon size
+  command: defaults write com.apple.dock tilesize -int {{ size }}
+  when: icon_size|changed
+  notify: restart Dock

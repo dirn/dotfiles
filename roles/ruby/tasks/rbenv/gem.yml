@@ -1,0 +1,2 @@
+- name: Install {{ name }} ({{ version }})
+  gem: name={{ name }} executable=~/.rbenv/versions/{{ version }}/bin/gem state=latest

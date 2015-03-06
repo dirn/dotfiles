@@ -1,0 +1,10 @@
+- name: Check clock format
+  command: defaults read com.apple.menuextra.clock DateFormat
+  changed_when: clock_format.stdout != format
+  register: clock_format
+  ignore_errors: yes
+
+- name: Set clock format
+  command: defaults write com.apple.menuextra.clock DateFormat -string '{{ format }}'
+  when: clock_format|changed
+  notify: restart Menubar

@@ -1,0 +1,10 @@
+- name: Install {{ name }}
+  pip: >
+    name={{ bin|default(name) }}
+    executable=/Users/{{ ansible_ssh_user }}/.local/venvs/{{ name }}/bin/pip
+    virtualenv=~/.local/venvs/{{ name }}
+    virtualenv_command={{ venv }}
+    state=present
+
+- name: Link {{ name }}
+  file: src=~/.local/venvs/{{ name }}/bin/{{ bin|default(name) }} dest=~/.local/bin/{{ bin|default(name)}} state=link

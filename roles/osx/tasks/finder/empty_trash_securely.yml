@@ -1,0 +1,10 @@
+- name: Check empty Trash securely
+  command: defaults read com.apple.finder EmptyTrashSecurely
+  changed_when: empty_trash_securely.stdout != '1'
+  register: empty_trash_securely
+  ignore_errors: yes
+
+- name: Set empty Trash securely
+  command: defaults write com.apple.finder EmptyTrashSecurely -bool 'YES'
+  when: empty_trash_securely|changed
+  notify: restart Finder

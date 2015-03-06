@@ -7,51 +7,107 @@
     rc_file: ~/.extra
     pyenv: /Users/{{ ansible_ssh_user }}/.pyenv
     python_version: 3.4.3
-    python_versions: [2.6.9, 2.7.9, 3.3.6, 3.4.3, pypy-2.5.0, pypy3-2.4.0]
     python_xp_version: 2.7.9
     ruby_version: 2.2.0
     ruby_versions: [2.0.0-p598, 2.1.5, 2.2.0]
     venv: ~/.pyenv/versions/{{ python_version }}/bin/pyvenv
 
-    osx_config:
-      dock:
-        # Dock: dim hidden apps
-        - domain: com.apple.dock
-          key: showhidden
-        # Dock: icon size
-        - domain: com.apple.dock
-          key: tilesize
-          type: int
-          value: '42'
-        # Dock: position
-        - domain: com.apple.dock
-          key: orientation
-          type: string
-          value: left
-      finder:
-        # Finder: empty Trash securely
-        - domain: com.apple.finder
-          key: EmptyTrashSecurely
-      menubar:
-        # Menu bar: show battery percentage
-        - domain: com.apple.menuextra.battery
-          key: ShowPercent
-        # Menu bar: show date and time
-        - domain: com.apple.menuextra.clock
-          key: DateFormat
-          type: string
-          value: "EEE MMM d  h:mm a"
-      misc:
-        # enable natural scrolling
-        - domain: NSGlobalDomain
-          key: com.apple.swipescrolldirection
-        # Universal Access: use Ctrl (^) key to zoom
-        - domain: com.apple.universalaccess
-          key: HIDScrollZoomModifierMask
-          type: int
-          value: '262144'
-        - domain: com.apple.universalaccess
-          key: closeViewScrollWheelToggle
+  roles:
+    - role: osx
+      tags: osx, configuration
+
+    - role: dirn.dotfiles
+      dotfiles_github_repo: git@github.com:dirn/dotfiles.git
+      dotfiles_dest: "{{ dotfiles }}"
+      dotfiles_keep_updated: true
+      tags: dotfiles
+
+    - role: dirn.homebrew
+      homebrew_libraries:
+        - ag # the_silver_searcher
+        - ansible
+        - aspell
+        - ctags
+        - go
+        - hg # mercurial
+        - keybase
+        - openssl
+        - readline
+        - tree
+        - wget
+      homebrew_casks:
+        # 1password only syncs with iCloud when installed from the App Store.
+        - alfred
+        - amazon-music
+        - appzapper
+        # cloud comes from the appstore
+        # dash comes from the appstore
+        - dropbox
+        - flux
+        # google-chrome-beta only in homebrew/versions tap
+        - hipchat
+        - iterm2
+        - kaleidoscope
+        - parallels-desktop
+        - rdio
+        - slack
+        - skitch
+        - transmit
+        - virtualbox # if VirtualBox is running, this will fail
+        - vmware-fusion
+        - xquartz
+      homebrew_casks_with_sudo:
+        - seil
+      tags: homebrew
+      # TODO: rc file
+    # - name: Configure Homebrew Cask
+    #   lineinfile: >
+    #     dest={{ rc_file }}
+    #     state=present
+    #     create=yes
+    #     line="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\""
+    #   tags: osx
+
+      tags: python
+
+    - role: ruby
+      rc_file: "{{ rc_file }}"
+      tags: ruby
+
+    - role: dirn.docker
+      docker_utility_root: ~/.local/bin
+      docker_install_machine: true
+      docker_install_compose: true
+      tags: docker
+      # TODO: rc file
+
+    - role: dirn.vim
+      vim_install_gvim: true
+      vim_install_nvim: true
+      vim_install_neobundle: true
+      tags: vim
+      # TODO: rc file
+      # TODO: NeoVim rc file
+      # TODO: link to Vim
+      # TODO: default editor
+
+    - role: dirn.git
+      git_runcom: "{{ rc_file }}"
+      git_utility_root: ~/.local/bin
+      git_install_gitsh: true
+      git_install_hub: true
+      tags: git
+      # TODO: rc file
+      # ~/.gitconfig
+      # ~/.gitignoreglobal
+
+    - role: dirn.psql
+      tags: psql
+      # TODO: rc file
+
+    - role: zsh
+      dotfiles: "{{ dotfiles }}"
+      tags: zsh
 
   tasks:
     # Dotfiles
@@ -61,11 +117,6 @@
 
     - name: Ensure the local bin folder exists
       file: path=~/.local/bin state=directory
-
-    - name: Download dotfiles
-      git: repo=git@github.com:dirn/dotfiles.git dest={{ dotfiles }} force=no
-      ignore_errors: yes
-      tags: dotfiles
 
     # Beautification
 
@@ -91,103 +142,6 @@
         state=present
         create=yes
         line="alias play=\"ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml\""
-
-    - name: Check the Dock configuration
-      command: defaults read {{ item.domain }} {{ item.key }}
-      register: dock
-      changed_when: dock.stdout != item.value|default('1')
-      ignore_errors: yes
-      with_items: osx_config.dock
-      tags: osx
-
-    - name: Configure the Dock
-      command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
-      when: dock.changed
-      with_items: osx_config.dock
-      tags: osx
-
-    - name: Restart the Dock
-      command: killall Dock
-      when: dock.changed
-      tags: osx
-
-    - name: Check the Finder configuration
-      command: defaults read {{ item.domain }} {{ item.key }}
-      register: finder
-      changed_when: finder.stdout != item.value|default('1')
-      ignore_errors: yes
-      with_items: osx_config.finder
-      tags: osx
-
-    - name: Configure Finder
-      command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
-      when: finder.changed
-      with_items: osx_config.finder
-      tags: osx
-
-    - name: Restart Finder
-      command: killall Finder
-      when: finder.changed
-      tags: osx
-
-    - name: Check the Menu bar configuration
-      command: defaults read {{ item.domain }} {{ item.key }}
-      register: menubar
-      changed_when: menubar.stdout != item.value|default('1')
-      ignore_errors: yes
-      with_items: osx_config.menubar
-      tags: osx
-
-    - name: Configure the Menu bar
-      command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
-      when: menubar.changed
-      with_items: osx_config.menubar
-      tags: osx
-
-    - name: Restart the Menu bar
-      command: killall SystemUIServer
-      when: menubar.changed
-      tags: osx
-
-    - name: Check the OS X configuration
-      command: defaults read {{ item.domain }} {{ item.key }}
-      register: misc
-      changed_when: misc.stdout != item.value|default('1')
-      ignore_errors: yes
-      with_items: osx_config.misc
-      tags: osx
-
-    - name: Configure OS X
-      command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
-      when: misc.changed
-      with_items: osx_config.misc
-      tags: osx
-
-    # Homebrew
-
-    - name: Download Homebrew's installer
-      git: repo=git@github.com:Homebrew/install.git dest={{ ansible }}/homebrew-installer
-
-    - name: Install Homebrew
-      command: creates=/usr/local/bin/brew {{ ansible }}/homebrew-installer/install
-
-    - name: Update Homebrew
-      homebrew: update_homebrew=yes upgrade_all=yes
-
-    - name: Install Homebrew libraries
-      homebrew: name={{ item }} state=present
-      with_items:
-        - ag # the_silver_searcher
-        - ansible
-        - aspell
-        - ctags
-        - go
-        - hg # mercurial
-        - keybase
-        - openssl
-        - readline
-        - tree
-        - wget
 
     # Zsh
 
@@ -234,70 +188,6 @@
         - exports
         - functions
       tags: zsh
-
-    # Docker
-
-    - name: Install Docker
-      homebrew: name={{ item }} state=present
-      with_items:
-        - docker
-        - docker-compose
-        - docker-machine
-      tags: docker
-
-    - name: Configure Docker
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="{{ item }}"
-      with_items:
-        - export DOCKER_HOST=tcp://192.168.59.103:2376
-        - export DOCKER_CERT_PATH=/Users/{{ ansible_ssh_user }}/.boot2docker/certs/boot2docker-vm
-        - export DOCKER_TLS_VERIFY=yes
-      tags: docker
-
-    # Git
-
-    - name: Install Git
-      homebrew: name={{ item }} state=present
-      with_items:
-        - gh
-        - git
-      tags: git
-
-    - name: Install Homebrew tap for gitsh
-      homebrew_tap: tap=thoughtbot/formulae state=present
-      tags: git
-
-    - name: Install gitsh
-      homebrew: name=gitsh state=present
-      tags: git
-
-    - name: Use gh
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="eval \"$(gh alias -s)\""
-      tags: git
-
-    - name: Use gitsh with gh
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="alias gsh='gitsh --git $(which gh)'"
-      tags: git
-
-    - name: Link Git's dotfiles
-      file: src={{ dotfiles }}/git/{{ item.src }} dest=~/.{{ item.dest }} state=link
-      with_items:
-        - src: gitconfig
-          dest: gitconfig
-        - src: gitignore
-          dest: gitignoreglobal
-      tags: git
 
     # Python
 
@@ -533,77 +423,6 @@
         - lunchy
       tags: ruby
 
-    # Postgres
-
-    - name: Install Postgres
-      homebrew: name=postgresql state=present
-      tags: psql
-
-    - name: Link Postgres's dotfiles
-      file: src={{ dotfiles }}/postgresql/psqlrc dest=~/.psqlrc state=link
-      tags: psql
-
-    # Vim
-
-    - name: Install Vim
-      homebrew: name=vim state=present
-      tags: vim
-
-    - name: Install MacVim
-      homebrew: name=macvim install_options=with-cscope state=present
-      tags: vim
-
-    - name: Install Homebrew tap for NeoVim
-      homebrew_tap: tap=neovim/neovim state=present
-      tags: vim
-
-    - name: Install NeoVim
-      homebrew: name=neovim state=head
-      tags: vim
-
-    - name: Install NeoVim Python libraries
-      pip: name=neovim executable={{ pyenv }}/versions/{{ item }}/bin/pip state=latest
-      with_items:
-        - "{{ python_version }}" # This isn't supported yet. 23 Jan 2015
-        - "{{ python_xp_version }}"
-      tags: vim
-
-    - name: Install NeoBundle
-      git: repo=git@github.com:shougo/neobundle.vim.git dest=~/.vim/bundle/neobundle.vim update=no
-      tags: vim
-
-    - name: Link Vim's dotfiles
-      file: src={{ dotfiles }}/vim/{{ item.src }} dest=~/{{ item.dest }} state=link
-      with_items:
-        - src: vimrc
-          dest: .vimrc
-        - src: ftplugin
-          dest: .vim/ftplugin
-      tags: vim
-
-    - name: Link NeoVim's dotfiles
-      file: src=~/.vimrc dest=~/.nvimrc state=link
-      tags: vim
-
-    - name: Use Vim when other variants aren't available
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="which {{ item }} &> /dev/null; if [[ $? -ne 0 ]]; then alias {{ item }}='vim'; fi"
-      with_items:
-        - mvim
-        - nvim
-      tags: vim
-
-    - name: Make MacVim/Vim the default editor
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="export EDITOR='mvim'"
-      tags: vim
-
     # Tmux
 
     - name: Install Tmux
@@ -685,59 +504,3 @@
     - name: Install MongoDB Shell Enhancements
       npm: name=mongo-hacker global=yes state=latest
       tags: mongo
-
-    # OS X Apps
-
-    - name: Install Homebrew tap for Homebrew Cask
-      homebrew_tap: name=caskroom/cask state=present
-      tags: osx
-
-    - name: Install Homebrew Cask
-      homebrew: name=brew-cask state=present
-      tags: osx
-
-    - name: Configure Homebrew Cask
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\""
-      tags: osx
-
-    - name: Install Homebrew Cask apps
-      homebrew_cask: name={{ item }} state=present
-      with_items:
-        # 1password only syncs with iCloud when installed from the App Store.
-        - alfred
-        - appzapper
-        # cloud comes from the appstore
-        # dash comes from the appstore
-        - dropbox
-        - flux
-        # google-chrome-beta only in homebrew/versions tap
-        - hipchat
-        - iterm2
-        - kaleidoscope
-        - parallels-desktop
-        - rdio
-        - skitch
-        - slack
-        - transmit
-        # - virtualbox
-        - vmware-fusion
-        - xquartz
-      tags: osx
-
-    - name: Install Homebrew Cask apps with sudo
-      homebrew_cask: name={{ item }} state=present
-      sudo: yes
-      with_items:
-        - seil
-      tags: osx
-
-    - name: Install Homebrew Cask apps that might fail
-      homebrew_cask: name={{ item }} state=present
-      ignore_errors: yes
-      with_items:
-        - virtualbox # If VirtualBox is installed and running, it will fail.
-      tags: osx

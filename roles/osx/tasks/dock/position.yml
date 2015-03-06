@@ -1,0 +1,10 @@
+- name: Check Dock position
+  command: defaults read com.apple.dock orientation
+  changed_when: orientation.stdout != position
+  register: orientation
+  ignore_errors: yes
+
+- name: Set Dock position
+  command: defaults write com.apple.dock orientation -string {{ position }}
+  when: orientation|changed
+  notify: restart Dock

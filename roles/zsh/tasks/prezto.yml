@@ -1,0 +1,10 @@
+  - name: Install Prezto
+    git: repo=git@github.com:sorin-ionescu/prezto.git dest=~/.zprezto
+
+  - name: Link Prezto's dotfiles
+    file: src=~/.zprezto/runcoms/{{ item }} dest=~/.{{ item }} state=link
+    with_items:
+      - zlogin
+      - zlogout
+      - zprofile
+      - zshenv

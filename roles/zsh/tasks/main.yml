@@ -1,0 +1,28 @@
+- name: Install
+  homebrew: name=zsh state=present
+
+- name: Add Homebrew's Zsh to /etc/shells
+  sudo: yes
+  lineinfile: >
+    dest=/etc/shells
+    line=/usr/local/bin/zsh
+
+- name: Check current shell
+  shell: echo $SHELL
+  register: shell_name
+  changed_when: shell_name.stdout != '/usr/local/bin/zsh'
+
+- name: Use Homebrew's Zsh
+  shell: chsh -s /usr/local/bin/zsh
+  when: shell_name|changed
+
+- include: prezto.yml dotfiles={{ dotfiles }}
+
+- name: Link dotfiles
+  file: src={{ dotfiles }}/zsh/{{ item }} dest=~/.{{ item }} state=link
+  with_items:
+    - zpreztorc
+    - zshrc
+    - aliases
+    - exports
+    - functions

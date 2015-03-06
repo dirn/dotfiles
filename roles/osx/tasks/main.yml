@@ -1,0 +1,15 @@
+# Dock
+- include: dock/dim_hidden_apps.yml
+- include: dock/icon_size.yml size='42'
+- include: dock/position.yml position='left'
+
+# Finder
+- include: finder/empty_trash_securely.yml
+
+# Menubar
+- include: menubar/clock_format.yml format='EEE MMM d  h:mm a'
+- include: menubar/show_battery_percent.yml
+
+# Miscellaneous
+- include: enable_natural_scroll.yml
+- include: universal_access/enable_ctrl_zoom.yml

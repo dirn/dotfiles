@@ -1,0 +1,10 @@
+- name: Check show battery percentage
+  command: defaults read com.apple.menuextra.battery ShowPercent
+  changed_when: show_battery_percent.stdout != '1'
+  register: show_battery_percent
+  ignore_errors: yes
+
+- name: Set show battery percentage
+  command: defaults write com.apple.menuextra.battery ShowPercent -bool 'YES'
+  when: show_battery_percent|changed
+  notify: restart Menubar

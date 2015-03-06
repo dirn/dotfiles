@@ -1,0 +1,4 @@
+- name: Set versions
+  template: >
+    src=../../templates/python-version.j2
+    dest={{ dest }}

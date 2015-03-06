@@ -1,0 +1,10 @@
+- name: Check dim hidden apps
+  command: defaults read com.apple.dock showhidden
+  changed_when: dim_hidden_apps.stdout != '1'
+  register: dim_hidden_apps
+  ignore_errors: yes
+
+- name: Set dim hidden apps
+  command: defaults write com.apple.dock showhidden -bool 'YES'
+  when: dim_hidden_apps|changed
+  notify: restart Dock

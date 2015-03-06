@@ -1,0 +1,14 @@
+pyenv_root: ~/.pyenv
+pyenv_rc_file: ~/.bashrc
+
+pyenv_python_26: false
+pyenv_python_27: false
+pyenv_python_33: false
+pyenv_python_34: false
+pyenv_pypy: false
+pyenv_pypy3: false
+
+pyenv_version_primary: system
+pyenv_version_secondary: false
+
+pyenv_virtualenv: true

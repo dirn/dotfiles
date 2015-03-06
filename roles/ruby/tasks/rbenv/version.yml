@@ -1,0 +1,2 @@
+- name: Install {{ version }}
+  command: creates=~/.rbenv/versions/{{ version }} rbenv install {{ version }}

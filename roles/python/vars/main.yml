@@ -1,0 +1,11 @@
+pyenv: /Users/{{ ansible_ssh_user }}/.pyenv
+
+python_26: 2.6.9
+python_27: 2.7.9
+python_33: 3.3.6
+python_34: 3.4.3
+pypy: pypy-2.5.0
+pypy3: pypy-2.4.0
+
+python_version: "{{ python_34 }}"
+python_xp_version: "{{ python_27 }}"

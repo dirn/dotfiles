@@ -1,0 +1,2 @@
+- name: Install {{ name }} ({{ version }})
+  pip: name={{ name }} executable={{ pyenv }}/versions/{{ version }}/bin/pip state=latest

@@ -1,0 +1,20 @@
+- name: Install
+  homebrew: name={{ item }} state=present
+  with_items:
+    - rbenv
+    - ruby-build
+
+- name: Source rbenv
+  lineinfile: >
+    dest={{ rc_file }}
+    state=present
+    create=yes
+    line="if which rbenv > /dev/null; then eval \"$(rbenv init -)\"; fi"
+
+- include: rbenv/version.yml version={{ ruby_20 }}
+- include: rbenv/version.yml version={{ ruby_21 }}
+- include: rbenv/version.yml version={{ ruby_22 }}
+
+- include: rbenv/versions.yml dest=~/.rbenv/version versions={{ [ruby_version] }}
+
+- include: rbenv/gem.yml version={{ ruby_version }} name=lunchy
