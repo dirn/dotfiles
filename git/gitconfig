@@ -28,6 +28,7 @@
     modified = !git ll -1
     last = diff --cached HEAD^
     aliases = !git config -l | grep alias | cut -c 7-
+    movetag = "!f() { git pull --tags; git push $1 :$2; git tag -af $2 -m \"$3\"; git push --tags; };f"
 [color]
     ui = true
 [color "diff-highlight"]

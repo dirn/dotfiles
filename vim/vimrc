@@ -39,6 +39,7 @@ NeoBundleLazy   'hynek/vim-python-pep8-indent',     {'autoload': {'filetypes': [
 NeoBundleLazy   'jmcantrell/vim-virtualenv',        {'autoload': {'filetypes': ['python']}}
 NeoBundleLazy   'mitsuhiko/vim-jinja',              {'autoload': {'filetypes': ['html', 'jinja']}}
 NeoBundleLazy   'pangloss/vim-javascript',          {'autoload': {'filetypes': ['javascript']}}
+NeoBundle       'Rykka/riv.vim',                    {'autoload': {'filetypes': ['rst']}}
 NeoBundle       'sheerun/vim-polyglot'
 
 " --- Language helpers ---
@@ -330,6 +331,7 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " --- Syntastic ---
 let g:syntastic_check_on_open = 1
+let g:syntastic_python_python_exec = "python3"
 
 " --- Clam ---
 nnoremap ! :Clam<space>
@@ -361,3 +363,8 @@ let g:table_mode_header_fillchar = "="
 
 " --- vim-json ---
 let g:vim_json_syntax_conceal = 0
+
+" --- riv.vim ---
+let g:riv_global_leader = '\'
+let g:riv_fold_level = 0
+let g:riv_fold_auto_update = 0

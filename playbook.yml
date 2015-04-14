@@ -395,7 +395,6 @@
       pip:
         name: devpi
         virtualenv: ~/.local/venvs/devpi
-        virtualenv_command: "{{ venv }}"
         state: present
       tags: python
 
@@ -437,7 +436,6 @@
       pip:
         name: bpython
         virtualenv: ~/.local/venvs/bpython
-        virtualenv_command: "{{ venv }}"
         state: latest
       tags: python
 
@@ -445,7 +443,6 @@
       pip:
         name: hovercraft
         virtualenv: ~/.local/venvs/hovercraft
-        virtualenv_command: "{{ venv }}"
         state: latest
       tags: python
 
@@ -460,7 +457,6 @@
       pip:
         name: sphinx
         virtualenv: ~/.local/venvs/sphinx
-        virtualenv_command: "{{ venv }}"
         state: latest
       tags: python
 
@@ -468,7 +464,6 @@
       pip:
         name: twine
         virtualenv: ~/.local/venvs/twine
-        virtualenv_command: "{{ venv }}"
         state: latest
       tags: python
 
@@ -476,7 +471,6 @@
       pip:
         name: wheel
         virtualenv: ~/.local/venvs/wheel
-        virtualenv_command: "{{ venv }}"
         state: latest
       tags: python
 
