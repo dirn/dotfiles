@@ -450,6 +450,7 @@
         - "#!/bin/zsh"
         - pip install bpython
         - pip install flake8-docstrings
+        - pip install neovim
       tags: python
 
     # Ruby
