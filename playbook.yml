@@ -414,6 +414,15 @@
         state=latest
       tags: python
 
+    - name: Install wheel
+      pip: >
+        name=wheel
+        executable=/Users/{{ ansible_ssh_user }}/.local/venvs/wheel/bin/pip
+        virtualenv=~/.local/venvs/wheel
+        virtualenv_command={{ venv }}
+        state=latest
+      tags: python
+
     - name: Link global Python executables
       file: src=~/.local/venvs/{{ item.venv }}/bin/{{ item.executable|default(item.venv) }} dest=~/.local/bin/{{ item.executable|default(item.venv) }} state=link
       with_items:
@@ -451,6 +460,7 @@
         - pip install bpython
         - pip install flake8-docstrings
         - pip install neovim
+        - pip install wheel
       tags: python
 
     # Ruby
