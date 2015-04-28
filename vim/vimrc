@@ -104,7 +104,7 @@ if exists('&colorcolumn')
 endif
 
 " --- Appearance ---
-set background=light
+set background=dark
 
 if has('gui_running') || &t_Co > 8
     set t_Co=256
@@ -114,6 +114,7 @@ if has('gui_running') || &t_Co > 8
     colorscheme solarized
 
     if has('gui_running')
+        set background=light
         set guifont=Fira\ Mono\ for\ Powerline:h16
         set lines=85 columns=280
     endif
