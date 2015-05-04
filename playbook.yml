@@ -676,7 +676,6 @@
       with_items:
         # 1password only syncs with iCloud when installed from the App Store.
         - alfred
-        - amazon-music
         - appzapper
         # cloud comes from the appstore
         # dash comes from the appstore
