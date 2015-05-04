@@ -32,6 +32,15 @@
         # Finder: empty Trash securely
         - domain: com.apple.finder
           key: EmptyTrashSecurely
+      menubar:
+        # Menu bar: show battery percentage
+        - domain: com.apple.menuextra.battery
+          key: ShowPercent
+        # Menu bar: show date and time
+        - domain: com.apple.menuextra.clock
+          key: DateFormat
+          type: string
+          value: "\"EEE MMM d  h:mm a\""
       misc:
         # enable natural scrolling
         - domain: NSGlobalDomain
@@ -115,6 +124,24 @@
     - name: Restart Finder
       command: killall Finder
       when: finder.changed
+      tags: osx
+
+    - name: Check the Menu bar configuration
+      command: defaults read {{ item.domain }} {{ item.key }}
+      register: menubar
+      changed_when: menubar.stdout != item.value|default('1')
+      with_items: osx_config.menubar
+      tags: osx
+
+    - name: Configure the Menu bar
+      command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
+      when: menubar.changed
+      with_items: osx_config.menubar
+      tags: osx
+
+    - name: Restart the Menu bar
+      command: killall SystemUIServer
+      when: menubar.changed
       tags: osx
 
     - name: Check the OS X configuration
