@@ -238,9 +238,9 @@
     - name: Install Docker
       homebrew: name={{ item }} state=present
       with_items:
-        - boot2docker
         - docker
         - docker-compose
+        - docker-machine
       tags: docker
 
     - name: Configure Docker
