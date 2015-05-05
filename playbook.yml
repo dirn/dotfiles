@@ -94,6 +94,7 @@
       command: defaults read {{ item.domain }} {{ item.key }}
       register: dock
       changed_when: dock.stdout != item.value|default('1')
+      ignore_errors: yes
       with_items: osx_config.dock
       tags: osx
 
@@ -112,6 +113,7 @@
       command: defaults read {{ item.domain }} {{ item.key }}
       register: finder
       changed_when: finder.stdout != item.value|default('1')
+      ignore_errors: yes
       with_items: osx_config.finder
       tags: osx
 
@@ -130,6 +132,7 @@
       command: defaults read {{ item.domain }} {{ item.key }}
       register: menubar
       changed_when: menubar.stdout != item.value|default('1')
+      ignore_errors: yes
       with_items: osx_config.menubar
       tags: osx
 
@@ -148,6 +151,7 @@
       command: defaults read {{ item.domain }} {{ item.key }}
       register: misc
       changed_when: misc.stdout != item.value|default('1')
+      ignore_errors: yes
       with_items: osx_config.misc
       tags: osx
 
