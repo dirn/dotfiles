@@ -40,7 +40,7 @@
         - domain: com.apple.menuextra.clock
           key: DateFormat
           type: string
-          value: "\"EEE MMM d  h:mm a\""
+          value: "EEE MMM d  h:mm a"
       misc:
         # enable natural scrolling
         - domain: NSGlobalDomain
