@@ -50,6 +50,8 @@
           key: HIDScrollZoomModifierMask
           type: int
           value: '262144'
+        - domain: com.apple.universalaccess
+          key: closeViewScrollWheelToggle
 
   tasks:
     # Dotfiles
