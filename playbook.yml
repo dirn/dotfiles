@@ -38,7 +38,6 @@
       homebrew_casks:
         # 1password only syncs with iCloud when installed from the App Store.
         - alfred
-        - amazon-music
         - appzapper
         # cloud comes from the appstore
         # dash comes from the appstore
@@ -67,8 +66,6 @@
     #     create=yes
     #     line="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\""
     #   tags: osx
-
-      tags: python
 
     - role: ruby
       rc_file: "{{ rc_file }}"
