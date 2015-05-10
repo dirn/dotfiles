@@ -102,6 +102,17 @@
       tags: psql
       # TODO: rc file
 
+    - role: dirn.tmux
+      tmux_install_tmuxinator: true
+      tmux_tmuxinator_executable: ~/.rbenv/versions/{{ ruby_version }}/bin/gem
+      tmux_install_tmuxp: true
+      tmux_tmuxp_virtualenv: ~/.local/venvs/tmuxp
+      tmux_tmuxp_virtualenv_command: "{{ venv }}"
+      tags: tmux
+      # TODO: rc file
+      # TODO: battery.sh
+      # TODO: Link tmupx into ~/.local/bin
+
     - role: zsh
       dotfiles: "{{ dotfiles }}"
       tags: zsh
@@ -419,26 +430,6 @@
       with_items:
         - lunchy
       tags: ruby
-
-    # Tmux
-
-    - name: Install Tmux
-      homebrew: name={{ item }} state=present
-      with_items:
-        - reattach-to-user-namespace
-        - tmux
-      tags: tmux
-
-    - name: Install tmuxinator
-      gem: name=tmuxinator executable=~/.rbenv/versions/{{ ruby_version }}/bin/gem state=latest
-      tags: tmux
-
-    - name: Link Tmux's dotfiles
-      file: src={{ dotfiles }}/tmux/{{ item }} dest=~/.{{ item }} state=link
-      with_items:
-        - tmux.conf
-        - tmux.battery.sh
-      tags: tmux
 
     # Weechat
 
