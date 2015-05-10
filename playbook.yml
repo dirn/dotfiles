@@ -72,11 +72,9 @@
       tags: ruby
 
     - role: dirn.docker
-      docker_utility_root: ~/.local/bin
       docker_install_machine: true
       docker_install_compose: true
       tags: docker
-      # TODO: rc file
 
     - role: dirn.vim
       vim_install_gvim: true
