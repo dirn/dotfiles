@@ -111,8 +111,11 @@
       # TODO: battery.sh
       # TODO: Link tmupx into ~/.local/bin
 
-    - role: zsh
-      dotfiles: "{{ dotfiles }}"
+    - role: dirn.zsh
+      zsh_install_prezto: true
+      zsh_prezto_ignore_run_commands:
+        - zpreztorc
+        - zshrc
       tags: zsh
 
   tasks:
@@ -123,6 +126,19 @@
 
     - name: Ensure the local bin folder exists
       file: path=~/.local/bin state=directory
+
+    - name: Link custom Zsh run commands
+      file:
+        src: ~/.ansible/dotfiles/zsh/{{ item }}
+        dest: ~/.{{ item }}
+        state: link
+      with_items:
+        - zpreztorc
+        - zshrc
+        - aliases
+        - exports
+        - functions
+      tags: zsh
 
     # Beautification
 
@@ -148,52 +164,6 @@
         state=present
         create=yes
         line="alias play=\"ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml\""
-
-    # Zsh
-
-    - name: Install Zsh
-      homebrew: name=zsh state=present
-      tags: zsh
-
-    - name: Add Homebrew's Zsh to /etc/shells
-      sudo: yes
-      lineinfile: dest=/etc/shells line="/usr/local/bin/zsh" state=present
-      tags: zsh
-
-    - name: Check shell
-      shell: echo $SHELL
-      register: shell_name
-      changed_when: shell_name.stdout != '/usr/local/bin/zsh'
-      tags: zsh
-
-    - name: Use Homebrew's Zsh
-      shell: chsh -s /usr/local/bin/zsh
-      register: zsh_test
-      when: shell_name.stdout != '/usr/local/bin/zsh'
-      tags: zsh
-
-    - name: Install Prezto
-      git: repo=git@github.com:sorin-ionescu/prezto.git dest=~/.zprezto
-      tags: zsh
-
-    - name: Link Prezto's dotfiles
-      file: src=~/.zprezto/runcoms/{{ item }} dest=~/.{{ item }} state=link
-      with_items:
-        - zlogin
-        - zlogout
-        - zprofile
-        - zshenv
-      tags: zsh
-
-    - name: Link Zsh's dotfiles
-      file: src={{ dotfiles }}/zsh/{{ item }} dest=~/.{{ item }} state=link
-      with_items:
-        - zpreztorc
-        - zshrc
-        - aliases
-        - exports
-        - functions
-      tags: zsh
 
     # Python
 
