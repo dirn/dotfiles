@@ -1,8 +1,6 @@
 # Listings
 alias ll='ls -lhF'
 alias la='ls -lahF'
-alias l='ls -CF'
-alias ld='ll | grep "^d"' # ... directories only
 
 # Always use color output for `ls`
 if [[ "$OSTYPE" =~ ^darwin ]]; then
@@ -15,43 +13,14 @@ fi
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
-# Update Homebrew and any installed packages
-alias update='brew update; brew upgrade'
-
-# IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en1"
-alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
-
 # Enhanced WHOIS lookups
 alias whois="whois -h whois-servers.net"
 
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache"
 
-# View HTTP traffic
-alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
-
-# Canonical hex dump; some systems have this symlinked
-type hd > /dev/null || alias hd="hexdump -C"
-
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
-
-# Recursively delete `.DS_Store` files
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-
-# File size
-alias fs="stat -f \"%z bytes\""
-
-# ROT13-encode text. Works for decoding, too! ;)
-alias rot13='tr a-zA-Z n-za-mN-ZA-M'
-
-# One of @janmoesen’s ProTip™s
-for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-    alias "$method"="lwp-request -m '$method'"
-done
 
 # Virtualenv
 alias stop='deactivate'
