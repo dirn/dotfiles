@@ -124,7 +124,8 @@ set noshowmode                  " hide the mode text, Powerline shows it
 
 set listchars=tab:▸\ ,eol:¬
 
-set number                      " show line numbers
+set relativenumber              " show relative line numbers
+set number                      " but show the current line number
 
 set title                       " show the filename in the window's title
 
