@@ -245,18 +245,6 @@
         - docker-machine
       tags: docker
 
-    - name: Configure Docker
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="{{ item }}"
-      with_items:
-        - export DOCKER_HOST=tcp://192.168.59.103:2376
-        - export DOCKER_CERT_PATH=/Users/{{ ansible_ssh_user }}/.boot2docker/certs/boot2docker-vm
-        - export DOCKER_TLS_VERIFY=yes
-      tags: docker
-
     # Git
 
     - name: Install Git
