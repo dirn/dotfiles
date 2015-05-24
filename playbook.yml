@@ -7,8 +7,8 @@
     rc_file: ~/.extra
     pyenv: /Users/{{ ansible_ssh_user }}/.pyenv
     python_version: 3.4.3
-    python_versions: [2.6.9, 2.7.9, 3.3.6, 3.4.3, pypy-2.5.0, pypy3-2.4.0]
-    python_xp_version: 2.7.9
+    python_versions: [2.6.9, 2.7.10, 3.3.6, 3.4.3, pypy-2.5.0, pypy3-2.4.0]
+    python_xp_version: 2.7.10
     ruby_version: 2.2.0
     ruby_versions: [2.0.0-p598, 2.1.5, 2.2.0]
     venv: ~/.pyenv/versions/{{ python_version }}/bin/pyvenv
@@ -348,12 +348,12 @@
         insert{{ item.insert_at|default('after') }}={{ item.pattern|default('EOF') }}
         line={{ item.version }}
       with_items:
-        - version: 2.7.9 # First for stuff that installs with Python
+        - version: 2.7.10 # First for stuff that installs with Python
           insert_at: before
           pattern: BOF
         - version: 3.4.3
           insert_at: after
-          pattern: 2.7.9
+          pattern: 2.7.10
         - version: 2.6.9
         - version: 3.3.6
         - version: pypy-2.5.0
@@ -380,7 +380,7 @@
         - version: 3.4.3
           insert_at: before
           pattern: BOF
-        - version: 2.7.9
+        - version: 2.7.10
           insert_at: after
           pattern: 3.4.3
         - version: 2.6.9
