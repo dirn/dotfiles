@@ -698,11 +698,11 @@
         # 1password only syncs with iCloud when installed from the App Store.
         - alfred
         - appzapper
-        # cloud comes from the appstore
-        # dash comes from the appstore
+        # cloud comes from the App Store.
+        # dash comes from the App Store.
         - dropbox
         - flux
-        # google-chrome-beta only in homebrew/versions tap
+        # google-chrome-beta only in homebrew/versions tap.
         - hipchat
         - iterm2
         - kaleidoscope
@@ -711,7 +711,7 @@
         - skitch
         - slack
         - transmit
-        # - virtualbox
+        # virtualbox
         - vmware-fusion
         - xquartz
       tags: osx
