@@ -710,6 +710,7 @@
         - rdio
         - skitch
         - slack
+        - tinygrab
         - transmit
         # virtualbox
         - vmware-fusion
