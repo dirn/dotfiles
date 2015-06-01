@@ -250,8 +250,8 @@
     - name: Install Git
       homebrew: name={{ item }} state=present
       with_items:
-        - gh
         - git
+        - hub
       tags: git
 
     - name: Install Homebrew tap for gitsh
@@ -262,20 +262,20 @@
       homebrew: name=gitsh state=present
       tags: git
 
-    - name: Use gh
+    - name: Use hub
       lineinfile: >
         dest={{ rc_file }}
         state=present
         create=yes
-        line="eval \"$(gh alias -s)\""
+        line="eval \"$(hub alias -s)\""
       tags: git
 
-    - name: Use gitsh with gh
+    - name: Use gitsh with hub
       lineinfile: >
         dest={{ rc_file }}
         state=present
         create=yes
-        line="alias gsh='gitsh --git $(which gh)'"
+        line="alias gsh='gitsh --git $(which hub)'"
       tags: git
 
     - name: Link Git's dotfiles
