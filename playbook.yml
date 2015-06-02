@@ -7,7 +7,7 @@
     rc_file: ~/.extra
     pyenv: /Users/{{ ansible_ssh_user }}/.pyenv
     python_version: 3.4.3
-    python_versions: [2.6.9, 2.7.10, 3.3.6, 3.4.3, pypy-2.5.1, pypy3-2.4.0]
+    python_versions: [2.6.9, 2.7.10, 3.3.6, 3.4.3, pypy-2.6.0, pypy3-2.4.0]
     python_xp_version: 2.7.10
     ruby_version: 2.2.0
     ruby_versions: [2.0.0-p598, 2.1.5, 2.2.0]
@@ -344,7 +344,7 @@
           pattern: 2.7.10
         - version: 2.6.9
         - version: 3.3.6
-        - version: pypy-2.5.1
+        - version: pypy-2.6.0
         - version: pypy3-2.4.0
       tags: python
 
@@ -373,7 +373,7 @@
           pattern: 3.4.3
         - version: 2.6.9
         - version: 3.3.6
-        - version: pypy-2.5.1
+        - version: pypy-2.6.0
         - version: pypy3-2.4.0
       tags: python
 
