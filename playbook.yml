@@ -200,16 +200,10 @@
       lineinfile: dest=/etc/shells line="/usr/local/bin/zsh" state=present
       tags: zsh
 
-    - name: Check shell
-      shell: echo $SHELL
-      register: shell_name
-      changed_when: shell_name.stdout != '/usr/local/bin/zsh'
-      tags: zsh
-
     - name: Use Homebrew's Zsh
       shell: chsh -s /usr/local/bin/zsh
       register: zsh_test
-      when: shell_name.stdout != '/usr/local/bin/zsh'
+      when: lookup('env', 'SHELL') != '/usr/local/bin/zsh'
       tags: zsh
 
     - name: Install Prezto
