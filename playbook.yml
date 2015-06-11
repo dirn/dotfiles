@@ -203,7 +203,7 @@
     - name: Use Homebrew's Zsh
       shell: chsh -s /usr/local/bin/zsh
       register: zsh_test
-      when: lookup('env', 'SHELL') != '/usr/local/bin/zsh'
+      when: "'{{ lookup('pipe', 'dscl . -read /Users/' + ansible_ssh_user + ' UserShell') }}' != 'UserShell: /usr/local/bin/zsh'"
       tags: zsh
 
     - name: Install Prezto
