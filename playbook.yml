@@ -11,6 +11,7 @@
     python_xp_version: 2.7.10
     ruby_version: 2.2.0
     ruby_versions: [2.0.0-p598, 2.1.5, 2.2.0]
+    shell: /usr/local/bin/zsh
     venv: ~/.pyenv/versions/{{ python_version }}/bin/pyvenv
 
     osx_config:
@@ -197,13 +198,13 @@
 
     - name: Add Homebrew's Zsh to /etc/shells
       sudo: yes
-      lineinfile: dest=/etc/shells line="/usr/local/bin/zsh" state=present
+      lineinfile: dest=/etc/shells line="{{ shell }}" state=present
       tags: zsh
 
     - name: Use Homebrew's Zsh
-      shell: chsh -s /usr/local/bin/zsh
+      shell: chsh -s {{ shell }}
       register: zsh_test
-      when: "'{{ lookup('pipe', 'dscl . -read /Users/' + ansible_ssh_user + ' UserShell') }}' != 'UserShell: /usr/local/bin/zsh'"
+      when: "'{{ lookup('pipe', 'dscl . -read /Users/' + ansible_ssh_user + ' UserShell') }}' != 'UserShell: {{ shell }}'"
       tags: zsh
 
     - name: Install Prezto
