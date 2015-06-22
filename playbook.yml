@@ -325,61 +325,11 @@
       tags: python
 
     - name: Set global Python versions
-      lineinfile: >
-        dest={{ pyenv }}/version
-        state=present
-        create=yes
-        insert{{ item.insert_at|default('after') }}={{ item.pattern|default('EOF') }}
-        line={{ item.version }}
-      with_items:
-        - version: 2.7.10 # First for stuff that installs with Python
-          insert_at: before
-          pattern: BOF
-        - version: 3.4.3
-          insert_at: after
-          pattern: 2.7.10
-        - version: 2.6.9
-        - version: 3.3.6
-        - version: pypy-2.6.0
-        - version: pypy3-2.4.0
-      tags: python
-
-    - name: Exclude old global Python versions
-      lineinfile: >
-        dest={{ pyenv }}/version
-        state=absent
-        line={{ item }}
-      with_items:
-        - 3.4.2
+      command: pyenv global 2.7.10 3.4.3 2.6.9 3.3.6 pypy-2.6.0 pypy3-2.4.0
       tags: python
 
     - name: Set local Python versions
-      lineinfile: >
-        dest=~/.python-version
-        state=present
-        create=yes
-        insert{{ item.insert_at|default('after') }}={{ item.pattern|default('EOF') }}
-        line={{ item.version }}
-      with_items:
-        - version: 3.4.3
-          insert_at: before
-          pattern: BOF
-        - version: 2.7.10
-          insert_at: after
-          pattern: 3.4.3
-        - version: 2.6.9
-        - version: 3.3.6
-        - version: pypy-2.6.0
-        - version: pypy3-2.4.0
-      tags: python
-
-    - name: Exclude old local Python versions
-      lineinfile: >
-        dest=~/.python-version
-        state=absent
-        line={{ item }}
-      with_items:
-        - 3.4.2
+      command: chdir=/Users/{{ ansible_ssh_user }} pyenv local 3.4.3 2.7.10 3.3.6 2.6.9 pypy3-2.4.0 pypy-2.6.0
       tags: python
 
     # Install and link devpi first so other pip tasks can use it.
