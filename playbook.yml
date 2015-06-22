@@ -189,6 +189,7 @@
         - readline
         - tree
         - wget
+        - z
 
     # Zsh
 
