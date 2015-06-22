@@ -27,3 +27,4 @@ alias stop='deactivate'
 
 # tmuxinator gets me most of the way there, but...
 alias dmux='tmux kill-session -t'
+alias remux='tmux attach-session -t'
