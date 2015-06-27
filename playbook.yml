@@ -14,6 +14,8 @@
     shell: /usr/local/bin/zsh
     venv: ~/.pyenv/versions/{{ python_version }}/bin/pyvenv
 
+    has_homebrew: "{{ lookup('pipe', 'which brew || /usr/bin/false') }}"
+
     osx_config:
       dock:
         # Dock: dim hidden apps
@@ -168,9 +170,11 @@
 
     - name: Download Homebrew's installer
       git: repo=git@github.com:Homebrew/install.git dest={{ ansible }}/homebrew-installer
+      when: not has_homebrew
 
     - name: Install Homebrew
       command: creates=/usr/local/bin/brew {{ ansible }}/homebrew-installer/install
+      when: not has_homebrew
 
     - name: Update Homebrew
       homebrew: update_homebrew=yes upgrade_all=yes
