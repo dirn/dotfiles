@@ -80,12 +80,6 @@
         - src: altercation/solarized
           dest: solarized
 
-    - name: Download fonts
-      git: repo=git@github.com:{{ item.src }}.git dest={{ ansible }}/fonts/{{ item.dest }}
-      with_items:
-        - src: Lokaltog/powerline-fonts
-          dest: powerline-fonts
-
     # Configuration
 
     - name: Add alias to run this playbook
@@ -626,8 +620,11 @@
 
     # OS X Apps
 
-    - name: Install Homebrew tap for Homebrew Cask
-      homebrew_tap: name=caskroom/cask state=present
+    - name: Install Homebrew Caskroom taps
+      homebrew_tap: name=caskroom/{{ item }} state=present
+      with_items:
+        - cask
+        - fonts
       tags: osx
 
     - name: Install Homebrew Cask
@@ -651,6 +648,7 @@
         # cloud comes from the App Store.
         # dash comes from the App Store.
         - dropbox
+        - font-fira-mono-for-powerline
         - flux
         # google-chrome-beta only in homebrew/versions tap.
         - hipchat
