@@ -545,6 +545,10 @@
         - tmux
       tags: tmux
 
+    - name: Install Tmux Plugin Manager
+      git: repo=git@github.com:tmux-plugins/tpm.git dest=~/.tmux/plugins/tpm
+      tags: tmux
+
     - name: Install tmuxinator
       gem: name=tmuxinator executable=~/.rbenv/versions/{{ ruby_version }}/bin/gem state=latest
       tags: tmux

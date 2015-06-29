@@ -63,6 +63,7 @@ NeoBundle       'Lokaltog/vim-easymotion'
 NeoBundle       'pbrisbin/vim-mkdir'
 NeoBundle       'chase/vim-ansible-yaml'
 NeoBundle       'majutsushi/tagbar'
+NeoBundle       'dhruvasagar/vim-prosession',       {'depends': 'tpope/vim-obsession'}
 
 " --- Tmux support ---
 if executable('tmux')
