@@ -334,7 +334,6 @@
     - name: Install devpi
       pip: >
         name=devpi-server
-        executable=/Users/{{ ansible_ssh_user }}/.local/venvs/devpi/bin/pip
         virtualenv=~/.local/venvs/devpi
         virtualenv_command={{ venv }}
         state=present
@@ -364,7 +363,6 @@
     - name: Install bpython
       pip: >
         name=bpython
-        executable=/Users/{{ ansible_ssh_user }}/.local/venvs/bpython/bin/pip
         virtualenv=~/.local/venvs/bpython
         virtualenv_command={{ venv}}
         state=latest
@@ -373,7 +371,6 @@
     - name: Install twine
       pip: >
         name=twine
-        executable=/Users/{{ ansible_ssh_user }}/.local/venvs/twine/bin/pip
         virtualenv=~/.local/venvs/twine
         virtualenv_command={{ venv }}
         state=latest
@@ -382,7 +379,6 @@
     - name: Install wheel
       pip: >
         name=wheel
-        executable=/Users/{{ ansible_ssh_user }}/.local/venvs/wheel/bin/pip
         virtualenv=~/.local/venvs/wheel
         virtualenv_command={{ venv }}
         state=latest
