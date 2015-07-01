@@ -368,6 +368,14 @@
         state=latest
       tags: python
 
+    - name: Install hovercraft
+      pip: >
+        name=hovercraft
+        virtualenv=~/.local/venvs/hovercraft
+        virtualenv_command={{ venv }}
+        state=latest
+      tags: python
+
     - name: Install Sphinx
       pip: >
         name=sphinx
@@ -396,6 +404,7 @@
       file: src=~/.local/venvs/{{ item.venv }}/bin/{{ item.executable|default(item.venv) }} dest=~/.local/bin/{{ item.executable|default(item.venv) }} state=link
       with_items:
         - venv: bpython
+        - venv: hovercraft
         - venv: sphinx
           executable: sphinx-build
         - venv: sphinx
