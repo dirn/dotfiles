@@ -368,6 +368,14 @@
         state=latest
       tags: python
 
+    - name: Install Sphinx
+      pip: >
+        name=sphinx
+        virtualenv=~/.local/venvs/sphinx
+        virtualenv_command={{ venv }}
+        state=latest
+      tags: python
+
     - name: Install twine
       pip: >
         name=twine
@@ -388,6 +396,10 @@
       file: src=~/.local/venvs/{{ item.venv }}/bin/{{ item.executable|default(item.venv) }} dest=~/.local/bin/{{ item.executable|default(item.venv) }} state=link
       with_items:
         - venv: bpython
+        - venv: sphinx
+          executable: sphinx-build
+        - venv: sphinx
+          executable: sphinx-quickstart
         - venv: twine
       tags: python
 
