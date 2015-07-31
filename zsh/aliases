@@ -13,9 +13,6 @@ fi
 # Don't let zsh try to autocorrect things as sudo.
 alias sudo='nocorrect sudo'
 
-# Enhanced WHOIS lookups
-alias whois="whois -h whois-servers.net"
-
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache"
 
