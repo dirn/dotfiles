@@ -333,14 +333,17 @@
     # Install and link devpi first so other pip tasks can use it.
     - name: Install devpi
       pip: >
-        name=devpi-server
+        name=devpi
         virtualenv=~/.local/venvs/devpi
         virtualenv_command={{ venv }}
         state=present
       tags: python
 
     - name: Link devpi
-      file: src=~/.local/venvs/devpi/bin/devpi-server dest=~/.local/bin/devpi-server state=link
+      file: src=~/.local/venvs/devpi/bin/{{ item }} dest=~/.local/bin/{{ item }} state=link
+      with_items:
+        - devpi
+        - devpi-server
       tags: python
 
     - name: Start devpi
