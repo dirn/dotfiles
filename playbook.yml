@@ -171,10 +171,10 @@
       when: not has_homebrew
 
     - name: Update Homebrew
-      homebrew: update_homebrew=yes upgrade_all=yes
+      homebrew: update_homebrew=yes
 
     - name: Install Homebrew libraries
-      homebrew: name={{ item }} state=present
+      homebrew: name={{ item }} state=latest
       with_items:
         - ag # the_silver_searcher
         - ansible
@@ -192,7 +192,7 @@
     # Zsh
 
     - name: Install Zsh
-      homebrew: name=zsh state=present
+      homebrew: name=zsh state=latest
       tags: zsh
 
     - name: Add Homebrew's Zsh to /etc/shells
@@ -232,7 +232,7 @@
     # Docker
 
     - name: Install Docker
-      homebrew: name={{ item }} state=present
+      homebrew: name={{ item }} state=latest
       with_items:
         - docker
         - docker-compose
@@ -242,7 +242,7 @@
     # Git
 
     - name: Install Git
-      homebrew: name={{ item }} state=present
+      homebrew: name={{ item }} state=latest
       with_items:
         - git
         - hub
@@ -253,7 +253,7 @@
       tags: git
 
     - name: Install gitsh
-      homebrew: name=gitsh state=present
+      homebrew: name=gitsh state=latest
       tags: git
 
     - name: Use hub
@@ -284,7 +284,7 @@
     # Python
 
     - name: Install Python
-      homebrew: name={{ item }} state=present
+      homebrew: name={{ item }} state=latest
       with_items:
         - pyenv
         - pyenv-virtualenv
@@ -448,7 +448,7 @@
     # Ruby
 
     - name: Install Ruby
-      homebrew: name={{ item }} state=present
+      homebrew: name={{ item }} state=latest
       with_items:
         - rbenv
         - ruby-build
@@ -485,7 +485,7 @@
     # Postgres
 
     - name: Install Postgres
-      homebrew: name=postgresql state=present
+      homebrew: name=postgresql state=latest
       tags: psql
 
     - name: Link Postgres's dotfiles
@@ -495,11 +495,11 @@
     # Vim
 
     - name: Install Vim
-      homebrew: name=vim state=present
+      homebrew: name=vim state=latest
       tags: vim
 
     - name: Install MacVim
-      homebrew: name=macvim install_options=with-cscope state=present
+      homebrew: name=macvim install_options=with-cscope state=latest
       tags: vim
 
     - name: Install Homebrew tap for NeoVim
@@ -556,7 +556,7 @@
     # Tmux
 
     - name: Install Tmux
-      homebrew: name={{ item }} state=present
+      homebrew: name={{ item }} state=latest
       with_items:
         - reattach-to-user-namespace
         - tmux
@@ -580,7 +580,7 @@
     # Weechat
 
     - name: Install WeeChat
-      homebrew: name=weechat install_options=with-aspell,with-perl,with-python,with-ruby state=present
+      homebrew: name=weechat install_options=with-aspell,with-perl,with-python,with-ruby state=latest
       tags: weechat
 
     - name: Install WeeChat gems
@@ -626,13 +626,13 @@
     # npm
 
     - name: Install npm
-      homebrew: name=npm
+      homebrew: name=npm state=latest
       tags: npm
 
     # MongoDB
 
     - name: Install MongoDB
-      homebrew: name=mongodb state=present
+      homebrew: name=mongodb state=latest
       tags: mongo
 
     - name: Install MongoDB Shell Enhancements
@@ -649,7 +649,7 @@
       tags: osx
 
     - name: Install Homebrew Cask
-      homebrew: name=brew-cask state=present
+      homebrew: name=brew-cask state=latest
       tags: osx
 
     - name: Configure Homebrew Cask
