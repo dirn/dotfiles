@@ -61,20 +61,29 @@
     # Dotfiles
 
     - name: Ensure the Ansible directory exists
-      file: path={{ ansible }} state=directory
+      file:
+        path: "{{ ansible }}"
+        state: directory
 
     - name: Ensure the local bin folder exists
-      file: path=~/.local/bin state=directory
+      file:
+        path: ~/.local/bin
+        state: directory
 
     - name: Download dotfiles
-      git: repo=git@github.com:dirn/dotfiles.git dest={{ dotfiles }} force=no
+      git:
+        repo: git@github.com:dirn/dotfiles.git
+        dest: "{{ dotfiles }}"
+        force: no
       ignore_errors: yes
       tags: dotfiles
 
     # Beautification
 
     - name: Download colorschemes
-      git: repo=git@github.com:{{ item.src }}.git dest={{ ansible }}/colorschemes/{{ item.dest }}
+      git:
+        repo: git@github.com:{{ item.src }}.git
+        dest: "{{ ansible }}/colorschemes/{{ item.dest }}"
       with_items:
         - src: chriskempson/base16-iterm2
           dest: base16-iterm2
@@ -84,11 +93,11 @@
     # Configuration
 
     - name: Add alias to run this playbook
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="alias play=\"ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml\""
+      lineinfile:
+        dest: "{{ rc_file }}"
+        state: present
+        create: yes
+        line: "alias play=\"ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml\""
 
     - name: Check the Dock configuration
       command: defaults read {{ item.domain }} {{ item.key }}
@@ -164,7 +173,9 @@
     # Homebrew
 
     - name: Download Homebrew's installer
-      git: repo=git@github.com:Homebrew/install.git dest={{ ansible }}/homebrew-installer
+      git:
+        repo: git@github.com:Homebrew/install.git
+        dest: "{{ ansible }}/homebrew-installer"
       when: not has_homebrew
 
     - name: Install Homebrew
@@ -172,10 +183,13 @@
       when: not has_homebrew
 
     - name: Update Homebrew
-      homebrew: update_homebrew=yes
+      homebrew:
+        update_homebrew: yes
 
     - name: Install Homebrew libraries
-      homebrew: name={{ item }} state=latest
+      homebrew:
+        name: "{{ item }}"
+        state: latest
       with_items:
         - ag # the_silver_searcher
         - aspell
@@ -191,12 +205,17 @@
     # Zsh
 
     - name: Install Zsh
-      homebrew: name=zsh state=latest
+      homebrew:
+        name: zsh
+        state: latest
       tags: zsh
 
     - name: Add Homebrew's Zsh to /etc/shells
       sudo: yes
-      lineinfile: dest=/etc/shells line="{{ shell }}" state=present
+      lineinfile:
+        dest: /etc/shells
+        line: "{{ shell }}"
+        state: present
       tags: zsh
 
     - name: Use Homebrew's Zsh
@@ -206,11 +225,16 @@
       tags: zsh
 
     - name: Install Prezto
-      git: repo=git@github.com:sorin-ionescu/prezto.git dest=~/.zprezto
+      git:
+        repo: git@github.com:sorin-ionescu/prezto.git
+        dest: ~/.zprezto
       tags: zsh
 
     - name: Link Prezto's dotfiles
-      file: src=~/.zprezto/runcoms/{{ item }} dest=~/.{{ item }} state=link
+      file:
+        src: ~/.zprezto/runcoms/{{ item }}
+        dest: ~/.{{ item }}
+        state: link
       with_items:
         - zlogin
         - zlogout
@@ -219,7 +243,10 @@
       tags: zsh
 
     - name: Link Zsh's dotfiles
-      file: src={{ dotfiles }}/zsh/{{ item }} dest=~/.{{ item }} state=link
+      file:
+        src: "{{ dotfiles }}/zsh/{{ item }}"
+        dest: ~/.{{ item }}
+        state: link
       with_items:
         - zpreztorc
         - zshrc
@@ -245,7 +272,9 @@
     # Docker
 
     - name: Install Docker
-      homebrew: name={{ item }} state=latest
+      homebrew:
+        name: "{{ item }}"
+        state: latest
       with_items:
         - docker
         - docker-compose
@@ -255,42 +284,54 @@
     # Git
 
     - name: Install Git
-      homebrew: name={{ item }} state=latest
+      homebrew:
+        name: "{{ item }}"
+        state: latest
       with_items:
         - git
         - hub
       tags: git
 
     - name: Install Homebrew tap for gitsh
-      homebrew_tap: tap=thoughtbot/formulae state=present
+      homebrew_tap:
+        tap: thoughtbot/formulae
+        state: present
       tags: git
 
     - name: Install gitsh
-      homebrew: name=gitsh state=latest
+      homebrew:
+        name: gitsh
+        state: latest
       tags: git
 
     - name: Use hub
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="eval \"$(hub alias -s)\""
+      lineinfile:
+        dest: "{{ rc_file }}"
+        state: present
+        create: yes
+        line: "eval \"$(hub alias -s)\""
       tags: git
 
     - name: Use gitsh with hub
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="alias gsh='gitsh --git $(which hub)'"
+      lineinfile:
+        dest: "{{ rc_file }}"
+        state: present
+        create: yes
+        line: "alias gsh='gitsh --git $(which hub)'"
       tags: git
 
     - name: Use diff-highlight
-      file: src="{{ homebrew_prefix }}/share/git-core/contrib/diff-highlight/diff-highlight" dest=~/.local/bin/diff-highlight state=link
+      file:
+        src: "{{ homebrew_prefix }}/share/git-core/contrib/diff-highlight/diff-highlight"
+        dest: ~/.local/bin/diff-highlight
+        state: link
       tags: git
 
     - name: Link Git's dotfiles
-      file: src={{ dotfiles }}/git/{{ item.src }} dest=~/.{{ item.dest }} state=link
+      file:
+        src: "{{ dotfiles }}/git/{{ item.src }}"
+        dest: ~/.{{ item.dest }}
+        state: link
       with_items:
         - src: gitconfig
           dest: gitconfig
@@ -301,7 +342,9 @@
     # Python
 
     - name: Install Python
-      homebrew: name={{ item }} state=latest
+      homebrew:
+        name: "{{ item }}"
+        state: latest
       with_items:
         - pyenv
         - pyenv-virtualenv
@@ -309,22 +352,22 @@
       tags: python
 
     - name: Configure virtualenvwrapper
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="{{ item }}"
+      lineinfile:
+        dest: "{{ rc_file }}"
+        state: present
+        create: yes
+        line: "{{ item }}"
       with_items:
         - export WORKON_HOME=\"$HOME/.virtualenvs\"
         - export PROJECT_HOME=\"$HOME/development\"
       tags: python
 
     - name: Source pyenv
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="{{ item }}"
+      lineinfile:
+        dest: "{{ rc_file }}"
+        state: present
+        create: yes
+        line: "{{ item }}"
       with_items:
         - if which pyenv > /dev/null; then
         - "    export PYENV_ROOT=\\\"$HOME/.pyenv\\\""
@@ -349,15 +392,18 @@
 
     # Install and link devpi first so other pip tasks can use it.
     - name: Install devpi
-      pip: >
-        name=devpi
-        virtualenv=~/.local/venvs/devpi
-        virtualenv_command={{ venv }}
-        state=present
+      pip:
+        name: devpi
+        virtualenv: ~/.local/venvs/devpi
+        virtualenv_command: "{{ venv }}"
+        state: present
       tags: python
 
     - name: Link devpi
-      file: src=~/.local/venvs/devpi/bin/{{ item }} dest=~/.local/bin/{{ item }} state=link
+      file:
+        src: ~/.local/venvs/devpi/bin/{{ item }}
+        dest: ~/.local/bin/{{ item }}
+        state: link
       with_items:
         - devpi
         - devpi-server
@@ -370,11 +416,11 @@
       tags: python
 
     - name: Configure pip to use devpi
-      lineinfile: >
-        dest=~/.pip/pip.conf
-        state=present
-        create=yes
-        line="{{ item }}"
+      lineinfile:
+        dest: ~/.pip/pip.conf
+        state: present
+        create: yes
+        line: "{{ item }}"
       with_items:
         - "[global]"
         - index-url = http://localhost:3141/root/pypi/+simple/
@@ -388,19 +434,19 @@
       tags: python
 
     - name: Install bpython
-      pip: >
-        name=bpython
-        virtualenv=~/.local/venvs/bpython
-        virtualenv_command={{ venv}}
-        state=latest
+      pip:
+        name: bpython
+        virtualenv: ~/.local/venvs/bpython
+        virtualenv_command: "{{ venv }}"
+        state: latest
       tags: python
 
     - name: Install hovercraft
-      pip: >
-        name=hovercraft
-        virtualenv=~/.local/venvs/hovercraft
-        virtualenv_command={{ venv }}
-        state=latest
+      pip:
+        name: hovercraft
+        virtualenv: ~/.local/venvs/hovercraft
+        virtualenv_command: "{{ venv }}"
+        state: latest
       tags: python
 
     - name: Install pip-tools
@@ -411,31 +457,34 @@
       tags: python
 
     - name: Install Sphinx
-      pip: >
-        name=sphinx
-        virtualenv=~/.local/venvs/sphinx
-        virtualenv_command={{ venv }}
-        state=latest
+      pip:
+        name: sphinx
+        virtualenv: ~/.local/venvs/sphinx
+        virtualenv_command: "{{ venv }}"
+        state: latest
       tags: python
 
     - name: Install twine
-      pip: >
-        name=twine
-        virtualenv=~/.local/venvs/twine
-        virtualenv_command={{ venv }}
-        state=latest
+      pip:
+        name: twine
+        virtualenv: ~/.local/venvs/twine
+        virtualenv_command: "{{ venv }}"
+        state: latest
       tags: python
 
     - name: Install wheel
-      pip: >
-        name=wheel
-        virtualenv=~/.local/venvs/wheel
-        virtualenv_command={{ venv }}
-        state=latest
+      pip:
+        name: wheel
+        virtualenv: ~/.local/venvs/wheel
+        virtualenv_command: "{{ venv }}"
+        state: latest
       tags: python
 
     - name: Link global Python executables
-      file: src=~/.local/venvs/{{ item.venv }}/bin/{{ item.executable|default(item.venv) }} dest=~/.local/bin/{{ item.executable|default(item.venv) }} state=link
+      file:
+        src: ~/.local/venvs/{{ item.venv }}/bin/{{ item.executable|default(item.venv) }}
+        dest: ~/.local/bin/{{ item.executable|default(item.venv) }}
+        state: link
       with_items:
         - venv: ansible
         - venv: ansible
@@ -460,7 +509,10 @@
       tags: python
 
     - name: Install pip libraries (Python 2.x)
-      pip: name={{ item }} executable={{ pyenv }}/versions/{{ python_xp_version }}/bin/pip state=latest
+      pip:
+        name: "{{ item }}"
+        executable: "{{ pyenv }}/versions/{{ python_xp_version }}/bin/pip"
+        state: latest
       with_items:
         - bpython
         - flake8-docstrings # flake8 plus pep257
@@ -469,7 +521,10 @@
       tags: python
 
     - name: Install pip libraries
-      pip: name={{ item }} executable={{ pyenv }}/versions/{{ python_version }}/bin/pip state=latest
+      pip:
+        name: "{{ item }}"
+        executable: "{{ pyenv }}/versions/{{ python_version }}/bin/pip"
+        state: latest
       with_items:
         - bpython
         - flake8-docstrings # flake8 plus pep257
@@ -478,12 +533,12 @@
       tags: python
 
     - name: Configure virtualenvwrapper
-      lineinfile: >
-        dest=~/.virtualenvs/postmkvirtualenv
-        state=present
-        create=yes
-        mode=0775
-        line="{{ item }}"
+      lineinfile:
+        dest: ~/.virtualenvs/postmkvirtualenv
+        state: present
+        create: yes
+        mode: 0775
+        line: "{{ item }}"
       with_items:
         - "#!/bin/zsh"
         - pip install bpython
@@ -496,18 +551,20 @@
     # Ruby
 
     - name: Install Ruby
-      homebrew: name={{ item }} state=latest
+      homebrew:
+        name: "{{ item }}"
+        state: latest
       with_items:
         - rbenv
         - ruby-build
       tags: ruby
 
     - name: Source rbenv
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="if which rbenv > /dev/null; then eval \"$(rbenv init -)\"; fi"
+      lineinfile:
+        dest: "{{ rc_file }}"
+        state: present
+        create: yes
+        line: "if which rbenv > /dev/null; then eval \"$(rbenv init -)\"; fi"
       tags: ruby
 
     - name: Install Ruby versions
@@ -516,16 +573,19 @@
       tags: ruby
 
     - name: Set global Ruby version
-      lineinfile: >
-        dest=~/.rbenv/version
-        state=present
-        create=yes
-        insertbefore=BOF
-        line={{ ruby_version }}
+      lineinfile:
+        dest: ~/.rbenv/version
+        state: present
+        create: yes
+        insertbefore: BOF
+        line: "{{ ruby_version }}"
       tags: ruby
 
     - name: Install gems
-      gem: name={{ item }} executable=~/.rbenv/versions/{{ ruby_version }}/bin/gem state=latest
+      gem:
+        name: "{{ item }}"
+        executable: ~/.rbenv/versions/{{ ruby_version }}/bin/gem
+        state: latest
       with_items:
         - lunchy
       tags: ruby
@@ -533,44 +593,67 @@
     # Postgres
 
     - name: Install Postgres
-      homebrew: name=postgresql state=latest
+      homebrew:
+        name: postgresql
+        state: latest
       tags: psql
 
     - name: Link Postgres's dotfiles
-      file: src={{ dotfiles }}/postgresql/psqlrc dest=~/.psqlrc state=link
+      file:
+        src: "{{ dotfiles }}/postgresql/psqlrc"
+        dest: ~/.psqlrc
+        state: link
       tags: psql
 
     # Vim
 
     - name: Install Vim
-      homebrew: name=vim state=latest
+      homebrew:
+        name: vim
+        state: latest
       tags: vim
 
     - name: Install MacVim
-      homebrew: name=macvim install_options=with-cscope state=latest
+      homebrew:
+        name: macvim
+        install_options: with-cscope
+        state: latest
       tags: vim
 
     - name: Install Homebrew tap for NeoVim
-      homebrew_tap: tap=neovim/neovim state=present
+      homebrew_tap:
+        tap: neovim/neovim
+        state: present
       tags: vim
 
     - name: Install NeoVim
-      homebrew: name=neovim state=head
+      homebrew:
+        name: neovim
+        state: head
       tags: vim
 
     - name: Install NeoVim Python libraries
-      pip: name=neovim executable={{ pyenv }}/versions/{{ item }}/bin/pip state=latest
+      pip:
+        name: neovim
+        executable: "{{ pyenv }}/versions/{{ item }}/bin/pip"
+        state: latest
       with_items:
         - "{{ python_version }}" # This isn't supported yet. 23 Jan 2015
         - "{{ python_xp_version }}"
       tags: vim
 
     - name: Install NeoBundle
-      git: repo=git@github.com:shougo/neobundle.vim.git dest=~/.vim/bundle/neobundle.vim update=no
+      git:
+        repo: git@github.com:shougo/neobundle.vim.git
+        dest: ~/.vim/bundle/neobundle.vim
+        update: no
       tags: vim
 
     - name: Link Vim's dotfiles
-      file: src={{ dotfiles }}/vim/{{ item.src }} dest=~/{{ item.dest }} state=link
+      file:
+        src: "{{ dotfiles }}/vim/{{ item.src }}"
+        dest: ~/{{ item.dest }}
+        state: link
       with_items:
         - src: vimrc
           dest: .vimrc
@@ -579,7 +662,10 @@
       tags: vim
 
     - name: Link NeoVim's dotfiles
-      file: src=~/{{ item.src }} dest=~/{{ item.dest }} state=link
+      file:
+        src: ~/{{ item.src }}
+        dest: ~/{{ item.dest }}
+        state: link
       with_items:
         - src: .vim
           dest: .config/nvim
@@ -588,43 +674,53 @@
       tags: vim
 
     - name: Use Vim when other variants aren't available
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="which {{ item }} &> /dev/null; if [[ $? -ne 0 ]]; then alias {{ item }}='vim'; fi"
+      lineinfile:
+        dest: "{{ rc_file }}"
+        state: present
+        create: yes
+        line: "which {{ item }} &> /dev/null; if [[ $? -ne 0 ]]; then alias {{ item }}='vim'; fi"
       with_items:
         - mvim
         - nvim
       tags: vim
 
     - name: Make MacVim/Vim the default editor
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="export EDITOR='mvim'"
+      lineinfile:
+        dest: "{{ rc_file }}"
+        state: present
+        create: yes
+        line: "export EDITOR='mvim'"
       tags: vim
 
     # Tmux
 
     - name: Install Tmux
-      homebrew: name={{ item }} state=latest
+      homebrew:
+        name: "{{ item }}"
+        state: latest
       with_items:
         - reattach-to-user-namespace
         - tmux
       tags: tmux
 
     - name: Install Tmux Plugin Manager
-      git: repo=git@github.com:tmux-plugins/tpm.git dest=~/.tmux/plugins/tpm
+      git:
+        repo: git@github.com:tmux-plugins/tpm.git
+        dest: ~/.tmux/plugins/tpm
       tags: tmux
 
     - name: Install tmuxinator
-      gem: name=tmuxinator executable=~/.rbenv/versions/{{ ruby_version }}/bin/gem state=latest
+      gem:
+        name: tmuxinator
+        executable: ~/.rbenv/versions/{{ ruby_version }}/bin/gem
+        state: latest
       tags: tmux
 
     - name: Link Tmux's dotfiles
-      file: src={{ dotfiles }}/tmux/{{ item }} dest=~/.{{ item }} state=link
+      file:
+        src: "{{ dotfiles }}/tmux/{{ item }}"
+        dest: ~/.{{ item }}
+        state: link
       with_items:
         - tmux.conf
         - tmux.battery.sh
@@ -633,11 +729,16 @@
     # Weechat
 
     - name: Install WeeChat
-      homebrew: name=weechat install_options=with-aspell,with-perl,with-python,with-ruby state=latest
+      homebrew:
+        name: weechat
+        install_options: with-aspell,with-perl,with-python,with-ruby
+        state: latest
       tags: weechat
 
     - name: Install WeeChat gems
-      gem: name={{ item }} state=present
+      gem:
+        name: "{{ item }}"
+        state: present
       with_items:
         - terminal-notifier
         - weechat
@@ -645,11 +746,11 @@
 
     # http://stackoverflow.com/questions/4495120/combine-user-with-prefix-error-with-setup-py-install
     - name: Disable global disutils prefix
-      lineinfile: >
-        dest=~/.pydistutils.cfg
-        state=present
-        create=yes
-        line={{ item }}
+      lineinfile:
+        dest: ~/.pydistutils.cfg
+        state: present
+        create: yes
+        line: "{{ item }}"
       with_items:
         - "[install]"
         - prefix=
@@ -657,64 +758,89 @@
       tags: weechat
 
     - name: Install WeeChat pip libraries
-      pip: name=pync executable=/usr/local/bin/pip2 extra_args=--user state=latest
+      pip:
+        name: pync
+        executable: /usr/local/bin/pip2
+        extra_args: --user
+        state: latest
       tags: weechat
 
     # Leaving this around would use pip to try to install things to /lib.
     - name: Reenable global disutils prefix
-      file: path=~/.pydistutils.cfg state=absent
+      file:
+        path: ~/.pydistutils.cfg
+        state: absent
       changed_when: false
       tags: weechat
 
     - name: Link WeeChat's dotfiles
-      file: src={{ dotfiles }}/weechat dest=~/.weechat state=link
+      file:
+        src: "{{ dotfiles }}/weechat"
+        dest: ~/.weechat
+        state: link
       tags: weechat
 
     # SSH
 
     - name: Link SSH dotfiles
-      file: src={{ dotfiles }}/ssh/config dest=~/.ssh/config state=link
+      file:
+        src: "{{ dotfiles }}/ssh/config"
+        dest: ~/.ssh/config
+        state: link
       tags: ssh
 
     # npm
 
     - name: Install npm
-      homebrew: name=npm state=latest
+      homebrew:
+        name: npm
+        state: latest
       tags: npm
 
     # MongoDB
 
     - name: Install MongoDB
-      homebrew: name=mongodb state=latest
+      homebrew:
+        name: mongodb
+        state: latest
       tags: mongo
 
     - name: Install MongoDB Shell Enhancements
-      npm: name=mongo-hacker global=yes state=latest
+      npm:
+        name: mongo-hacker
+        global: yes
+        state: latest
       tags: mongo
 
     # OS X Apps
 
     - name: Install Homebrew Caskroom taps
-      homebrew_tap: name=caskroom/{{ item }} state=present
+      homebrew_tap:
+        name: caskroom/{{ item }}
+        state: present
       with_items:
         - cask
         - fonts
       tags: osx
 
     - name: Install Homebrew Cask
-      homebrew: name=brew-cask state=latest
+      homebrew:
+        name: brew-cask
+        state: latest
       tags: osx
 
     - name: Configure Homebrew Cask
-      lineinfile: >
-        dest={{ rc_file }}
-        state=present
-        create=yes
-        line="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\""
+      lineinfile:
+        dest: "{{ rc_file }}"
+        state: present
+        create: yes
+        line: "export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\""
       tags: osx
 
     - name: Install Homebrew Cask apps
-      homebrew_cask: name={{ item }} state=present
+      homebrew_cask:
+        name: "{{ item }}"
+        state: present
       with_items:
         # 1password only syncs with iCloud when installed from the App Store.
         - alfred
@@ -741,14 +867,18 @@
       tags: osx
 
     - name: Install Homebrew Cask apps with sudo
-      homebrew_cask: name={{ item }} state=present
+      homebrew_cask:
+        name: "{{ item }}"
+        state: present
       sudo: yes
       with_items:
         - seil
       tags: osx
 
     - name: Install Homebrew Cask apps that might fail
-      homebrew_cask: name={{ item }} state=present
+      homebrew_cask:
+        name: "{{ item }}"
+        state: present
       ignore_errors: yes
       with_items:
         - virtualbox # If VirtualBox is installed and running, it will fail.
