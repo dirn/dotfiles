@@ -30,9 +30,15 @@
     aliases = !git config -l | grep alias | cut -c 7-
 [color]
     ui = true
+[color "diff-highlight"]
+    newHighlight = "green bold 22"
+    newNormal = "green bold"
+    oldHighlight = "red bold 52"
+    oldNormal = "red bold"
 [core]
     editor = vim
     excludesfile = ~/.gitignoreglobal
+    pager = diff-highlight | less -r
 [push]
     default = simple
 [merge]

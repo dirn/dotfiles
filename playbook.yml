@@ -15,6 +15,7 @@
     venv: ~/.pyenv/versions/{{ python_version }}/bin/pyvenv
 
     has_homebrew: "{{ lookup('pipe', 'which brew || /usr/bin/false') }}"
+    homebrew_prefix: "{{ lookup('pipe', 'brew --prefix || \"\"') }}"
 
     osx_config:
       dock:
@@ -270,6 +271,10 @@
         state=present
         create=yes
         line="alias gsh='gitsh --git $(which hub)'"
+      tags: git
+
+    - name: Use diff-highlight
+      file: src="{{ homebrew_prefix }}/share/git-core/contrib/diff-highlight/diff-highlight" dest=~/.local/bin/diff-highlight state=link
       tags: git
 
     - name: Link Git's dotfiles
