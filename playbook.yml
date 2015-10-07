@@ -178,7 +178,6 @@
       homebrew: name={{ item }} state=latest
       with_items:
         - ag # the_silver_searcher
-        - ansible
         - aspell
         - ctags
         - go
@@ -366,6 +365,12 @@
       with_items:
         - "[global]"
         - index-url = http://localhost:3141/root/pypi/+simple/
+
+    - name: Install Ansible
+      pip:
+        name: ansible
+        virtualenv: ~/.local/venvs/ansible
+        state: latest
       tags: python
 
     - name: Install bpython
@@ -411,6 +416,15 @@
     - name: Link global Python executables
       file: src=~/.local/venvs/{{ item.venv }}/bin/{{ item.executable|default(item.venv) }} dest=~/.local/bin/{{ item.executable|default(item.venv) }} state=link
       with_items:
+        - venv: ansible
+        - venv: ansible
+          executable: ansible-galaxy
+        - venv: ansible
+          executable: ansible-playbook
+        - venv: ansible
+          executable: ansible-vault
+        - venv: ansible
+          executable: ansible-playbook
         - venv: bpython
         - venv: hovercraft
         - venv: sphinx
