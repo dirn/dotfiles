@@ -16,18 +16,15 @@ easy. Here's what you'll need to get started:
 .. _An SSH key registered with GitHub: https://help.github.com/articles/generating-ssh-keys/
 .. _pip: https://pip.pypa.io/en/latest/installing.html
 
-Once you have these, setup is::
+Once you have these, install Ansible::
 
-    $ git clone --recursive https://github.com/ansible/ansible.git
-    $ cd ./ansible
-    $ source ./hacking/env-setup
-    $ pip install --user PyYAML Jinja2
+    $ python -m pip install --user ansible
 
 This will install a version of Ansible that you can use for the initial run of
 the playbook::
 
     $ curl -1 https://raw.githubusercontent.com/dirn/dotfiles/master/playbook.yml > /tmp/playbook.yml
-    $ ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local /tmp/playbook.yml
+    $ ~/path/to/bin/ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local /tmp/playbook.yml
 
 After the initial run, the playbook can be run again with::
 
