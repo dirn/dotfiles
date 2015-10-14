@@ -187,7 +187,6 @@
         - readline
         - tree
         - wget
-        - z
 
     # Zsh
 
@@ -228,6 +227,20 @@
         - exports
         - functions
       tags: zsh
+
+    # z
+
+    - name: Install z
+      homebrew: name=z state=latest
+      tags: z
+
+    - name: Use z
+      lineinfile: >
+        dest={{ rc_file }}
+        state=present
+        create=yes
+        line="source $(brew --prefix)/etc/profile.d/z.sh"
+      tags: z
 
     # Docker
 
