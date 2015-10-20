@@ -64,6 +64,7 @@ NeoBundle       'pbrisbin/vim-mkdir'
 NeoBundle       'chase/vim-ansible-yaml'
 NeoBundle       'majutsushi/tagbar'
 NeoBundle       'dhruvasagar/vim-prosession',       {'depends': 'tpope/vim-obsession'}
+NeoBundle       'dhruvasagar/vim-table-mode',       {'autoload': {'filetypes': ['python', 'rst']}}
 
 " --- Tmux support ---
 if executable('tmux')
@@ -386,3 +387,7 @@ map * <Plug>(incsearch-nohl-*)
 map # <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
+
+" --- Table Mode ---
+let g:table_mode_corner_corner = "+"
+let g:table_mode_header_fillchar = "="
