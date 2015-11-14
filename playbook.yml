@@ -7,7 +7,7 @@
     rc_file: ~/.extra
     pyenv: /Users/{{ ansible_ssh_user }}/.pyenv
     python_version: 3.5.0
-    python_versions: [2.6.9, 2.7.10, 3.3.6, 3.4.3, 3.5.0, pypy-2.6.0, pypy3-2.4.0]
+    python_versions: [2.6.9, 2.7.10, 3.3.6, 3.4.3, 3.5.0, pypy-4.0.0, pypy3-2.4.0]
     python_xp_version: 2.7.10
     ruby_version: 2.2.0
     ruby_versions: [2.0.0-p598, 2.1.5, 2.2.0]
@@ -340,11 +340,11 @@
       tags: python
 
     - name: Set global Python versions
-      command: pyenv global 2.7.10 3.5.0 3.4.3 2.6.9 3.3.6 pypy-2.6.0 pypy3-2.4.0
+      command: pyenv global 2.7.10 3.5.0 3.4.3 2.6.9 3.3.6 pypy-4.0.0 pypy3-2.4.0
       tags: python
 
     - name: Set local Python versions
-      command: chdir=/Users/{{ ansible_ssh_user }} pyenv local 3.5.0 3.4.3 2.7.10 3.3.6 2.6.9 pypy3-2.4.0 pypy-2.6.0
+      command: chdir=/Users/{{ ansible_ssh_user }} pyenv local 3.5.0 3.4.3 2.7.10 3.3.6 2.6.9 pypy3-2.4.0 pypy-4.0.0
       tags: python
 
     # Install and link devpi first so other pip tasks can use it.
