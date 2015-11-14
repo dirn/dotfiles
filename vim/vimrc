@@ -226,9 +226,7 @@ inoremap <c-t> <esc>:tabnew<cr>
 
 " FileType switching
 nnoremap <leader>Tp :set ft=python<cr>
-nnoremap <leader>Th :set ft=html<cr>
 nnoremap <leader>Tj :set ft=htmljinja<cr>
-nnoremap <leader>Tr :set ft=rst<cr>
 
 " Don't use the cursor keys
 for prefix in ['i', 'n', 'v']
@@ -328,19 +326,6 @@ let g:gist_open_browser_after_post = 1
 " --- Learn Vimscript the Hard Way ---
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap pb :exe "rightbelow vsplit " . bufname('#')<cr>
-
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
-
-" --- Fugitive ---
-nnoremap <leader>gci :Gcommit<cr>
-nnoremap <leader>gco :Gcheckout<cr>
-nnoremap <leader>gmv :Gmove<cr>
-nnoremap <leader>grm :Gremove<cr>
-nnoremap <leader>gst :Gstatus<cr>
 
 " --- Syntastic ---
 let g:syntastic_check_on_open = 1
@@ -356,25 +341,6 @@ let g:gundo_tree_statusline = "gundo"
 let g:gundo_preview_statusline = "gundo preview"
 
 nnoremap <leader>gu :GundoToggle<cr>
-
-" --- Tabularize ---
-" Make columns the same width when by triggering :Tabular when you type |
-" Taken from https://gist.github.com/tpope/287147
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
-
-" --- Tmux complete ---
-" let g:tmuxcomplete#trigger = ''
 
 " --- incsearch ---
 map / <Plug>(incsearch-forward)
