@@ -20,48 +20,51 @@ NeoBundle      'Shougo/vimproc', {
       \    },
       \ }
 
-" --- Themes ---
+" --- Appearance ---
 NeoBundle       'altercation/vim-colors-solarized'
+NeoBundle       'airblade/vim-gitgutter'
+NeoBundle       'bling/vim-airline'
+
+" --- Settings ---
+NeoBundle       'tpope/vim-sensible'
 
 " --- File types ---
-NeoBundleLazy   'mitsuhiko/vim-jinja',              {'autoload': {'filetypes': ['html', 'jinja']}}
-NeoBundle       'sheerun/vim-polyglot'
-NeoBundle       'hynek/vim-python-pep8-indent',     {'autoload': {'filetypes': ['python']}}
-NeoBundle       'pangloss/vim-javascript',          {'autoload': {'filetypes': ['javascript']}}
-NeoBundle       'fatih/vim-go',                     {'autoload': {'filetypes': ['go']}}
-
-" --- Plugins ---
-NeoBundle       'jmcantrell/vim-virtualenv',        {'autoload': {'filetypes': ['python']}}
-NeoBundle       'rking/ag.vim'
-NeoBundle       'sjl/clam.vim'
 NeoBundleLazy   'alfredodeza/coveragepy.vim',       {'autoload': {'filetypes': ['python']}}
-NeoBundle       'ctrlpvim/ctrlp.vim'
-NeoBundle       'rizzatti/dash.vim'
-NeoBundle       'mattn/webapi-vim'
-NeoBundle       'mattn/gist-vim'
-NeoBundle       'sjl/gundo.vim'
-" NeoBundle       'Shougo/neocomplete'
-NeoBundle       'haya14busa/incsearch.vim'
-NeoBundle       'scrooloose/nerdtree'
-NeoBundle       'bling/vim-airline'
 NeoBundleLazy   'alfredodeza/pytest.vim',           {'autoload': {'filetypes': ['python']}}
-NeoBundle       'sjl/strftimedammit.vim',           {'autoload': {'commands': ['help']}}
-NeoBundle       'scrooloose/syntastic'
-NeoBundleLazy   'godlygeek/tabular',                {'autoload': {'commands': ['Tabularize']}}
-NeoBundle       'tpope/vim-commentary'
-NeoBundle       'tommcdo/vim-exchange'
-NeoBundle       'tpope/vim-fugitive'
-NeoBundle       'airblade/vim-gitgutter'
-NeoBundle       'tpope/vim-repeat'
-NeoBundle       'tpope/vim-sensible'
-NeoBundle       'honza/vim-snippets',               {'depends': ['garbas/vim-snipmate', 'tomtom/tlib_vim', 'MarcWeber/vim-addon-mw-utils']}
-NeoBundle       'tpope/vim-surround'
-NeoBundle       'Lokaltog/vim-easymotion'
-NeoBundle       'pbrisbin/vim-mkdir'
-NeoBundle       'chase/vim-ansible-yaml'
-NeoBundle       'majutsushi/tagbar'
-NeoBundle       'dhruvasagar/vim-prosession',       {'depends': 'tpope/vim-obsession'}
+NeoBundle       'chase/vim-ansible-yaml',           {'autoload': {'filetypes': ['yaml']}}
 NeoBundle       'dhruvasagar/vim-table-mode',       {'autoload': {'filetypes': ['python', 'rst']}}
+NeoBundle       'fatih/vim-go',                     {'autoload': {'filetypes': ['go']}}
+NeoBundle       'hynek/vim-python-pep8-indent',     {'autoload': {'filetypes': ['python']}}
+NeoBundle       'jmcantrell/vim-virtualenv',        {'autoload': {'filetypes': ['python']}}
+NeoBundleLazy   'mitsuhiko/vim-jinja',              {'autoload': {'filetypes': ['html', 'jinja']}}
+NeoBundle       'pangloss/vim-javascript',          {'autoload': {'filetypes': ['javascript']}}
+NeoBundle       'sheerun/vim-polyglot'
+
+" --- Language helpers ---
+NeoBundle       'majutsushi/tagbar'
+
+" --- Documentation ---
+NeoBundle       'rizzatti/dash.vim'
+NeoBundle       'sjl/strftimedammit.vim',           {'autoload': {'commands': ['help']}}
+
+" --- Utilities ---
+NeoBundle       'ctrlpvim/ctrlp.vim'
+NeoBundle       'dhruvasagar/vim-prosession',       {'depends': 'tpope/vim-obsession'}
+NeoBundle       'haya14busa/incsearch.vim'
+NeoBundle       'honza/vim-snippets',               {'depends': ['garbas/vim-snipmate', 'tomtom/tlib_vim', 'MarcWeber/vim-addon-mw-utils']}
+NeoBundle       'Lokaltog/vim-easymotion'
+NeoBundle       'mattn/gist-vim',                   {'depends': ['mattn/webapi-vim']}
+NeoBundle       'pbrisbin/vim-mkdir'
+NeoBundle       'rking/ag.vim'
+NeoBundle       'scrooloose/nerdtree'
+NeoBundle       'scrooloose/syntastic'
+NeoBundle       'sjl/clam.vim'
+NeoBundle       'sjl/gundo.vim'
+NeoBundle       'tommcdo/vim-exchange'
+NeoBundle       'tpope/vim-commentary'
+NeoBundle       'tpope/vim-fugitive'
+NeoBundle       'tpope/vim-repeat'
+NeoBundle       'tpope/vim-surround'
 
 " --- Tmux support ---
 if executable('tmux')
