@@ -31,13 +31,13 @@ NeoBundle       'tpope/vim-sensible'
 " --- File types ---
 NeoBundleLazy   'alfredodeza/coveragepy.vim',       {'autoload': {'filetypes': ['python']}}
 NeoBundleLazy   'alfredodeza/pytest.vim',           {'autoload': {'filetypes': ['python']}}
-NeoBundle       'chase/vim-ansible-yaml',           {'autoload': {'filetypes': ['yaml']}}
-NeoBundle       'dhruvasagar/vim-table-mode',       {'autoload': {'filetypes': ['python', 'rst']}}
-NeoBundle       'fatih/vim-go',                     {'autoload': {'filetypes': ['go']}}
-NeoBundle       'hynek/vim-python-pep8-indent',     {'autoload': {'filetypes': ['python']}}
-NeoBundle       'jmcantrell/vim-virtualenv',        {'autoload': {'filetypes': ['python']}}
+NeoBundleLazy   'chase/vim-ansible-yaml',           {'autoload': {'filetypes': ['yaml']}}
+NeoBundleLazy   'dhruvasagar/vim-table-mode',       {'autoload': {'filetypes': ['python', 'rst']}}
+NeoBundleLazy   'fatih/vim-go',                     {'autoload': {'filetypes': ['go']}}
+NeoBundleLazy   'hynek/vim-python-pep8-indent',     {'autoload': {'filetypes': ['python']}}
+NeoBundleLazy   'jmcantrell/vim-virtualenv',        {'autoload': {'filetypes': ['python']}}
 NeoBundleLazy   'mitsuhiko/vim-jinja',              {'autoload': {'filetypes': ['html', 'jinja']}}
-NeoBundle       'pangloss/vim-javascript',          {'autoload': {'filetypes': ['javascript']}}
+NeoBundleLazy   'pangloss/vim-javascript',          {'autoload': {'filetypes': ['javascript']}}
 NeoBundle       'sheerun/vim-polyglot'
 
 " --- Language helpers ---
@@ -45,7 +45,7 @@ NeoBundle       'majutsushi/tagbar'
 
 " --- Documentation ---
 NeoBundle       'rizzatti/dash.vim'
-NeoBundle       'sjl/strftimedammit.vim',           {'autoload': {'commands': ['help']}}
+NeoBundleLazy   'sjl/strftimedammit.vim',           {'autoload': {'commands': ['help']}}
 
 " --- Utilities ---
 NeoBundle       'ctrlpvim/ctrlp.vim'
