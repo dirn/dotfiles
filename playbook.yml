@@ -403,6 +403,13 @@
         state=latest
       tags: python
 
+    - name: Install pip-tools
+      pip:
+        name: pip-tools
+        virtualenv: ~/.local/venvs/pip-tools
+        state: latest
+      tags: python
+
     - name: Install Sphinx
       pip: >
         name=sphinx
@@ -441,6 +448,10 @@
           executable: ansible-playbook
         - venv: bpython
         - venv: hovercraft
+        - venv: pip-tools
+          executable: pip-compile
+        - venv: pip-tools
+          executable: pip-sync
         - venv: sphinx
           executable: sphinx-build
         - venv: sphinx
