@@ -33,6 +33,7 @@ NeoBundleLazy   'alfredodeza/coveragepy.vim',       {'autoload': {'filetypes': [
 NeoBundleLazy   'alfredodeza/pytest.vim',           {'autoload': {'filetypes': ['python']}}
 NeoBundleLazy   'chase/vim-ansible-yaml',           {'autoload': {'filetypes': ['yaml']}}
 NeoBundleLazy   'dhruvasagar/vim-table-mode',       {'autoload': {'filetypes': ['python', 'rst']}}
+NeoBundleLazy   'elzr/vim-json',                    {'autoload': {'filetypes': ['json']}}
 NeoBundleLazy   'fatih/vim-go',                     {'autoload': {'filetypes': ['go']}}
 NeoBundleLazy   'hynek/vim-python-pep8-indent',     {'autoload': {'filetypes': ['python']}}
 NeoBundleLazy   'jmcantrell/vim-virtualenv',        {'autoload': {'filetypes': ['python']}}
@@ -357,3 +358,6 @@ map g# <Plug>(incsearch-nohl-g#)
 " --- Table Mode ---
 let g:table_mode_corner_corner = "+"
 let g:table_mode_header_fillchar = "="
+
+" --- vim-json ---
+let g:vim_json_syntax_conceal = 0
