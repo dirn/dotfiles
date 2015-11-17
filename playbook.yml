@@ -378,6 +378,7 @@
       with_items:
         - "[global]"
         - index-url = http://localhost:3141/root/pypi/+simple/
+      tags: python
 
     - name: Install Ansible
       pip:
