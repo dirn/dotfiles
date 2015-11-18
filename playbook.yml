@@ -489,6 +489,7 @@
         - pip install bpython
         - pip install flake8-docstrings
         - pip install neovim
+        - pip install pip-tools
         - pip install wheel
       tags: python
 
