@@ -464,7 +464,9 @@
       with_items:
         - bpython
         - flake8-docstrings # flake8 plus pep257
+        - neovim
         - pip
+        - pip-tools
         - setuptools
       tags: python
 
@@ -473,7 +475,9 @@
       with_items:
         - bpython
         - flake8-docstrings # flake8 plus pep257
+        - neovim
         - pip
+        - pip-tools
         - setuptools
       tags: python
 
