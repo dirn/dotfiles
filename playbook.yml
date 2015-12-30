@@ -258,8 +258,8 @@
         - aspell
         - ctags
         - go
-        - hg # mercurial
         - keybase
+        - mercurial
         - openssl
         - readline
         - tree
@@ -912,7 +912,7 @@
   tasks:
     - name: Install npm
       homebrew:
-        name: npm
+        name: node
         state: latest
 
 - name: Install MongoDB
