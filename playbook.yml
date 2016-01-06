@@ -739,6 +739,13 @@
         - libraries
         - ruby_versions
 
+    - name: Use Travis CI
+      lineinfile:
+        dest: "{{ rc_file }}"
+        state: present
+        create: yes
+        line: "[ -f {{ home }}.travis/travis.sh ] && source {{ home }}.travis/travis.sh"
+
 - name: Postgres
   hosts: localhost
   gather_facts: no
