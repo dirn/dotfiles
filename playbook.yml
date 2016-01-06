@@ -695,6 +695,7 @@
       - lunchy
       # This is needed by WeeChat.
       - terminal-notifier
+      - travis
       - tmuxinator
       - weechat
 
