@@ -210,10 +210,6 @@
         - cask
         - fonts
 
-    - name: Install Homebrew Cask
-      homebrew:
-        name: brew-cask
-        state: latest
 
     - name: Configure Homebrew Cask
       lineinfile:
