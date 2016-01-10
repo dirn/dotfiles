@@ -250,7 +250,6 @@
         name: "{{ item }}"
         state: latest
       with_items:
-        - ag # the_silver_searcher
         - aspell
         - ctags
         - go
@@ -258,6 +257,7 @@
         - mercurial
         - openssl
         - readline
+        - the_silver_searcher
         - tree
         - wget
       when: update|changed
