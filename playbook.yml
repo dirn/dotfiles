@@ -64,7 +64,7 @@
         dest: "{{ rc_file }}"
         state: present
         create: yes
-        line: alias play=\"ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml\"
+        line: alias play="ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml"
       tags:
         - dotfiles
 
@@ -286,7 +286,7 @@
       when: update|changed
 
     - name: Install Homebrew Cask libraries with sudo
-      sudo: yes
+      become: yes
       homebrew_cask:
         name: "{{ item }}"
         state: present
@@ -314,7 +314,7 @@
         state: latest
 
     - name: Add Zsh to available shells
-      sudo: yes
+      become: yes
       lineinfile:
         dest: /etc/shells
         line: "{{ homebrew }}/bin/zsh"
@@ -709,7 +709,7 @@
         dest: "{{ rc_file }}"
         state: present
         create: yes
-        line: if which rbenv > /dev/null; then eval \"$(rbenv init -)\"; fi
+        line: if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
       tags:
         - dotfiles
 
