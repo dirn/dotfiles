@@ -281,6 +281,7 @@
         - skitch
         - slack
         - transmit
+        - tunnelblick
         - vmware-fusion
         - xquartz
       when: update|changed
