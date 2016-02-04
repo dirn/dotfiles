@@ -554,44 +554,6 @@
       command: chdir={{ home }} pyenv local {{ ' '.join(pyenv_versions.local) }}
       when: current_pyenv_versions.stdout_lines != pyenv_versions.local
 
-    - name: Install devpi
-      pip:
-        name: devpi
-        virtualenv: "{{ local }}/venvs/devpi"
-        virtualenv_command: "{{ venv }}"
-        state: present
-
-    - name: Link devpi
-      file:
-        src: "{{ local }}/venvs/devpi/bin/{{ item }}"
-        dest: "{{ local }}/bin/{{ item }}"
-        state: link
-        force: yes
-      with_items:
-        - devpi
-        - devpi-server
-
-    - name: Configure pip to use devpi
-      lineinfile:
-        dest: "{{ home }}/.pip/pip.conf"
-        state: present
-        create: yes
-        line: "{{ item }}"
-      with_items:
-        - "[global]"
-        - index-url = http://localhost:3141/root/pypi/+simple/
-
-- name: Start devpi
-  hosts: localhost
-  gather_facts: no
-  tags: always
-
-  tasks:
-    - name: Start devpi
-      command: "{{ local }}/bin/devpi-server --start"
-      register: devpi
-      changed_when: devpi.stdout.startswith('starting background')
-
 - name: Install global Python libraries
   hosts: localhost
   gather_facts: no
