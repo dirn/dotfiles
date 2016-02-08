@@ -22,8 +22,8 @@ NeoBundle 'Shougo/vimproc.vim', {
 " --- Appearance ---
 NeoBundle       'altercation/vim-colors-solarized'
 NeoBundle       'airblade/vim-gitgutter'
-NeoBundle       'bling/vim-airline'
 NeoBundle       'blueyed/vim-diminactive'
+NeoBundle       'vim-airline/vim-airline-themes',   {'depends': 'vim-airline/vim-airline'}
 
 " --- Settings ---
 NeoBundle       'tpope/vim-sensible'
