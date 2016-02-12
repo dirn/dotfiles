@@ -56,6 +56,7 @@ NeoBundle       'honza/vim-snippets',               {'depends': ['garbas/vim-sni
 NeoBundle       'Lokaltog/vim-easymotion'
 NeoBundle       'mattn/gist-vim',                   {'depends': ['mattn/webapi-vim']}
 NeoBundle       'pbrisbin/vim-mkdir'
+NeoBundle       'rhysd/committia.vim'
 NeoBundle       'rking/ag.vim'
 NeoBundle       'scrooloose/nerdtree'
 NeoBundle       'scrooloose/syntastic'
