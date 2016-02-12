@@ -31,7 +31,6 @@ NeoBundle       'tpope/vim-sensible'
 " --- File types ---
 NeoBundleLazy   'alfredodeza/coveragepy.vim',       {'autoload': {'filetypes': ['python']}}
 NeoBundleLazy   'alfredodeza/pytest.vim',           {'autoload': {'filetypes': ['python']}}
-NeoBundleLazy   'chase/vim-ansible-yaml',           {'autoload': {'filetypes': ['yaml']}}
 NeoBundleLazy   'dhruvasagar/vim-table-mode',       {'autoload': {'filetypes': ['python', 'rst']}}
 NeoBundleLazy   'elzr/vim-json',                    {'autoload': {'filetypes': ['json']}}
 NeoBundleLazy   'fatih/vim-go',                     {'autoload': {'filetypes': ['go']}}
@@ -39,6 +38,7 @@ NeoBundleLazy   'hynek/vim-python-pep8-indent',     {'autoload': {'filetypes': [
 NeoBundleLazy   'jmcantrell/vim-virtualenv',        {'autoload': {'filetypes': ['python']}}
 NeoBundleLazy   'mitsuhiko/vim-jinja',              {'autoload': {'filetypes': ['html', 'jinja']}}
 NeoBundleLazy   'pangloss/vim-javascript',          {'autoload': {'filetypes': ['javascript']}}
+NeoBundleLazy   'pearofducks/ansible-vim',          {'autoload': {'filetypes': ['yaml']}}
 NeoBundle       'sheerun/vim-polyglot'
 
 " --- Language helpers ---
