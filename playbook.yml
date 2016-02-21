@@ -10,7 +10,7 @@
 
 - name: Register facts
   hosts: localhost
-  # facts are needed for ansible_env.
+  # Facts are needed for ansible_env.
   gather_facts: yes
   tags: always
 
