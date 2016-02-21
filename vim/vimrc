@@ -286,6 +286,9 @@ augroup filetypes
     autocmd BufWritePost .vimrc source $MYVIMRC
 augroup END
 
+" --- NeoVim configuration ---
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
 " --- Plugin configuration ---
 
 " --- ctrlp ---
