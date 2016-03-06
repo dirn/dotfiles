@@ -130,12 +130,12 @@
       register: dock
       changed_when: dock.stdout != item.value|default('1')
       ignore_errors: yes
-      with_items: config.dock
+      with_items: "{{ config.dock }}"
 
     - name: Configure the Dock
       command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
       when: dock.changed
-      with_items: config.dock
+      with_items: "{{ config.dock }}"
       notify: Restart Dock
 
     - name: Check the Finder configuration
@@ -143,12 +143,12 @@
       register: finder
       changed_when: finder.stdout != item.value|default('1')
       ignore_errors: yes
-      with_items: config.finder
+      with_items: "{{ config.finder }}"
 
     - name: Configure Finder
       command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
       when: finder.changed
-      with_items: config.finder
+      with_items: "{{ config.finder }}"
       notify: Restart Finder
 
     - name: Check the Menu bar configuration
@@ -156,12 +156,12 @@
       register: menubar
       changed_when: menubar.stdout != item.value|default('1')
       ignore_errors: yes
-      with_items: config.menubar
+      with_items: "{{ config.menubar }}"
 
     - name: Configure the Menu bar
       command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
       when: menubar.changed
-      with_items: config.menubar
+      with_items: "{{ config.menubar }}"
       notify: Restart Menubar
 
     - name: Check the OS X configuration
@@ -169,12 +169,12 @@
       register: misc
       changed_when: misc.stdout != item.value|default('1')
       ignore_errors: yes
-      with_items: config.misc
+      with_items: "{{ config.misc }}"
 
     - name: Configure OS X
       command: defaults write {{ item.domain }} {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
       when: misc.changed
-      with_items: config.misc
+      with_items: "{{ config.misc }}"
 
 - name: Install Homebrew
   hosts: localhost
@@ -491,7 +491,7 @@
 
     - name: Install Python versions
       command: creates="{{ pyenv }}/versions/{{ item }}" pyenv install {{ item }}
-      with_items: python_versions
+      with_items: "{{ python_versions }}"
 
     - name: Configure virtualenvwrapper
       lineinfile:
@@ -608,7 +608,7 @@
         state: latest
         virtualenv: "{{ local }}/venvs/{{ item.venv }}"
         virtualenv_command: "{{ item.pyvenv|default('virtualenv') }}"
-      with_items: global_libraries
+      with_items: "{{ global_libraries }}"
 
     - name: Link executables
       file:
@@ -617,7 +617,7 @@
         state: link
         force: yes
       with_subelements:
-        - global_libraries
+        - "{{ global_libraries }}"
         - executables
 
     - name: Install pip libraries
@@ -626,8 +626,8 @@
         executable: "{{ pyenv }}/versions/{{ item.1 }}/bin/pip"
         state: latest
       with_nested:
-        - libraries
-        - python_versions
+        - "{{ libraries }}"
+        - "{{ python_versions }}"
 
 - name: Set Ruby facts
   hosts: localhost
@@ -678,7 +678,7 @@
 
     - name: Install Ruby versions
       command: creates="{{ rbenv }}/versions/{{ item }}" rbenv install {{ item }}
-      with_items: ruby_versions
+      with_items: "{{ ruby_versions }}"
 
     - name: Check global Ruby version
       command: cat {{ rbenv }}/version
@@ -695,8 +695,8 @@
         executable: "{{ rbenv }}/versions/{{ item.1 }}/bin/gem"
         state: latest
       with_nested:
-        - libraries
-        - ruby_versions
+        - "{{ libraries }}"
+        - "{{ ruby_versions }}"
 
     - name: Use Travis CI
       lineinfile:
