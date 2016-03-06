@@ -60,3 +60,5 @@
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [gitsh]
     prompt = "%D %c%b%#%w"
+[pull]
+    rebase = true
