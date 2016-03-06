@@ -1,10 +1,11 @@
+# Authentication
 [user]
     name = Andy Dirnberger
     email = andy@dirnberger.me
-[github]
-    user = dirn
 [credential]
     helper = osxkeychain
+
+# Core
 [alias]
     br = branch
     ci = commit
@@ -12,22 +13,22 @@
     cp = cherry-pick
     rb = rebase
     st = status
-    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-    rewind = reset --soft HEAD~1
-    fml = reset --hard HEAD
-    sigh = push --force
-    amend = commit --amend
-    patch = commit --patch -v
-    locate = ls-tree --name-only -r HEAD
-    restore = !git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
-    missing = !git log --no-merges "$1" ^"$2"
-    ls = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate
-    ll = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --numstat
-    when = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --date=relative
-    pretty = log --oneline --decorate
-    modified = !git ll -1
-    last = diff --cached HEAD^
     aliases = !git config -l | grep alias | cut -c 7-
+    amend = commit --amend
+    fml = reset --hard HEAD
+    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+    last = diff --cached HEAD^
+    ll = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --numstat
+    locate = ls-tree --name-only -r HEAD
+    ls = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate
+    missing = !git log --no-merges "$1" ^"$2"
+    modified = !git ll -1
+    patch = commit --patch -v
+    pretty = log --oneline --decorate
+    restore = !git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
+    rewind = reset --soft HEAD~1
+    sigh = push --force
+    when = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --date=relative
     wip = commit -m '[WIP]'
 [color]
     ui = true
@@ -40,8 +41,13 @@
     editor = vim
     excludesfile = ~/.gitignoreglobal
     pager = diff-highlight | less -r
-[push]
-    default = simple
+[diff]
+    algorithm = patience
+    tool = Kaleidoscope
+[difftool]
+    prompt = false
+[difftool "Kaleidoscope"]
+    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [merge]
     tool = Kaleidoscope
 [mergetool]
@@ -52,14 +58,13 @@
 [mergetool "Kaleidoscope"]
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
     trustExitCode = true
-[diff]
-    algorithm = patience
-    tool = Kaleidoscope
-[difftool]
-    prompt = false
-[difftool "Kaleidoscope"]
-    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[gitsh]
-    prompt = "%D %c%b%#%w"
 [pull]
     rebase = true
+[push]
+    default = simple
+
+# Plugins
+[github]
+    user = dirn
+[gitsh]
+    prompt = "%D %c%b%#%w"
