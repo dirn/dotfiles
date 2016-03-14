@@ -742,10 +742,15 @@
       homebrew:
         name: "{{ item }}"
         state: latest
+        install_options: with-python3,without-python
       with_items:
         - vim
         - macvim
-        - neovim
+
+    - name: Install NeoVim
+      homebrew:
+        name: neovim
+        state: latest
 
     # The neovim Pip library is installed in a Python play.
 
