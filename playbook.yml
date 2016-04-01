@@ -514,11 +514,7 @@
         line: "{{ item }}"
       with_items:
         - "#!/bin/zsh"
-        - python -m pip install bpython
-        - python -m pip install flake8-docstrings
-        - python -m pip install neovim
-        - python -m pip install pip-tools
-        - python -m pip install wheel
+        - python -m pip install bpython flake8-docstrings neovim pip-tools wheel
 
     - name: Use pyenv
       lineinfile:
