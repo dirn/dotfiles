@@ -1,3 +1,6 @@
+# When a playbook run fails, a retry file is generated.
+playbook.retry
+
 weechat/logs
 weechat/script/plugins.xml.gz
 weechat/sec.conf
