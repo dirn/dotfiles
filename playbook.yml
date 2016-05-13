@@ -401,18 +401,12 @@
   tags: git
 
   tasks:
-    - name: Install Homebrew tap for gitsh
-      homebrew_tap:
-        tap: thoughtbot/formulae
-        state: present
-
     - name: Install Git
       homebrew:
         name: "{{ item }}"
         state: latest
       with_items:
         - git
-        - gitsh
         - hub
 
     - name: Use hub
@@ -421,15 +415,6 @@
         state: present
         create: yes
         line: eval "$(hub alias -s)"
-      tags:
-        - dotfiles
-
-    - name: Use gitsh with hub
-      lineinfile:
-        dest: "{{ rc_file }}"
-        state: present
-        create: yes
-        line: alias gsh='gitsh --git $(which hub)'
       tags:
         - dotfiles
 
