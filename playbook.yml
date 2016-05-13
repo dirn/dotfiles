@@ -636,7 +636,6 @@
       # This is needed by WeeChat.
       - terminal-notifier
       - travis
-      - tmuxinator
       - weechat
 
   tasks:
@@ -792,8 +791,6 @@
       git:
         repo: git@github.com:tmux-plugins/tpm.git
         dest: "{{ home }}/.tmux/plugins/tpm"
-
-    # tmuxinator is installed in a Ruby play.
 
     - name: Link dotfiles
       file:
