@@ -15,7 +15,6 @@
     st = status
     aliases = !git config -l | grep alias | cut -c 7-
     amend = commit --amend
-    fml = reset --hard HEAD
     graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     last = diff --cached HEAD^
     ll = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --numstat
@@ -27,7 +26,6 @@
     pretty = log --oneline --decorate
     restore = !git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
     rewind = reset --soft HEAD~1
-    sigh = push --force
     when = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --date=relative
     wip = commit -m '[WIP]'
 [color]
