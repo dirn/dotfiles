@@ -35,6 +35,8 @@
     newNormal = "green bold"
     oldHighlight = "red bold 52"
     oldNormal = "red bold"
+[commit]
+    gpgsign = true
 [core]
     editor = vim
     excludesfile = ~/.gitignoreglobal
@@ -46,6 +48,10 @@
     prompt = false
 [difftool "Kaleidoscope"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[include]
+    # Include a file that contains user.signingkey so that a different key can
+    # be used on all machines using this .gitconfig.
+    path = ~/.gitsigningkey
 [merge]
     tool = Kaleidoscope
 [mergetool]
