@@ -64,5 +64,3 @@
 # Plugins
 [github]
     user = dirn
-[gitsh]
-    prompt = "%D %c%b%#%w"
