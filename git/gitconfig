@@ -26,6 +26,7 @@
     pretty = log --oneline --decorate
     restore = !git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
     rewind = reset --soft HEAD~1
+    stash = -c commit.gpgsign=false stash
     when = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --date=relative
     wip = commit -m '[WIP]'
 [color]
