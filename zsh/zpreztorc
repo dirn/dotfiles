@@ -124,6 +124,7 @@ zstyle ':prezto:module:prompt' theme 'steeef'
 #   'main' \
 #   'brackets' \
 #   'pattern' \
+#   'line' \
 #   'cursor' \
 #   'root'
 #
