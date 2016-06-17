@@ -64,7 +64,7 @@
         dest: "{{ rc_file }}"
         state: present
         create: yes
-        line: alias play="ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml"
+        line: alias play="ANSIBLE_RETRY_FILES_ENABLED=false ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml"
       tags:
         - dotfiles
 
