@@ -199,7 +199,10 @@
       when: not has_homebrew
 
     - name: Install Homebrew
-      command: creates=/usr/local/bin/brew /tmp/homebrew-installer/install
+      command: install
+      args:
+        chdir: /tmp/homebrew-installer
+        creates: /usr/local/bin/brew
       when: not has_homebrew
 
     - name: Install Homebrew taps for Homebrew Cask
@@ -475,7 +478,9 @@
         - pyenv-virtualenvwrapper
 
     - name: Install Python versions
-      command: creates="{{ pyenv }}/versions/{{ item }}" pyenv install {{ item }}
+      command: pyenv install {{ item }}
+      args:
+        creates: "{{ pyenv }}/versions/{{ item }}"
       with_items: "{{ python_versions }}"
 
     - name: Configure virtualenvwrapper
@@ -668,7 +673,9 @@
         - dotfiles
 
     - name: Install Ruby versions
-      command: creates="{{ rbenv }}/versions/{{ item }}" rbenv install {{ item }}
+      command: rbenv install {{ item }}
+      args:
+        creates: "{{ rbenv }}/versions/{{ item }}"
       with_items: "{{ ruby_versions }}"
 
     - name: Check global Ruby version
