@@ -842,6 +842,15 @@
       tags:
         - dotfiles
 
+    - name: Open shells with a Tmux session
+      lineinfile:
+        dest: "{{ extras_file }}"
+        state: present
+        create: yes
+        line: if not set -q TMUX; exec env tmux new-session; end
+      tags:
+        - dotfiles
+
 - name: WeeChat
   hosts: localhost
   gather_facts: no
