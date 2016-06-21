@@ -39,9 +39,11 @@
 [commit]
     gpgsign = true
 [core]
+    diff = diff-highlight | less
     editor = vim
     excludesfile = ~/.gitignoreglobal
-    pager = diff-highlight | less -r
+    pager = diff-highlight | less
+    show = diff-highlight | less
 [diff]
     algorithm = patience
     tool = Kaleidoscope
@@ -53,6 +55,8 @@
     # Include a file that contains user.signingkey so that a different key can
     # be used on all machines using this .gitconfig.
     path = ~/.gitsigningkey
+[interactive]
+    diffFilter = diff-highlight
 [merge]
     tool = Kaleidoscope
 [mergetool]
