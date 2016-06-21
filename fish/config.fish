@@ -1,6 +1,9 @@
 # Add the local bin folder (e.g., single-command virtual environments) to $PATH.
 setenv PATH $PATH ~/.local/bin
 
+# Disable the greeting.
+set fish_greeting
+
 # Vim all the things!
 fish_vi_key_bindings
 
