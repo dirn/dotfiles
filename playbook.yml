@@ -18,9 +18,9 @@
     - name: Set global facts
       set_fact:
         ansible: "{{ ansible_env.HOME }}/.ansible"
+        extras_file: "{{ ansible_env.HOME }}/.config/fish/extras.fish"
         home: "{{ ansible_env.HOME }}"
         local: "{{ ansible_env.HOME }}/.local"
-        rc_file: "{{ ansible_env.HOME }}/.extra"
 
     - name: Set global facts that depend on other global facts
       set_fact:
@@ -61,10 +61,10 @@
 
     - name: Add an alias to run this playbook
       lineinfile:
-        dest: "{{ rc_file }}"
+        dest: "{{ extras_file }}"
         state: present
         create: yes
-        line: alias play="ANSIBLE_RETRY_FILES_ENABLED=false ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml"
+        line: alias play "env ANSIBLE_RETRY_FILES_ENABLED=false ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml"
       tags:
         - dotfiles
 
@@ -213,13 +213,14 @@
         - cask
         - fonts
 
-
     - name: Configure Homebrew Cask
       lineinfile:
-        dest: "{{ rc_file }}"
+        dest: "{{ extras_file }}"
         state: present
         create: yes
-        line: export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+        line: set --global --export HOMEBREW_CASK_OPTS "--appdir=/Applications"
+      tags:
+        - dotfiles
 
 - name: Set facts
   hosts: localhost
@@ -306,62 +307,60 @@
         - virtualbox # If VirtualBox is installed and running, it will fail.
       tags: osx
 
-- name: Zsh
+- name: fish
   hosts: localhost
   gather_facts: no
-  tags: zsh
+  tags: fish
 
   tasks:
-    - name: Install Zsh
+    - name: Install fish
       homebrew:
-        name: zsh
+        name: fish
         state: latest
 
-    - name: Add Zsh to available shells
+    - name: Add fish to available shells
       become: yes
       lineinfile:
         dest: /etc/shells
-        line: "{{ homebrew }}/bin/zsh"
+        line: "{{ homebrew }}/bin/fish"
         state: present
 
-    - name: Make Zsh the default shell
-      shell: chsh -s "{{ homebrew }}/bin/zsh"
-      register: zsh
-      when: "'{{ lookup('pipe', 'dscl . -read ' + ansible_env.HOME + ' UserShell') }}' != 'UserShell: {{ homebrew }}/bin/zsh'"
+    - name: Make fish the default shell
+      shell: chsh -s "{{ homebrew }}/bin/fish"
+      register: fish
+      when: "'{{ lookup('pipe', 'dscl . -read ' + ansible_env.HOME + ' UserShell') }}' != 'UserShell: {{ homebrew }}/bin/fish'"
 
-    - name: Install Prezto
+    - name: Download Oh My Fish installer
       git:
-        repo: git@github.com:sorin-ionescu/prezto.git
-        dest: "{{ ansible_env.HOME }}/.zprezto"
+        repo: git@github.com:oh-my-fish/oh-my-fish.git
+        dest: /tmp/oh-my-fish
 
-    - name: Link Prezto's dotfiles
-      file:
-        src: "{{ ansible_env.HOME }}/.zprezto/runcoms/{{ item }}"
-        dest: "{{ ansible_env.HOME }}/.{{ item }}"
-        state: link
-        force: yes
-      with_items:
-        - zlogin
-        - zlogout
-        - zprofile
-        - zshenv
-      tags:
-        - dotfiles
+    - name: Install Oh My Fish
+      command: fish install
+      args:
+        chdir: /tmp/oh-my-fish/bin
+        creates: "{{ local }}/share/omf"
 
     - name: Link dotfiles
       file:
-        src: "{{ dotfiles }}/zsh/{{ item }}"
-        dest: "{{ home }}/.{{ item }}"
+        src: "{{ dotfiles }}/fish/{{ item }}"
+        dest: "{{ home }}/.config/fish/{{ item }}"
         state: link
         force: yes
       with_items:
-        - zpreztorc
-        - zshrc
-        - aliases
-        - exports
-        - functions
+        - config.fish
+        - functions/c.fish
       tags:
         - dotfiles
+
+    # In case this isn't the first time running this playbook after installing
+    # Oh My Fish, update it and its plugins.
+    - name: Update Oh My Fish
+      shell: omf update
+      args:
+        executable: "{{ homebrew }}/bin/fish"
+      # omf returns an non-zero exit code when everything is up-to-date.
+      ignore_errors: yes
 
 - name: z
   hosts: localhost
@@ -374,29 +373,21 @@
         name: z
         state: latest
 
-    - name: Use z
+    - name: Install the z plugin for Oh My Fish
+      shell: omf install z
+      args:
+        executable: "{{ homebrew }}/bin/fish"
+      # omf returns an non-zero exit code when the plugin is already installed.
+      ignore_errors: yes
+
+    - name: Enable z
       lineinfile:
-        dest: "{{ rc_file }}"
+        dest: "{{ extras_file }}"
         state: present
         create: yes
-        line: source $(brew --prefix)/etc/profile.d/z.sh
+        line: set --global Z_SCRIPT_PATH (brew --prefix)/etc/profile.d/z.sh
       tags:
         - dotfiles
-
-- name: Docker
-  hosts: localhost
-  gather_facts: no
-  tags: docker
-
-  tasks:
-    - name: Install Docker
-      homebrew:
-        name: "{{ item }}"
-        state: latest
-      with_items:
-        - docker
-        - docker-compose
-        - docker-machine
 
 - name: Git
   hosts: localhost
@@ -412,12 +403,21 @@
         - git
         - hub
 
-    - name: Use hub
+    - name: Make g an alias for git
       lineinfile:
-        dest: "{{ rc_file }}"
+        dest: "{{ extras_file }}"
         state: present
         create: yes
-        line: eval "$(hub alias -s)"
+        line: alias g git
+      tags:
+        - dotfiles
+
+    - name: Use hub
+      lineinfile:
+        dest: "{{ extras_file }}"
+        state: present
+        create: yes
+        line: eval (hub alias -s)
       tags:
         - dotfiles
 
@@ -468,14 +468,10 @@
   tags: python
 
   tasks:
-    - name: Install Python
+    - name: Install pyenv
       homebrew:
-        name: "{{ item }}"
+        name: pyenv
         state: latest
-      with_items:
-        - pyenv
-        - pyenv-virtualenv
-        - pyenv-virtualenvwrapper
 
     - name: Install Python versions
       command: pyenv install {{ item }}
@@ -483,42 +479,12 @@
         creates: "{{ pyenv }}/versions/{{ item }}"
       with_items: "{{ python_versions }}"
 
-    - name: Configure virtualenvwrapper
-      lineinfile:
-        dest: "{{ rc_file }}"
-        state: present
-        create: yes
-        line: "{{ item }}"
-      with_items:
-        - export WORKON_HOME="$HOME/.virtualenvs"
-        - export PROJECT_HOME="$HOME/src"
-      tags:
-        - dotfiles
-
-    - name: Configure virtualenvwrapper to initialize new environments
-      lineinfile:
-        dest: "{{ home }}/.virtualenvs/postmkvirtualenv"
-        state: present
-        create: yes
-        mode: 0755
-        line: "{{ item }}"
-      with_items:
-        - "#!/bin/zsh"
-        - python -m pip install bpython flake8-docstrings neovim pip-tools wheel
-
     - name: Use pyenv
       lineinfile:
-        dest: "{{ rc_file }}"
+        dest: "{{ extras_file }}"
         state: present
         create: yes
-        line: "{{ item }}"
-      with_items:
-        - if which pyenv > /dev/null; then
-        - '    export PYENV_ROOT="$HOME/.pyenv"'
-        - '    export PATH="$PYENV_ROOT/bin:$PATH"'
-        - '    eval "$(pyenv init -)"'
-        - '    pyenv virtualenvwrapper_lazy'
-        - 'fi # pyenv'
+        line: if type -q pyenv; status --is-interactive; and source (pyenv init -|psub); end
       tags:
         - dotfiles
 
@@ -575,6 +541,10 @@
         executables:
           - twine
         pyvenv: "{{ pyenv }}/versions/{{ python_version }}/bin/pyvenv"
+      - venv: virtualfish
+        executables:
+          - vf
+        pyenv: "{{ pyenv }}/versions/{{ python_version }}/bin/pyvenv"
       - venv: wheel
         executables:
           - wheel
@@ -626,6 +596,60 @@
         - "{{ libraries }}"
         - "{{ python_versions }}"
 
+    - name: Configure virtualfish
+      lineinfile:
+        dest: "{{ extras_file }}"
+        state: present
+        create: yes
+        line: set --global --export {{ item.key }} "{{ item.value }}"
+      with_dict:
+        PROJECT_HOME: $HOME/src
+        WORKON_HOME: $HOME/.virtualenvs
+      tags:
+        - dotfiles
+
+    - name: Configure virtualfish's global requirements
+      lineinfile:
+        dest: "{{ home }}/.virtualenvs/global_requirements.txt"
+        state: present
+        create: yes
+        line: "{{ item }}"
+      with_items:
+        - bpython
+        - flake8-docstrings
+        - neovim
+        - pip
+        - pip-tools
+        - setuptools
+        - wheel
+
+    - name: Enable virtualfish compatibility aliases for projects
+      lineinfile:
+        dest: "{{ extras_file }}"
+        state: present
+        create: yes
+        line: set --export VIRTUALFISH_COMPAT_ALIASES 1
+      tags:
+        - dotfiles
+
+    - name: Set virtualfish facts
+      set_fact:
+        virtualfish_plugins:
+          - compat_aliases
+          - global_requirements
+          - projects
+      tags:
+        - dotfiles
+
+    - name: Load virtualfish and its plugins
+      lineinfile:
+        dest: "{{ extras_file }}"
+        state: present
+        create: yes
+        line: eval (~/.local/venvs/virtualfish/bin/python -m virtualfish {{ virtualfish_plugins|join(' ') }})
+      tags:
+        - dotfiles
+
 - name: Set Ruby facts
   hosts: localhost
   gather_facts: no
@@ -663,14 +687,12 @@
         - rbenv
         - ruby-build
 
-    - name: Use rbenv
-      lineinfile:
-        dest: "{{ rc_file }}"
-        state: present
-        create: yes
-        line: if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-      tags:
-        - dotfiles
+    - name: Install the rbenv plugin for Oh My Fish
+      shell: omf install rbenv
+      args:
+        executable: "{{ homebrew }}/bin/fish"
+      # omf returns an non-zero exit code when the plugin is already installed.
+      ignore_errors: yes
 
     - name: Install Ruby versions
       command: rbenv install {{ item }}
@@ -695,13 +717,6 @@
       with_nested:
         - "{{ libraries }}"
         - "{{ ruby_versions }}"
-
-    - name: Use Travis CI
-      lineinfile:
-        dest: "{{ rc_file }}"
-        state: present
-        create: yes
-        line: "[ -f {{ home }}.travis/travis.sh ] && source {{ home }}.travis/travis.sh"
 
 - name: Postgres
   hosts: localhost
@@ -786,10 +801,15 @@
 
     - name: Make Vim the default editor
       lineinfile:
-        dest: "{{ rc_file }}"
+        dest: "{{ extras_file }}"
         state: present
         create: yes
-        line: export EDITOR="vim"
+        line: set --global --export {{ item }} vim
+      with_items:
+        - editor
+        - visual
+      tags:
+        - dotfiles
 
 - name: Tmux
   hosts: localhost
@@ -863,14 +883,24 @@
   tags: ssh
 
   tasks:
+    - name: Install ssh-config.d
+      shell: omf install ssh-config.d
+      args:
+        executable: "{{ homebrew }}/bin/fish"
+      # omf returns an non-zero exit code when the plugin is already installed.
+      ignore_errors: yes
+
     - name: Link dotfiles
       file:
-        src: "{{ dotfiles }}/{{ item }}"
-        dest: "{{ home }}/.{{ item }}"
+        src: "{{ dotfiles }}/.ssh/config"
+        dest: "{{ home }}/.ssh/config.d/base.config"
         state: link
         force: yes
-      with_items:
-        - ssh/config
+
+    - name: Generate SSH config
+      command: ssh-config.d
+      args:
+        executable: "{{ homebrew }}/bin/fish"
 
 - name: npm
   hosts: localhost
