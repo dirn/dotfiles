@@ -273,6 +273,7 @@
       with_items:
         - alfred
         - appzapper
+        - docker
         - dropbox
         - font-fira-mono-for-powerline
         - flux
