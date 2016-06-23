@@ -29,4 +29,7 @@
 -- Automatically toggle the output mode based on how much there is to display.
 \x auto
 
+-- Always show how long a query takes.
+\timing
+
 \unset QUIET
