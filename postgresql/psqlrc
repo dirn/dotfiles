@@ -18,7 +18,7 @@
 \set HISTCONTROL ignoredups
 
 -- Fancy prompts
-\set PROMPT1 '%[%033[1m%]%n@%M:%~%R%[%033[0m%]%# '
+\set PROMPT1 '%[%033[1;34;40m%]%n@%M:%~%R%[%033[0m%]%# '
 \set PROMPT2 '%[%033[1m%][more]%[%033[0m%] %R > '
 
 -- Big mouth!
