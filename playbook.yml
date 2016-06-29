@@ -902,7 +902,7 @@
 
     - name: Link dotfiles
       file:
-        src: "{{ dotfiles }}/.ssh/config"
+        src: "{{ dotfiles }}/ssh/config"
         dest: "{{ home }}/.ssh/config.d/base.config"
         state: link
         force: yes
