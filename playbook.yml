@@ -453,10 +453,10 @@
       set_fact:
         pyenv: "{{ home }}/.pyenv"
         pyenv_versions:
-          global: [2.7.11, 3.5.2, 3.4.5, 3.3.6, pypy-5.1]
-          local: [3.5.2, 3.4.5, 2.7.11, 3.3.6, pypy-5.1]
+          global: [2.7.12, 3.5.2, 3.4.5, 3.3.6, pypy-5.1]
+          local: [3.5.2, 3.4.5, 2.7.12, 3.3.6, pypy-5.1]
         python_version: 3.5.2
-        python_xp_version: 2.7.11
+        python_xp_version: 2.7.12
 
     - name: Set Python facts that depend on other Python facts
       set_fact:
