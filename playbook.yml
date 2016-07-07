@@ -807,8 +807,8 @@
         create: yes
         line: set --global --export {{ item }} vim
       with_items:
-        - editor
-        - visual
+        - EDITOR
+        - VISUAL
       tags:
         - dotfiles
 
