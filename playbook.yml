@@ -768,11 +768,10 @@
 
     # The neovim Pip library is installed in a Python play.
 
-    - name: Install NeoBundle
-      git:
-        repo: git@github.com:shougo/neobundle.vim.git
-        dest: "{{ home }}/.vim/bundle/neobundle.vim"
-        update: no
+    - name: Install vim-plug
+      get_url:
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: "{{ home }}/.vim/autoload/plug.vim"
 
     - name: Link dotfiles
       file:

@@ -3,86 +3,70 @@ set nocompatible
 let mapleader = "\<Space>"
 let maplocalleader = ","
 
-" --- NeoBundle ---
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-call neobundle#begin(expand('~/.vim/bundle/'))
+" --- vim-plug ---
+call plug#begin(expand('~/.vim/bundle/'))
 
-" Inception
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-    \   'build' : {
-    \     'mac' : 'make -f make_mac.mak',
-    \     'linux' : 'make',
-    \     'unix' : 'gmake',
-    \   }
-    \ }
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
 
 " --- Appearance ---
-NeoBundle       'altercation/vim-colors-solarized'
-NeoBundle       'airblade/vim-gitgutter'
-NeoBundle       'blueyed/vim-diminactive'
-NeoBundle       'vim-airline/vim-airline-themes',   {'depends': 'vim-airline/vim-airline'}
+Plug 'altercation/vim-colors-solarized'
+Plug 'airblade/vim-gitgutter'
+Plug 'blueyed/vim-diminactive'
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 
 " --- Settings ---
-NeoBundle       'tpope/vim-sensible'
+Plug 'tpope/vim-sensible'
 
 " --- File types ---
-NeoBundleLazy   'alfredodeza/coveragepy.vim',       {'autoload': {'filetypes': ['python']}}
-NeoBundleLazy   'alfredodeza/pytest.vim',           {'autoload': {'filetypes': ['python']}}
-NeoBundleLazy   'dhruvasagar/vim-table-mode',       {'autoload': {'filetypes': ['python', 'rst']}}
-NeoBundleLazy   'elzr/vim-json',                    {'autoload': {'filetypes': ['json']}}
-NeoBundleLazy   'fatih/vim-go',                     {'autoload': {'filetypes': ['go']}}
-NeoBundleLazy   'hynek/vim-python-pep8-indent',     {'autoload': {'filetypes': ['python']}}
-NeoBundleLazy   'jmcantrell/vim-virtualenv',        {'autoload': {'filetypes': ['python']}}
-NeoBundleLazy   'mitsuhiko/vim-jinja',              {'autoload': {'filetypes': ['html', 'jinja']}}
-NeoBundleLazy   'pangloss/vim-javascript',          {'autoload': {'filetypes': ['javascript']}}
-NeoBundleLazy   'pearofducks/ansible-vim',          {'autoload': {'filetypes': ['yaml']}}
-NeoBundle       'sheerun/vim-polyglot'
+Plug 'alfredodeza/coveragepy.vim'
+Plug 'alfredodeza/pytest.vim'
+Plug 'dhruvasagar/vim-table-mode', {'for': ['python', 'rst']}
+Plug 'elzr/vim-json'
+Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
+Plug 'mitsuhiko/vim-jinja', {'for': ['html', 'jinja']}
+Plug 'pangloss/vim-javascript'
+Plug 'pearofducks/ansible-vim'
+Plug 'sheerun/vim-polyglot'
 
 " --- Language helpers ---
-NeoBundle       'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " --- Documentation ---
-NeoBundle       'rizzatti/dash.vim'
-NeoBundleLazy   'sjl/strftimedammit.vim',           {'autoload': {'commands': ['help']}}
+Plug 'rizzatti/dash.vim'
+Plug 'sjl/strftimedammit.vim'
 
 " --- Utilities ---
-NeoBundle       'ctrlpvim/ctrlp.vim'
-NeoBundle       'dhruvasagar/vim-prosession',       {'depends': 'tpope/vim-obsession'}
-NeoBundle       'haya14busa/incsearch.vim'
-NeoBundle       'honza/vim-snippets',               {'depends': ['garbas/vim-snipmate', 'tomtom/tlib_vim', 'MarcWeber/vim-addon-mw-utils']}
-NeoBundle       'Lokaltog/vim-easymotion'
-NeoBundle       'mattn/gist-vim',                   {'depends': ['mattn/webapi-vim']}
-NeoBundle       'pbrisbin/vim-mkdir'
-NeoBundle       'rhysd/committia.vim'
-NeoBundle       'rking/ag.vim'
-NeoBundle       'scrooloose/nerdtree'
-NeoBundle       'scrooloose/syntastic'
-NeoBundle       'sjl/clam.vim'
-NeoBundle       'sjl/gundo.vim'
-NeoBundle       'tommcdo/vim-exchange'
-NeoBundle       'tpope/vim-commentary'
-NeoBundle       'tpope/vim-fugitive'
-NeoBundle       'tpope/vim-repeat'
-NeoBundle       'tpope/vim-surround'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+Plug 'haya14busa/incsearch.vim'
+Plug 'tomtom/tlib_vim' | Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'garbas/vim-snipmate' | Plug 'honza/vim-snippets'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'rhysd/committia.vim'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'sjl/clam.vim'
+Plug 'sjl/gundo.vim'
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 
 " --- Tmux support ---
 if executable('tmux')
-    NeoBundle   'christoomey/vim-tmux-navigator'
-    NeoBundle   'sjl/vitality.vim'
-    " NeoBundle   'wellle/tmux-complete.vim'
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'sjl/vitality.vim'
 endif
-
-call neobundle#end()
+call plug#end()
 
 " --- Configuration ---
 syntax on
 filetype plugin indent on
-
-" Check for plugins
-NeoBundleCheck
 
 set encoding=utf8
 set lazyredraw                  " no redraw during macros (much faster)
