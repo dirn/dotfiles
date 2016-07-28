@@ -47,7 +47,7 @@ Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'rhysd/committia.vim'
 Plug 'rking/ag.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/syntastic'
 Plug 'sjl/clam.vim'
 Plug 'sjl/gundo.vim'
