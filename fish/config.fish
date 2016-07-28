@@ -7,6 +7,15 @@ set fish_greeting
 # Vim all the things!
 fish_vi_key_bindings
 
+# Prompt before overwriting or removing a file.
+alias cp "cp -i"
+alias ln "ln -i"
+alias mv "mv -i"
+alias rm "rm -i"
+
+# Create intermediate directories.
+alias mkdir "mkdir -p"
+
 if test -e ~/.config/fish/extras.fish
     source ~/.config/fish/extras.fish
 end
