@@ -906,6 +906,11 @@
       # omf returns an non-zero exit code when the plugin is already installed.
       ignore_errors: yes
 
+    - name: Ensure the ssh-config.d directory exists
+      file:
+        path: "{{ home }}/.ssh/config.d"
+        state: directory
+
     - name: Link dotfiles
       file:
         src: "{{ dotfiles }}/ssh/config"
