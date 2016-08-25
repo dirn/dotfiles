@@ -24,4 +24,6 @@ end
 set --global --export OMF_PATH "/Users/dirn/.local/share/omf"
 
 # Load oh-my-fish configuration.
-source $OMF_PATH/init.fish
+if test -e $OMF_PATH/init.fish
+    source $OMF_PATH/init.fish
+end
