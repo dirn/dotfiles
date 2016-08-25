@@ -337,7 +337,9 @@
         dest: /tmp/oh-my-fish
 
     - name: Install Oh My Fish
-      command: fish install
+      # Set CI to prevent the installer from opening a new session.
+      # https://github.com/oh-my-fish/oh-my-fish/issues/189#issuecomment-161956208
+      command: env CI=1 fish install
       args:
         chdir: /tmp/oh-my-fish/bin
         creates: "{{ local }}/share/omf"
