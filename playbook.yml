@@ -545,7 +545,7 @@
       - venv: virtualfish
         executables:
           - vf
-        pyenv: "{{ pyenv }}/versions/{{ python_version }}/bin/pyvenv"
+        pyvenv: "{{ pyenv }}/versions/{{ python_version }}/bin/pyvenv"
       - venv: wheel
         executables:
           - wheel
