@@ -388,7 +388,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
-        line: set --global Z_SCRIPT_PATH (brew --prefix)/etc/profile.d/z.sh
+        line: set --global --export Z_SCRIPT_PATH (brew --prefix)/etc/profile.d/z.sh
       tags:
         - dotfiles
 
@@ -631,7 +631,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
-        line: set --export VIRTUALFISH_COMPAT_ALIASES 1
+        line: set --global --export VIRTUALFISH_COMPAT_ALIASES 1
       tags:
         - dotfiles
 
