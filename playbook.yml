@@ -606,7 +606,6 @@
         create: yes
         line: set --global --export {{ item.key }} "{{ item.value }}"
       with_dict:
-        PROJECT_HOME: $HOME/src
         WORKON_HOME: $HOME/.virtualenvs
       tags:
         - dotfiles
@@ -626,21 +625,11 @@
         - setuptools
         - wheel
 
-    - name: Enable virtualfish compatibility aliases for projects
-      lineinfile:
-        dest: "{{ extras_file }}"
-        state: present
-        create: yes
-        line: set --global --export VIRTUALFISH_COMPAT_ALIASES 1
-      tags:
-        - dotfiles
-
     - name: Set virtualfish facts
       set_fact:
         virtualfish_plugins:
-          - compat_aliases
+          - auto_activation
           - global_requirements
-          - projects
       tags:
         - dotfiles
 
@@ -649,6 +638,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
+        regexp: python -m virtualfish
         line: eval (~/.local/venvs/virtualfish/bin/python -m virtualfish {{ virtualfish_plugins|join(' ') }})
       tags:
         - dotfiles
