@@ -97,8 +97,6 @@ set background=dark
 if has('gui_running') || &t_Co > 8
     set t_Co=256
 
-    let g:solarized_termcolors = 256
-    let g:solarized_termtrans = 1
     colorscheme solarized
 
     if has('gui_running')
