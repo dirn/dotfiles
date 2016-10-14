@@ -291,14 +291,6 @@
         - xquartz
       when: update|changed
 
-    - name: Install Homebrew Cask libraries with sudo
-      become: yes
-      homebrew_cask:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - seil
-
     - name: Install Homebrew Cask apps that might fail
       homebrew_cask:
         name: "{{ item }}"
@@ -364,6 +356,26 @@
         executable: "{{ homebrew }}/bin/fish"
       # omf returns an non-zero exit code when everything is up-to-date.
       ignore_errors: yes
+
+- name: Keyboard
+  hosts: localhost
+  gather_facts: no
+  tags: keyboard
+
+  tasks:
+    - name: Install Karabiner-Elements
+      homebrew_cask:
+        name: karabiner-elements
+        state: present
+
+    - name: Remap keys
+      file:
+        src: "{{ dotfiles }}/karabiner/karabiner.json"
+        dest: "{{ home }}/.karabiner.d/configuration/karabiner.json"
+        state: link
+        force: yes
+      tags:
+        - dotfiles
 
 - name: z
   hosts: localhost
