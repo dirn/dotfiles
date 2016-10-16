@@ -93,6 +93,26 @@
         # Finder: empty Trash securely
         - domain: com.apple.finder
           key: EmptyTrashSecurely
+      keyboard:
+        # Disable smart dashes
+        - domain: Apple Global Domain
+          key: NSAutomaticCapitalizationEnabled
+          type: int
+          value: '0'
+        - domain: Apple Global Domain
+          key: NSAutomaticDashSubstitutionEnabled
+          type: int
+          value: '0'
+        - domain: Apple Global Domain
+          key: NSAutomaticPeriodSubstitutionEnabled
+          type: int
+          value: '0'
+        - domain: Apple Global Domain
+          key: NSAutomaticQuoteSubstitutionEnabled
+          type: int
+          value: '0'
+        - domain: Apple Global Domain
+          key: NSAutomaticSpellingCorrectionEnabled
       menubar:
         # Menu bar: show battery percentage
         - domain: com.apple.menuextra.battery
@@ -150,6 +170,18 @@
       when: finder.changed
       with_items: "{{ config.finder }}"
       notify: Restart Finder
+
+    - name: Check the keyboard configuration
+      command: defaults read "{{ item.domain }}" {{ item.key }}
+      register: keyboard
+      changed_when: keyboard.stdout != item.value|default('1')
+      ignore_errors: yes
+      with_items: "{{ config.keyboard }}"
+
+    - name: Configure the keyboard
+      command: defaults write "{{ item.domain }}" {{ item.key }} -{{ item.type|default('bool') }} {{ item.value|default('YES') }}
+      when: keyboard.changed
+      with_items: "{{ config.keyboard }}"
 
     - name: Check the Menu bar configuration
       command: defaults read {{ item.domain }} {{ item.key }}
