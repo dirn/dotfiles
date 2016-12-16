@@ -509,7 +509,7 @@
       command: pyenv global {{ ' '.join(pyenv_versions.global) }}
       when: current_pyenv_versions.stdout_lines != pyenv_versions.global
 
-    - name: Check global Python versions
+    - name: Check local Python versions
       command: cat {{ home }}/.python-version
       register: current_pyenv_versions
       changed_when: false
