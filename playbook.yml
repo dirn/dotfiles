@@ -661,7 +661,7 @@
     - name: Set Ruby facts
       set_fact:
         rbenv: "{{ home }}/.rbenv"
-        ruby_version: 2.2.0
+        ruby_version: 2.2.3
         ruby_versions:
           - 2.0.0-p598
           - 2.1.7
