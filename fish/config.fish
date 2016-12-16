@@ -4,6 +4,9 @@ setenv PATH $PATH ~/.local/bin
 # Disable the greeting.
 set fish_greeting
 
+# Set the colors.
+set fish_pager_color_progress cyan
+
 # Vim all the things!
 fish_vi_key_bindings
 
