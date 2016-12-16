@@ -7,7 +7,6 @@ and repo and play around. If you want to setup up your computer with some useful
 (at least to me) stuff, they can take care of that for you. Installation is
 easy. Here's what you'll need to get started:
 
-* Xcode
 * `Xcode command line tools`_
 * `An SSH key registered with GitHub`_
 * `pip`_

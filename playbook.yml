@@ -758,12 +758,14 @@
 
     - name: Install Vim
       homebrew:
-        name: "{{ item }}"
+        name: vim
         state: latest
         install_options: with-python3,without-python
-      with_items:
-        - vim
-        - macvim
+
+    - name: Install MacVim
+      homebrew_cask:
+        name: macvim
+        state: present
 
     - name: Install NeoVim
       homebrew:
