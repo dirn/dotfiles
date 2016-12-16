@@ -274,7 +274,6 @@
     - name: Update Homebrew
       homebrew:
         update_homebrew: yes
-      register: update
 
 - name: Install Homebrew packages
   hosts: localhost
@@ -297,7 +296,6 @@
         - the_silver_searcher
         - tree
         - wget
-      when: update|changed
 
     - name: Install Homebrew Cask libraries
       homebrew_cask:
@@ -322,7 +320,6 @@
         - tunnelblick
         - vmware-fusion
         - xquartz
-      when: update|changed
 
     - name: Install Homebrew Cask apps that might fail
       homebrew_cask:
