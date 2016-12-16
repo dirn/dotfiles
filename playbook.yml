@@ -308,27 +308,14 @@
         - dropbox
         - font-fira-mono-for-powerline
         - flux
-        - hipchat
         - iterm2
         - kaleidoscope
         - mac2imgur
-        - parallels-desktop
-        - send-to-kindle
         - skitch
         - slack
         - transmit
         - tunnelblick
-        - vmware-fusion
         - xquartz
-
-    - name: Install Homebrew Cask apps that might fail
-      homebrew_cask:
-        name: "{{ item }}"
-        state: present
-      ignore_errors: yes
-      with_items:
-        - virtualbox # If VirtualBox is installed and running, it will fail.
-      tags: osx
 
 - name: fish
   hosts: localhost
@@ -386,32 +373,6 @@
         executable: "{{ homebrew }}/bin/fish"
       # omf returns an non-zero exit code when everything is up-to-date.
       ignore_errors: yes
-
-- name: Keyboard
-  hosts: localhost
-  gather_facts: no
-  tags: keyboard
-
-  tasks:
-    - name: Install Karabiner-Elements
-      homebrew_cask:
-        name: karabiner-elements
-        state: present
-
-    - name: Ensure Karabiner-Element's directory exists
-      file:
-        path: "{{ home }}/.karabiner.d/configuration"
-        state: directory
-
-
-    - name: Remap keys
-      file:
-        src: "{{ dotfiles }}/karabiner/karabiner.json"
-        dest: "{{ home }}/.karabiner.d/configuration/karabiner.json"
-        state: link
-        force: yes
-      tags:
-        - dotfiles
 
 - name: z
   hosts: localhost
