@@ -2,6 +2,7 @@
 [user]
     name = Andy Dirnberger
     email = andy@dirnberger.me
+    signingkey = 264DD8DB
 [credential]
     helper = osxkeychain
 
@@ -51,10 +52,6 @@
     prompt = false
 [difftool "Kaleidoscope"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[include]
-    # Include a file that contains user.signingkey so that a different key can
-    # be used on all machines using this .gitconfig.
-    path = ~/.gitsigningkey
 [interactive]
     diffFilter = diff-highlight
 [merge]
