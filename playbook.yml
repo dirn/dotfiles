@@ -340,18 +340,47 @@
       register: fish
       when: "'{{ lookup('pipe', 'dscl . -read ' + ansible_env.HOME + ' UserShell') }}' != 'UserShell: {{ homebrew }}/bin/fish'"
 
-    - name: Download Oh My Fish installer
+    - name: Ensure fish completions directory exits
+      file:
+        path: "{{ home }}/.config/fish/completions"
+        state: directory
+
+    - name: Ensure fish functions directory exits
+      file:
+        path: "{{ home }}/.config/fish/functions"
+        state: directory
+
+    # There is an Oh My Fish plugin called ssh-config.d that allows you to
+    # generate an SSH config file from a directory of config files. This will
+    # let me to invoke SSH without specifying an alternative config, while
+    # having unique configurations across locations. Enabling the plugin is just
+    # a matter of installing the functions. The functions, however, rely on some
+    # of the Git functions provided by Oh My Fish. Those should be installed,
+    # too. Doing so will also enable me to use them for my prompt.
+    - name: Download Oh My Fish
       git:
         repo: git@github.com:oh-my-fish/oh-my-fish.git
-        dest: /tmp/oh-my-fish
+        dest: "{{ ansible }}/fish/oh-my-fish"
+      tags:
+        - dotfiles
 
-    - name: Install Oh My Fish
-      # Set CI to prevent the installer from opening a new session.
-      # https://github.com/oh-my-fish/oh-my-fish/issues/189#issuecomment-161956208
-      command: env CI=1 fish install
-      args:
-        chdir: /tmp/oh-my-fish/bin
-        creates: "{{ local }}/share/omf"
+    - name: Link dotfiles from Oh My Fish
+      file:
+        src: "{{ ansible }}/fish/oh-my-fish/lib/git/git_{{ item }}.fish"
+        dest: "{{ home }}/.config/fish/functions/git_{{ item }}.fish"
+        state: link
+        force: yes
+      with_items:
+        - ahead
+        - branch_name
+        - is_dirty
+        - is_repo
+        - is_staged
+        - is_stashed
+        - is_touched
+        - untracked
+      tags:
+        - dotfiles
 
     - name: Link dotfiles
       file:
@@ -365,15 +394,6 @@
       tags:
         - dotfiles
 
-    # In case this isn't the first time running this playbook after installing
-    # Oh My Fish, update it and its plugins.
-    - name: Update Oh My Fish
-      shell: omf update
-      args:
-        executable: "{{ homebrew }}/bin/fish"
-      # omf returns an non-zero exit code when everything is up-to-date.
-      ignore_errors: yes
-
 - name: z
   hosts: localhost
   gather_facts: no
@@ -385,12 +405,24 @@
         name: z
         state: latest
 
-    - name: Install the z plugin for Oh My Fish
-      shell: omf install z
-      args:
-        executable: "{{ homebrew }}/bin/fish"
-      # omf returns an non-zero exit code when the plugin is already installed.
-      ignore_errors: yes
+    - name: Download z
+      git:
+        repo: git@github.com:oh-my-fish/plugin-z.git
+        dest: "{{ ansible }}/fish/plugin-z"
+      tags:
+        - dotfiles
+
+    - name: Link dotfiles from z
+      file:
+        src: "{{ ansible }}/fish/plugin-z/{{ item }}.fish"
+        dest: "{{ home }}/.config/fish/{{ item }}.fish"
+        state: link
+        force: yes
+      with_items:
+        - completions/z
+        - functions/z
+      tags:
+        - dotfiles
 
     - name: Enable z
       lineinfile:
@@ -691,12 +723,14 @@
         - rbenv
         - ruby-build
 
-    - name: Install the rbenv plugin for Oh My Fish
-      shell: omf install rbenv
-      args:
-        executable: "{{ homebrew }}/bin/fish"
-      # omf returns an non-zero exit code when the plugin is already installed.
-      ignore_errors: yes
+    - name: Use rbenv
+      lineinfile:
+        dest: "{{ extras_file }}"
+        state: present
+        create: yes
+        line: if type -q rbenv; status --is-interactive; and source (rbenv init -|psub); end
+      tags:
+        - dotfiles
 
     - name: Install Ruby versions
       command: rbenv install {{ item }}
@@ -903,13 +937,6 @@
   tags: ssh
 
   tasks:
-    - name: Install ssh-config.d
-      shell: omf install ssh-config.d
-      args:
-        executable: "{{ homebrew }}/bin/fish"
-      # omf returns an non-zero exit code when the plugin is already installed.
-      ignore_errors: yes
-
     - name: Ensure the ssh-config.d directory exists
       file:
         path: "{{ home }}/.ssh/config.d"
@@ -922,10 +949,24 @@
         state: link
         force: yes
 
-    - name: Generate SSH config
-      command: ssh-config.d
-      args:
-        executable: "{{ homebrew }}/bin/fish"
+    - name: Download ssh-config.d
+      git:
+        repo: git@github.com:oh-my-fish/plugin-ssh-config.d.git
+        dest: "{{ ansible }}/fish/plugin-ssh-config.d"
+      tags:
+        - dotfiles
+
+    - name: Link dotfiles from ssh-config.d
+      file:
+        src: "{{ ansible }}/fish/plugin-ssh-config.d/{{ item }}.fish"
+        dest: "{{ home }}/.config/fish/{{ item }}.fish"
+        state: link
+        force: yes
+      with_items:
+        - completions/ssh-config.d
+        - functions/ssh-config.d
+        - functions/ssh-config.d_ssh
+        - functions/ssh
 
 - name: npm
   hosts: localhost

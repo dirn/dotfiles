@@ -19,11 +19,3 @@ alias mkdir "mkdir -p"
 if test -e ~/.config/fish/extras.fish
     source ~/.config/fish/extras.fish
 end
-
-# Path to Oh My Fish install.
-set --global --export OMF_PATH "/Users/dirn/.local/share/omf"
-
-# Load oh-my-fish configuration.
-if test -e $OMF_PATH/init.fish
-    source $OMF_PATH/init.fish
-end
