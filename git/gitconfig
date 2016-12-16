@@ -16,16 +16,12 @@
     st = status
     aliases = !git config -l | grep alias | cut -c 7-
     amend = commit --amend
-    graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+    force = push --force-with-lease
     last = diff --cached HEAD^
     ll = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --numstat
-    locate = ls-tree --name-only -r HEAD
     ls = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate
     missing = !git log --no-merges "$1" ^"$2"
     modified = !git ll -1
-    patch = commit --patch -v
-    pretty = log --oneline --decorate
-    restore = !git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
     rewind = reset --soft HEAD~1
     stash = -c commit.gpgsign=false stash
     when = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --date=relative
