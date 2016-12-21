@@ -420,7 +420,7 @@
         state: present
         create: yes
         regexp: init/\*\.fish
-        line: for init in {{ home }}/.config/fish/init/*.fish; source $init; init; functions --erase init; end
+        line: for init in {{ home }}/.config/fish/init/*.fish; source $init; init; end; functions --erase init
       tags:
         - dotfiles
 
