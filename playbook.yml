@@ -251,6 +251,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
+        regexp: HOMEBREW_CASK_OPTS
         line: set --global --export HOMEBREW_CASK_OPTS "--appdir=/Applications"
       tags:
         - dotfiles
@@ -468,6 +469,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
+        regexp: Z_SCRIPT_PATH
         line: set --global --export Z_SCRIPT_PATH (brew --prefix)/etc/profile.d/z.sh
       tags:
         - dotfiles
@@ -491,6 +493,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
+        regexp: alias g
         line: alias g git
       tags:
         - dotfiles
@@ -500,6 +503,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
+        regexp: hub alias
         line: eval (hub alias -s)
       tags:
         - dotfiles
@@ -567,6 +571,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
+        regexp: pyenv init
         line: if type -q pyenv; status --is-interactive; and source (pyenv init -|psub); end
       tags:
         - dotfiles
@@ -686,6 +691,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
+        regexp: "{{ item.key }}"
         line: set --global --export {{ item.key }} "{{ item.value }}"
       with_dict:
         WORKON_HOME: $HOME/.virtualenvs
@@ -767,6 +773,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
+        regexp: rbenv init
         line: if type -q rbenv; status --is-interactive; and source (rbenv init -|psub); end
       tags:
         - dotfiles
@@ -888,6 +895,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
+        regexp: "{{ item }}"
         line: set --global --export {{ item }} vim
       with_items:
         - EDITOR
@@ -931,6 +939,7 @@
         dest: "{{ extras_file }}"
         state: present
         create: yes
+        regexp: TMUX
         line: if not set -q TMUX; exec env tmux new-session; end
       tags:
         - dotfiles
