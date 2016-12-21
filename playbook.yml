@@ -382,6 +382,25 @@
       tags:
         - dotfiles
 
+    - name: Download config plugin for Oh My Fish
+      git:
+        repo: git@github.com:oh-my-fish/plugin-config.git
+        dest: "{{ ansible }}/fish/plugin-config"
+      tags:
+        - dotfiles
+
+    - name: Link dotfiles from config plugin Oh My Fish
+      file:
+        src: "{{ ansible }}/fish/plugin-config/functions/{{ item }}.fish"
+        dest: "{{ home }}/.config/fish/functions/{{ item }}.fish"
+        state: link
+        force: yes
+      with_items:
+        - config
+        - config.help
+      tags:
+        - dotfiles
+
     - name: Link dotfiles
       file:
         src: "{{ dotfiles }}/fish/{{ item }}"
