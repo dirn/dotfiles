@@ -967,6 +967,8 @@
         - functions/ssh-config.d
         - functions/ssh-config.d_ssh
         - functions/ssh
+      tags:
+        - dotfiles
 
 - name: npm
   hosts: localhost
