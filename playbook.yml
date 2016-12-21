@@ -340,15 +340,15 @@
       register: fish
       when: "'{{ lookup('pipe', 'dscl . -read ' + ansible_env.HOME + ' UserShell') }}' != 'UserShell: {{ homebrew }}/bin/fish'"
 
-    - name: Ensure fish completions directory exits
+    - name: Ensure fish directories exist
       file:
-        path: "{{ home }}/.config/fish/completions"
+        path: "{{ home }}/.config/fish/{{ item }}"
         state: directory
-
-    - name: Ensure fish functions directory exits
-      file:
-        path: "{{ home }}/.config/fish/functions"
-        state: directory
+      with_items:
+        - completions
+        - functions
+      tags:
+        - dotfiles
 
     # There is an Oh My Fish plugin called ssh-config.d that allows you to
     # generate an SSH config file from a directory of config files. This will
