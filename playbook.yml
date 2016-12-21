@@ -347,6 +347,7 @@
       with_items:
         - completions
         - functions
+        - init
       tags:
         - dotfiles
 
@@ -413,6 +414,16 @@
       tags:
         - dotfiles
 
+    - name: Load fish init scripts
+      lineinfile:
+        dest: "{{ extras_file }}"
+        state: present
+        create: yes
+        regexp: init/\*\.fish
+        line: for init in {{ home }}/.config/fish/init/*.fish; source $init; init; functions --erase init; end
+      tags:
+        - dotfiles
+
 - name: z
   hosts: localhost
   gather_facts: no
@@ -440,6 +451,15 @@
       with_items:
         - completions/z
         - functions/z
+      tags:
+        - dotfiles
+
+    - name: Link the init file for z
+      file:
+        src: "{{ ansible }}/fish/plugin-z/init.fish"
+        dest: "{{ home }}/.config/fish/init/z.fish"
+        state: link
+        force: yes
       tags:
         - dotfiles
 
@@ -986,6 +1006,15 @@
         - functions/ssh-config.d
         - functions/ssh-config.d_ssh
         - functions/ssh
+      tags:
+        - dotfiles
+
+    - name: Link the init file for ssh-config.d
+      file:
+        src: "{{ ansible }}/fish/plugin-ssh-config.d/init.fish"
+        dest: "{{ home }}/.config/fish/init/ssh-config.d.fish"
+        state: link
+        force: yes
       tags:
         - dotfiles
 
