@@ -19,8 +19,7 @@ Once you have these, install Ansible::
 
     $ python -m pip install --user ansible
 
-This will install a version of Ansible that you can use for the initial run of
-the playbook::
+Then grab a version of the playbook that can be used for its initial run::
 
     $ curl -1 https://raw.githubusercontent.com/dirn/dotfiles/master/playbook.yml > /tmp/playbook.yml
     $ ~/path/to/bin/ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local /tmp/playbook.yml
@@ -28,9 +27,6 @@ the playbook::
 After the initial run, the playbook can be run again with::
 
     $ play
-
-The playbook will install Ansible so you don't need to keep the cloned
-repository around anymore.
 
 Caution
 #######
