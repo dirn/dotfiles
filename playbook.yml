@@ -306,6 +306,7 @@
       with_items:
         - alfred
         - appzapper
+        - dash
         - docker
         - dropbox
         - font-fira-mono-for-powerline
