@@ -275,6 +275,7 @@
     - name: Update Homebrew
       homebrew:
         update_homebrew: yes
+      changed_when: false
 
 - name: Install Homebrew packages
   hosts: localhost
