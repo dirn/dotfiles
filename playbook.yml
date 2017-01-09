@@ -65,7 +65,7 @@
         state: present
         create: yes
         regexp: alias play
-        line: alias play "env ANSIBLE_RETRY_FILES_ENABLED=false ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml"
+        line: alias play "env ANSIBLE_RETRY_FILES_ENABLED=false {{ local }}/bin/ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml"
       tags:
         - dotfiles
 
