@@ -598,6 +598,17 @@
       command: chdir={{ home }} pyenv local {{ ' '.join(pyenv_versions.local) }}
       when: current_pyenv_versions.stdout_lines != pyenv_versions.local
 
+    - name: Link dotfiles
+      file:
+        src: "{{ dotfiles }}/python/{{ item }}"
+        dest: "{{ home }}/.{{ item }}"
+        state: link
+        force: yes
+      with_items:
+        - pypirc
+      tags:
+        - dotfiles
+
 - name: Install global Python libraries
   hosts: localhost
   gather_facts: no
