@@ -541,8 +541,8 @@
       set_fact:
         pyenv: "{{ home }}/.pyenv"
         pyenv_versions:
-          global: [2.7.12, 3.6.0, 3.5.2, 3.4.5, 3.3.6, pypy-5.6.0]
-          local: [3.6.0, 3.5.2, 3.4.5, 2.7.12, 3.3.6, pypy-5.6.0]
+          global: [2.7.12, 3.6.0, 3.5.3, 3.4.5, 3.3.6, pypy-5.6.0]
+          local: [3.6.0, 3.5.3, 3.4.5, 2.7.12, 3.3.6, pypy-5.6.0]
         python_version: 3.6.0
         python_xp_version: 2.7.12
 
