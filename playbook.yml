@@ -65,7 +65,7 @@
         state: present
         create: yes
         regexp: alias play
-        line: alias play "env ANSIBLE_RETRY_FILES_ENABLED=false {{ local }}/bin/ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml"
+        line: alias play "env ANSIBLE_PYTHON_INTERPRETER={{ local }}/venvs/ansible/bin/python ANSIBLE_RETRY_FILES_ENABLED=false {{ local }}/bin/ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local {{ dotfiles }}/playbook.yml"
       tags:
         - dotfiles
 
@@ -667,7 +667,7 @@
         name: pip
         state: latest
         virtualenv: "{{ local }}/venvs/{{ item.venv }}"
-        virtualenv_command: "{{ item.pyvenv|default('virtualenv') }}"
+        virtualenv_command: "{{ pyenv }}/versions/{{ python_version }}/bin/pyvenv"
       with_items: "{{ global_libraries }}"
 
     - name: Install libraries
@@ -675,7 +675,7 @@
         name: "{{ item.venv }}"
         state: latest
         virtualenv: "{{ local }}/venvs/{{ item.venv }}"
-        virtualenv_command: "{{ item.pyvenv|default('virtualenv') }}"
+        virtualenv_command: "{{ pyenv }}/versions/{{ python_version }}/bin/pyvenv"
       with_items: "{{ global_libraries }}"
 
     - name: Link executables
