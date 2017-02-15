@@ -291,7 +291,6 @@
         - aspell
         - ctags
         - go
-        - keybase
         - mercurial
         - openssl
         - readline
@@ -313,6 +312,7 @@
         - flux
         - iterm2
         - kaleidoscope
+        - keybase
         - slack
         - transmit
         - tunnelblick
