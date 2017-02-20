@@ -408,6 +408,8 @@
       with_items:
         - config.fish
         - functions/c.fish
+        - functions/fish_prompt.fish
+        - functions/fish_right_prompt.fish
       tags:
         - dotfiles
 
