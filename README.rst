@@ -32,7 +32,7 @@ easy. Here's what you'll need to get started:
 Then grab a version of the playbook that can be used for its initial run::
 
     $ curl -1 https://raw.githubusercontent.com/dirn/dotfiles/master/playbook.yml > /tmp/playbook.yml
-    $ ~/path/to/bin/ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local /tmp/playbook.yml
+    $ ~/Library/Python/2.7/bin/ansible-playbook --ask-sudo-pass --inventory-file localhost, --connection=local /tmp/playbook.yml
 
 After the initial run, the playbook can be run again with::
 
