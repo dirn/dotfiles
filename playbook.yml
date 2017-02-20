@@ -741,77 +741,23 @@
       tags:
         - dotfiles
 
-- name: Set Ruby facts
-  hosts: localhost
-  gather_facts: no
-  tags: ruby
-
-  tasks:
-    - name: Set Ruby facts
-      set_fact:
-        rbenv: "{{ home }}/.rbenv"
-        ruby_version: 2.2.3
-        ruby_versions:
-          - 2.0.0-p598
-          - 2.1.7
-          - 2.2.3
-
 - name: Ruby
   hosts: localhost
   gather_facts: no
   tags: ruby
 
-  vars:
-    libraries:
-      - lunchy
-      # This is needed by WeeChat.
-      - terminal-notifier
-      - travis
-      - weechat
-
   tasks:
     - name: Install Ruby
       homebrew:
-        name: "{{ item }}"
+        name: ruby
         state: latest
-      with_items:
-        - rbenv
-        - ruby-build
-
-    - name: Use rbenv
-      lineinfile:
-        dest: "{{ extras_file }}"
-        state: present
-        create: yes
-        regexp: rbenv init
-        line: if type -q rbenv; status --is-interactive; and source (rbenv init -|psub); end
-      tags:
-        - dotfiles
-
-    - name: Install Ruby versions
-      command: rbenv install {{ item }}
-      args:
-        creates: "{{ rbenv }}/versions/{{ item }}"
-      with_items: "{{ ruby_versions }}"
-
-    - name: Check global Ruby version
-      command: cat {{ rbenv }}/version
-      register: current_rbenv_version
-      changed_when: false
-      ignore_errors: yes
-
-    - name: Set global Ruby version
-      command: rbenv global {{ ruby_version }}
-      when: current_rbenv_version.stdout != ruby_version
 
     - name: Install gems
       gem:
-        name: "{{ item.0 }}"
-        executable: "{{ rbenv }}/versions/{{ item.1 }}/bin/gem"
+        name: "{{ item }}"
         state: latest
-      with_nested:
-        - "{{ libraries }}"
-        - "{{ ruby_versions }}"
+      with_items:
+        - travis
 
 - name: Postgres
   hosts: localhost
