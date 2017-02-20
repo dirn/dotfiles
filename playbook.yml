@@ -47,6 +47,7 @@
         repo: git@github.com:dirn/dotfiles.git
         dest: "{{ dotfiles }}"
         force: no
+        accept_hostkey: yes
       ignore_errors: yes
       tags:
         - dotfiles
@@ -55,6 +56,7 @@
       git:
         repo: git@github.com:{{ item.src }}.git
         dest: "{{ ansible }}/colorschemes/{{ item.dest }}"
+        accept_hostkey: yes
       with_items:
         - src: chriskempson/base16-iterm2
           dest: base16-iterm2
@@ -229,6 +231,7 @@
       git:
         repo: git@github.com:Homebrew/install.git
         dest: /tmp/homebrew-installer
+        accept_hostkey: yes
       when: not has_homebrew
 
     - name: Install Homebrew
@@ -363,6 +366,7 @@
       git:
         repo: git@github.com:oh-my-fish/oh-my-fish.git
         dest: "{{ ansible }}/fish/oh-my-fish"
+        accept_hostkey: yes
       tags:
         - dotfiles
 
@@ -388,6 +392,7 @@
       git:
         repo: git@github.com:oh-my-fish/plugin-config.git
         dest: "{{ ansible }}/fish/plugin-config"
+        accept_hostkey: yes
       tags:
         - dotfiles
 
@@ -440,6 +445,7 @@
       git:
         repo: git@github.com:oh-my-fish/plugin-z.git
         dest: "{{ ansible }}/fish/plugin-z"
+        accept_hostkey: yes
       tags:
         - dotfiles
 
@@ -932,6 +938,7 @@
       git:
         repo: git@github.com:tmux-plugins/tpm.git
         dest: "{{ home }}/.tmux/plugins/tpm"
+        accept_hostkey: yes
 
     - name: Link dotfiles
       file:
@@ -1012,6 +1019,7 @@
       git:
         repo: git@github.com:oh-my-fish/plugin-ssh-config.d.git
         dest: "{{ ansible }}/fish/plugin-ssh-config.d"
+        accept_hostkey: yes
       tags:
         - dotfiles
 
