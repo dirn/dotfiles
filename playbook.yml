@@ -249,16 +249,6 @@
         - cask
         - fonts
 
-    - name: Configure Homebrew Cask
-      lineinfile:
-        dest: "{{ extras_file }}"
-        state: present
-        create: yes
-        regexp: HOMEBREW_CASK_OPTS
-        line: set --global --export HOMEBREW_CASK_OPTS "--appdir=/Applications"
-      tags:
-        - dotfiles
-
 - name: Set facts
   hosts: localhost
   gather_facts: no
