@@ -537,15 +537,15 @@
     - name: Set Python facts
       set_fact:
         pyenv: "{{ home }}/.pyenv"
-        pyenv_versions:
-          global: [2.7.12, 3.6.0, 3.5.3, 3.4.5, 3.3.6, pypy-5.6.0]
-          local: [3.6.0, 3.5.3, 3.4.5, 2.7.12, 3.3.6, pypy-5.6.0]
         python_version: 3.6.0
-        python_xp_version: 2.7.12
+        python_versions:
+          - 3.6.0
+          - 3.5.3
+          - 3.4.5
+          - 3.3.6
 
     - name: Set Python facts that depend on other Python facts
       set_fact:
-        python_versions: "{{ pyenv_versions.global|union(pyenv_versions.local) }}"
         venv: "{{ pyenv }}/versions/{{ python_version }}/bin/pyvenv"
 
 - name: Python
@@ -575,25 +575,15 @@
       tags:
         - dotfiles
 
-    - name: Check global Python versions
+    - name: Check Python versions
       command: cat {{ pyenv }}/version
       register: current_pyenv_versions
       changed_when: false
       ignore_errors: yes
 
-    - name: Set global Python versions
-      command: pyenv global {{ ' '.join(pyenv_versions.global) }}
-      when: current_pyenv_versions.stdout_lines != pyenv_versions.global
-
-    - name: Check local Python versions
-      command: cat {{ home }}/.python-version
-      register: current_pyenv_versions
-      changed_when: false
-      ignore_errors: yes
-
-    - name: Set local Python versions
-      command: chdir={{ home }} pyenv local {{ ' '.join(pyenv_versions.local) }}
-      when: current_pyenv_versions.stdout_lines != pyenv_versions.local
+    - name: Set Python versions
+      command: pyenv global {{ ' '.join(python_versions) }}
+      when: current_pyenv_versions.stdout_lines != python_versions
 
     - name: Link dotfiles
       file:
