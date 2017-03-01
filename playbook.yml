@@ -648,6 +648,20 @@
       - setuptools
 
   tasks:
+    - name: Check the version of Python for installed libraries
+      command: "{{ local }}/venvs/{{ item.venv }}/bin/python --version"
+      register: library_python_versions
+      changed_when: "{{ library_python_versions.stdout|default('')|replace('Python ', '') != python_version }}"
+      failed_when: false
+      with_items: "{{ global_libraries }}"
+
+    - name: Upgrade the virtual environment for installed libraries
+      file:
+        dest: "{{ local }}/venvs/{{ item.venv }}/bin/python"
+        state: absent
+      when: "{{ library_python_versions.results|selectattr('item.venv', 'equalto', item.venv)|join('', attribute='changed')|bool }}"
+      with_items: "{{ global_libraries }}"
+
     # If this is done after running the task to install each library, the
     # playbook will fail when Pip fails to install a library that requires
     # something in a newer version of Pip.
