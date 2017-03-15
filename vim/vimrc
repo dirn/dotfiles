@@ -49,7 +49,6 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'rhysd/committia.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
-Plug 'scrooloose/syntastic'
 Plug 'sjl/clam.vim'
 Plug 'sjl/gundo.vim'
 Plug 'tommcdo/vim-exchange'
@@ -57,6 +56,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'w0rp/ale'
 
 " --- Tmux support ---
 if executable('tmux')
@@ -310,9 +310,6 @@ let g:gist_open_browser_after_post = 1
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" --- Syntastic ---
-let g:syntastic_check_on_open = 1
-
 " --- Clam ---
 nnoremap ! :Clam<space>
 vnoremap ! :ClamVisual<space>
@@ -343,3 +340,6 @@ let g:table_mode_header_fillchar = "="
 
 " --- vim-json ---
 let g:vim_json_syntax_conceal = 0
+
+" --- ALE ---
+let g:ale_sign_column_always = 1
