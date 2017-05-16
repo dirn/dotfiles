@@ -23,7 +23,7 @@ Plug 'alfredodeza/pytest.vim'
 Plug 'dhruvasagar/vim-table-mode', {'for': ['python', 'rst']}
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}
-Plug 'hynek/vim-python-pep8-indent'
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
 Plug 'mitsuhiko/vim-jinja', {'for': ['html', 'jinja']}
 Plug 'pangloss/vim-javascript'
