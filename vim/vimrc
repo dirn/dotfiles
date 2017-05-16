@@ -20,6 +20,7 @@ Plug 'tpope/vim-sensible'
 " --- File types ---
 Plug 'alfredodeza/coveragepy.vim'
 Plug 'alfredodeza/pytest.vim'
+" Plug 'davidhalter/jedi-vim'
 Plug 'dhruvasagar/vim-table-mode', {'for': ['python', 'rst']}
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}
@@ -39,18 +40,19 @@ Plug 'rizzatti/dash.vim'
 Plug 'sjl/strftimedammit.vim'
 
 " --- Utilities ---
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 Plug 'haya14busa/incsearch.vim'
 Plug 'tomtom/tlib_vim' | Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'garbas/vim-snipmate' | Plug 'honza/vim-snippets'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'rhysd/committia.vim'
-Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
-Plug 'sjl/clam.vim'
-Plug 'sjl/gundo.vim'
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} | Plug 'zchee/deoplete-jedi'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -310,29 +312,17 @@ let g:gist_open_browser_after_post = 1
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" --- Clam ---
-nnoremap ! :Clam<space>
-vnoremap ! :ClamVisual<space>
-let g:clam_autoreturn = 1
-
-" --- Gundo ---
-let g:gundo_preview_bottom = 1
-let g:gundo_tree_statusline = "gundo"
-let g:gundo_preview_statusline = "gundo preview"
-
-nnoremap <leader>gu :GundoToggle<cr>
-
 " --- incsearch ---
 map / <Plug>(incsearch-forward)
 map ? <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
-let g:incsearch#auto_nohlsearch = 1
 map n <Plug>(incsearch-nohl-n)
 map N <Plug>(incsearch-nohl-N)
 map * <Plug>(incsearch-nohl-*)
 map # <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
+let g:incsearch#auto_nohlsearch = 1
 
 " --- Table Mode ---
 let g:table_mode_corner_corner = "+"
@@ -343,3 +333,54 @@ let g:vim_json_syntax_conceal = 0
 
 " --- ALE ---
 let g:ale_sign_column_always = 1
+
+" --- deoplete ---
+let g:deoplete#enable_at_startup = 1
+let g:python3_host_prog = '/Users/dirn/.pyenv/shims/python3'
+
+" --- fzf ---
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep(
+    \ 'rg
+        \ --line-number
+        \ --no-heading
+        \ --fixed-strings
+        \ --ignore-case
+        \ --hidden
+        \ --follow
+        \ --type-add "stone:*.stone"
+        \ --type "py"
+        \ --type "rst"
+        \ --type "stone"
+        \ --type "yaml"
+        \ --glob "!.git/*"
+        \ --color "always"
+    \ '.shellescape(<q-args>).' 2> /dev/null', 1, <bang>0)
+nnoremap <silent> <c-p> :Files!<cr>
+nnoremap <silent> <c-_> :Rg!<space>
+let g:fzf_action = {
+    \ 'ctrl-s': 'split',
+    \ 'ctrl-v': 'vsplit'
+    \ }
+let g:fzf_colors = {
+    \ 'fg':      ['fg', 'Normal'],
+    \ 'bg':      ['bg', 'Normal'],
+    \ 'hl':      ['fg', 'Comment'],
+    \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+    \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+    \ 'hl+':     ['fg', 'Statement'],
+    \ 'info':    ['fg', 'PreProc'],
+    \ 'prompt':  ['fg', 'Conditional'],
+    \ 'pointer': ['fg', 'Exception'],
+    \ 'marker':  ['fg', 'Keyword'],
+    \ 'spinner': ['fg', 'Label'],
+    \ 'header':  ['fg', 'Comment'] }
+let g:fzf_layout = { 'window': 'enew' }
