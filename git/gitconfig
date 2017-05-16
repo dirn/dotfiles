@@ -66,6 +66,8 @@
     default = simple
 [rebase]
     autoStash = true
+[tag]
+    gpgsign = true
 
 # Plugins
 [github]
