@@ -328,10 +328,15 @@
         line: "{{ homebrew }}/bin/fish"
         state: present
 
+    - name: Set default shell facts
+      set_fact:
+        default_shell: "{{ lookup('pipe', 'dscl . -read ' + ansible_env.HOME + ' UserShell') }}"
+        fish_shell: "UserShell: {{ homebrew }}/bin/fish"
+
     - name: Make fish the default shell
       shell: chsh -s "{{ homebrew }}/bin/fish"
       register: fish
-      when: "'{{ lookup('pipe', 'dscl . -read ' + ansible_env.HOME + ' UserShell') }}' != 'UserShell: {{ homebrew }}/bin/fish'"
+      when: "default_shell != fish_shell"
 
     - name: Ensure fish directories exist
       file:
