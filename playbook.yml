@@ -57,9 +57,7 @@
         repo: git@github.com:{{ item.src }}.git
         dest: "{{ ansible }}/colorschemes/{{ item.dest }}"
         accept_hostkey: yes
-      with_items:
-        - src: chriskempson/base16-iterm2
-          dest: base16-iterm2
+      with_items: []
 
     - name: Add an alias to run this playbook
       lineinfile:
