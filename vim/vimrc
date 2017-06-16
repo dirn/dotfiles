@@ -42,6 +42,7 @@ Plug 'sjl/strftimedammit.vim'
 " --- Utilities ---
 " Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
+Plug 'ervandew/supertab'
 Plug 'haya14busa/incsearch.vim'
 Plug 'tomtom/tlib_vim' | Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'garbas/vim-snipmate' | Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
@@ -384,3 +385,6 @@ let g:fzf_colors = {
     \ 'spinner': ['fg', 'Label'],
     \ 'header':  ['fg', 'Comment'] }
 let g:fzf_layout = { 'window': 'enew' }
+
+" --- SuperTab ---
+let g:SuperTabDefaultCompletionType = "<c-n>"
