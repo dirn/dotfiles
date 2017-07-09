@@ -1,0 +1,78 @@
+# Authentication
+[user]
+    name = Andy Dirnberger
+    email = andy@dirnberger.me
+    signingkey = 264DD8DB
+[credential]
+    helper = osxkeychain
+
+# Core
+[alias]
+    br = branch
+    ci = commit -s
+    co = checkout
+    cp = cherry-pick
+    rb = rebase
+    st = status
+    aliases = !git config -l | grep alias | cut -c 7-
+    amend = commit --amend
+    force = push --force-with-lease
+    last = diff --cached HEAD^
+    ll = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --numstat
+    ls = log --pretty=format:"%C(yellow)%h%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate
+    missing = !git log --no-merges "$1" ^"$2"
+    modified = !git ll -1
+    rewind = reset --soft HEAD~1
+    stash = -c commit.gpgsign=false stash
+    when = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(cyan)%d\\ %Creset%s%Cred\\ [%cn]" --decorate --date=relative
+    wip = commit -m '[WIP]'
+[color]
+    ui = true
+[color "diff-highlight"]
+    newHighlight = "green bold 22"
+    newNormal = "green bold"
+    oldHighlight = "red bold 52"
+    oldNormal = "red bold"
+[commit]
+    gpgsign = true
+[core]
+    diff = diff-highlight | less
+    editor = vim
+    excludesfile = ~/.gitignoreglobal
+    pager = diff-highlight | less
+    show = diff-highlight | less
+[diff]
+    algorithm = patience
+    tool = Kaleidoscope
+[difftool]
+    prompt = false
+[difftool "Kaleidoscope"]
+    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[gpg]
+    program = gpg2
+[interactive]
+    diffFilter = diff-highlight
+[merge]
+    tool = Kaleidoscope
+[mergetool]
+    keepBackup = false
+    prompt = false
+[mergetool "fugitive"]
+    cmd = mvim -f -c \"Gdiff\" \"$MERGED\"
+[mergetool "Kaleidoscope"]
+    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+    trustExitCode = true
+[pull]
+    rebase = true
+[push]
+    default = simple
+[rebase]
+    autoStash = true
+[rerere]
+    enabled = true
+[tag]
+    gpgsign = true
+
+# Plugins
+[github]
+    user = dirn
