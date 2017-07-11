@@ -1,5 +1,3 @@
-set nocompatible
-
 let mapleader = "\<Space>"
 let maplocalleader = ","
 
@@ -18,9 +16,6 @@ Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-sensible'
 
 " --- File types ---
-Plug 'alfredodeza/coveragepy.vim'
-Plug 'alfredodeza/pytest.vim'
-" Plug 'davidhalter/jedi-vim'
 Plug 'dhruvasagar/vim-table-mode', {'for': ['python', 'rst']}
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}
@@ -35,23 +30,17 @@ Plug 'sheerun/vim-polyglot'
 " --- Language helpers ---
 Plug 'majutsushi/tagbar'
 
-" --- Documentation ---
-Plug 'rizzatti/dash.vim'
-Plug 'sjl/strftimedammit.vim'
-
 " --- Utilities ---
 " Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 Plug 'ervandew/supertab'
 Plug 'haya14busa/incsearch.vim'
 Plug 'tomtom/tlib_vim' | Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'garbas/vim-snipmate' | Plug 'honza/vim-snippets'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plug 'junegunn/fzf.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'rhysd/committia.vim'
-" Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} | Plug 'zchee/deoplete-jedi'
 Plug 'tommcdo/vim-exchange'
@@ -75,9 +64,14 @@ filetype plugin indent on
 set encoding=utf8
 set lazyredraw                  " no redraw during macros (much faster)
 set linebreak
+set nojoinspaces
 set nowrap
 set report=0                    " :cmd always shows changed line count
 set textwidth=80
+
+set nobackup
+set nowritebackup
+set noswapfile
 
 set mouse=a                     " turn on mouse support
 
@@ -153,6 +147,9 @@ set shiftround                  " indents to a multiple of shiftwidth
 set shiftwidth=4
 set softtabstop=4
 set tabstop=8
+
+" Treat li and p tags as block elements.
+let g:html_indent_tags = 'li\|p'
 
 " --- Mappings ---
 " Make word uppercase
@@ -361,6 +358,7 @@ command! -bang -nargs=* Rg call fzf#vim#grep(
         \ --type "py"
         \ --type "rst"
         \ --type "stone"
+        \ --type "ts"
         \ --type "yaml"
         \ --glob "!.git/*"
         \ --color "always"
