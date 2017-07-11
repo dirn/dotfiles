@@ -37,7 +37,7 @@
     gpgsign = true
 [core]
     diff = diff-highlight | less
-    editor = vim
+    editor = nvim
     excludesfile = ~/.gitignoreglobal
     pager = diff-highlight | less
     show = diff-highlight | less
@@ -56,7 +56,7 @@
     keepBackup = false
     prompt = false
 [mergetool "fugitive"]
-    cmd = mvim -f -c \"Gdiff\" \"$MERGED\"
+    cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool "Kaleidoscope"]
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
     trustExitCode = true
