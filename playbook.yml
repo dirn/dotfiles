@@ -281,12 +281,14 @@
       with_items:
         - aspell
         - ctags
+        - fzf
         - go
         - gpg
+        - gpg-agent
         - mercurial
         - openssl
         - readline
-        - the_silver_searcher
+        - ripgrep
         - tree
         - wget
 
@@ -301,13 +303,11 @@
         - docker
         - dropbox
         - font-fira-mono-for-powerline
-        - flux
         - iterm2
         - kaleidoscope
         - keybase
         - slack
         - transmit
-        - tunnelblick
         - xquartz
 
 - name: fish
