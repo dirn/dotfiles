@@ -37,7 +37,7 @@
     gpgsign = true
 [core]
     diff = diff-highlight | less
-    editor = vim
+    editor = nvim
     excludesfile = ~/.gitignoreglobal
     pager = diff-highlight | less
     show = diff-highlight | less
