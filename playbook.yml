@@ -281,7 +281,6 @@
       with_items:
         - aspell
         - ctags
-        - fzf
         - go
         - gpg
         - gpg-agent
@@ -423,6 +422,27 @@
         create: yes
         regexp: init/\*\.fish
         line: for init in {{ home }}/.config/fish/init/*.fish; source $init; init; end; functions --erase init
+      tags:
+        - dotfiles
+
+- name: fzf
+  hosts: localhost
+  gather_facts: no
+  tags: fzf
+
+  tasks:
+    - name: Install fzf
+      homebrew:
+        name: fzf
+        state: latest
+
+    - name: Configure fzf
+      lineinfile:
+        dest: "{{ extras_file }}"
+        state: present
+        create: yes
+        regexp: FZF_DEFAULT_COMMAND
+        line: set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glob "!.git/*"'
       tags:
         - dotfiles
 
