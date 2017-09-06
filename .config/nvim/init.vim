@@ -93,6 +93,7 @@ endif
 set background=dark
 
 colorscheme solarized
+let g:airline_theme = 'solarized'
 
 if has('nvim')
     " Set the look of the cursor...
