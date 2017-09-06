@@ -334,8 +334,8 @@ let g:vim_json_syntax_conceal = 0
 let g:ale_sign_column_always = 1
 
 " --- deoplete ---
-let g:deoplete#enable_at_startup = 1
-let g:python3_host_prog = '/Users/dirn/.pyenv/shims/python3'
+call g:deoplete#enable()
+let g:python3_host_prog = '/usr/bin/env python3'
 
 " --- fzf ---
 " --line-number: Show line number
