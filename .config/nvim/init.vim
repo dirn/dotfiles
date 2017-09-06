@@ -94,10 +94,6 @@ set background=dark
 
 colorscheme solarized
 
-if has('gui_running')
-    set background=light
-    set guifont=Fira\ Mono\ for\ Powerline:h16
-endif
 
 set noshowmode                  " hide the mode text, Powerline shows it
 
