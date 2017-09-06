@@ -121,6 +121,8 @@ set completeopt=longest,menuone,preview
 
 set spell                       " use spell check
 
+set sidescroll=1                " make scrolling smoother
+
 set nofoldenable                " stop folding things!
 
 " Open splits to the right and bottom.
