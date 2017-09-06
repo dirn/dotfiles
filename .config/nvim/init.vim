@@ -94,6 +94,14 @@ set background=dark
 
 colorscheme solarized
 
+if has('nvim')
+    " Set the look of the cursor...
+    set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+        \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+        \,sm:block-blinkwait175-blinkoff150-blinkon175
+    " ...but make sure it's restored before exiting.
+    au VimLeave * set guicursor=a:block-blinkon0
+end
 
 set noshowmode                  " hide the mode text, Powerline shows it
 
@@ -259,9 +267,6 @@ augroup filetypes
     " Reload .vimrc if changes are made to it
     autocmd BufWritePost .vimrc source $MYVIMRC
 augroup END
-
-" --- NeoVim configuration ---
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " --- Plugin configuration ---
 
