@@ -48,8 +48,6 @@
     prompt = false
 [difftool "Kaleidoscope"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[gpg]
-    program = gpg2
 [interactive]
     diffFilter = diff-highlight
 [merge]
