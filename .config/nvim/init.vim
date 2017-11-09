@@ -26,6 +26,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'pearofducks/ansible-vim'
 Plug 'raimon49/requirements.txt.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'vim-scripts/OnSyntaxChange', {'for': ['python']}
 
 " --- Language helpers ---
 Plug 'majutsushi/tagbar'

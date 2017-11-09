@@ -3,10 +3,9 @@ setlocal colorcolumn=73,80
 setlocal textwidth=79
 
 " Toggle textwidth
-" docstrings and comments
-nnoremap <leader>2 :setlocal textwidth=72<cr>
-" code
-nnoremap <leader>9 :setlocal textwidth=79<cr>
+call OnSyntaxChange#Install('Comment', '^Comment$', 0, 'a')
+autocmd User SyntaxCommentEnterA setlocal textwidth=72
+autocmd User SyntaxCommentLeaveA setlocal textwidth=79
 
 " Highlight all the things
 let python_highlight_all=1
