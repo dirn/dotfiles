@@ -337,7 +337,7 @@ let g:vim_json_syntax_conceal = 0
 let g:ale_sign_column_always = 1
 
 " --- deoplete ---
-call g:deoplete#enable()
+let g:deoplete#enable_at_startup = 1
 let g:python3_host_prog = '/usr/bin/env python3'
 
 " --- fzf ---
