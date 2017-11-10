@@ -6,6 +6,9 @@ setlocal textwidth=79
 call OnSyntaxChange#Install('Comment', '^Comment$', 0, 'a')
 autocmd User SyntaxCommentEnterA setlocal textwidth=72
 autocmd User SyntaxCommentLeaveA setlocal textwidth=79
+call OnSyntaxChange#Install('pythonDocstring', '^pythonDocstring$', 0, 'a')
+autocmd User SyntaxpythonDocstringEnterA setlocal textwidth=72
+autocmd User SyntaxpythonDocstringLeaveA setlocal textwidth=79
 
 " Highlight all the things
 let python_highlight_all=1
