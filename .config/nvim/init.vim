@@ -104,7 +104,7 @@ if has('nvim')
     au VimLeave * set guicursor=a:block-blinkon0
 end
 
-set noshowmode                  " hide the mode text, Powerline shows it
+set noshowmode                  " hide the mode text, Airline shows it
 
 set listchars=tab:▸\ ,eol:¬
 
