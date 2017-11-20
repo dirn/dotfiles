@@ -10,5 +10,8 @@ call OnSyntaxChange#Install('pythonDocstring', '^pythonDocstring$', 0, 'a')
 autocmd User SyntaxpythonDocstringEnterA setlocal textwidth=72
 autocmd User SyntaxpythonDocstringLeaveA setlocal textwidth=79
 
+" Boilerplate shortcuts
+:iabbrev ifmain<t>	if __name__ == '__main__':<cr>
+
 " Highlight all the things
 let python_highlight_all=1
