@@ -262,15 +262,6 @@ augroup END
 
 " --- Plugin configuration ---
 
-" --- ctrlp ---
-let g:ctrlp_dont_split = 'NERD_tree_2'
-set wildignore+=*.pyc,*/*.egg-info/*
-set wildignore+=.git,.hg
-set wildignore+=*.orig
-set wildignore+=*.jpg,*.jpeg,*.gif,*.png
-set wildignore+=*.mp3
-set wildignore+=*.sw?                           " Vim swap files
-
 " --- NERD Tree ---
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeIgnore = ['\.vim$', '\~$', '\.pyc$', '^__pycache__$', '\.swp$', '\.git$', '\.egg', '\.egg\-info', '\.coverage', '\.tox', '.DS_Store', '.sass-cache']
