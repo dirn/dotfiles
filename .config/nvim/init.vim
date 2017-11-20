@@ -138,17 +138,6 @@ set ignorecase                  " make search case insensitive ...
 set smartcase                   " ... unless an uppercase character is used
 set hlsearch
 
-if executable('ag')
-    " Use ag instead of grep.
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    " Use ag in ctrlp for listing files. Oh yeah, and it honors .gitignore.
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-    " ag is fast, so don't use ctrlp's cache.
-    let g:ctrlp_use_caching = 0
-endif
-
 " --- Whitespace ---
 set expandtab                   " spaces > tabs
 set shiftround                  " indents to a multiple of shiftwidth
