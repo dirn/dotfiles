@@ -62,28 +62,42 @@ syntax on
 filetype plugin indent on
 
 set encoding=utf8
-set lazyredraw                  " no redraw during macros (much faster)
-set linebreak
+" Don't redraw the screen while executing macros (and other things).
+set lazyredraw
+" Always show the number of lines changed when executing a command.
+set report=0
+
+" Don't use two spaces after sentence ending punctuation when joining lines.
 set nojoinspaces
-set nowrap
-set report=0                    " :cmd always shows changed line count
+
+" Set the maximum length of lines.
 set textwidth=80
+" Wrap lines based on characters, not line length.
+set linebreak
+" That said, don't wrap lines.
+set nowrap
 
+" I find that swap and backup files cause more trouble than they're worth so
+" disable them.
 set nobackup
-set nowritebackup
 set noswapfile
+set nowritebackup
 
-set mouse=a                     " turn on mouse support
+" While I don't use it much, having mouse support can be nice from time to time.
+set mouse=a
 
 " --- Guides ---
-set cursorline                  " highlight current line
-set showmatch                   " show matching brackets ...
+" Highlight the current line.
+set cursorline
+" Highlight matches brackets.
+set showmatch
+" Include angle brackets.
 set matchpairs+=<:>
-set matchtime=5                 " ... for 5 seconds
-" Conflict markers
+
+" Highlight conflict markers as errors.
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-" Show a rule
+" Show a rule at the width of the text.
 if exists('&colorcolumn')
     highlight ColorColumn guibg=Red
     set colorcolumn=+1
@@ -104,67 +118,90 @@ if has('nvim')
     au VimLeave * set guicursor=a:block-blinkon0
 end
 
-set noshowmode                  " hide the mode text, Airline shows it
+" Since Airline includes the current mode, hide the default message.
+set noshowmode
 
 set listchars=tab:▸\ ,eol:¬
 
-set relativenumber              " show relative line numbers
-set number                      " but show the current line number
+" Show relative line numbers.
+set relativenumber
+" But show the current line's number.
+set number
 
-set title                       " show the filename in the window's title
+" Set the window title, defaulting to the name of the current file.
+set title
 
 " --- Behavior ---
+" Make sure we don't losing unsaved changes when closing a window.
 set confirm
 
-set complete=.,w,b,u,t          " this should be the default, but just in case
+" When completing in insert mode:
+"   - only insert the common text of matches
+"   - show the menu even when there's only one match
+"   - show more about the currently selected item
 set completeopt=longest,menuone,preview
 
-set spell                       " use spell check
+" Use spell check.
+set spell
 
-set sidescroll=1                " make scrolling smoother
+" Make horizontal scrolling smoother.
+set sidescroll=1
 
-set nofoldenable                " stop folding things!
+" Automatically expand all folds.
+set nofoldenable
 
 " Open splits to the right and bottom.
-set splitbelow                  " this feels weird with Fugitive
+set splitbelow
 set splitright
 
-set diffopt+=vertical           " always use vertical diffs
+" Always open diffs in vertical splits.
+set diffopt+=vertical
 
 " --- Search ---
-set gdefault                    " replace with g by default
-set ignorecase                  " make search case insensitive ...
-set smartcase                   " ... unless an uppercase character is used
+" Replace all matches in a line.
+set gdefault
+" Highlight all matches.
 set hlsearch
+" Make search case insensitive.
+set ignorecase
+" Do that unless an uppercase letter is used.
+set smartcase
 
 " --- Whitespace ---
-set expandtab                   " spaces > tabs
-set shiftround                  " indents to a multiple of shiftwidth
+" Insert spaces when <tab> is pressed.
+set expandtab
+" Indent to the nearest multiple of shiftwidth.
+set shiftround
+" Use 4 spaces for each indent.
 set shiftwidth=4
+" Use 4 spaces when inserting a <tab>.
 set softtabstop=4
-set tabstop=8
+" Make a <tab> equal to 4 spaces.
+set tabstop=4
 
 " Treat li and p tags as block elements.
 let g:html_indent_tags = 'li\|p'
 
 " --- Mappings ---
-" Make word uppercase
+" Make the word under the cursor uppercase.
 nnoremap <c-u> mzgUiw`z
-" Make word lowercase (down, because <c-l> is used for navigation)
+" Make the word under the cursor lowercase.
+" D represents down, <c-l> is used for navigation.
 nnoremap <c-d> mzguiw`z
 
-" Reindent a file
+" Reindent a file.
 nnoremap <silent> <leader><tab> gg=G
 
-" Select (charwise) the contents of the current line, excluding indentation.
-" Great for pasting Python lines into REPLs.
+" Select the contents of the current line, excluding indentation. Great for
+" pasting Python lines into REPLs.
 nnoremap vv ^vg_
 
-" Exit insert mode
+" Exit insert mode with something on the home row, not <esc>.
 inoremap jk <esc>
+inoremap <esc> <nop>
 
 " Keystroke savers
-" vim-easymotion takes care of losing ;
+" vim-easymotion takes care of losing ;.
 nnoremap ; :
 vnoremap ; :
 
@@ -172,17 +209,17 @@ vnoremap ; :
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Quickly change windows
+" Quickly change windows.
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
-" Quickly change tabs
+" Quickly change tabs.
 nnoremap <s-h> gT
 nnoremap <s-l> gt
 
-" Copy and paste using the system clipboard
+" Copy and paste using the system clipboard.
 vnoremap <leader>y "+y
 vnoremap <leader>d "+d
 nnoremap <leader>p "+p
@@ -190,32 +227,29 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
-" Swap selected regions (vim-exchange)
-" I never use s anyway.
+" Swap selected regions (vim-exchange).
 map s <Plug>(Exchange)
 map sxx <Plug>(ExchangeClear)
 map S <Plug>(ExchangeLine)
 
-" Open a new tab. This remaps jumping to the next tag, but I don't use those.
+" Open a new tab. Note that this remaps jumping to the next tag.
 nnoremap <c-t> :tabnew<cr>
 inoremap <c-t> <esc>:tabnew<cr>
 
-" FileType switching
-nnoremap <leader>Tp :set ft=python<cr>
-nnoremap <leader>Tj :set ft=htmljinja<cr>
+" Load .vimrc in a vertical split.
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" Resource .vimrc.
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" Don't use the cursor keys
+" Don't use the cursor keys.
 for prefix in ['i', 'n', 'v']
     for key in ['<up>', '<right>', '<down>', '<left>']
         execute prefix . 'noremap ' . key . ' <nop>'
     endfor
 endfor
 
-" Retrain my brain
-inoremap <esc> <nop>
-
 " --- Typos ---
-" this one has plagued me for years
+" Replace some typos I make more often than I'd like.
 :iabbrev functino function
 :iabbrev verison version
 
@@ -227,10 +261,10 @@ if has('autocmd') && has('eval')
     augroup misc
         autocmd!
 
-        " Resize splits
+        " Resize splits when Vim is resized.
         autocmd VimResized * :wincmd =
 
-        " Jump to the last known cursor position if it's valid (from the docs)
+        " Jump to the last known cursor position if it's valid (from the docs).
         autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
             \   execute "normal g`\"" |
@@ -242,6 +276,7 @@ if has('autocmd') && has('eval')
             %s/\s\+$//e
         endfunction
 
+        " Trim trailing whitespace when the file is saved.
         autocmd FileWritePre * :call TrimWhitespace()
         autocmd FileAppendPre * :call TrimWhitespace()
         autocmd FilterWritePre * :call TrimWhitespace()
@@ -253,23 +288,14 @@ endif
 augroup filetypes
     autocmd!
 
+    " Some file types uses 2 spaces instead of 4.
     autocmd FileType css,html,htmldjango,htmljinja,ruby,scss,xml,yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
-    " --- .vimrc ---
-    " Reload .vimrc if changes are made to it
+    " Reload .vimrc if changes are made to it.
     autocmd BufWritePost .vimrc source $MYVIMRC
 augroup END
 
 " --- Plugin configuration ---
-
-" --- NERD Tree ---
-let g:NERDTreeChDirMode = 2
-let g:NERDTreeIgnore = ['\.vim$', '\~$', '\.pyc$', '^__pycache__$', '\.swp$', '\.git$', '\.egg', '\.egg\-info', '\.coverage', '\.tox', '.DS_Store', '.sass-cache']
-let g:NERDTreeSortOrder = ['^__\.py$', '\/$', '*', '\.swp$', '\~$']
-let g:NERDTreeShowBookmarks = 1
-let g:NERDTreeShowHidden = 1
-
-nnoremap <leader>fs :NERDTreeToggle<cr>
 
 "--- Airline ---
 let g:airline#extensions#tabline#enabled = 1
@@ -279,40 +305,6 @@ endif
 let g:airline_symbols.space = "\ua0"
 let g:airline_powerline_fonts = 1
 
-" --- Git Gutter ---
-highlight clear SignColumn  " same as the row number column
-highlight GitGutterAddDefault          guifg=Green  guibg=NONE  ctermfg=DarkGreen   ctermbg=NONE
-highlight GitGutterChangeDefault       guifg=Yellow guibg=NONE  ctermfg=DarkYellow  ctermbg=NONE
-highlight GitGutterDeleteDefault       guifg=Red    guibg=NONE  ctermfg=DarkRed     ctermbg=NONE
-
-" --- Gist Vim ---
-let g:gist_clip_command = 'pbcopy'
-let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 1
-
-" --- Learn Vimscript the Hard Way ---
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
-" --- incsearch ---
-map / <Plug>(incsearch-forward)
-map ? <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-map n <Plug>(incsearch-nohl-n)
-map N <Plug>(incsearch-nohl-N)
-map * <Plug>(incsearch-nohl-*)
-map # <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
-let g:incsearch#auto_nohlsearch = 1
-
-" --- Table Mode ---
-let g:table_mode_corner_corner = "+"
-let g:table_mode_header_fillchar = "="
-
-" --- vim-json ---
-let g:vim_json_syntax_conceal = 0
-
 " --- ALE ---
 let g:ale_sign_column_always = 1
 
@@ -320,6 +312,7 @@ let g:ale_sign_column_always = 1
 let g:deoplete#enable_at_startup = 1
 
 " --- fzf ---
+" Create an :Rg command to use ripgrep to find text.
 " --line-number: Show line number
 " --no-heading: Do not show file headings in results
 " --fixed-strings: Search term as a literal string
@@ -328,7 +321,6 @@ let g:deoplete#enable_at_startup = 1
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* Rg call fzf#vim#grep(
     \ 'rg
         \ --line-number
@@ -346,7 +338,9 @@ command! -bang -nargs=* Rg call fzf#vim#grep(
         \ --glob "!.git/*"
         \ --color "always"
     \ '.shellescape(<q-args>).' 2> /dev/null', 1, <bang>0)
+" Fuzzy find files.
 nnoremap <silent> <c-p> :Files!<cr>
+" Fuzzy find text.
 nnoremap <silent> <c-_> :Rg!<space>
 let g:fzf_action = {
     \ 'ctrl-s': 'split',
@@ -367,5 +361,45 @@ let g:fzf_colors = {
     \ 'header':  ['fg', 'Comment'] }
 let g:fzf_layout = { 'window': 'enew' }
 
+" --- Gist Vim ---
+let g:gist_clip_command = 'pbcopy'
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
+
+" --- Git Gutter ---
+" The sign column is the same as the line number column.
+highlight clear SignColumn
+highlight GitGutterAddDefault          guifg=Green  guibg=NONE  ctermfg=DarkGreen   ctermbg=NONE
+highlight GitGutterChangeDefault       guifg=Yellow guibg=NONE  ctermfg=DarkYellow  ctermbg=NONE
+highlight GitGutterDeleteDefault       guifg=Red    guibg=NONE  ctermfg=DarkRed     ctermbg=NONE
+
+" --- incsearch ---
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map n <Plug>(incsearch-nohl-n)
+map N <Plug>(incsearch-nohl-N)
+map * <Plug>(incsearch-nohl-*)
+map # <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+let g:incsearch#auto_nohlsearch = 1
+
+" --- NERD Tree ---
+let g:NERDTreeChDirMode = 2
+let g:NERDTreeIgnore = ['\.vim$', '\~$', '\.pyc$', '^__pycache__$', '\.swp$', '\.git$', '\.egg', '\.egg\-info', '\.coverage', '\.tox', '.DS_Store', '.sass-cache']
+let g:NERDTreeSortOrder = ['^__\.py$', '\/$', '*', '\.swp$', '\~$']
+let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeShowHidden = 1
+
+nnoremap <leader>fs :NERDTreeToggle<cr>
+
 " --- SuperTab ---
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" --- Table Mode ---
+let g:table_mode_corner_corner = "+"
+let g:table_mode_header_fillchar = "="
+
+" --- vim-json ---
+let g:vim_json_syntax_conceal = 0
