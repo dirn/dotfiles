@@ -33,7 +33,6 @@ Plug 'vim-scripts/OnSyntaxChange', {'for': ['python']}
 Plug 'majutsushi/tagbar'
 
 " --- Utilities ---
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 Plug 'ervandew/supertab'
 Plug 'haya14busa/incsearch.vim'
