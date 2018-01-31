@@ -17,6 +17,7 @@ Plug 'tpope/vim-sensible'
 
 " --- File types ---
 Plug 'dhruvasagar/vim-table-mode', {'for': ['python', 'rst']}
+Plug 'dirn/Stone.vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}
 Plug 'Vimjas/vim-python-pep8-indent'
