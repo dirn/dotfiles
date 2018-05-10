@@ -8,6 +8,10 @@ set fish_greeting
 set fish_pager_color_progress cyan
 
 # Vim all the things!
+# This is needed to fix CursorShape inside tmux. See
+# https://github.com/neovim/neovim/issues/7067 which links to
+# https://github.com/junegunn/fzf/issues/881#issuecomment-318576205.
+function fish_vi_cursor; end
 fish_vi_key_bindings
 
 # Prompt before overwriting or removing a file.
