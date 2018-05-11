@@ -1,5 +1,5 @@
 # Add the local bin folder (e.g., single-command virtual environments) to $PATH.
-set --global --export PATH $PATH ~/.local/bin
+set --universal fish_user_paths $fish_user_paths ~/.local/bin
 
 # Disable the greeting.
 set fish_greeting
