@@ -201,9 +201,12 @@ inoremap jk <esc>
 inoremap <esc> <nop>
 
 " Keystroke savers
-" vim-easymotion takes care of losing ;.
+" I use command mode more than I repeat character searches.
 nnoremap ; :
 vnoremap ; :
+" But being able to repeat character searches is useful.
+nnoremap : ;
+vnoremap : ;
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
