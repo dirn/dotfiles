@@ -41,7 +41,6 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'rhysd/committia.vim'
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'} | Plug 'zchee/deoplete-jedi'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
@@ -387,15 +386,6 @@ map # <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 let g:incsearch#auto_nohlsearch = 1
-
-" --- NERD Tree ---
-let g:NERDTreeChDirMode = 2
-let g:NERDTreeIgnore = ['\.vim$', '\~$', '\.pyc$', '^__pycache__$', '\.swp$', '\.git$', '\.egg', '\.egg\-info', '\.coverage', '\.tox', '.DS_Store', '.sass-cache']
-let g:NERDTreeSortOrder = ['^__\.py$', '\/$', '*', '\.swp$', '\~$']
-let g:NERDTreeShowBookmarks = 1
-let g:NERDTreeShowHidden = 1
-
-nnoremap <leader>fs :NERDTreeToggle<cr>
 
 " --- SuperTab ---
 let g:SuperTabDefaultCompletionType = "<c-n>"
