@@ -131,7 +131,7 @@ set number
 set title
 
 " --- Behavior ---
-" Make sure we don't losing unsaved changes when closing a window.
+" Make sure we don't lose unsaved changes when closing a window.
 set confirm
 
 " When completing in insert mode:
