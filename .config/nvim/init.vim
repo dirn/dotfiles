@@ -57,10 +57,7 @@ endif
 call plug#end()
 
 " --- Configuration ---
-syntax on
-filetype plugin indent on
 
-set encoding=utf8
 " Don't redraw the screen while executing macros (and other things).
 set lazyredraw
 " Always show the number of lines changed when executing a command.
