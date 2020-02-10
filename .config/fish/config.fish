@@ -38,3 +38,6 @@ if not set -q TMUX; exec env tmux new-session; end
 
 # Configure fzf.
 set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glob="!.git/*" --glob="!.mypy_cache/*"'
+
+# Manage my dotfiles.
+alias config "git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
