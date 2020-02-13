@@ -3,7 +3,7 @@ let mapleader = "\<Space>"
 
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'https://github.com/w0rp/ale'
+Plug 'https://github.com/dense-analysis/ale'
 let g:ale_fix_on_save = 1
 
 Plug 'https://github.com/rhysd/committia.vim'
