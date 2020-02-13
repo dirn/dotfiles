@@ -29,6 +29,8 @@
     prompt = false
 [fetch]
     prune = true
+[init]
+    templateDir = /Users/dirn/.gittemplate
 [mergetool]
     keepBackup = false
     prompt = false
