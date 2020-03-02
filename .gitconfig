@@ -22,7 +22,6 @@
     ui = true
 [core]
     editor = nvim
-    excludesfile = ~/.gitignoreglobal
 [diff]
     algorithm = patience
 [difftool]
