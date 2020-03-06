@@ -23,9 +23,11 @@ alias rm "rm -i"
 alias mkdir "mkdir -p"
 
 # Manage Python with pyenv.
-set --global --export PYENV_ROOT $HOME/.pyenv
-set --global --export PATH $PYENV_ROOT/bin $PATH
-pyenv init - | source
+if test -e $HOME/.pyenv
+    set --global --export PYENV_ROOT $HOME/.pyenv
+    set --global --export PATH $PYENV_ROOT/bin $PATH
+    pyenv init - | source
+end
 
 # PuDB is a nicer debugger than pdb.
 set --global --export PYTHONBREAKPOINT "pudb.set_trace"
