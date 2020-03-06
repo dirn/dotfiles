@@ -43,3 +43,8 @@ set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glo
 
 # Manage my dotfiles.
 alias config "git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+
+# Allow for system-specific configuration.
+if test -e ~/.config/fish/extras.fish
+    source ~/.config/fish/extras.fish
+end
