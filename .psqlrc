@@ -1,0 +1,35 @@
+\set QUIET 1
+
+-- NULL normally displays as an empty string. Make it obvious when a field is
+-- NULL rather than an actual empty string.
+\pset null [null]
+
+-- Always autocomplete keywords using uppercase.
+\set COMP_KEYWORD_CASE upper
+
+-- Store a database-specific history.
+\set HISTFILE ~/.psql_history- :DBNAME
+
+-- Unlimited history!!
+\set HISTFILESIZE
+\set HISTSIZE
+
+-- Don't duplicate consecutive commands in the history.
+\set HISTCONTROL ignoredups
+
+-- Fancy prompts
+-- username@hostname:database=#
+\set PROMPT1 '%[%033[1;34;40m%]%n@%M:%~%R%[%033[0m%]%# '
+-- [more] %R > (where %R is either - or the open character to be closed)
+\set PROMPT2 '%[%033[1m%][more]%[%033[0m%] %R > '
+
+-- Big mouth!
+\set VERBOSITY verbose
+
+-- Automatically toggle the output mode based on how much there is to display.
+\x auto
+
+-- Always show how long a query takes.
+\timing
+
+\unset QUIET
