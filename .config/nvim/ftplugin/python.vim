@@ -1,6 +1,6 @@
 " Long comments and strings should only be 72 characters, not 79.
 setlocal colorcolumn=73,80,100
-" Black will usually take care of the width for me.
+" Let Black worry about where to break the lines.
 setlocal textwidth=99
 
 " Toggle textwidth
