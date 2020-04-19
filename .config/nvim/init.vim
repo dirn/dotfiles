@@ -227,6 +227,9 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
+" Select pasted text.
+nnoremap gp `[v`]
+
 " Fuzzy find files.
 nnoremap <silent> <c-p> :GitFiles!<cr>
 
