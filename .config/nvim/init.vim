@@ -213,6 +213,12 @@ nnoremap <silent> ]t :tnext<cr>
 nnoremap <silent> [T :tfirst<cr>
 nnoremap <silent> ]T :tlast<cr>
 
+" Navigate ALE warnings.
+nmap <silent> [a <Plug>(ale_previous_wrap)
+nmap <silent> ]a <Plug>(ale_next_wrap)
+nmap <silent> [A <Plug>(ale_first)
+nmap <silent> ]A <Plug>(ale_last)
+
 " Copy and paste using the system clipboard.
 vnoremap <leader>y "+y
 vnoremap <leader>d "+d
