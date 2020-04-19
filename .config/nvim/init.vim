@@ -64,6 +64,9 @@ endif
 command! -bang -nargs=? -complete=dir GitFiles
     \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+Plug 'https://github.com/camspiers/animate.vim' | Plug 'https://github.com/camspiers/lens.vim'
+let g:animate#duration = 1
+
 Plug 'https://github.com/vim-scripts/OnSyntaxChange', {'for': ['python']}
 Plug 'https://github.com/raimon49/requirements.txt.vim'
 Plug 'https://github.com/majutsushi/tagbar'
