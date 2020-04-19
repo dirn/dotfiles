@@ -35,9 +35,6 @@ set --global --export PYTHONBREAKPOINT "pudb.set_trace"
 # git is too long to type.
 alias g git
 
-# Use tmux for all new sessions.
-if not set -q TMUX; exec env tmux new-session; end
-
 # Configure fzf.
 set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glob="!.git/*" --glob="!.mypy_cache/*"'
 
@@ -48,3 +45,7 @@ alias config "git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 if test -e ~/.config/fish/extras.fish
     source ~/.config/fish/extras.fish
 end
+
+# Use tmux for all new sessions. This should be done last in case extras.fish
+# changes $PATH in a way that affects tmux.
+if not set -q TMUX; exec env tmux new-session; end
