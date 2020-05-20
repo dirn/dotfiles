@@ -6,9 +6,9 @@ and repo and play around. If you want to setup up your computer with some useful
 
 ## Setup
 
-This repository is inspired by the bare repository approach popularized in
-https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/. To add it to a new computer:
+This repository is managed by [Yet Another Dotfiles Manager][yadm]. To add it to
+a new computer:
 
-    $ git clone --bare https://gitlab.com/dirn/dotfiles.git $HOME/.cfg
-    $ git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout
-    $ git --git-dir=$HOME/.cfg/ --work-tree=$HOME config --local status.showUntrackedFiles no
+    $ yadm clone https://gitlab.com/dirn/dotfiles.git --bootstrap
+
+[yadm]: https://yadm.io
