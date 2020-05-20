@@ -1,12 +1,13 @@
 " Set the leader first so that any plugins providing mappings will pick it up.
 let mapleader = "\<Space>"
 
-" Install vim-plugin and any missing plugins if they haven't already been
+" Install vim-plug and any missing plugins if they haven't already been
 " installed.
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+let vim_plug = stdpath('data') . '/site/autoload/plug.vim'
+if empty(glob(vim_plug))
+    let vim_plug_url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    silent execute '!curl -fLo ' . vim_plug . ' --create-dirs ' . vim_plug_url
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin(stdpath('data') . '/plugged')
