@@ -22,6 +22,8 @@ alias rm "rm -i"
 # Create intermediate directories.
 alias mkdir "mkdir -p"
 
+set --global --export PATH /usr/local/sbin $PATH
+
 # Manage Python with pyenv.
 if test -e $HOME/.pyenv
     set --global --export PYENV_ROOT $HOME/.pyenv
