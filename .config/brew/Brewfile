@@ -66,3 +66,6 @@ cask "keybase"
 cask "moom"
 cask "slack"
 mas "1Password 7", id: 1333542190
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
