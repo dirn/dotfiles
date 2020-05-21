@@ -9,3 +9,13 @@ if [ -f "$HOMEBREW_BUNDLE_FILE" ]; then
     echo "Updating Homebrew bundle."
     brew bundle
 fi
+
+if command -v pyenv >/dev/null 2>&1; then
+    echo "Installing Python versions."
+    pyenv install --skip-existing 3.8.2
+    pyenv global 3.8.2
+
+    echo "Installing Python libraries."
+    python -m pip install --upgrade pip
+    pip install black bpython flake8 flake8_bugbear mypy pre-commit pudb pynvim virtualfish
+fi

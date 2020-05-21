@@ -25,10 +25,8 @@ alias mkdir "mkdir -p"
 set --global --export PATH /usr/local/sbin $PATH
 
 # Manage Python with pyenv.
-if test -e $HOME/.pyenv
-    set --global --export PYENV_ROOT $HOME/.pyenv
-    set --global --export PATH $PYENV_ROOT/bin $PATH
-    pyenv init - | source
+if type -f pyenv
+    status --is-interactive; and source (pyenv init -|psub)
 end
 
 # PuDB is a nicer debugger than pdb.
