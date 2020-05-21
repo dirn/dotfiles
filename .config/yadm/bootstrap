@@ -19,3 +19,8 @@ if command -v pyenv >/dev/null 2>&1; then
     python -m pip install --upgrade pip
     pip install black bpython flake8 flake8_bugbear mypy pre-commit pudb pynvim virtualfish
 fi
+
+if command -v vf >/dev/null 2>&1; then
+    echo "Installing virtualfish plugins."
+    vf install auto_activation global_requirements
+fi
