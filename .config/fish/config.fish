@@ -25,7 +25,7 @@ alias mkdir "mkdir -p"
 set --global --export PATH /usr/local/sbin $PATH
 
 # Manage Python with pyenv.
-if type -f pyenv
+if type --no-functions --quiet pyenv
     status --is-interactive; and source (pyenv init -|psub)
 end
 
