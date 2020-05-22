@@ -22,5 +22,16 @@ fi
 
 if command -v vf >/dev/null 2>&1; then
     echo "Installing virtualfish plugins."
-    vf install auto_activation global_requirements
+    fish -c "vf install auto_activation global_requirements"
+fi
+
+if [ -f "$HOME/.virtualenvs/global_requirements.txt" ]; then
+    echo "Installing requirements into virtual environments."
+    # The only entry point to installing the requirements is through
+    # `vf requirements`. This opens the global requirements file into $EDITOR
+    # and then runs `pip install` after the editor exits. By using `echo` as the
+    # editor instead, we can install the requirements without further user
+    # interaction.
+    # TODO: This can be switched to `true` in fish 3.2.
+    fish -c "set EDITOR echo; vf requirements"
 fi

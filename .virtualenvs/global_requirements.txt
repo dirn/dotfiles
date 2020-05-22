@@ -1,0 +1,6 @@
+black
+bpython
+flake8-bugbear
+pip
+pudb
+pynvim
