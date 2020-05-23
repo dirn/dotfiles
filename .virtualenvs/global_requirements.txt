@@ -4,3 +4,4 @@ flake8-bugbear
 pip
 pudb
 pynvim
+tox
