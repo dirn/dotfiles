@@ -1,0 +1,15 @@
+set folder = "~/Mail/pygotham"
+
+source _pre
+# Discover the other mailboxes. This is adapted from
+# https://neomutt.org/guide/advancedusage#note-10. `sort` has been moved so that
+# child folders appear after their parent.
+mailboxes `find ~/Mail/pygotham/ -type d -name cur | sed -e 's:/cur/*$::' -e 's/ /\\ /g' | sort | tr '\n' ' '`
+source _post
+
+# Send emails from the right account.
+set sendmail = "msmtp --account pygotham"
+
+# Simplify the status line to just the account, folder name, some counts, and
+# the percentage of the way through the index.
+set status_format = "[ pygotham ] [ Folder: %f ] [%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%>─%?p?( %p postponed )?---(%P)---"

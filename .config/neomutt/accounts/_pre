@@ -1,0 +1,7 @@
+unmailboxes *
+mailboxes =Inbox
+mailboxes =[Gmail]/Starred
+mailboxes =[Gmail]/Important
+mailboxes =[Gmail]/"All Mail"
+mailboxes =[Gmail]/Drafts
+mailboxes =[Gmail]/"Sent Mail"

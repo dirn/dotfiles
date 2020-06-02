@@ -1,0 +1,18 @@
+set folder = "~/Mail/dirnonline"
+
+source _pre
+# Discover the other mailboxes. This is adapted from
+# https://neomutt.org/guide/advancedusage#note-10. `sort` has been moved so that
+# child folders appear after their parent.
+mailboxes `find ~/Mail/dirnonline/ -type d -name cur | sed -e 's:/cur/*$::' -e 's/ /\\ /g' | sort | tr '\n' ' '`
+source _post
+
+# Support aliases.
+alternates andy@dirnberger.me
+
+# Send emails from the right account.
+set sendmail = "msmtp --account dirnonline"
+
+# Simplify the status line to just the account, folder name, some counts, and
+# the percentage of the way through the index.
+set status_format = "[ dirnonline ] [ Folder: %f ] [%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%>─%?p?( %p postponed )?---(%P)---"

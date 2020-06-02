@@ -1,0 +1,31 @@
+defaults
+auth on
+tls on
+tls_starttls on
+logfile ~/.local/share/msmtp/msmtp.log
+
+account gmail
+host smtp.gmail.com
+port 587
+from andy.dirnberger@gmail.com
+user andy.dirnberger@gmail.com
+
+account dirnonline
+host smtp.gmail.com
+port 587
+from dirn@dirnonline.com
+user dirn@dirnonline.com
+
+account pygotham
+host smtp.gmail.com
+port 587
+from andy@pygotham.org
+user andy@pygotham.org
+
+account bigapplepy
+host smtp.gmail.com
+port 587
+from andy@bigapplepy.org
+user andy@bigapplepy.org
+
+account default : gmail

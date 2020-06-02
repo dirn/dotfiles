@@ -1,0 +1,176 @@
+set realname = "Andy Dirnberger"
+
+set mbox_type = Maildir
+set header_cache = ~/.local/share/neomutt/cache/headers
+set message_cachedir = ~/.local/share/neonutt/cache/bodies
+set tmpdir = ~/.local/share/neomutt/tmp
+
+set mailcap_path = ~/.config/neomutt/mailcap
+
+# Don't ask to delete messages when exiting, just do it.
+set delete
+# By default, unread messages are marked as old when exiting. Don't do that.
+unset mark_old
+
+# Get the sender from the From: field.
+set use_envelope_from
+set reverse_name
+
+set abort_key = "<esc>"
+
+# Don't ask for recipients or a subject when replying.
+set fast_reply
+# Reply to the reply-to address.
+set reply_to
+# Always include a copy of the message when replying.
+set include
+# Quote the original message when forwarding it.
+set forward_quote
+set forward_format = "Fwd: %s"
+# When composing an email, let the editor insert line breaks in e.g.,
+# paragraphs, but tell recipients that they can ignore them if they want to.
+set text_flowed
+# I don't use a signature, so don't include a separator.
+unset sig_dashes
+
+# Sort messages by thread, newer ones first.
+set sort = threads
+# Within a thread, show older ones first.
+set sort_aux = reverse-last-date-received
+# Always start with thread collapsed.
+set collapse_all
+# Unless there are new messages in them.
+set uncollapse_new
+set uncollapse_jump
+unset collapse_unread
+
+# Replace the help bar with the status bar. The full help is always just a ?
+# away.
+unset help
+set status_on_top
+# This is close to the default, but I don't need to see if the mailbox is
+# unchanged.
+set status_chars = " *%A"
+# Show the message flags, whether or not there's an attachment, the date and
+# time, the author name (or recipient if from me), and the subject.
+set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %s"
+#
+# Prefer UTF-8.
+set send_charset = "utf-8:iso-8859-1:us-ascii"
+set charset = "utf-8"
+
+# Pad when paging.
+set pager_context = 3
+# Don't automatically move to the next messaging when paging.
+set pager_stop
+#
+# Don't visually distinguish wrapped lines.
+unset markers
+
+# Limit the headers shown in the pager. Taken from
+# https://neomutt.org/guide/configuration.html#ignore.
+ignore *
+unignore from date subject to cc
+unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
+unignore posted-to:
+
+# Prefer plain text.
+alternative_order text/plain text/enriched text/html
+auto_view text/html
+
+# Indent nested folders.
+set sidebar_folder_indent
+# And don't repeat the names of parent folders.
+set sidebar_short_path
+# Calculate total, new, and flagged message counts so that they can be included
+# in the sidebar format.
+set mail_check_stats
+set sidebar_format = "%B %?N?(%N)?%* %S"
+
+# Highlight the status bar.
+color status blue default
+# Highlight unread messages and the folders they're in.
+color index blue default "~N"
+color sidebar_new blue default
+# Highlight the current folder.
+color sidebar_indicator black blue
+# Highlight the folder the cursor is on.
+color sidebar_highlight brightblue default
+
+# # The noop bind is needed so that the line editor accepts IMAP folders with
+# spaces in their names.
+bind editor <space> noop
+
+# Navigate the sidebar.
+bind index,pager B sidebar-toggle-visible
+bind index,pager \Cj sidebar-next
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cl sidebar-open
+
+# Use some Vim-like navigation. This is adopted from
+# https://github.com/neomutt/neomutt/blob/b57c413226f2cf07fc5f80b66f038ac02dbd6364/contrib/vim-keys/vim-keys.rc.
+# g can't be bound since gg uses it.
+bind attach,browser,index,pager g noop
+
+# Moving around
+bind attach,browser,index gg first-entry
+bind attach,browser,index G last-entry
+bind pager gg top
+bind pager G bottom
+bind pager k previous-line
+bind pager j next-line
+
+# Reverse how j/k and J/K work in the index.
+bind index j next-entry
+bind index k previous-entry
+bind index J next-undeleted
+bind index K previous-undeleted
+
+# Scrolling
+bind attach,browser,index,pager \Cf next-page
+bind attach,browser,index,pager \Cb previous-page
+bind attach,browser,index,pager \Cu half-up
+bind attach,browser,index,pager \Cd half-down
+bind browser,index,pager \Ce next-line
+bind browser,index,pager \Cy previous-line
+
+# Threads
+bind index <space> collapse-thread
+
+# Add some Gmail-inspired bindings.
+macro index,pager gi "<change-folder>=Inbox<enter>" "Go to Inbox"
+macro index,pager gs "<change-folder>=[Gmail]/Starred<enter>" "Go to Starred conversations"
+macro index,pager gt "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to Sent messages"
+macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to Drafts"
+macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to All mail"
+bind index c mail
+bind index,pager a group-reply
+bind index \# delete-message
+# Return to the index after deleting a message. Really, though, we need to
+# return to the index first, otherwise the next message could be marked as read
+# without ever visually opening it.
+macro pager \# "<exit><delete-message>"
+macro index,pager e "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
+bind index I toggle-new
+bind index,pager s flag-message
+bind index,pager l copy-message
+bind index,pager v save-message
+# Get rid of the default bindings for these things.
+unbind index m
+unbind index,pager d
+unbind index N
+unbind index,pager C
+unbind index,pager F
+
+# Set up accounts. This is done last so that they can override other settings
+# such as bindings and macros.
+source accounts/gmail
+macro index,pager <F1> "<enter-command>source ~/.config/neomutt/accounts/gmail<enter><change-folder>=Inbox<enter>" "Switch to gmail"
+macro index,pager <F2> "<enter-command>source ~/.config/neomutt/accounts/dirnonline<enter><change-folder>=Inbox<enter>" "Switch to dirnonline"
+macro index,pager <F3> "<enter-command>source ~/.config/neomutt/accounts/pygotham<enter><change-folder>=Inbox<enter>" "Switch to pygotham"
+macro index,pager <F4> "<enter-command>source ~/.config/neomutt/accounts/bigapplepy<enter><change-folder>=Inbox<enter>" "Switch to bigapplepy"
+
+set spoolfile = "+Inbox"
+set postponed = "+[Gmail]/Drafts"
+set trash = "+[Gmail]/Trash"
+set record  = ""

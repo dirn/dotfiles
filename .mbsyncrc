@@ -1,0 +1,91 @@
+IMAPAccount gmail
+    Host imap.gmail.com
+    User andy.dirnberger@gmail.com
+    PassCmd "security find-internet-password -s 'smtp.gmail.com' -a 'andy.dirnberger@gmail.com' -w"
+    SSLType IMAPS
+    SSLVersion TLSv1.2
+    AuthMechs LOGIN
+
+IMAPStore gmail-remote
+    Account gmail
+
+MaildirStore gmail-local
+    Path ~/Mail/gmail/
+    Inbox ~/Mail/gmail/Inbox
+    Subfolders Verbatim
+
+Channel gmail
+    Master :gmail-remote:
+    Slave :gmail-local:
+    Patterns *
+    Create Both
+    SyncState *
+
+IMAPAccount dirnonline
+    Host imap.gmail.com
+    User dirn@dirnonline.com
+    PassCmd "security find-internet-password -s 'smtp.gmail.com' -a 'dirn@dirnonline.com' -w"
+    SSLType IMAPS
+    SSLVersion TLSv1.2
+    AuthMechs LOGIN
+
+IMAPStore dirnonline-remote
+    Account dirnonline
+
+MaildirStore dirnonline-local
+    Path ~/Mail/dirnonline/
+    Inbox ~/Mail/dirnonline/Inbox
+    Subfolders Verbatim
+
+Channel dirnonline
+    Master :dirnonline-remote:
+    Slave :dirnonline-local:
+    Patterns *
+    Create Both
+    SyncState *
+
+IMAPAccount pygotham
+    Host imap.gmail.com
+    User andy@pygotham.org
+    PassCmd "security find-internet-password -s 'smtp.gmail.com' -a 'andy@pygotham.org' -w"
+    SSLType IMAPS
+    SSLVersion TLSv1.2
+    AuthMechs LOGIN
+
+IMAPStore pygotham-remote
+    Account pygotham
+
+MaildirStore pygotham-local
+    Path ~/Mail/pygotham/
+    Inbox ~/Mail/pygotham/Inbox
+    Subfolders Verbatim
+
+Channel pygotham
+    Master :pygotham-remote:
+    Slave :pygotham-local:
+    Patterns *
+    Create Both
+    SyncState *
+
+IMAPAccount bigapplepy
+    Host imap.gmail.com
+    User andy@bigapplepy.org
+    PassCmd "security find-internet-password -s 'smtp.gmail.com' -a 'andy@bigapplepy.org' -w"
+    SSLType IMAPS
+    SSLVersion TLSv1.2
+    AuthMechs LOGIN
+
+IMAPStore bigapplepy-remote
+    Account bigapplepy
+
+MaildirStore bigapplepy-local
+    Path ~/Mail/bigapplepy/
+    Inbox ~/Mail/bigapplepy/Inbox
+    Subfolders Verbatim
+
+Channel bigapplepy
+    Master :bigapplepy-remote:
+    Slave :bigapplepy-local:
+    Patterns *
+    Create Both
+    SyncState *

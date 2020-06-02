@@ -1,0 +1,4 @@
+# Hide folders I don't want to see.
+unmailboxes =[Gmail]/Spam
+unmailboxes =[Gmail]/Trash
+unmailboxes =[Gmail]Trash
