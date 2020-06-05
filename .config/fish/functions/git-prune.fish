@@ -33,7 +33,7 @@ function git-prune
     echo
     for branch in $MERGED
         set -l HASH (git rev-parse $branch)
-        echo \tgit checkout -b $HASH $branch
+        echo \tgit switch --create $branch $HASH
         git branch --quiet --delete $branch
     end
     echo
