@@ -145,7 +145,7 @@ macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to Drafts"
 macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to All mail"
 bind index c mail
 bind index,pager a group-reply
-bind index \# delete-message
+bind index \# delete-thread
 # Return to the index after deleting a message. Really, though, we need to
 # return to the index first, otherwise the next message could be marked as read
 # without ever visually opening it.
