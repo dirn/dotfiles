@@ -16,3 +16,5 @@ set sendmail = "msmtp --account dirnonline"
 # Simplify the status line to just the account, folder name, some counts, and
 # the percentage of the way through the index.
 set status_format = "[ dirnonline ] [ Folder: %f ] [%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%>─%?p?( %p postponed )?---(%P)---"
+
+macro index @ "<shell-escape>mbsync dirnonline<enter>" "Sync all mail"
