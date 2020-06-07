@@ -35,3 +35,10 @@ if [ -f "$HOME/.virtualenvs/global_requirements.txt" ]; then
     # TODO: This can be switched to `true` in fish 3.2.
     fish -c "set EDITOR echo; vf requirements"
 fi
+
+# Make the Maildir directories. isync seems to want them to exist rather than
+# just creating them if they aren't there.
+mkdir -p ~/Mail/bigapplepy
+mkdir -p ~/Mail/dirnonline
+mkdir -p ~/Mail/gmail
+mkdir -p ~/Mail/pygotham
