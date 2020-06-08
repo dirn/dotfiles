@@ -19,6 +19,7 @@ Channel gmail
     Slave :gmail-local:
     Patterns *
     Create Both
+    Remove Both
     SyncState *
 
 IMAPAccount dirnonline
@@ -42,6 +43,7 @@ Channel dirnonline
     Slave :dirnonline-local:
     Patterns *
     Create Both
+    Remove Both
     SyncState *
 
 IMAPAccount pygotham
@@ -65,6 +67,7 @@ Channel pygotham
     Slave :pygotham-local:
     Patterns *
     Create Both
+    Remove Both
     SyncState *
 
 IMAPAccount bigapplepy
@@ -88,4 +91,5 @@ Channel bigapplepy
     Slave :bigapplepy-local:
     Patterns *
     Create Both
+    Remove Both
     SyncState *
