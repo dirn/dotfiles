@@ -150,16 +150,24 @@ macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to All mail"
 bind index c mail
 bind index,pager a group-reply
 bind index x tag-thread
-bind index \# delete-thread
+bind index \# delete-message
 # Return to the index after deleting a message. Really, though, we need to
 # return to the index first, otherwise the next message could be marked as read
-# without ever visually opening it.
-macro pager \# "<exit><delete-message>"
+# without ever visually opening it. For some reason that I don't fully
+# understand yet, doing this without <untag-pattern> and <tag-thread> results in
+# only deleting the selected message. Doing it without <untag-pattern> deletes
+# the first message after the thread in the mailbox.
+macro pager \# "<exit><tag-thread><delete-message>" "Delete the current thread"
 macro index,pager e "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
 bind index I toggle-new
 bind index,pager s flag-message
-macro index,pager l "<tag-thread><copy-message>" "Label thread"
-macro index,pager v "<tag-thread><save-message>" "Move thread"
+bind index,pager l copy-message
+bind index,pager v save-message
+# Remove tags from messages and then tag the selected thread before opening the
+# selected message. This will make it easier to operate on the current thread
+# while viewing a message.
+macro index <enter> "<untag-pattern>.*<enter><tag-thread><select-entry>" "Open the current message"
+macro pager q "<exit><untag-pattern>.*<enter>" "Return to the mailbox"
 # Get rid of the default bindings for these things.
 unbind index m
 unbind index,pager d
