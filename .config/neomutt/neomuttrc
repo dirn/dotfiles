@@ -12,6 +12,10 @@ set delete
 # By default, unread messages are marked as old when exiting. Don't do that.
 unset mark_old
 
+# Apply commands to all tagged messages. This is most applicable when operating
+# on threads. Without it, <tag-prefix> would be needed.
+set auto_tag
+
 # Get the sender from the From: field.
 set use_envelope_from
 set reverse_name
@@ -153,8 +157,8 @@ macro pager \# "<exit><delete-message>"
 macro index,pager e "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
 bind index I toggle-new
 bind index,pager s flag-message
-bind index,pager l copy-message
-bind index,pager v save-message
+macro index,pager l "<tag-thread><copy-message>" "Label thread"
+macro index,pager v "<tag-thread><save-message>" "Move thread"
 # Get rid of the default bindings for these things.
 unbind index m
 unbind index,pager d
