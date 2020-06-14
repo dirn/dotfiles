@@ -55,10 +55,17 @@ set status_on_top
 # This is close to the default, but I don't need to see if the mailbox is
 # unchanged.
 set status_chars = " *%A"
-# Show the message flags, whether or not there's an attachment, the date and
-# time, the author name (or recipient if from me), and the subject.
-set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %s"
-#
+# Show the message flags, whether or not there's an attachment,
+# the author name (or recipient if from me), the number of messages in the
+# thread (if more than one), the subject, and the date using the following
+# conditional formatting:
+# Test   Date Range     Format String  Example
+# --------------------------------------------
+# %[24h  Past 24 hours  %[%H:%M ]      12:34
+# %[y    This year      %[%a %b ]      Jan 01
+#  -     Older          %[%m/%d/%y ]   01/02/03
+set index_format = "[%Z] %?X?a&-? %-20.20F %?M?%3M&   ?  %s %> %<[y?%<[24H?%[%H:%M ]&%[%b %d ]>&%[%m/%d/%y ]>"
+
 # Prefer UTF-8.
 set send_charset = "utf-8:iso-8859-1:us-ascii"
 set charset = "utf-8"
