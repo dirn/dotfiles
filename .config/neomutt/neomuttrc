@@ -98,15 +98,8 @@ set sidebar_short_path
 set mail_check_stats
 set sidebar_format = "%B %?N?(%N)?%* %S"
 
-# Highlight the status bar.
-color status blue default
-# Highlight unread messages and the folders they're in.
-color index blue default "~N"
-color sidebar_new blue default
-# Highlight the current folder.
-color sidebar_indicator black blue
-# Highlight the folder the cursor is on.
-color sidebar_highlight brightblue default
+# See https://github.com/altercation/solarized.
+source mutt-colors-solarized-dark-16.muttrc
 
 # # The noop bind is needed so that the line editor accepts IMAP folders with
 # spaces in their names.
