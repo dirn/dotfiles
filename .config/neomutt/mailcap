@@ -1,4 +1,4 @@
 application/pdf; pdftotext -layout %s -; copiousoutput
 image/*; open %s
-text/html; w3m -T text/html -I %{charset} -O utf-8 %s; needsterminal
+text/html; w3m -o confirm_qq=false -T text/html -I %{charset} -O utf-8 %s; needsterminal
 text/html; w3m -dump -T text/html -I %{charset} -O utf-8 %s; copiousoutput; description=HTML Text; nametemplate=%s.html
