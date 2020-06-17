@@ -12,6 +12,9 @@ set delete
 # By default, unread messages are marked as old when exiting. Don't do that.
 unset mark_old
 
+# Don't wait for me after exiting an external command.
+unset wait_key
+
 # Apply commands to all tagged messages. This is most applicable when operating
 # on threads. Without it, <tag-prefix> would be needed.
 set auto_tag
