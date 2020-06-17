@@ -178,6 +178,16 @@ bind index,pager \Cj sidebar-next
 bind index,pager \Ck sidebar-prev
 bind index,pager \Cl sidebar-open
 
+# Sometimes I'd like to interact with the hyperlinks in a message, but those
+# aren't displayed when viewing the rendered output in NeoMutt. I need to
+# explicitly open the text/html attachment directly using the mailcap for that.
+# I don't care about seeing NeoMutt's version from within NeoMutt, so I'm going
+# to steal that bind.
+unbind index,pager V
+# This will open the list of attachments, find the first one with html in it,
+# and open it. The <exit> gets us back out of the list of attachments when done.
+macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
+
 # Set up accounts. This is done last so that they can override other settings
 # such as bindings and macros.
 source accounts/gmail
