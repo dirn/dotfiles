@@ -21,7 +21,6 @@ set auto_tag
 
 # Get the sender from the From: field.
 set use_envelope_from
-set reverse_name
 
 set abort_key = "<esc>"
 

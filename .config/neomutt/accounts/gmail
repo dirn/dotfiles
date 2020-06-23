@@ -8,7 +8,12 @@ mailboxes `find ~/Mail/gmail/ -type d -name cur | sed -e 's:/cur/*$::' -e 's/ /\
 source _post
 
 # Send emails from the right account.
+set from = "andy.dirnberger@gmail.com"
 set sendmail = "msmtp --account gmail"
+
+# Don't use aliases with this account.
+alternates ""
+unset reverse_name
 
 # Simplify the status line to just the account, folder name, some counts, and
 # the percentage of the way through the index.

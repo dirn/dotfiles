@@ -7,11 +7,13 @@ source _pre
 mailboxes `find ~/Mail/dirnonline/ -type d -name cur | sed -e 's:/cur/*$::' -e 's/ /\\ /g' | sort | tr '\n' ' '`
 source _post
 
-# Support aliases.
-alternates andy@dirnberger.me
-
 # Send emails from the right account.
+set from = "dirn@dirnonline.com"
 set sendmail = "msmtp --account dirnonline"
+
+# Support aliases.
+alternates "^andy@dirnberger.me$"
+set reverse_name
 
 # Simplify the status line to just the account, folder name, some counts, and
 # the percentage of the way through the index.
