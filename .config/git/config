@@ -30,7 +30,7 @@
 [fetch]
     prune = true
 [init]
-    templateDir = /Users/dirn/.gittemplate
+    templateDir = ~/.gittemplate
 [mergetool]
     keepBackup = false
     prompt = false
