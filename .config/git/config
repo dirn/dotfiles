@@ -30,7 +30,7 @@
 [fetch]
     prune = true
 [init]
-    templateDir = ~/.gittemplate
+    templateDir = ~/.config/git/template
 [mergetool]
     keepBackup = false
     prompt = false
