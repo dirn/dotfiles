@@ -30,6 +30,7 @@
 [fetch]
     prune = true
 [init]
+    defaultBranch = main
     templateDir = ~/.config/git/template
 [mergetool]
     keepBackup = false
