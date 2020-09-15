@@ -2,6 +2,7 @@ black
 bpython
 flake8-bugbear
 pip
+pre-commit
 pudb
 pynvim
 tox
