@@ -16,6 +16,7 @@ Plug 'https://github.com/dense-analysis/ale'
 let g:ale_fix_on_save = 1
 
 Plug 'https://github.com/rhysd/committia.vim'
+Plug 'https://github.com/rhysd/conflict-marker.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 
 Plug 'https://github.com/junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'} | Plug 'https://github.com/junegunn/fzf.vim'
