@@ -9,6 +9,6 @@ and repo and play around. If you want to setup up your computer with some useful
 This repository is managed by [Yet Another Dotfiles Manager][yadm]. To add it to
 a new computer:
 
-    $ yadm clone https://gitlab.com/dirn/dotfiles.git --bootstrap
+    $ yadm clone -b origin/main https://gitlab.com/dirn/dotfiles.git --bootstrap
 
 [yadm]: https://yadm.io
