@@ -22,7 +22,26 @@ alias rm "rm -i"
 # Create intermediate directories.
 alias mkdir "mkdir -p"
 
-set --global --export PATH /usr/local/sbin $PATH
+# Add Homebrew to $PATH.
+eval (/opt/homebrew/bin/brew shellenv)
+
+# Add GNU command line tools to $PATH.
+set brewfix (brew --prefix)
+set --global --export PATH \
+    "$brewfix/opt/file-formula/bin" \
+    "$brewfix/opt/m4/bin" \
+    "$brewfix/opt/unzip/bin" \
+    "$brewfix/opt/ed/libexec/gnubin" \
+    "$brewfix/opt/gnu-indent/libexec/gnubin" \
+    "$brewfix/opt/gnu-sed/libexec/gnubin" \
+    "$brewfix/opt/gnu-tar/libexec/gnubin" \
+    "$brewfix/opt/gnu-which/libexec/gnubin" \
+    "$brewfix/opt/grep/libexec/gnubin" \
+    "$brewfix/opt/make/libexec/gnubin" \
+    $PATH
+
+# Manage Homebrew formulae.
+set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 
 # Manage Python with pyenv.
 if type --no-functions --quiet pyenv
@@ -37,9 +56,6 @@ alias g git
 
 # Configure fzf.
 set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glob="!.git/*" --glob="!.mypy_cache/*"'
-
-# Manage Homebrew formulae.
-set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 
 # Allow for system-specific configuration.
 if test -e ~/.config/fish/extras.fish

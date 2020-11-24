@@ -23,6 +23,11 @@ Store. Its license must be accepted; this can be done through the command line:
 
     $ sudo xcodebuild -license accept
 
+If using an ARM-based processor, Rosetta 2 is required to run anything that is
+only available for x86-based processors.
+
+    $ /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+
 #### GNU
 
 macOS ships with the BSD version of some tools rather than the [GNU] version.
