@@ -38,9 +38,6 @@ alias g git
 # Configure fzf.
 set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glob="!.git/*" --glob="!.mypy_cache/*"'
 
-# Manage my dotfiles.
-alias config "git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-
 # Manage Homebrew formulae.
 set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 
