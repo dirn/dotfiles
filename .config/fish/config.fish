@@ -48,4 +48,6 @@ end
 
 # Use tmux for all new sessions. This should be done last in case extras.fish
 # changes $PATH in a way that affects tmux.
-if not set -q TMUX; exec env tmux new-session; end
+if type -q tmux 
+    if not set -q TMUX; exec env tmux new-session; end
+end
