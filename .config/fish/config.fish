@@ -51,6 +51,11 @@ end
 # PuDB is a nicer debugger than pdb.
 set --global --export PYTHONBREAKPOINT "pudb.set_trace"
 
+# Both Poetry and my fish configuration add the name of the current environment
+# to the prompt. The only way to stop the former is to tell pyvenv not to do it.
+# Fortunately I've been using virtualfish for my non-Poetry environments.
+set --global --export VIRTUAL_ENV_DISABLE_PROMPT 1
+
 # git is too long to type.
 alias g git
 
