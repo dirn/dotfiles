@@ -83,6 +83,7 @@ Plug 'https://github.com/pbrisbin/vim-mkdir'
 Plug 'https://github.com/tpope/vim-obsession' | Plug 'https://github.com/dhruvasagar/vim-prosession'
 Plug 'https://github.com/Vimjas/vim-python-pep8-indent'
 Plug 'https://github.com/tpope/vim-rsi'
+Plug 'https://github.com/cespare/vim-toml'
 
 if executable('tmux')
     Plug 'https://github.com/christoomey/vim-tmux-navigator'
