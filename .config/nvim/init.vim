@@ -86,6 +86,7 @@ Plug 'https://github.com/lifepillar/vim-solarized8'
 Plug 'https://github.com/cespare/vim-toml'
 
 if executable('tmux')
+    Plug 'https://github.com/tmux-plugins/vim-tmux-focus-events'
     Plug 'https://github.com/christoomey/vim-tmux-navigator'
 endif
 call plug#end()
@@ -108,6 +109,15 @@ set encoding=utf8
 set autoindent
 set backspace=indent,eol,start
 set smarttab
+
+" I use things like pre-commit to run fixers on my code. The problem with that
+" is that if I start making changes before reloading the buffer, pre-commit will
+" reject the commit again or, even worse, I'll end up with merge conflicts. This
+" will automatically reload it when something else changes it.
+set autoread
+augroup autoread
+    autocmd BufEnter * checktime
+augroup END
 
 " Let me switch buffers without saving the current one. This will return undo
 " history even when switching between buffers.
