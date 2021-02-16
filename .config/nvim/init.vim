@@ -74,7 +74,6 @@ Plug 'https://github.com/raimon49/requirements.txt.vim'
 Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://gitlab.com/dirn/TODO.vim'
 Plug 'https://github.com/tpope/vim-commentary'
-Plug 'https://github.com/altercation/vim-colors-solarized'
 Plug 'https://github.com/blueyed/vim-diminactive'
 Plug 'https://github.com/tommcdo/vim-exchange'
 Plug 'https://github.com/wsdjeg/vim-fetch'
@@ -83,6 +82,7 @@ Plug 'https://github.com/pbrisbin/vim-mkdir'
 Plug 'https://github.com/tpope/vim-obsession' | Plug 'https://github.com/dhruvasagar/vim-prosession'
 Plug 'https://github.com/Vimjas/vim-python-pep8-indent'
 Plug 'https://github.com/tpope/vim-rsi'
+Plug 'https://github.com/lifepillar/vim-solarized8'
 Plug 'https://github.com/cespare/vim-toml'
 
 if executable('tmux')
@@ -93,7 +93,10 @@ call plug#end()
 filetype plugin indent on
 syntax enable
 
-colorscheme solarized
+if has('termguicolors')
+    set termguicolors
+endif
+colorscheme solarized8
 if has('mac')
     set background=dark
 elseif has('unix')
@@ -144,7 +147,6 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Show a rule at the width of the text.
 if exists('&colorcolumn')
-    highlight ColorColumn guibg=Red
     set colorcolumn=+1
 endif
 
