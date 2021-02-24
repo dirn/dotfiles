@@ -190,6 +190,9 @@ set spell
 " Make horizontal scrolling smoother.
 set sidescroll=1
 
+" Leave some padding at the top or bottom of the window when scrolling.
+set scrolloff=2
+
 " Automatically expand all folds.
 set nofoldenable
 
