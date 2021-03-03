@@ -44,7 +44,7 @@ set --global --export PATH \
 set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 
 # Manage Python with pyenv.
-if type --no-functions --quiet pyenv
+if type --no-functions --query pyenv
     status --is-interactive; and source (pyenv init -|psub)
 end
 
@@ -69,6 +69,6 @@ end
 
 # Use tmux for all new sessions. This should be done last in case extras.fish
 # changes $PATH in a way that affects tmux.
-if type -q tmux 
-    if not set -q TMUX; exec env tmux new-session; end
+if type --query tmux
+    if not set --query TMUX; exec env tmux new-session; end
 end
