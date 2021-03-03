@@ -27,7 +27,7 @@ eval (/opt/homebrew/bin/brew shellenv)
 
 # Add GNU command line tools to $PATH.
 set brewfix (brew --prefix)
-set --global --export PATH \
+fish_add_path --path --prepend \
     "$brewfix/opt/file-formula/bin" \
     "$brewfix/opt/m4/bin" \
     "$brewfix/opt/unzip/bin" \
@@ -37,8 +37,7 @@ set --global --export PATH \
     "$brewfix/opt/gnu-tar/libexec/gnubin" \
     "$brewfix/opt/gnu-which/libexec/gnubin" \
     "$brewfix/opt/grep/libexec/gnubin" \
-    "$brewfix/opt/make/libexec/gnubin" \
-    $PATH
+    "$brewfix/opt/make/libexec/gnubin"
 
 # Manage Homebrew formulae.
 set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
