@@ -14,8 +14,8 @@ fi
 
 if command -v pyenv >/dev/null 2>&1; then
     echo "Installing Python versions."
-    pyenv install --skip-existing 3.9.2
-    pyenv global 3.9.2
+    pyenv install --skip-existing 3.9.4
+    pyenv global 3.9.4
 
     echo "Installing Python libraries."
     python -m pip install --upgrade pip
