@@ -2,35 +2,36 @@
 
 if ! command -v brew >/dev/null 2>&1; then
     echo "Installing Homebrew."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" >/dev/null
 fi
 
 # TODO: This is set in a file that is sourced by something installed by brew
 # bundle.
 if [ -f "$HOMEBREW_BUNDLE_FILE" ]; then
     echo "Updating Homebrew bundle."
-    brew update
+    brew update >/dev/null
     brew bundle
-    brew cleanup
+    brew cleanup >/dev/null
 fi
 
 if command -v pyenv >/dev/null 2>&1; then
-    echo "Installing Python versions."
-    pyenv install --skip-existing 3.9.4
-    pyenv global 3.9.4
+    echo "Installing Python."
+    pyenv install --skip-existing 3.9.4 >/dev/null
+    pyenv global 3.9.4 >/dev/null
 
     echo "Installing Python libraries."
-    python -m pip install --upgrade pip
-    pip install black bpython flake8 flake8_bugbear mypy pre-commit pudb pynvim virtualfish
+    python -m pip install --upgrade pip >/dev/null
+    pip install black bpython flake8 flake8_bugbear mypy pre-commit pudb pynvim virtualfish >/dev/null
 fi
 
 if command -v fish >/dev/null 2>&1; then
   if command -v vf >/dev/null 2>&1; then
-      echo "Installing virtualfish plugins."
-      fish -c "vf install"
+      echo "Installing virtualfish."
+      fish -c "vf install" >/dev/null
   fi
-  fish -c "vf addplugins auto_activation"
-  fish -c "vf addplugins global_requirements"
+  echo "Registering virtualfish plugins."
+  fish -c "vf addplugins auto_activation" >/dev/null
+  fish -c "vf addplugins global_requirements" >/dev/null
 
   if [ -f "$HOME/.virtualenvs/global_requirements.txt" ]; then
       echo "Installing requirements into virtual environments."
@@ -40,14 +41,14 @@ if command -v fish >/dev/null 2>&1; then
       # editor instead, we can install the requirements without further user
       # interaction.
       # TODO: This can be switched to `true` in fish 3.2.
-      fish -c "set EDITOR echo; vf requirements"
+      fish -c "set EDITOR echo; vf requirements" >/dev/null
   fi
 fi
 
 # Make the Maildir directories. isync seems to want them to exist rather than
 # just creating them if they aren't there.
 echo "Creating mailboxes."
-mkdir -p ~/Mail/bigapplepy
-mkdir -p ~/Mail/dirnonline
-mkdir -p ~/Mail/gmail
-mkdir -p ~/Mail/pygotham
+mkdir -p ~/Mail/bigapplepy >/dev/null
+mkdir -p ~/Mail/dirnonline >/dev/null
+mkdir -p ~/Mail/gmail >/dev/null
+mkdir -p ~/Mail/pygotham >/dev/null
