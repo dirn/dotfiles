@@ -23,6 +23,14 @@
     ui = true
 [core]
     editor = nvim
+    pager = delta
+[delta]
+    file-decoration-style = underline
+    hunk-header-decoration-style = yellow box
+    line-numbers = true
+    side-by-side = true
+    syntax-theme = Solarized (dark)
+    zero-style = dim syntax
 [diff]
     algorithm = patience
 [difftool]
