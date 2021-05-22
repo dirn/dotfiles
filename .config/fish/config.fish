@@ -44,7 +44,8 @@ set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 
 # Manage Python with pyenv.
 if type --no-functions --query pyenv
-    status --is-interactive; and source (pyenv init -|psub)
+    status --is-login; and pyenv init --path | source
+    pyenv init - | source
 end
 
 # PuDB is a nicer debugger than pdb.
