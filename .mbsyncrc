@@ -15,8 +15,8 @@ MaildirStore gmail-local
     Subfolders Verbatim
 
 Channel gmail
-    Master :gmail-remote:
-    Slave :gmail-local:
+    Far :gmail-remote:
+    Near :gmail-local:
     Patterns *
     Create Both
     Remove Both
@@ -39,8 +39,8 @@ MaildirStore dirnonline-local
     Subfolders Verbatim
 
 Channel dirnonline
-    Master :dirnonline-remote:
-    Slave :dirnonline-local:
+    Far :dirnonline-remote:
+    Near :dirnonline-local:
     Patterns *
     Create Both
     Remove Both
@@ -63,8 +63,8 @@ MaildirStore pygotham-local
     Subfolders Verbatim
 
 Channel pygotham
-    Master :pygotham-remote:
-    Slave :pygotham-local:
+    Far :pygotham-remote:
+    Near :pygotham-local:
     Patterns *
     Create Both
     Remove Both
@@ -87,8 +87,8 @@ MaildirStore bigapplepy-local
     Subfolders Verbatim
 
 Channel bigapplepy
-    Master :bigapplepy-remote:
-    Slave :bigapplepy-local:
+    Far :bigapplepy-remote:
+    Near :bigapplepy-local:
     Patterns *
     Create Both
     Remove Both
