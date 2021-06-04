@@ -29,7 +29,7 @@
     hunk-header-decoration-style = yellow box
     line-numbers = true
     side-by-side = true
-    syntax-theme = Solarized (dark)
+    syntax-theme = GitHub (dark)
     zero-style = dim syntax
 [diff]
     algorithm = patience
