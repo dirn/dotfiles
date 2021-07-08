@@ -13,6 +13,10 @@ indent_style = space
 indent_size = 4
 indent_style = space
 
+[*.lua]
+indent_size = 2
+indent_style = space
+
 [.mbsyncrc]
 indent_size = 4
 indent_style = space

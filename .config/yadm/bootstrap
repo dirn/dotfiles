@@ -23,7 +23,12 @@ if command -v pyenv >/dev/null 2>&1; then
 
     echo "Installing Python libraries."
     python -m pip install --upgrade pip >/dev/null
-    pip install black bpython flake8 flake8_bugbear mypy pre-commit pudb pynvim virtualfish >/dev/null
+    pip install black bpython flake8 flake8_bugbear isort mypy pre-commit pudb pynvim virtualfish >/dev/null
+fi
+
+# The Lua language server needs lua-format to format code.
+if ! command -v lua-format >/dev/null 2>&1; then
+    luarocks install --server=https://luarocks.org/dev luaformatter
 fi
 
 if command -v fish >/dev/null 2>&1; then

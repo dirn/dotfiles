@@ -62,6 +62,8 @@ alias g git
 # Configure fzf.
 set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glob="!.git/*" --glob="!.mypy_cache/*"'
 
+fish_add_path --path --prepend "$HOME/.local/bin"
+
 # Allow for system-specific configuration.
 if test -e ~/.config/fish/extras.fish
     source ~/.config/fish/extras.fish

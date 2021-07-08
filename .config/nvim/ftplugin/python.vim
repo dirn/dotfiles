@@ -16,7 +16,3 @@ autocmd User SyntaxpythonDocstringLeaveA setlocal textwidth=100
 
 " Highlight all the things
 let python_highlight_all=1
-
-" Fix the code
-let b:ale_fixers = ['black']
-let b:ale_linters = ['flake8', 'mypy']
