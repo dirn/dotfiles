@@ -47,7 +47,10 @@ set --global --export ASDF_CONFIG_FILE ~/.config/asdf/config
 set --global --export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME ~/.config/asdf/versions
 
 # Use asdf to manage versions of things.
-source (brew --prefix asdf)/asdf.fish
+set asdffix  (brew --prefix asdf)
+if test -e $asdffix
+    source $asdffix/asdf.fish
+end
 
 # Manage Python with pyenv.
 if type --no-functions --query pyenv
