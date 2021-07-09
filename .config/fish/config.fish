@@ -42,6 +42,13 @@ fish_add_path --path --prepend \
 # Manage Homebrew formulae.
 set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 
+# Set the location of the asdf configuration.
+set --global --export ASDF_CONFIG_FILE ~/.config/asdf/config
+set --global --export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME ~/.config/asdf/versions
+
+# Use asdf to manage versions of things.
+source (brew --prefix asdf)/asdf.fish
+
 # Manage Python with pyenv.
 if type --no-functions --query pyenv
     status --is-login; and pyenv init --path | source
