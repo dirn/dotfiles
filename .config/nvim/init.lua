@@ -2,16 +2,16 @@
 vim.g.mapleader = [[ ]]
 
 -- Install plugins.
-require('plugins')
+require("plugins")
 
 -- Use my own idea of sensible defaults.
-require('settings')
+require("settings")
 
 -- Register my keybindings.
-require('bindings')
+require("bindings")
 
 -- Configure language servers.
-require('lsp')
+require("lsp")
 
 -- Allow for system-specific configuration.
-pcall(require, 'extras')
+pcall(require, "extras")

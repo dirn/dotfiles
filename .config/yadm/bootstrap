@@ -17,6 +17,7 @@ fi
 if command -v asdf >/dev/null 2>&1; then
     echo "Install versions of things."
     asdf plugin add python
+    asdf plugin add rust
     asdf plugin update --all
     asdf install
 
@@ -24,13 +25,11 @@ if command -v asdf >/dev/null 2>&1; then
     python -m pip install --upgrade pip >/dev/null
     pip install black bpython flake8 flake8_bugbear isort mypy pre-commit pudb pynvim virtualfish >/dev/null
 
+    echo "Installing Rust libraries."
+    cargo install stylua
+
     echo "Regenerating shims."
     asdf reshim
-fi
-
-# The Lua language server needs lua-format to format code.
-if ! command -v lua-format >/dev/null 2>&1; then
-    luarocks install --server=https://luarocks.org/dev luaformatter
 fi
 
 if command -v fish >/dev/null 2>&1; then

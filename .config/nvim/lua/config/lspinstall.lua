@@ -1,3 +1,3 @@
-require('lspinstall').post_install_hook = function()
-  vim.cmd [[ bufdo e ]]
+require("lspinstall").post_install_hook = function()
+  vim.cmd([[ bufdo e ]])
 end

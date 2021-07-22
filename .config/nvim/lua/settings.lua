@@ -1,19 +1,19 @@
 local fn = vim.fn
 
-local config = require('config')
+local config = require("config")
 local autocmd = config.autocmd
 
 -- Some of these settings are already the default, but sometimes plugins do
 -- silly things.
 
-vim.cmd [[ filetype plugin indent on ]]
-vim.cmd [[ syntax enable ]]
+vim.cmd([[ filetype plugin indent on ]])
+vim.cmd([[ syntax enable ]])
 
-vim.opt.encoding = 'utf8'
+vim.opt.encoding = "utf8"
 
 -- Handle whitespace.
 vim.opt.autoindent = true
-vim.opt.backspace = 'indent,eol,start'
+vim.opt.backspace = "indent,eol,start"
 vim.opt.smarttab = true
 
 -- I use things like pre-commit to run fixers on my code. The problem with that
@@ -21,7 +21,7 @@ vim.opt.smarttab = true
 -- will reject the commit again or, even worse, I'll end up with merge
 -- conflicts. This will automatically reload it when something else changes it.
 vim.opt.autoread = true
-autocmd('autoread', 'BufEnter * checktime', true)
+autocmd("autoread", "BufEnter * checktime", true)
 
 -- Let me switch buffers without saving the current one. This will retain undo
 -- history even when switching between buffers.
@@ -48,20 +48,22 @@ vim.opt.writebackup = false
 
 -- While I don't use it much, having mouse support can be nice from time to
 -- time.
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 
 -- Highlight the current line.
 vim.opt.cursorline = true
 -- Highlight matching brackets.
 vim.opt.showmatch = true
 -- ...including angle brackets.
-vim.opt.matchpairs = vim.opt.matchpairs + '<:>'
+vim.opt.matchpairs = vim.opt.matchpairs + "<:>"
 
 -- Highlight conflict markers as errors.
-vim.cmd [[ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' ]]
+vim.cmd([[ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' ]])
 
 -- Show a rule at the width of the text.
-if fn.exists('&colorcolumn') > 0 then vim.opt.colorcolumn = '+1' end
+if fn.exists("&colorcolumn") > 0 then
+  vim.opt.colorcolumn = "+1"
+end
 
 -- Replace all matches in a line, not just the first.
 vim.opt.gdefault = true
@@ -102,20 +104,22 @@ vim.opt.foldenable = false
 -- When completing in insert mode:
 --   - show the menu even when there's only one match
 --   - only insert from the menu when told
-vim.opt.completeopt = 'menuone,noinsert,noselect'
+vim.opt.completeopt = "menuone,noinsert,noselect"
 -- Don't give completion-related messages.
-vim.opt.shortmess = vim.opt.shortmess + 'c'
+vim.opt.shortmess = vim.opt.shortmess + "c"
 
 -- Open new splits to the right and bottom.
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Always open diff in vertical splits.
-vim.opt.diffopt = vim.opt.diffopt + 'vertical'
+vim.opt.diffopt = vim.opt.diffopt + "vertical"
 
 -- Jump to the last known cursor position if it's valid (from the docs).
 autocmd(
-  'last-position-jump', [[
+  "last-position-jump",
+  [[
     BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
-]], true
+]],
+  true
 )

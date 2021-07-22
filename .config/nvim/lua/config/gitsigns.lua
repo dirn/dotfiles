@@ -1,19 +1,19 @@
-require('gitsigns').setup({
+require("gitsigns").setup({
   signs = {
     add = {
-      text = '+',
+      text = "+",
     },
     change = {
-      text = '~',
+      text = "~",
     },
     delete = {
-      text = '_',
+      text = "_",
     },
     topdelete = {
-      text = '‾',
+      text = "‾",
     },
     changedelete = {
-      text = '~_',
+      text = "~_",
     },
   },
   yadm = {
@@ -24,6 +24,6 @@ require('gitsigns').setup({
 -- gitsigns reverses the fg and bg colors and uses the background of the
 -- number column rather than the background of the sign column. Fix that.
 -- TODO: Is there a way to get the background from SignColumn?
-vim.cmd [[ highlight GitSignsAdd gui=NONE guibg=NONE ctermbg=242 ]]
-vim.cmd [[ highlight GitSignsChange gui=NONE guibg=NONE ctermbg=242 ]]
-vim.cmd [[ highlight GitSignsDelete gui=NONE guibg=NONE ctermbg=242 ]]
+vim.cmd([[ highlight GitSignsAdd gui=NONE guibg=NONE ctermbg=242 ]])
+vim.cmd([[ highlight GitSignsChange gui=NONE guibg=NONE ctermbg=242 ]])
+vim.cmd([[ highlight GitSignsDelete gui=NONE guibg=NONE ctermbg=242 ]])

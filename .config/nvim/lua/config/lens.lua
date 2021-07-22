@@ -1,1 +1,1 @@
-vim.g['animate#duration'] = 1
+vim.g["animate#duration"] = 1
