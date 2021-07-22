@@ -69,6 +69,11 @@ set --global --export VIRTUAL_ENV_DISABLE_PROMPT 1
 # git is too long to type.
 alias g git
 
+# Use bat for manpages.
+if type --no-functions --query bat
+    set --global --export MANPAGER "sh -c 'col -bx | bat -l man -p'"
+end
+
 # Configure fzf.
 set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glob="!.git/*" --glob="!.mypy_cache/*"'
 
