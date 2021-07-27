@@ -45,6 +45,7 @@ return require("packer").startup(function(use)
       "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "https://github.com/nvim-treesitter/playground",
     },
+    branch = "0.5-compat",
     run = ":TSUpdate",
     config = [[ require('config.treesitter') ]],
   })
