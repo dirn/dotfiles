@@ -31,15 +31,15 @@ local on_attach = function(client, bufnr)
   )
 
   -- Navigate code.
-  noremap("n", "gd", [[ <cmd>lua vim.lsp.buf.definition()<cr> ]], opts)
-  noremap("n", "gy", [[ <cmd>lua vim.lsp.buf.type_definition()<cr> ]], opts)
-  noremap("n", "gr", [[ <cmd>lua vim.lsp.buf.references()<cr> ]], opts)
+  noremap("n", "gd", [[<cmd>lua vim.lsp.buf.definition()<cr>]], opts)
+  noremap("n", "gy", [[<cmd>lua vim.lsp.buf.type_definition()<cr>]], opts)
+  noremap("n", "gr", [[<cmd>lua vim.lsp.buf.references()<cr>]], opts)
 
   -- Show documentation.
   noremap(
     "n",
     "K",
-    [[ <cmd>lua require('lspsaga.hover').render_hover_doc()<cr> ]],
+    [[<cmd>lua require('lspsaga.hover').render_hover_doc()<cr>]],
     opts
   )
 
