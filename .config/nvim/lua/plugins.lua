@@ -100,6 +100,15 @@ return require("packer").startup(function(use)
 
   use("https://github.com/majutsushi/tagbar")
 
+  use({
+    "https://github.com/nvim-telescope/telescope.nvim",
+    requires = {
+      { "nvim-lua/popup.nvim" },
+      { "nvim-lua/plenary.nvim" },
+    },
+    config = [[ require('config.telescope') ]],
+  })
+
   use("https://gitlab.com/dirn/TODO.vim")
 
   use("https://github.com/tpope/vim-commentary")
