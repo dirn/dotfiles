@@ -52,7 +52,14 @@ return require("packer").startup(function(use)
   })
 
   use({
-    "https://github.com/hrsh7th/nvim-compe",
+    "https://github.com/hrsh7th/nvim-cmp",
+    requires = {
+      "https://github.com/hrsh7th/cmp-buffer",
+      "https://github.com/hrsh7th/cmp-calc",
+      "https://github.com/hrsh7th/cmp-nvim-lsp",
+      "https://github.com/hrsh7th/cmp-nvim-lua",
+      "https://github.com/hrsh7th/cmp-path",
+    },
     config = [[ require('config.completion') ]],
   })
 

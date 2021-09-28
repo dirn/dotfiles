@@ -1,39 +1,32 @@
-local noremap = require("config").noremap
-local silent_expression = { silent = true, expr = true }
+local cmp = require("cmp")
 
-require("compe").setup({
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = "enable",
-  throttle_time = 80,
-  source_timeout = 200,
-  resolve_timeout = 800,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  documentation = {
-    border = { "", "", "", " ", "", "", "", " " }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
+cmp.setup({
+  formatting = {
+    format = function(entry, vim_item)
+      -- Show the source of the completion.
+      vim_item.menu = ({
+        buffer = "[Buffer]",
+        calc = "[Calc]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[Lua]",
+        path = "[Path]",
+      })[entry.source.name]
+      return vim_item
+    end,
   },
-
-  source = {
-    path = true,
-    buffer = true,
-    calc = true,
-    nvim_lsp = true,
-    nvim_lua = true,
+  mapping = {
+    ["<c-space>"] = cmp.mapping.complete(),
+    ["<c-e>"] = cmp.mapping.close(),
+    ["<cr>"] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    }),
+  },
+  sources = {
+    { name = "buffer" },
+    { name = "calc" },
+    { name = "nvim_lsp" },
+    { name = "nvim_lua" },
+    { name = "path" },
   },
 })
-
-noremap("i", "<c-space>", "compe#complete()", silent_expression)
-noremap("i", "<cr>", "compe#confirm('<cr>')", silent_expression)
-noremap("i", "<c-e>", "compe#close('<c-e>')", silent_expression)
--- noremap('i', '<c-f>', "compe#scroll({ 'delta': +4 })", silent_expression)
--- noremap('i', '<c-d>', "compe#scroll({ 'delta': -4 })", silent_expression)
