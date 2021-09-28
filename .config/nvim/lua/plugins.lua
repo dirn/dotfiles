@@ -30,7 +30,7 @@ return require("packer").startup(function(use)
   use({
     "https://github.com/neovim/nvim-lspconfig",
     {
-      "https://github.com/glepnir/lspsaga.nvim",
+      "https://github.com/tami5/lspsaga.nvim",
       config = [[ require('config.lspsaga') ]],
     },
     {
