@@ -2,6 +2,8 @@ __pycache__
 .cfg
 .venv
 
+.envrc
+
 .DS_Store
 .DS_Store?
 .Spotlight-V100

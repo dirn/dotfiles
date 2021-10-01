@@ -79,6 +79,9 @@ set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glo
 
 fish_add_path --path --prepend "$HOME/.local/bin"
 
+# Use direnv.
+direnv hook fish | source
+
 # Allow for system-specific configuration.
 if test -e ~/.config/fish/extras.fish
     source ~/.config/fish/extras.fish
