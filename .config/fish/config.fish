@@ -69,6 +69,12 @@ set --global --export VIRTUAL_ENV_DISABLE_PROMPT 1
 # git is too long to type.
 alias g git
 
+# I like using exa but all of my muscle memory is for ls aliases.
+alias ls exa
+alias la "exa --all"
+alias ll "exa --long"
+alias lt "exa --tree --ignore-glob='.git|.mypy_cache|*.pyc' --all"
+
 # Use bat for manpages.
 if type --no-functions --query bat
     set --global --export MANPAGER "sh -c 'col -bx | bat -l man -p'"
