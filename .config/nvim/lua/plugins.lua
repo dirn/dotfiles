@@ -92,7 +92,12 @@ return require("packer").startup(function(use)
     end,
   })
 
-  use("https://github.com/tpope/vim-commentary")
+  use({
+    "https://github.com/numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+  })
 
   use("https://github.com/rhysd/committia.vim")
 
