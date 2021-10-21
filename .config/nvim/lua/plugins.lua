@@ -22,7 +22,9 @@ return require("packer").startup(function(use)
   -- Colorscheme
   use({
     "https://github.com/sainnhe/gruvbox-material",
-    config = [[ require('config.colorscheme') ]],
+    config = function()
+      require("config.colorscheme")
+    end,
   })
 
   -- LSP
@@ -35,11 +37,15 @@ return require("packer").startup(function(use)
       -- compatible with 0.5.
       -- TODO: Remove this once 0.6 has been released.
       branch = "nvim51",
-      config = [[ require('config.lspsaga') ]],
+      config = function()
+        require("config.lspsaga")
+      end,
     },
     {
       "https://github.com/kabouzeid/nvim-lspinstall",
-      config = [[ require('config.lspinstall') ]],
+      config = function()
+        require("config.lspinstall")
+      end,
     },
   })
 
@@ -53,7 +59,9 @@ return require("packer").startup(function(use)
     -- TODO: Remove this once 0.6 has been released.
     branch = "0.5-compat",
     run = ":TSUpdate",
-    config = [[ require('config.treesitter') ]],
+    config = function()
+      require("config.treesitter")
+    end,
   })
 
   -- Outside of the categories above, all plugins are listed here
@@ -79,7 +87,9 @@ return require("packer").startup(function(use)
       "https://github.com/hrsh7th/cmp-nvim-lua",
       "https://github.com/hrsh7th/cmp-path",
     },
-    config = [[ require('config.completion') ]],
+    config = function()
+      require("config.completion")
+    end,
   })
 
   use("https://github.com/tpope/vim-commentary")
@@ -99,19 +109,25 @@ return require("packer").startup(function(use)
   use({
     "https://github.com/junegunn/fzf.vim",
     requires = { "https://github.com/junegunn/fzf" },
-    config = [[ require('config.fzf') ]],
+    config = function()
+      require("config.fzf")
+    end,
   })
 
   use({
     "https://github.com/ruifm/gitlinker.nvim",
     requires = { "https://github.com/nvim-lua/plenary.nvim" },
-    config = [[ require('gitlinker').setup() ]],
+    config = function()
+      require("gitlinker").setup()
+    end,
   })
 
   use({
     "https://github.com/lewis6991/gitsigns.nvim",
     requires = { "https://github.com/nvim-lua/plenary.nvim" },
-    config = [[ require('config.gitsigns') ]],
+    config = function()
+      require("config.gitsigns")
+    end,
   })
 
   use({
@@ -120,13 +136,17 @@ return require("packer").startup(function(use)
       "https://github.com/nvim-lua/plenary.nvim",
       "https://github.com/nvim-lua/popup.nvim",
     },
-    config = [[ require('config.harpoon') ]],
+    config = function()
+      require("config.harpoon")
+    end,
   })
 
   use({
     "https://github.com/camspiers/lens.vim",
     requires = { "https://github.com/camspiers/animate.vim" },
-    config = [[ require('config.lens') ]],
+    config = function()
+      require("config.lens")
+    end,
   })
 
   use("https://github.com/pbrisbin/vim-mkdir")
@@ -155,13 +175,17 @@ return require("packer").startup(function(use)
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
     },
-    config = [[ require('config.telescope') ]],
+    config = function()
+      require("config.telescope")
+    end,
   })
 
   if fn.executable("tmux") > 0 then
     use({
       "https://github.com/aserowy/tmux.nvim",
-      config = [[ require('config.tmux') ]],
+      config = function()
+        require("config.tmux")
+      end,
     })
   end
 
