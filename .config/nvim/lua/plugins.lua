@@ -57,6 +57,20 @@ return require("packer").startup(function(use)
     config = [[ require('config.treesitter') ]],
   })
 
+  -- Outside of the categories above, all plugins are listed here
+  -- alphabetically. Upon first glance that may not appear to be the case, but
+  -- the sort is a bit nuanced.
+  --
+  -- First, I'm sorting by the name of the plugin, not the repository owner. I
+  -- do this because I can typically remember which plugins I'm using but not
+  -- who maintains them.
+  --
+  -- Second, I'm ignoring the [n]vim- prefix in plugin names. I can't always
+  -- remember which plugins use a prefix and which don't.
+  --
+  -- I realize that search makes all of this mostly unnecessary, but I try to
+  -- keep things organized regardless.
+
   use({
     "https://github.com/hrsh7th/nvim-cmp",
     requires = {
@@ -69,11 +83,19 @@ return require("packer").startup(function(use)
     config = [[ require('config.completion') ]],
   })
 
+  use("https://github.com/tpope/vim-commentary")
+
   use("https://github.com/rhysd/committia.vim")
 
   use("https://github.com/rhysd/conflict-marker.vim")
 
+  use("https://github.com/blueyed/vim-diminactive")
+
   use("https://github.com/editorconfig/editorconfig-vim")
+
+  use("https://github.com/tommcdo/vim-exchange")
+
+  use("https://github.com/wsdjeg/vim-fetch")
 
   use({
     "https://github.com/junegunn/fzf.vim",
@@ -110,29 +132,6 @@ return require("packer").startup(function(use)
 
   use("https://github.com/pbrisbin/vim-mkdir")
 
-  use("https://github.com/raimon49/requirements.txt.vim")
-
-  use("https://github.com/majutsushi/tagbar")
-
-  use({
-    "https://github.com/nvim-telescope/telescope.nvim",
-    requires = {
-      { "nvim-lua/popup.nvim" },
-      { "nvim-lua/plenary.nvim" },
-    },
-    config = [[ require('config.telescope') ]],
-  })
-
-  use("https://gitlab.com/dirn/TODO.vim")
-
-  use("https://github.com/tpope/vim-commentary")
-
-  use("https://github.com/blueyed/vim-diminactive")
-
-  use("https://github.com/tommcdo/vim-exchange")
-
-  use("https://github.com/wsdjeg/vim-fetch")
-
   use({
     "https://github.com/inkarkat/vim-OnSyntaxChange",
     requires = {
@@ -149,10 +148,25 @@ return require("packer").startup(function(use)
 
   -- use 'https://github.com/Vimjas/vim-python-pep8-indent'
 
+  use("https://github.com/raimon49/requirements.txt.vim")
+
+  use("https://github.com/majutsushi/tagbar")
+
+  use({
+    "https://github.com/nvim-telescope/telescope.nvim",
+    requires = {
+      { "nvim-lua/popup.nvim" },
+      { "nvim-lua/plenary.nvim" },
+    },
+    config = [[ require('config.telescope') ]],
+  })
+
   if fn.executable("tmux") > 0 then
     use({
       "https://github.com/aserowy/tmux.nvim",
       config = [[ require('config.tmux') ]],
     })
   end
+
+  use("https://gitlab.com/dirn/TODO.vim")
 end)
