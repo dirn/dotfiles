@@ -21,7 +21,6 @@ return require("packer").startup(function(use)
 
   -- Colorscheme
   use({
-    -- "https://github.com/ishan9299/nvim-solarized-lua",
     "https://github.com/sainnhe/gruvbox-material",
     config = [[ require('config.colorscheme') ]],
   })
@@ -145,8 +144,6 @@ return require("packer").startup(function(use)
     "https://github.com/dhruvasagar/vim-prosession",
     requires = { "https://github.com/tpope/vim-obsession" },
   })
-
-  -- use 'https://github.com/Vimjas/vim-python-pep8-indent'
 
   use("https://github.com/raimon49/requirements.txt.vim")
 
