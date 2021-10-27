@@ -42,6 +42,10 @@ fish_add_path --path --prepend \
 # Manage Homebrew formulae.
 set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 
+# Install homerew/core and homebrew/cask via the API rather than cloning their
+# repositories.
+set --global --export HOMEBREW_INSTALL_FROM_API
+
 # Set the location of the asdf configuration.
 set --global --export ASDF_CONFIG_FILE ~/.config/asdf/config
 set --global --export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME ~/.config/asdf/versions
