@@ -5,6 +5,28 @@ function retro --description "Sync retro games to an SD card"
         set_color normal
     end
 
+    set --local options
+    set options $options (fish_opt --short h --long help)
+    argparse $options -- $argv
+
+    if set --query _flag_help
+        echo "Sync retro games to an SD card"
+        echo
+
+        set_color --bold
+        echo "USAGE"
+        set_color normal
+        echo "  retro [OPTIONS]"
+        echo
+
+        set_color --bold
+        echo "OPTIONS"
+        set_color normal
+        echo "  -h/--help         Display this help message."
+
+        return 0
+    end
+
     if test -z "$RETRO_GAMES"
         echo "\$RETRO_GAMES not set"
         return 1
