@@ -7,6 +7,7 @@ function retro --description "Sync retro games to an SD card"
 
     set --local options
     set options $options (fish_opt --short h --long help)
+    set options $options (fish_opt --short s --long system --required-val)
     argparse $options -- $argv
 
     if set --query _flag_help
@@ -23,6 +24,7 @@ function retro --description "Sync retro games to an SD card"
         echo "OPTIONS"
         set_color normal
         echo "  -h/--help         Display this help message."
+        echo "  -s/--system       The system to sync."
 
         return 0
     end
@@ -37,11 +39,12 @@ function retro --description "Sync retro games to an SD card"
 
     set --local source $RETRO_GAMES
 
-    exa $source
-    read --prompt-str "Which system would you like to sync? " --local system
-
-    if test -z $system; or not test -e "$source/$system"
-        echo "'$system' not found"
+    if not set --query _flag_system
+        exa $source
+        read --prompt-str "Which system would you like to sync? " _flag_system
+    end
+    if test -z $_flag_system; or not test -e "$source/$_flag_system"
+        echo "'$_flag_system' not found"
         return 1
     end
 
@@ -58,7 +61,7 @@ function retro --description "Sync retro games to an SD card"
                 return 1
             end
 
-            set --global _destination "/Volumes/$_volume/$system"
+            set --global _destination "/Volumes/$_volume/$_flag_system"
         case "ssh"
             set --local hosts (grep "^Host .*\$" $HOME/.ssh/config | sed "s/Host //" | string split " ")
             _to_table $hosts
@@ -69,13 +72,13 @@ function retro --description "Sync retro games to an SD card"
                 return 1
             end
 
-            set --global _destination "$host:roms/$system"
+            set --global _destination "$host:roms/$_flag_system"
         case "*"
             echo "'$method' is not a valid choice"
             return 1
     end
 
-    rsync --verbose --update $source/$system/* $_destination
+    rsync --verbose --update $source/$_flag_system/* $_destination
     set --erase _destination
 
     if test $method = "sd"
