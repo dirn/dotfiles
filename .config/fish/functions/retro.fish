@@ -8,6 +8,7 @@ function retro --description "Sync retro games to an SD card"
     set --local options
     set options $options (fish_opt --short h --long help)
     set options $options (fish_opt --short s --long system --required-val)
+    set options $options (fish_opt --short m --long method --required-val)
     argparse $options -- $argv
 
     if set --query _flag_help
@@ -25,6 +26,7 @@ function retro --description "Sync retro games to an SD card"
         set_color normal
         echo "  -h/--help         Display this help message."
         echo "  -s/--system       The system to sync."
+        echo "  -m/--method       The method to use to sync."
 
         return 0
     end
@@ -48,10 +50,12 @@ function retro --description "Sync retro games to an SD card"
         return 1
     end
 
-    _to_table "sd ssh"
-    read --prompt-str "How would you like sync? " --local method
+    if not set --query _flag_method
+        _to_table "sd ssh"
+        read --prompt-str "How would you like sync? " _flag_method
+    end
 
-    switch $method
+    switch $_flag_method
         case sd
             exa /Volumes
             read --prompt-str "Which volume would you like to use? " --global _volume
@@ -74,14 +78,14 @@ function retro --description "Sync retro games to an SD card"
 
             set --global _destination "$host:roms/$_flag_system"
         case "*"
-            echo "'$method' is not a valid choice"
+            echo "'$_flag_method' is not a valid choice"
             return 1
     end
 
     rsync --verbose --update $source/$_flag_system/* $_destination
     set --erase _destination
 
-    if test $method = "sd"
+    if test $_flag_method = "sd"
         dot_clean "/Volumes/$_volume"
         set --erase _volume
     end
