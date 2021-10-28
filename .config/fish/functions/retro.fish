@@ -9,6 +9,7 @@ function retro --description "Sync retro games to an SD card"
     set options $options (fish_opt --short h --long help)
     set options $options (fish_opt --short s --long system --required-val)
     set options $options (fish_opt --short m --long method --required-val)
+    set options $options (fish_opt --short d --long dest --required-val)
     argparse $options -- $argv
 
     if set --query _flag_help
@@ -27,6 +28,7 @@ function retro --description "Sync retro games to an SD card"
         echo "  -h/--help         Display this help message."
         echo "  -s/--system       The system to sync."
         echo "  -m/--method       The method to use to sync."
+        echo "  -d/--dest         The volume or host to sync to."
 
         return 0
     end
@@ -57,26 +59,31 @@ function retro --description "Sync retro games to an SD card"
 
     switch $_flag_method
         case sd
-            exa /Volumes
-            read --prompt-str "Which volume would you like to use? " --global _volume
+            if not set --query _flag_dest
+                exa /Volumes
+                read --prompt-str "Which volume would you like to use? " _flag_dest
+            end
 
-            if test -z $_volume; or not test -e "/Volumes/$_volume"
-                echo "'$_volume' not found"
+            if test -z $_flag_dest; or not test -e "/Volumes/$_flag_dest"
+                echo "'$_flag_dest' not found"
                 return 1
             end
 
             set --global _destination "/Volumes/$_volume/$_flag_system"
         case "ssh"
             set --local hosts (grep "^Host .*\$" $HOME/.ssh/config | sed "s/Host //" | string split " ")
-            _to_table $hosts
-            read --prompt-str "Which host would you like to use? " --local host
 
-            if not contains $host $hosts
-                echo "'$host' not found"
+            if not set --query _flag_dest
+                _to_table $hosts
+                read --prompt-str "Which host would you like to use? " _flag_dest
+            end
+
+            if not contains $_flag_dest $hosts
+                echo "'$_flag_dest' not found"
                 return 1
             end
 
-            set --global _destination "$host:roms/$_flag_system"
+            set --global _destination "$_flag_dest:roms/$_flag_system"
         case "*"
             echo "'$_flag_method' is not a valid choice"
             return 1
@@ -86,7 +93,6 @@ function retro --description "Sync retro games to an SD card"
     set --erase _destination
 
     if test $_flag_method = "sd"
-        dot_clean "/Volumes/$_volume"
-        set --erase _volume
+        dot_clean "/Volumes/$_flag_dest"
     end
 end
