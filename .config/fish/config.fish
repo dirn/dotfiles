@@ -73,6 +73,9 @@ set --global --export VIRTUAL_ENV_DISABLE_PROMPT 1
 # git is too long to type.
 alias g git
 
+# I'm used to using gh to work with GitHub. Why type more to work with GitLab?
+alias gl glab
+
 # I like using exa but all of my muscle memory is for ls aliases.
 alias ls exa
 alias la "exa --all"
