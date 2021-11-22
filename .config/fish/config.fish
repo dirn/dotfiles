@@ -56,12 +56,6 @@ if test -e $asdffix
     source $asdffix/asdf.fish
 end
 
-# Manage Python with pyenv.
-if type --no-functions --query pyenv
-    status --is-login; and pyenv init --path | source
-    pyenv init - | source
-end
-
 # PuDB is a nicer debugger than pdb.
 set --global --export PYTHONBREAKPOINT "pudb.set_trace"
 
