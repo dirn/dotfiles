@@ -8,7 +8,8 @@ function retro --description "Sync retro games to an SD card"
     set --local options
     set options $options (fish_opt --short h --long help)
     set options $options (fish_opt --short s --long system --multiple-vals)
-    set options $options (fish_opt --short m --long method --required-val)
+    set options $options (fish_opt --short a --long sd --long-only)
+    set options $options (fish_opt --short b --long ssh --long-only)
     set options $options (fish_opt --short d --long dest --required-val)
     argparse $options -- $argv
 
@@ -27,7 +28,8 @@ function retro --description "Sync retro games to an SD card"
         set_color normal
         echo "  -h/--help         Display this help message."
         echo "  -s/--system       The system to sync."
-        echo "  -m/--method       The method to use to sync."
+        echo "  --sd              Sync to an SD card."
+        echo "  --ssh             Sync over SSH."
         echo "  -d/--dest         The volume or host to sync to."
 
         return 0
@@ -55,12 +57,19 @@ function retro --description "Sync retro games to an SD card"
         end
     end
 
-    if not set --query _flag_method
-        _to_table "sd ssh"
-        read --prompt-str "How would you like sync? " _flag_method
+    set --local method
+    if set --query _flag_sd
+        set method "sd"
+    else if set --query _flag_ssh
+        set method "ssh"
     end
 
-    switch $_flag_method
+    if not set --query method
+        _to_table "sd ssh"
+        read --prompt-str "How would you like sync? " method
+    end
+
+    switch $method
         case sd
             if not set --query _flag_dest
                 exa /Volumes
