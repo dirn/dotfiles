@@ -21,6 +21,8 @@
     wip = commit -m"[WIP]"
 [color]
     ui = true
+[commit]
+    gpgsign = true
 [core]
     editor = nvim
     pager = delta
@@ -37,6 +39,11 @@
     prompt = false
 [fetch]
     prune = true
+[gpg]
+    format = ssh
+[gpg.ssh]
+    allowedSignersFile = ~/.config/git/allowed_signers
+    defaultKeyCommand = ssh-add -L
 [init]
     defaultBranch = main
     templateDir = ~/.config/git/template
@@ -51,3 +58,5 @@
     autoStash = true
 [rerere]
     enabled = true
+[tag]
+    gpgsign = true
