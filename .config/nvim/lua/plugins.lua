@@ -83,9 +83,11 @@ return require("packer").startup(function(use)
     requires = {
       "https://github.com/hrsh7th/cmp-buffer",
       "https://github.com/hrsh7th/cmp-calc",
+      "https://github.com/petertriho/cmp-git",
       "https://github.com/hrsh7th/cmp-nvim-lsp",
       "https://github.com/hrsh7th/cmp-nvim-lua",
       "https://github.com/hrsh7th/cmp-path",
+      "https://github.com/nvim-lua/plenary.nvim",
     },
     config = function()
       require("config.completion")
