@@ -42,9 +42,9 @@ return require("packer").startup(function(use)
       end,
     },
     {
-      "https://github.com/kabouzeid/nvim-lspinstall",
+      "https://github.com/williamboman/nvim-lsp-installer",
       config = function()
-        require("config.lspinstall")
+        require("config.lsp-installer")
       end,
     },
   })

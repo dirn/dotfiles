@@ -1,3 +1,3 @@
-require("lspinstall").post_install_hook = function()
-  vim.cmd([[ bufdo e ]])
-end
+require("nvim-lsp-installer").on_server_ready(function(server)
+  server:setup({})
+end)
