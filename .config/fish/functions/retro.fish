@@ -69,7 +69,7 @@ function retro --description "Sync retro games to an SD card"
                 return 1
             end
 
-            set --global _destination "/Volumes/$_volume/$_flag_system"
+            set --global _destination "/Volumes/$_flag_dest/$_flag_system"
         case "ssh"
             set --local hosts (grep "^Host .*\$" $HOME/.ssh/config | sed "s/Host //" | string split " ")
 
