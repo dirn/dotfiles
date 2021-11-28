@@ -7,7 +7,7 @@ function retro --description "Sync retro games to an SD card"
 
     set --local options
     set options $options (fish_opt --short h --long help)
-    set options $options (fish_opt --short s --long system --required-val)
+    set options $options (fish_opt --short s --long system --multiple-vals)
     set options $options (fish_opt --short m --long method --required-val)
     set options $options (fish_opt --short d --long dest --required-val)
     argparse $options -- $argv
@@ -45,11 +45,14 @@ function retro --description "Sync retro games to an SD card"
 
     if not set --query _flag_system
         exa $source
-        read --prompt-str "Which system would you like to sync? " _flag_system
+        read --prompt-str "Which system would you like to sync? " _system
+        set --append _flag_system $_system
     end
-    if test -z $_flag_system; or not test -e "$source/$_flag_system"
-        echo "'$_flag_system' not found"
-        return 1
+    for _system in $_flag_system
+        if test -z $_system; or not test -e "$source/$_system"
+            echo "'$_system' not found"
+            return 1
+        end
     end
 
     if not set --query _flag_method
@@ -83,16 +86,20 @@ function retro --description "Sync retro games to an SD card"
                 return 1
             end
 
-            set --global _destination "$_flag_dest:roms/$_flag_system"
+            set --global _destination "$_flag_dest:roms/"
         case "*"
             echo "'$_flag_method' is not a valid choice"
             return 1
     end
 
-    rsync --verbose --update $source/$_flag_system/* $_destination
+    set --local _systems ""
+    for _system in (string split " " $_flag_system | sort | uniq)
+        set --append _systems "$source/./$_system/*"
+    end
+    rsync --progress --update --relative $_systems $_destination
     set --erase _destination
 
-    if test $_flag_method = "sd"
+    if test $method = "sd"
         dot_clean "/Volumes/$_flag_dest"
     end
 end
