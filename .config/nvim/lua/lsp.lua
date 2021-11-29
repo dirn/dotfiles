@@ -69,77 +69,24 @@ local on_attach = function(client, bufnr)
 end
 
 -- Set up language servers and include the configuration.
-local black = { command = "black", args = { "--quiet", "-" } }
-
-local flake8 = {
-  sourceName = "flake8",
-  command = "flake8",
-  debounce = 100,
-  args = { "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s", "-" },
-  offsetLine = 0,
-  offsetColumn = 0,
-  formatLines = 1,
-  formatPattern = {
-    "(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$",
-    { line = 1, column = 2, security = 3, message = 4 },
-  },
-  securities = {
-    W = "warning",
-    E = "error",
-    F = "error",
-    C = "error",
-    N = "error",
-  },
-}
-
-local isort = { command = "isort", args = { "--quiet", "-" } }
-
-local mypy = {
-  sourceName = "mypy",
-  command = "mypy",
-  args = {
-    "--no-color-output",
-    "--no-error-summary",
-    "--show-column-numbers",
-    "--follow-imports=silent",
-    "%file",
-  },
-  formatPattern = {
-    "^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$",
-    { line = 1, column = 2, security = 3, message = 4 },
-  },
-  securities = { error = "error" },
-}
-
-local stylua = {
-  command = "stylua",
-  args = {
-    "--search-parent-directories",
-    "--verify",
-    "-",
-  },
-}
-
 local disable_virtual_text = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
   { virtual_text = false }
 )
+
+local diagnosticls = require("diagnosticls")
 
 local server_configs = {
   diagnosticls = {
     filetypes = { "lua", "python" },
     init_options = {
       filetypes = { python = { "flake8", "mypy" } },
-      formatters = {
-        black = black,
-        isort = isort,
-        stylua = stylua,
-      },
+      formatters = diagnosticls.formatters,
       formatFiletypes = {
         lua = { "stylua" },
         python = { "black", "isort" },
       },
-      linters = { flake8 = flake8, mypy = mypy },
+      linters = diagnosticls.linters,
     },
   },
   jedi_language_server = {},
