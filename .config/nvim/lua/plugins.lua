@@ -41,12 +41,7 @@ return require("packer").startup(function(use)
         require("config.lspsaga")
       end,
     },
-    {
-      "https://github.com/williamboman/nvim-lsp-installer",
-      config = function()
-        require("config.lsp-installer")
-      end,
-    },
+    "https://github.com/williamboman/nvim-lsp-installer",
   })
 
   -- Treesitter

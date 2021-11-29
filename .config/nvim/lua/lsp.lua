@@ -1,4 +1,4 @@
-local has_lspconfig, lspconfig = pcall(require, "lspconfig")
+local has_lspconfig, _ = pcall(require, "lspconfig")
 if has_lspconfig == false then
   return
 end
@@ -130,32 +130,32 @@ local server_configs = {
     filetypes = { "lua", "python" },
     init_options = {
       filetypes = { python = { "flake8", "mypy" } },
-      formatters = { black = black, isort = isort, stylua = stylua },
+      formatters = {
+        black = black,
+        isort = isort,
+        stylua = stylua,
+      },
       formatFiletypes = {
         lua = { "stylua" },
         python = { "black", "isort" },
       },
       linters = { flake8 = flake8, mypy = mypy },
     },
-    on_attach = on_attach,
-    handlers = { ["textDocument/publishDiagnostics"] = disable_virtual_text },
   },
-  jedi_language_server = {
-    on_attach = on_attach,
-    handlers = { ["textDocument/publishDiagnostics"] = disable_virtual_text },
-  },
-  lua = {
-    filetypes = { "lua" },
+  jedi_language_server = {},
+  rust_analyzer = {},
+  sumneko_lua = {
     settings = {
       Lua = {
         diagnostics = {
           disable = { "lowercase-global" },
           globals = { "vim" },
         },
+        telemetry = {
+          enable = false,
+        },
       },
     },
-    on_attach = on_attach,
-    handlers = { ["textDocument/publishDiagnostics"] = disable_virtual_text },
   },
 }
 
@@ -164,34 +164,23 @@ if has_local_lsp then
   server_configs = local_lsp.merge(server_configs)
 end
 
-local has_lspinstall, lspinstall = pcall(require, "lspinstall")
+local has_lspinstall, servers = pcall(require, "nvim-lsp-installer.servers")
 if has_lspinstall then
-  -- This exists until lspinstall supports this server.
-  local jedi_config = lspconfig.jedi_language_server.document_config
-  require("lspconfig/configs").jedi_language_server = nil
-  jedi_config.default_config.cmd[1] = "./venv/bin/jedi-language-server"
-  require("lspinstall/servers").jedi_language_server = vim.tbl_extend(
-    "error",
-    jedi_config,
-    {
-      install_script = [[
-      python3 -m venv ./venv
-      ./venv/bin/pip3 install --upgrade pip
-      ./venv/bin/pip3 install --upgrade jedi-language-server
-    ]],
-    }
-  )
-
-  lspinstall.setup()
-  local servers = lspinstall.installed_servers()
-
-  for server, _ in pairs(server_configs) do
-    if vim.tbl_contains(servers, server) == false then
-      lspinstall.install_server(server)
+  for server_name, _ in pairs(server_configs) do
+    local _, server = servers.get_server(server_name)
+    server:on_ready(function()
+      local defaults = {
+        on_attach = on_attach,
+        handlers = {
+          ["textDocument/publishDiagnostics"] = disable_virtual_text,
+        },
+      }
+      server:setup(
+        vim.tbl_deep_extend("force", defaults, server_configs[server.name])
+      )
+    end)
+    if not server:is_installed() then
+      server:install()
     end
-  end
-
-  for _, server in ipairs(servers) do
-    lspconfig[server].setup(server_configs[server])
   end
 end
