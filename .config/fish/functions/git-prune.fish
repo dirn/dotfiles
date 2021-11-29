@@ -5,14 +5,14 @@
 
 function git-prune
     set -l CURRENT_BRANCH (git rev-parse --abbrev-ref HEAD)
-    if test "$CURRENT_BRANCH" != master
-        echo "git-prune must be run from master"
+    if test "$CURRENT_BRANCH" != main
+        echo "git-prune must be run from main"
         return 1
     end
 
     git fetch
 
-    set -l MERGED (git branch --merged origin/master | grep -v 'master$' | string trim)
+    set -l MERGED (git branch --merged origin/main | grep -v 'main$' | string trim)
     if test -z "$MERGED"
         echo "There are no branches that have been merged."
         return
