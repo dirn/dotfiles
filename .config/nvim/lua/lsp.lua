@@ -78,9 +78,13 @@ local diagnosticls = require("diagnosticls")
 
 local server_configs = {
   diagnosticls = {
-    filetypes = { "fish", "lua", "python" },
+    filetypes = { "fish", "lua", "python", "yaml" },
     init_options = {
-      filetypes = { fish = { "fish" }, python = { "flake8", "mypy" } },
+      filetypes = {
+        fish = { "fish" },
+        python = { "flake8", "mypy" },
+        yaml = { "yamllint" },
+      },
       formatters = diagnosticls.formatters,
       formatFiletypes = {
         fish = { "fish_indent" },
