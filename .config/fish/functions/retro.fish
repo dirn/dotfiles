@@ -18,13 +18,13 @@ function retro --description "Sync retro games to an SD card"
         echo
 
         set_color --bold
-        echo "USAGE"
+        echo USAGE
         set_color normal
         echo "  retro [OPTIONS]"
         echo
 
         set_color --bold
-        echo "OPTIONS"
+        echo OPTIONS
         set_color normal
         echo "  -h/--help         Display this help message."
         echo "  -s/--system       The system to sync."
@@ -59,9 +59,9 @@ function retro --description "Sync retro games to an SD card"
 
     set --local method
     if set --query _flag_sd
-        set method "sd"
+        set method sd
     else if set --query _flag_ssh
-        set method "ssh"
+        set method ssh
     end
 
     if not set --query method
@@ -82,7 +82,7 @@ function retro --description "Sync retro games to an SD card"
             end
 
             set --global _destination "/Volumes/$_flag_dest/$_flag_system"
-        case "ssh"
+        case ssh
             set --local hosts (grep "^Host .*\$" $HOME/.ssh/config | sed "s/Host //" | string split " ")
 
             if not set --query _flag_dest
@@ -108,7 +108,7 @@ function retro --description "Sync retro games to an SD card"
     rsync --progress --update --relative $_systems $_destination
     set --erase _destination
 
-    if test $method = "sd"
+    if test $method = sd
         dot_clean "/Volumes/$_flag_dest"
     end
 end

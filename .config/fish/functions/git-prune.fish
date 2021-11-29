@@ -5,7 +5,7 @@
 
 function git-prune
     set -l CURRENT_BRANCH (git rev-parse --abbrev-ref HEAD)
-    if test "$CURRENT_BRANCH" != "master"
+    if test "$CURRENT_BRANCH" != master
         echo "git-prune must be run from master"
         return 1
     end
@@ -25,7 +25,7 @@ function git-prune
     end
     echo
     read --local --prompt-str "Continue [yN]? " REPLY
-    if test (string lower "$REPLY") != "y"
+    if test (string lower "$REPLY") != y
         return
     end
 
@@ -38,5 +38,5 @@ function git-prune
     end
     echo
 
-    echo "done"
+    echo done
 end

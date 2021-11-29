@@ -4,7 +4,8 @@ set fish_greeting
 # This is needed to fix CursorShape inside tmux. See
 # https://github.com/neovim/neovim/issues/7067 which links to
 # https://github.com/junegunn/fzf/issues/881#issuecomment-318576205.
-function fish_vi_cursor; end
+function fish_vi_cursor
+end
 
 # Use Vim bindings.
 fish_vi_key_bindings
@@ -51,7 +52,7 @@ set --global --export ASDF_CONFIG_FILE ~/.config/asdf/config
 set --global --export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME ~/.config/asdf/versions
 
 # Use asdf to manage versions of things.
-set asdffix  (brew --prefix asdf)
+set asdffix (brew --prefix asdf)
 if test -e $asdffix
     source $asdffix/asdf.fish
 end
@@ -97,5 +98,7 @@ end
 # Use tmux for all new sessions. This should be done last in case extras.fish
 # changes $PATH in a way that affects tmux.
 if type --query tmux
-    if not set --query TMUX; exec env tmux new-session; end
+    if not set --query TMUX
+        exec env tmux new-session
+    end
 end
