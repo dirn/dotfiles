@@ -33,11 +33,6 @@ return require("packer").startup(function(use)
     "https://github.com/neovim/nvim-lspconfig",
     {
       "https://github.com/tami5/lspsaga.nvim",
-      -- master has dropped support for Neovim 0.5 in preparation of the release
-      -- of 0.6. Until 0.6 has a stable release, pin the version to one that's
-      -- compatible with 0.5.
-      -- TODO: Remove this once 0.6 has been released.
-      branch = "nvim51",
       config = function()
         require("config.lspsaga")
       end,
@@ -52,8 +47,6 @@ return require("packer").startup(function(use)
       "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "https://github.com/nvim-treesitter/playground",
     },
-    -- TODO: Remove this once 0.6 has been released.
-    branch = "0.5-compat",
     run = ":TSUpdate",
     config = function()
       require("config.treesitter")
