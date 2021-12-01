@@ -14,19 +14,19 @@ local on_attach = function(client, bufnr)
   noremap(
     "n",
     "[a",
-    [[<cmd>lua require('lspsaga.diagnostic').navigate("prev")({ wrap = false })<cr>]],
+    [[<cmd>lua require("lspsaga.diagnostic").navigate("prev")({ wrap = false })<cr>]],
     opts
   )
   noremap(
     "n",
     "]a",
-    [[<cmd>lua require('lspsaga.diagnostic').navigate("next")({ wrap = false })<cr>]],
+    [[<cmd>lua require("lspsaga.diagnostic").navigate("next")({ wrap = false })<cr>]],
     opts
   )
   noremap(
     "n",
     "<leader>a",
-    [[<cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<cr>]],
+    [[<cmd>lua require("lspsaga.diagnostic").show_line_diagnostics()<cr>]],
     opts
   )
 
@@ -39,7 +39,7 @@ local on_attach = function(client, bufnr)
   noremap(
     "n",
     "K",
-    [[<cmd>lua require('lspsaga.hover').render_hover_doc()<cr>]],
+    [[<cmd>lua require("lspsaga.hover").render_hover_doc()<cr>]],
     opts
   )
 
@@ -47,7 +47,7 @@ local on_attach = function(client, bufnr)
   noremap(
     "n",
     "<leader>rn",
-    [[<cmd>lua require('lspsaga.rename').rename()<cr>]],
+    [[<cmd>lua require("lspsaga.rename").rename()<cr>]],
     opts
   )
 
@@ -63,7 +63,7 @@ local on_attach = function(client, bufnr)
 
   autocmd(
     "show-diagnostics",
-    [[ CursorHold <buffer> lua require('lspsaga.diagnostic').show_line_diagnostics() ]],
+    [[ CursorHold <buffer> lua require("lspsaga.diagnostic").show_line_diagnostics() ]],
     true
   )
 end
