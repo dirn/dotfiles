@@ -14,13 +14,13 @@ local on_attach = function(client, bufnr)
   noremap(
     "n",
     "[a",
-    [[<cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_prev({ wrap = false })<cr>]],
+    [[<cmd>lua require('lspsaga.diagnostic').navigate("prev")({ wrap = false })<cr>]],
     opts
   )
   noremap(
     "n",
     "]a",
-    [[<cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_next({ wrap = false })<cr>]],
+    [[<cmd>lua require('lspsaga.diagnostic').navigate("next")({ wrap = false })<cr>]],
     opts
   )
   noremap(
