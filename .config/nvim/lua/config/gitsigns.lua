@@ -1,3 +1,7 @@
+if os.getenv("NVIM_DISABLE_GITSIGNS") ~= nil then
+  return
+end
+
 require("gitsigns").setup({
   signs = {
     add = {
