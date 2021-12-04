@@ -101,11 +101,10 @@ function retro --description "Sync retro games to an SD card"
             return 1
     end
 
-    set --local _systems ""
     for _system in (string split " " $_flag_system | sort | uniq)
         set --append _systems "$source/./$_system/"
     end
-    rsync --recursive --times --progress --update --relative (eval echo "$_systems") $_destination
+    rsync --recursive --times --progress --update --relative $_systems $_destination
     set --erase _destination
 
     if test $method = sd
