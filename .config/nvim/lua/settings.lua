@@ -23,13 +23,6 @@ vim.opt.smarttab = true
 vim.opt.autoread = true
 autocmd("autoread", "BufEnter * checktime", true)
 
--- Let me switch buffers without saving the current one. This will retain undo
--- history even when switching between buffers.
-vim.opt.hidden = true
-
--- Don't use two spaces after a period when joining lines.
-vim.opt.joinspaces = false
-
 -- Don't redraw the screen while executing macros (and other things).
 vim.opt.lazyredraw = true
 
