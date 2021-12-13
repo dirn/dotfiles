@@ -60,3 +60,10 @@ mkdir -p ~/Mail/bigapplepy >/dev/null
 mkdir -p ~/Mail/dirnonline >/dev/null
 mkdir -p ~/Mail/gmail >/dev/null
 mkdir -p ~/Mail/pygotham >/dev/null
+
+echo "Updating Tmux Plugin Manager"
+if test ! -d ~/.config/tmux/plugins/tpm; then
+    mkdir ~/.config/tmux/plugins
+    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+fi
+~/.config/tmux/plugins/tpm/bin/install_plugins

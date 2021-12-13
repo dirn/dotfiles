@@ -21,7 +21,7 @@ return require("packer").startup(function(use)
 
   -- Colorscheme
   use({
-    "https://github.com/sainnhe/gruvbox-material",
+    "https://github.com/Mofiqul/dracula.nvim",
     config = function()
       require("config.colorscheme")
     end,

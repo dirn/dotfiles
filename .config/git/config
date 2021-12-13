@@ -31,7 +31,7 @@
     hunk-header-decoration-style = yellow box
     line-numbers = true
     side-by-side = true
-    syntax-theme = gruvbox-dark
+    syntax-theme = dracula
     zero-style = dim syntax
 [diff]
     algorithm = patience

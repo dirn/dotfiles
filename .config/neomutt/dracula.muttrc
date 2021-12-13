@@ -1,0 +1,72 @@
+###############################################################################
+# Dracula Theme for Neomutt: https://draculatheme.com/
+#
+# @author Paul Townsend <paul@caprica.org>
+# @changes Caleb Albritton <caleb@wa9ace.net>
+
+# general ------------ foreground ---- background -----------------------------
+color error		color231	color212
+color indicator		color231	color241
+color markers		color210	default
+color message		default		default
+color normal		default		default
+color prompt		default	        default
+color search		color84		default
+color status 		color141	color236
+color tilde		color231	default
+color tree		color141	default
+
+# color index #6272a4 default
+
+color index color103 default '.*'
+color indicator default color60
+
+# message index ------ foreground ---- background -----------------------------
+color index		color210	default 	~D # deleted messages
+color index		color84		default 	~F # flagged messages
+color index		color117	default 	~N # new messages
+color index		color212	default 	~Q # messages which have been replied to
+color index		color215	default 	~T # tagged messages
+color index		color141	default		~v # messages part of a collapsed thread
+
+# color indicator  color108 color236
+# color tree       color109 color237
+# color normal     color188 color237
+
+# message headers ---- foreground ---- background -----------------------------
+color hdrdefault	color117	default
+color header		color231	default		^Subject:.*
+
+# message body ------- foreground ---- background -----------------------------
+color attachment	color228	default
+color body		color231	default		[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+               # email addresses
+color body		color228	default		(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+        # URLs
+color body		color231	default		(^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$) # *bold* text
+color body		color231	default		(^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)     # _underlined_ text
+color body		color231	default		(^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)     # /italic/ text
+color quoted		color61		default
+color quoted1		color117	default
+color quoted2		color84		default
+color quoted3		color215	default
+color quoted4		color212	default
+color signature		color212	default
+
+# Sidebar-specific color of the selected item
+color sidebar_indicator black green
+# Color of the highlighted, but not open, mailbox.
+color sidebar_highlight blue black
+# Color of the divider separating the Sidebar from NeoMutt panels
+color sidebar_divider color8 default
+# Color to give mailboxes containing flagged mail
+color sidebar_flagged red default
+# Color to give mailboxes containing new mail
+color sidebar_new green default
+# Color to give mailboxes containing no new/flagged mail, etc.
+color sidebar_ordinary blue default
+
+# Color to give the spoolfile mailbox
+# color sidebar_spoolfile color207 default
+color sidebar_spoolfile green default
+# Color to give mailboxes containing no unread mail
+color sidebar_unread color136 default
+
