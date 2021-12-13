@@ -24,11 +24,18 @@ alias rm "rm -i"
 alias mkdir "mkdir -p"
 
 # Add Homebrew to $PATH.
-eval (/opt/homebrew/bin/brew shellenv)
+set --local architecture (uname -m)
+switch $architecture
+    case arm64
+        eval (/opt/homebrew/bin/brew shellenv)
+        fish_add_path --prepend /opt/homebrew/bin /opt/homebrew/sbin
+    case "*"
+        eval (/usr/local/bin/brew shellenv)
+end
 
 # Add GNU command line tools to $PATH.
 set brewfix (brew --prefix)
-fish_add_path --path --prepend \
+fish_add_path --append \
     "$brewfix/opt/file-formula/bin" \
     "$brewfix/opt/m4/bin" \
     "$brewfix/opt/unzip/bin" \
@@ -80,7 +87,7 @@ end
 # Configure fzf.
 set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glob="!.git/*" --glob="!.mypy_cache/*"'
 
-fish_add_path --path --prepend "$HOME/.local/bin"
+fish_add_path --prepend --move "$HOME/.local/bin"
 
 # Use direnv.
 direnv hook fish | source
