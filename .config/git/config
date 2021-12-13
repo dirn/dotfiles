@@ -21,6 +21,27 @@
     wip = commit -m"[WIP]"
 [color]
     ui = true
+[color "advice"]
+    hint = "#ffb86c"  ; orange
+[color "branch"]
+    current = "#ffb86c"  ; orange
+    local = "#f8f8f2"  ; white
+    remote = "#bd93f9"  ; purple
+[color "decorate"]
+    branch = "#ffb86c"  ; orange
+    HEAD = "#ff5555"  ; red
+    remoteBranch = "#bd93f9"  ; purple
+    stash = "#50fa7b"  ; green
+    tag = "#8be9fd"  ; cyan
+[color "diff"]
+    frag = "#ff79c6"
+    meta = "#8be9fd"
+    new = "#50fa7b"
+    old = "#ff5555"
+[color "status"]
+    added = "#50fa7b"  ; green
+    changed = "#bd93f9"  ; purple
+    untracked = "#ffb86c"  ; orange
 [commit]
     gpgsign = true
 [core]
