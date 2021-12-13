@@ -100,8 +100,9 @@ set sidebar_short_path
 set mail_check_stats
 set sidebar_format = "%B %?N?(%N)?%* %S"
 
-# See https://github.com/altercation/solarized.
-source mutt-colors-solarized-dark-16.muttrc
+# See https://www.sthu.org/code/codesnippets/mutt-gruvbox.html.
+source colors-gruvbox-shuber.muttrc
+source colors-gruvbox-shuber-extended.muttrc
 
 # # The noop bind is needed so that the line editor accepts IMAP folders with
 # spaces in their names.
