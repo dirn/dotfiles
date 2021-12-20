@@ -67,3 +67,8 @@ if test ! -d ~/.config/tmux/plugins/tpm; then
     git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 fi
 ~/.config/tmux/plugins/tpm/bin/install_plugins
+
+if command -v softwareupdate >/dev/null 2>&1; then
+    echo "Installing software updates"
+    softwareupdate --all --install --force
+fi
