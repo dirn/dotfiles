@@ -108,6 +108,7 @@ function retro --description "Sync retro games to an SD card"
         --update \
         --recursive \
         --exclude=.DS_Store \
+        --exclude=gamelist.copy.xml --exclude=gamelist.Missing.Serial.txt \
         --copy-links \
         --times \
         --progress \
