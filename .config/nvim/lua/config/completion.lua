@@ -24,12 +24,12 @@ cmp.setup({
     }),
   },
   sources = {
-    { name = "buffer" },
-    { name = "calc" },
-    { name = "cmp_git" },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
+    { name = "buffer" },
+    { name = "cmp_git" },
     { name = "path" },
+    { name = "calc" },
   },
 })
 
