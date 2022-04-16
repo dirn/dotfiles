@@ -52,7 +52,7 @@
     hunk-header-decoration-style = yellow box
     line-numbers = true
     side-by-side = true
-    syntax-theme = dracula
+    syntax-theme = Dracula
     zero-style = dim syntax
 [diff]
     algorithm = patience
