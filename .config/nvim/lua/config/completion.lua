@@ -15,14 +15,14 @@ cmp.setup({
       return vim_item
     end,
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ["<c-space>"] = cmp.mapping.complete(),
     ["<c-e>"] = cmp.mapping.close(),
     ["<cr>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     }),
-  },
+  }),
   sources = {
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
