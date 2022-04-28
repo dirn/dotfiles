@@ -77,7 +77,7 @@ alias gl glab
 alias ls exa
 alias la "exa --all"
 alias ll "exa --long"
-alias lt "exa --tree --ignore-glob='.git|.mypy_cache|*.pyc' --all"
+alias tree "exa --tree --ignore-glob='.git|.mypy_cache|*.pyc' --all"
 
 # Use bat for manpages.
 if type --no-functions --query bat
