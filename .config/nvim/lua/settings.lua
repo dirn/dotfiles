@@ -116,3 +116,5 @@ autocmd(
 ]],
   true
 )
+
+vim.api.nvim_set_var("markdown_fenced_languages", { "python" })
