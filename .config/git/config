@@ -51,6 +51,7 @@
     file-decoration-style = underline
     hunk-header-decoration-style = yellow box
     line-numbers = true
+    navigate = true
     side-by-side = true
     syntax-theme = Dracula
     zero-style = dim syntax
