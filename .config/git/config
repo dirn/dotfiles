@@ -70,6 +70,8 @@
 [init]
     defaultBranch = main
     templateDir = ~/.config/git/template
+[interactive]
+    diffFilter = delta --color-only
 [mergetool]
     keepBackup = false
     prompt = false
