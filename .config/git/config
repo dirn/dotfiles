@@ -57,6 +57,7 @@
     zero-style = dim syntax
 [diff]
     algorithm = patience
+    colorMoved = default
 [difftool]
     prompt = false
 [fetch]
