@@ -53,7 +53,7 @@ local on_attach = function(client, bufnr)
 
   -- Format on save. If the augroup isn't cleared, multiple LSPs attaching to a
   -- buffer would attach this autocmd multiple times.
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.documentFormattingProvider then
     autocmd(
       "format-on-save",
       [[ BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 5000) ]],
