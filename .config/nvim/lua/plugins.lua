@@ -30,7 +30,6 @@ return require("packer").startup(function(use)
   -- LSP
   use({
     "https://github.com/lithammer/nvim-diagnosticls",
-    "https://github.com/neovim/nvim-lspconfig",
     {
       "https://github.com/tami5/lspsaga.nvim",
       config = function()
