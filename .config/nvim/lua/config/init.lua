@@ -19,9 +19,7 @@ local function remap(modes, lhs, rhs, opts)
   if type(modes) == "string" then
     modes = { modes }
   end
-  for _, m in ipairs(modes) do
-    vim.api.nvim_set_keymap(m, lhs, rhs, opts)
-  end
+  vim.keymap.set(modes, lhs, rhs, opts)
 end
 
 local function noremap(modes, lhs, rhs, opts)

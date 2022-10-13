@@ -1,11 +1,7 @@
-local fn = vim.fn
-
-local autocmd = require("config").autocmd
-
 -- Install packer and any missing plugins if they haven't already been
 -- installed.
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.api.nvim_command(
     "!git clone https://github.com/wbthomason/packer.nvim " .. install_path
   )
@@ -13,7 +9,13 @@ end
 vim.cmd([[ packadd packer.nvim ]])
 
 -- Auto compile the pack when there are changes to the plugins file.
-autocmd("packer", "BufWritePost plugins.lua PackerCompile")
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = vim.api.nvim_create_augroup("packer", {}),
+  pattern = { "plugins.lua" },
+  callback = function()
+    require("packer").compile()
+  end,
+})
 
 return require("packer").startup(function(use)
   -- Let packer manage itself.
@@ -175,7 +177,7 @@ return require("packer").startup(function(use)
     end,
   })
 
-  if fn.executable("tmux") > 0 then
+  if vim.fn.executable("tmux") > 0 then
     use({
       "https://github.com/aserowy/tmux.nvim",
       config = function()

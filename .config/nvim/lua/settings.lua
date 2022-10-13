@@ -1,13 +1,5 @@
-local fn = vim.fn
-
-local config = require("config")
-local autocmd = config.autocmd
-
 -- Some of these settings are already the default, but sometimes plugins do
 -- silly things.
-
-vim.cmd([[ filetype plugin indent on ]])
-vim.cmd([[ syntax enable ]])
 
 vim.opt.encoding = "utf8"
 
@@ -21,7 +13,12 @@ vim.opt.smarttab = true
 -- will reject the commit again or, even worse, I'll end up with merge
 -- conflicts. This will automatically reload it when something else changes it.
 vim.opt.autoread = true
-autocmd("autoread", "BufEnter * checktime", true)
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = vim.api.nvim_create_augroup("autoread", { clear = true }),
+  callback = function()
+    vim.cmd("checktime")
+  end,
+})
 
 -- Don't redraw the screen while executing macros (and other things).
 vim.opt.lazyredraw = true
@@ -54,7 +51,7 @@ vim.opt.matchpairs = vim.opt.matchpairs + "<:>"
 vim.cmd([[ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' ]])
 
 -- Show a rule at the width of the text.
-if fn.exists("&colorcolumn") > 0 then
+if vim.fn.exists("&colorcolumn") > 0 then
   vim.opt.colorcolumn = "+1"
 end
 
@@ -109,12 +106,14 @@ vim.opt.splitbelow = true
 vim.opt.diffopt = vim.opt.diffopt + "vertical"
 
 -- Jump to the last known cursor position if it's valid (from the docs).
-autocmd(
-  "last-position-jump",
-  [[
-    BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
-]],
-  true
-)
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = vim.api.nvim_create_augroup("last-position-jump", { clear = true }),
+  callback = function()
+    local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
+    if { row, col } ~= { 0, 0 } then
+      vim.api.nvim_win_set_cursor(0, { row, 0 })
+    end
+  end,
+})
 
 vim.api.nvim_set_var("markdown_fenced_languages", { "python" })
