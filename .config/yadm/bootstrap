@@ -77,3 +77,5 @@ if command -v softwareupdate >/dev/null 2>&1; then
     echo "Installing software updates"
     softwareupdate --all --install --force
 fi
+
+echo "Completed" $(date)
