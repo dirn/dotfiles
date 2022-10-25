@@ -1,6 +1,7 @@
 -- Install packer and any missing plugins if they haven't already been
 -- installed.
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local install_path = vim.fn.stdpath("data")
+    .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.api.nvim_command(
     "!git clone https://github.com/wbthomason/packer.nvim " .. install_path
@@ -31,6 +32,12 @@ return require("packer").startup(function(use)
 
   -- LSP
   use({
+    {
+      "https://github.com/williamboman/mason.nvim",
+      requires = {
+        "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
+      },
+    },
     "https://github.com/lithammer/nvim-diagnosticls",
     {
       "https://github.com/tami5/lspsaga.nvim",
@@ -38,7 +45,6 @@ return require("packer").startup(function(use)
         require("config.lspsaga")
       end,
     },
-    "https://github.com/williamboman/nvim-lsp-installer",
   })
 
   -- Treesitter

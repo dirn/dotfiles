@@ -1,29 +1,40 @@
-local find_root_dir = function(files)
-  return vim.fs.dirname(vim.fs.find(files, { upward = true })[1])
+local has_mason, mason = pcall(require, "mason")
+if not has_mason then
+  return
 end
 
-local server_path = function(server)
-  -- Right now this configuration relies on nvim-lsp-installer to install the
-  -- language servers. I've decided to encapsulate the path for the binaries in
-  -- here because I'm exploring alternative approaches and that will make it
-  -- easier to try them out.
-  local path = vim.fn.stdpath("data") .. "/lsp_servers/"
-  if server == "diagnosticls" then
-    path = path .. "diagnosticls/node_modules/.bin/diagnostic-languageserver"
-  elseif server == "jedi_language_server" then
-    path = path .. "jedi_language_server/venv/bin/jedi-language-server"
-  elseif server == "rust_analyzer" then
-    path = path .. "rust/rust-analyzer"
-  elseif server == "sumneko_lua" then
-    path = path .. "sumneko_lua/extension/server/bin/lua-language-server"
-  end
-  return path
+local has_installer, installer = pcall(require, "mason-tool-installer")
+if not has_installer then
+  return
+end
+
+local server_path = require("mason-core.path").bin_prefix
+
+mason.setup()
+installer.setup({
+  ensure_installed = {
+    "black",
+    "diagnostic-languageserver",
+    "flake8",
+    "isort",
+    "jedi-language-server",
+    "lua-language-server",
+    "mypy",
+    "prettier",
+    "rust-analyzer",
+    "stylua",
+    "yamllint",
+  },
+})
+
+local find_root_dir = function(files)
+  return vim.fs.dirname(vim.fs.find(files, { upward = true })[1])
 end
 
 local configs = {
   jedi_language_server = {
     name = "jedi_language_server",
-    cmd = { server_path("jedi_language_server") },
+    cmd = { server_path("jedi-language-server") },
     filetypes = { "python" },
     root_dir = find_root_dir({
       "pyproject.toml",
@@ -35,13 +46,13 @@ local configs = {
   },
   rust_analyzer = {
     name = "rust_analyzer",
-    cmd = { server_path("rust_analyzer") },
+    cmd = { server_path("rust-analyzer") },
     filetypes = { "rust" },
     root_dir = find_root_dir({ "Cargo.toml" }),
   },
   sumneko_lua = {
     name = "sumneko_lua",
-    cmd = { server_path("sumneko_lua") },
+    cmd = { server_path("lua-language-server") },
     filetypes = { "lua" },
     root_dir = find_root_dir({ "stylua.toml" }),
     single_file_support = true,
@@ -69,7 +80,7 @@ local has_diagnosticls, diagnosticls = pcall(require, "diagnosticls")
 if has_diagnosticls then
   configs["diagnosticls"] = {
     name = "diagnosticls",
-    cmd = { server_path("diagnosticls"), "--stdio" },
+    cmd = { server_path("diagnostic-languageserver"), "--stdio" },
     filetypes = { "fish", "lua", "python", "yaml" },
     root_dir = find_root_dir({ ".editorconfig", "stylua.toml", ".git" }),
     single_file_support = true,
@@ -85,6 +96,7 @@ if has_diagnosticls then
         fish = { "fish_indent" },
         lua = { "stylua" },
         python = { "black", "isort" },
+        yaml = { "prettier" },
       },
     },
   }
@@ -95,9 +107,10 @@ if has_local_lsp then
   configs = local_lsp.merge(configs)
 end
 
+lsp_augroup = vim.api.nvim_create_augroup("lsp", {})
 for _, config in pairs(configs) do
   vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("lsp", {}),
+    group = lsp_augroup,
     pattern = config.filetypes,
     callback = function()
       vim.lsp.start(config, {
@@ -168,14 +181,3 @@ vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   -- Disable virtual text globally.
   virtual_text = false,
 })
-
--- Install any language servers that are missing.
-local has_lspinstall, servers = pcall(require, "nvim-lsp-installer.servers")
-if has_lspinstall then
-  for server_name, _ in pairs(configs) do
-    local _, server = servers.get_server(server_name)
-    if not server:is_installed() then
-      server:install()
-    end
-  end
-end
