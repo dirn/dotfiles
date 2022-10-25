@@ -56,7 +56,6 @@ set --global --export HOMEBREW_INSTALL_FROM_API
 
 # Set the location of the asdf configuration.
 set --global --export ASDF_CONFIG_FILE ~/.config/asdf/config
-set --global --export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME ~/.config/asdf/versions
 
 # Use asdf to manage versions of things.
 set asdffix (brew --prefix asdf)
