@@ -23,11 +23,6 @@ if command -v asdf >/dev/null 2>&1; then
 
     echo "Installing Python libraries."
     python -m pip install --upgrade pip >/dev/null
-    if [[ $(python --version) =~ "3.11"* ]]; then
-	# The current release of greenlet isn't compatible with Python 3.11.
-	# Fortunately the latest pre-release is.
-        pip install --pre greenlet
-    fi
     pip install black bpython flake8 flake8_bugbear isort mypy pre-commit pudb pynvim virtualfish >/dev/null
 
     echo "Installing Rust libraries."
