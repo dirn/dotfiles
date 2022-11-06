@@ -13,6 +13,7 @@ local server_path = require("mason-core.path").bin_prefix
 mason.setup()
 installer.setup({
   ensure_installed = {
+    "autoflake",
     "black",
     "diagnostic-languageserver",
     "flake8",
@@ -86,7 +87,13 @@ if has_diagnosticls then
     single_file_support = true,
     init_options = {
       linters = diagnosticls.linters,
-      formatters = diagnosticls.formatters,
+      formatters = vim.tbl_deep_extend("force", diagnosticls.formatters, {
+        autoflake = {
+          command = "autoflake",
+          args = { "-" },
+          rootPatterns = { "pyproject.toml" },
+        },
+      }),
       filetypes = {
         fish = { "fish" },
         python = { "flake8", "mypy" },
@@ -95,7 +102,7 @@ if has_diagnosticls then
       formatFiletypes = {
         fish = { "fish_indent" },
         lua = { "stylua" },
-        python = { "black", "isort" },
+        python = { "autoflake", "black", "isort" },
         yaml = { "prettier" },
       },
     },
