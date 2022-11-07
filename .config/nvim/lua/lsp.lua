@@ -87,13 +87,7 @@ if has_diagnosticls then
     single_file_support = true,
     init_options = {
       linters = diagnosticls.linters,
-      formatters = vim.tbl_deep_extend("force", diagnosticls.formatters, {
-        autoflake = {
-          command = "autoflake",
-          args = { "-" },
-          rootPatterns = { "pyproject.toml" },
-        },
-      }),
+      formatters = diagnosticls.formatters,
       filetypes = {
         fish = { "fish" },
         python = { "flake8", "mypy" },
