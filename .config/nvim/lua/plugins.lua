@@ -155,15 +155,6 @@ return require("packer").startup(function(use)
   use("https://github.com/pbrisbin/vim-mkdir")
 
   use({
-    "https://github.com/inkarkat/vim-OnSyntaxChange",
-    requires = {
-      { "https://github.com/inkarkat/vim-ingo-library", branch = "stable" },
-    },
-    branch = "stable",
-    ft = { "python" },
-  })
-
-  use({
     "https://github.com/dhruvasagar/vim-prosession",
     requires = { "https://github.com/tpope/vim-obsession" },
   })
