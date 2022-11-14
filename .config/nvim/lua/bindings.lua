@@ -5,7 +5,7 @@ local silent = { silent = true }
 
 noremap("i", "jk", "<esc>")
 
-noremap("n", "<leader>Q", "<cmd>bufdo bdelete<cr>")
+noremap("n", "<leader>Q", "<cmd>%bdelete><cr>")
 
 -- The following set of previous/next/first/last mappings are inspired by
 -- (borrowed from) https://github.com/tpope/vim-unimpaired.
