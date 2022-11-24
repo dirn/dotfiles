@@ -1,22 +1,24 @@
 -- Install packer and any missing plugins if they haven't already been
 -- installed.
-local install_path = vim.fn.stdpath("data")
+local ensure_packer = function()
+  local install_path = vim.fn.stdpath("data")
     .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.api.nvim_command(
-    "!git clone https://github.com/wbthomason/packer.nvim " .. install_path
-  )
+  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system({
+      "git",
+      "clone",
+      "--depth",
+      "1",
+      "https://github.com/wbthomason/packer.nvim",
+      install_path,
+    })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
 end
-vim.cmd([[ packadd packer.nvim ]])
 
--- Auto compile the pack when there are changes to the plugins file.
-vim.api.nvim_create_autocmd("BufWritePost", {
-  group = vim.api.nvim_create_augroup("packer", {}),
-  pattern = { "plugins.lua" },
-  callback = function()
-    require("packer").compile()
-  end,
-})
+local packer_bootstrap = ensure_packer()
 
 return require("packer").startup(function(use)
   -- Let packer manage itself.
@@ -184,4 +186,8 @@ return require("packer").startup(function(use)
   end
 
   use("https://gitlab.com/dirn/TODO.vim")
+
+  if packer_bootstrap then
+    require("packer").sync()
+  end
 end)
