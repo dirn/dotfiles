@@ -89,6 +89,7 @@ brew "yamllint"
 brew "youtube-dl"
 brew "zlib"
 brew "zsh"
+cask "1password"
 cask "alacritty"
 cask "alfred"
 cask "applepi-baker"
@@ -103,7 +104,7 @@ cask "moom"
 cask "sdformatter"
 cask "slack"
 cask "steam"
-mas "1Password 7", id: 1333542190
+mas "1Password for Safari", id: 1569813296
 mas "Baking Soda", id: 1601151613
 mas "Keynote", id: 409183694
 mas "Noir", id: 1592917505
