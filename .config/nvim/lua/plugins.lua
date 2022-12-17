@@ -2,7 +2,7 @@
 -- installed.
 local ensure_packer = function()
   local install_path = vim.fn.stdpath("data")
-      .. "/site/pack/packer/start/packer.nvim"
+    .. "/site/pack/packer/start/packer.nvim"
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system({
       "git",
@@ -26,12 +26,7 @@ return require("packer").startup({
     use("https://github.com/wbthomason/packer.nvim")
 
     -- Colorscheme
-    use({
-      "https://github.com/Mofiqul/dracula.nvim",
-      config = function()
-        require("config.colorscheme")
-      end,
-    })
+    use("https://github.com/Mofiqul/dracula.nvim")
 
     -- LSP
     use({
@@ -42,12 +37,7 @@ return require("packer").startup({
         },
       },
       "https://github.com/lithammer/nvim-diagnosticls",
-      {
-        "https://github.com/tami5/lspsaga.nvim",
-        config = function()
-          require("config.lspsaga")
-        end,
-      },
+      "https://github.com/tami5/lspsaga.nvim",
     })
 
     -- Treesitter
@@ -58,9 +48,6 @@ return require("packer").startup({
         "https://github.com/nvim-treesitter/playground",
       },
       run = ":TSUpdate",
-      config = function()
-        require("config.treesitter")
-      end,
     })
 
     -- Outside of the categories above, all plugins are listed here
@@ -88,9 +75,6 @@ return require("packer").startup({
         "https://github.com/hrsh7th/cmp-path",
         "https://github.com/nvim-lua/plenary.nvim",
       },
-      config = function()
-        require("config.completion")
-      end,
     })
 
     use({
@@ -115,9 +99,6 @@ return require("packer").startup({
     use({
       "https://github.com/junegunn/fzf.vim",
       requires = { "https://github.com/junegunn/fzf" },
-      config = function()
-        require("config.fzf")
-      end,
     })
 
     use({
@@ -131,9 +112,6 @@ return require("packer").startup({
     use({
       "https://github.com/lewis6991/gitsigns.nvim",
       requires = { "https://github.com/nvim-lua/plenary.nvim" },
-      config = function()
-        require("config.gitsigns")
-      end,
     })
 
     use({
@@ -142,17 +120,11 @@ return require("packer").startup({
         "https://github.com/nvim-lua/plenary.nvim",
         "https://github.com/nvim-lua/popup.nvim",
       },
-      config = function()
-        require("config.harpoon")
-      end,
     })
 
     use({
       "https://github.com/camspiers/lens.vim",
       requires = { "https://github.com/camspiers/animate.vim" },
-      config = function()
-        require("config.lens")
-      end,
     })
 
     use("https://github.com/pbrisbin/vim-mkdir")
@@ -172,17 +144,11 @@ return require("packer").startup({
         { "nvim-lua/popup.nvim" },
         { "nvim-lua/plenary.nvim" },
       },
-      config = function()
-        require("config.telescope")
-      end,
     })
 
     if vim.fn.executable("tmux") > 0 then
       use({
         "https://github.com/aserowy/tmux.nvim",
-        config = function()
-          require("config.tmux")
-        end,
       })
     end
 
@@ -196,7 +162,7 @@ return require("packer").startup({
     display = {
       open_fn = function()
         local result, win, buf =
-        require("packer.util").float({ border = "rounded" })
+          require("packer.util").float({ border = "rounded" })
         vim.api.nvim_win_set_option(
           win,
           "winhighlight",

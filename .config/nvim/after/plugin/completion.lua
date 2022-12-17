@@ -1,4 +1,7 @@
-local cmp = require("cmp")
+local ok, cmp = pcall(require, "cmp")
+if not ok then
+  return
+end
 
 cmp.setup({
   formatting = {
@@ -33,6 +36,11 @@ cmp.setup({
   },
 })
 
-require("cmp_git").setup({
+local ok, cmp_git = pcall(require, "cmp_git")
+if not ok then
+  return
+end
+
+cmp_git.setup({
   filetypes = { "gitcommit" },
 })
