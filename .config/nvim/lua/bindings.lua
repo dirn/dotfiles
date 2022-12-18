@@ -1,43 +1,42 @@
-local config = require("config")
-noremap = config.noremap
-
+local noremap = { noremap = true }
 local silent = { silent = true }
+local options = vim.tbl_extend("keep", noremap, silent)
 
-noremap("i", "jk", "<esc>")
+vim.keymap.set("i", "jk", "<esc>")
 
-noremap("n", "<leader>Q", "<cmd>%bdelete><cr>")
+vim.keymap.set("n", "<leader>Q", "<cmd>%bdelete<cr>")
 
 -- The following set of previous/next/first/last mappings are inspired by
 -- (borrowed from) https://github.com/tpope/vim-unimpaired.
 -- Navigate buffers.
-noremap("n", "[b", "<cmd>bprevious<cr>", silent)
-noremap("n", "]b", "<cmd>bnext<cr>", silent)
-noremap("n", "[B", "<cmd>bfirst<cr>", silent)
-noremap("n", "]B", "<cmd>blast<cr>", silent)
+vim.keymap.set("n", "[b", vim.cmd.bprevious, options)
+vim.keymap.set("n", "]b", vim.cmd.bnext, options)
+vim.keymap.set("n", "[B", vim.cmd.bfirst, options)
+vim.keymap.set("n", "]B", vim.cmd.blast, options)
 
 -- Navigate the location list.
-noremap("n", "[l", "<cmd>lprevious<cr>", silent)
-noremap("n", "]l", "<cmd>lnext<cr>", silent)
-noremap("n", "[L", "<cmd>lfirst<cr>", silent)
-noremap("n", "]L", "<cmd>llast<cr>", silent)
+vim.keymap.set("n", "[l", vim.cmd.lprevious, options)
+vim.keymap.set("n", "]l", vim.cmd.lnext, options)
+vim.keymap.set("n", "[L", vim.cmd.lfirst, options)
+vim.keymap.set("n", "]L", vim.cmd.llast, options)
 
 -- Navigate the quickfix list.
-noremap("n", "[q", "<cmd>qprevious<cr>", silent)
-noremap("n", "]q", "<cmd>qnext<cr>", silent)
-noremap("n", "[Q", "<cmd>qfirst<cr>", silent)
-noremap("n", "]Q", "<cmd>qlast<cr>", silent)
+vim.keymap.set("n", "[q", vim.cmd.qprevious, options)
+vim.keymap.set("n", "]q", vim.cmd.qnext, options)
+vim.keymap.set("n", "[Q", vim.cmd.qfirst, options)
+vim.keymap.set("n", "]Q", vim.cmd.qlast, options)
 
 -- Navigate tabs (these differ from vim-unimpaired).
-noremap("n", "[t", "<cmd>tprevious<cr>", silent)
-noremap("n", "]t", "<cmd>tnext<cr>", silent)
-noremap("n", "[T", "<cmd>tfirst<cr>", silent)
-noremap("n", "]T", "<cmd>tlast<cr>", silent)
+vim.keymap.set("n", "[t", vim.cmd.tprevious, options)
+vim.keymap.set("n", "]t", vim.cmd.tnext, options)
+vim.keymap.set("n", "[T", vim.cmd.tfirst, options)
+vim.keymap.set("n", "]T", vim.cmd.tlast, options)
 
 -- Copy and paste using the system clipboard.
-noremap("v", "<leader>y", '"+y')
-noremap("v", "<leader>d", '"+d')
-noremap({ "n", "v" }, "<leader>p", '"+p')
-noremap({ "n", "v" }, "<leader>P", '"+P')
+vim.keymap.set("v", "<leader>y", '"+y', noremap)
+vim.keymap.set("v", "<leader>d", '"+d', noremap)
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', noremap)
+vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', noremap)
 
 -- Selected the text that was just pasted.
-noremap("n", "gp", "`[v`]")
+vim.keymap.set("n", "gp", "`[v`]", noremap)
