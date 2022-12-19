@@ -67,6 +67,8 @@
 [gpg.ssh]
     allowedSignersFile = ~/.config/git/allowed_signers
     defaultKeyCommand = ssh-add -L
+[include]
+    path = ~/.config/git/local.inc
 [init]
     defaultBranch = main
     templateDir = ~/.config/git/template
