@@ -2,7 +2,7 @@
 -- installed.
 local ensure_packer = function()
   local install_path = vim.fn.stdpath("data")
-    .. "/site/pack/packer/start/packer.nvim"
+      .. "/site/pack/packer/start/packer.nvim"
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system({
       "git",
@@ -161,8 +161,9 @@ return require("packer").startup({
   config = {
     display = {
       open_fn = function()
-        local result, win, buf =
-          require("packer.util").float({ border = "rounded" })
+        local result, win, buf = require("packer.util").float({
+          border = "rounded",
+        })
         vim.api.nvim_win_set_option(
           win,
           "winhighlight",
