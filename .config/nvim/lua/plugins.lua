@@ -25,6 +25,13 @@ return require("packer").startup({
     -- Let packer manage itself.
     use("https://github.com/wbthomason/packer.nvim")
 
+    use({
+      "https://github.com/lewis6991/impatient.nvim",
+      config = function()
+        require("impatient")
+      end,
+    })
+
     -- Colorscheme
     use("https://github.com/Mofiqul/dracula.nvim")
 
