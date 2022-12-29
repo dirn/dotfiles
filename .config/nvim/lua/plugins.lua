@@ -97,6 +97,13 @@ return require("packer").startup({
     use("https://github.com/wsdjeg/vim-fetch")
 
     use({
+      "https://github.com/beauwilliams/focus.nvim",
+      config = function()
+        require("focus").setup()
+      end,
+    })
+
+    use({
       "https://github.com/junegunn/fzf.vim",
       requires = { "https://github.com/junegunn/fzf" },
     })
@@ -120,11 +127,6 @@ return require("packer").startup({
         "https://github.com/nvim-lua/plenary.nvim",
         "https://github.com/nvim-lua/popup.nvim",
       },
-    })
-
-    use({
-      "https://github.com/camspiers/lens.vim",
-      requires = { "https://github.com/camspiers/animate.vim" },
     })
 
     use("https://github.com/pbrisbin/vim-mkdir")
