@@ -90,7 +90,7 @@ return require("packer").startup({
 
     use("https://github.com/blueyed/vim-diminactive")
 
-    use("https://github.com/editorconfig/editorconfig-vim")
+    use("https://github.com/gpanders/editorconfig.nvim")
 
     use("https://github.com/tommcdo/vim-exchange")
 
