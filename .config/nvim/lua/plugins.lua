@@ -154,7 +154,7 @@ return require("packer").startup({
       })
     end
 
-    use("https://gitlab.com/dirn/TODO.vim")
+    use("https://github.com/folke/todo-comments.nvim")
 
     if packer_bootstrap then
       require("packer").sync()
