@@ -139,8 +139,9 @@ return require("packer").startup({
     use("https://github.com/pbrisbin/vim-mkdir")
 
     use({
-      "https://github.com/dhruvasagar/vim-prosession",
-      requires = { "https://github.com/tpope/vim-obsession" },
+      "https://github.com/folke/persistence.nvim",
+      event = "BufReadPre",
+      module = "persistence",
     })
 
     use("https://github.com/raimon49/requirements.txt.vim")
