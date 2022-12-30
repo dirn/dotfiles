@@ -185,7 +185,10 @@ local plugins = {
 
   "https://github.com/raimon49/requirements.txt.vim",
 
-  "https://github.com/majutsushi/tagbar",
+  {
+    "https://github.com/majutsushi/tagbar",
+    cmd = { "Tagbar", "TagbarOpen", "TagbarToggle" },
+  },
 
   {
     "https://github.com/nvim-telescope/telescope.nvim",
