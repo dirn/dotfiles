@@ -66,6 +66,7 @@ local plugins = {
 
   {
     "https://github.com/numToStr/Comment.nvim",
+    keys = { "gc" },
     config = true,
   },
 
