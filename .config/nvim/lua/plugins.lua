@@ -77,7 +77,10 @@ local plugins = {
 
   "https://github.com/gpanders/editorconfig.nvim",
 
-  "https://github.com/tommcdo/vim-exchange",
+  {
+    "https://github.com/tommcdo/vim-exchange",
+    keys = { "cx" },
+  },
 
   "https://github.com/wsdjeg/vim-fetch",
 
