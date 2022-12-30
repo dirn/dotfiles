@@ -159,7 +159,25 @@ local plugins = {
     },
   },
 
-  "https://github.com/ggandor/leap.nvim",
+  {
+    "https://github.com/ggandor/leap.nvim",
+    keys = {
+      {
+        "<leader>f",
+        "<Plug>(leap-forward)",
+        mode = { "n", "o", "x" },
+        noremap = true,
+        silent = true,
+      },
+      {
+        "<leader>F",
+        "<Plug>(leap-backward)",
+        mode = { "n", "o", "x" },
+        noremap = true,
+        silent = true,
+      },
+    },
+  },
 
   "https://github.com/pbrisbin/vim-mkdir",
 
