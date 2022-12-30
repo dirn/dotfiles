@@ -153,10 +153,45 @@ local plugins = {
 
   {
     "https://github.com/ThePrimeagen/harpoon",
+    keys = {
+      {
+        "<leader>ha",
+        function()
+          require("harpoon.mark").add_file()
+        end,
+        noremap = true,
+        silent = true,
+      },
+      {
+        "<leader>hn",
+        function()
+          require("harpoon.ui").nav_next()
+        end,
+        noremap = true,
+        silent = true,
+      },
+      {
+        "<leader>hp",
+        function()
+          require("harpoon.ui").nav_prev()
+        end,
+        noremap = true,
+        silent = true,
+      },
+      {
+        "<leader>ht",
+        function()
+          require("harpoon.ui").toggle_quick_menu()
+        end,
+        noremap = true,
+        silent = true,
+      },
+    },
     dependencies = {
       "https://github.com/nvim-lua/plenary.nvim",
       "https://github.com/nvim-lua/popup.nvim",
     },
+    config = true,
   },
 
   {
