@@ -1,189 +1,145 @@
--- Install packer and any missing plugins if they haven't already been
--- installed.
-local ensure_packer = function()
-  local install_path = vim.fn.stdpath("data")
-    .. "/site/pack/packer/start/packer.nvim"
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system({
-      "git",
-      "clone",
-      "--depth",
-      "1",
-      "https://github.com/wbthomason/packer.nvim",
-      install_path,
-    })
-    vim.cmd([[packadd packer.nvim]])
-    return true
-  end
-  return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "--branch=stable", -- remove this if you want to bootstrap to HEAD
+    "https://github.com/folke/lazy.nvim.git",
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
+local plugins = {
+  -- Colorscheme
+  "https://github.com/Mofiqul/dracula.nvim",
 
-return require("packer").startup({
-  function(use)
-    -- Let packer manage itself.
-    use("https://github.com/wbthomason/packer.nvim")
-
-    use({
-      "https://github.com/lewis6991/impatient.nvim",
-      config = function()
-        require("impatient")
-      end,
-    })
-
-    -- Colorscheme
-    use("https://github.com/Mofiqul/dracula.nvim")
-
-    -- LSP
-    use({
-      {
-        "https://github.com/williamboman/mason.nvim",
-        requires = {
-          "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
-        },
+  -- LSP
+  {
+    {
+      "https://github.com/williamboman/mason.nvim",
+      dependencies = {
+        "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
       },
-      "https://github.com/lithammer/nvim-diagnosticls",
-      "https://github.com/tami5/lspsaga.nvim",
-    })
+    },
+    "https://github.com/lithammer/nvim-diagnosticls",
+    "https://github.com/tami5/lspsaga.nvim",
+  },
 
-    -- Treesitter
-    use({
-      "https://github.com/nvim-treesitter/nvim-treesitter",
-      requires = {
-        "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-        "https://github.com/nvim-treesitter/playground",
-      },
-      run = ":TSUpdate",
-    })
+  -- Treesitter
+  {
+    "https://github.com/nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+      "https://github.com/nvim-treesitter/playground",
+    },
+    build = ":TSUpdate",
+  },
 
-    -- Outside of the categories above, all plugins are listed here
-    -- alphabetically. Upon first glance that may not appear to be the case, but
-    -- the sort is a bit nuanced.
-    --
-    -- First, I'm sorting by the name of the plugin, not the repository owner. I
-    -- do this because I can typically remember which plugins I'm using but not
-    -- who maintains them.
-    --
-    -- Second, I'm ignoring the [n]vim- prefix in plugin names. I can't always
-    -- remember which plugins use a prefix and which don't.
-    --
-    -- I realize that search makes all of this mostly unnecessary, but I try to
-    -- keep things organized regardless.
+  -- Outside of the categories above, all plugins are listed here
+  -- alphabetically. Upon first glance that may not appear to be the case, but
+  -- the sort is a bit nuanced.
+  --
+  -- First, I'm sorting by the name of the plugin, not the repository owner. I
+  -- do this because I can typically remember which plugins I'm using but not
+  -- who maintains them.
+  --
+  -- Second, I'm ignoring the [n]vim- prefix in plugin names. I can't always
+  -- remember which plugins use a prefix and which don't.
+  --
+  -- I realize that search makes all of this mostly unnecessary, but I try to
+  -- keep things organized regardless.
 
-    use({
-      "https://github.com/hrsh7th/nvim-cmp",
-      requires = {
-        "https://github.com/hrsh7th/cmp-buffer",
-        "https://github.com/hrsh7th/cmp-calc",
-        "https://github.com/petertriho/cmp-git",
-        "https://github.com/hrsh7th/cmp-nvim-lsp",
-        "https://github.com/hrsh7th/cmp-nvim-lua",
-        "https://github.com/hrsh7th/cmp-path",
-        "https://github.com/nvim-lua/plenary.nvim",
-      },
-    })
-
-    use({
-      "https://github.com/numToStr/Comment.nvim",
-      config = function()
-        require("Comment").setup()
-      end,
-    })
-
-    use("https://github.com/rhysd/committia.vim")
-
-    use("https://github.com/rhysd/conflict-marker.vim")
-
-    use("https://github.com/blueyed/vim-diminactive")
-
-    use("https://github.com/gpanders/editorconfig.nvim")
-
-    use("https://github.com/tommcdo/vim-exchange")
-
-    use("https://github.com/wsdjeg/vim-fetch")
-
-    use({
-      "https://github.com/beauwilliams/focus.nvim",
-      config = function()
-        require("focus").setup()
-      end,
-    })
-
-    use({
-      "https://github.com/junegunn/fzf.vim",
-      requires = { "https://github.com/junegunn/fzf" },
-    })
-
-    use({
-      "https://github.com/ruifm/gitlinker.nvim",
-      requires = { "https://github.com/nvim-lua/plenary.nvim" },
-      config = function()
-        require("gitlinker").setup()
-      end,
-    })
-
-    use({
-      "https://github.com/lewis6991/gitsigns.nvim",
-      requires = { "https://github.com/nvim-lua/plenary.nvim" },
-    })
-
-    use({
-      "https://github.com/ThePrimeagen/harpoon",
-      requires = {
-        "https://github.com/nvim-lua/plenary.nvim",
-        "https://github.com/nvim-lua/popup.nvim",
-      },
-    })
-
-    use("https://github.com/ggandor/leap.nvim")
-
-    use("https://github.com/pbrisbin/vim-mkdir")
-
-    use({
-      "https://github.com/folke/persistence.nvim",
-      event = "BufReadPre",
-      module = "persistence",
-    })
-
-    use("https://github.com/raimon49/requirements.txt.vim")
-
-    use("https://github.com/majutsushi/tagbar")
-
-    use({
-      "https://github.com/nvim-telescope/telescope.nvim",
-      requires = {
-        { "https://github.com/nvim-lua/popup.nvim" },
-        { "https://github.com/nvim-lua/plenary.nvim" },
-      },
-    })
-
-    if vim.fn.executable("tmux") > 0 then
-      use({
-        "https://github.com/aserowy/tmux.nvim",
-      })
-    end
-
-    use("https://github.com/folke/todo-comments.nvim")
-
-    if packer_bootstrap then
-      require("packer").sync()
-    end
-  end,
-  config = {
-    display = {
-      open_fn = function()
-        local result, win, buf = require("packer.util").float({
-          border = "rounded",
-        })
-        vim.api.nvim_win_set_option(
-          win,
-          "winhighlight",
-          "FloatBorder:TelescopePromptBorder"
-        )
-        return result, win, buf
-      end,
+  {
+    "https://github.com/hrsh7th/nvim-cmp",
+    dependencies = {
+      "https://github.com/hrsh7th/cmp-buffer",
+      "https://github.com/hrsh7th/cmp-calc",
+      "https://github.com/petertriho/cmp-git",
+      "https://github.com/hrsh7th/cmp-nvim-lsp",
+      "https://github.com/hrsh7th/cmp-nvim-lua",
+      "https://github.com/hrsh7th/cmp-path",
+      "https://github.com/nvim-lua/plenary.nvim",
     },
   },
-})
 
+  {
+    "https://github.com/numToStr/Comment.nvim",
+    config = true,
+  },
+
+  "https://github.com/rhysd/committia.vim",
+
+  "https://github.com/rhysd/conflict-marker.vim",
+
+  "https://github.com/blueyed/vim-diminactive",
+
+  "https://github.com/gpanders/editorconfig.nvim",
+
+  "https://github.com/tommcdo/vim-exchange",
+
+  "https://github.com/wsdjeg/vim-fetch",
+
+  {
+    "https://github.com/beauwilliams/focus.nvim",
+    config = true,
+  },
+
+  {
+    "https://github.com/junegunn/fzf.vim",
+    dependencies = { "https://github.com/junegunn/fzf" },
+  },
+
+  {
+    "https://github.com/ruifm/gitlinker.nvim",
+    dependencies = { "https://github.com/nvim-lua/plenary.nvim" },
+    config = true,
+  },
+
+  {
+    "https://github.com/lewis6991/gitsigns.nvim",
+    dependencies = { "https://github.com/nvim-lua/plenary.nvim" },
+  },
+
+  {
+    "https://github.com/ThePrimeagen/harpoon",
+    dependencies = {
+      "https://github.com/nvim-lua/plenary.nvim",
+      "https://github.com/nvim-lua/popup.nvim",
+    },
+  },
+
+  "https://github.com/ggandor/leap.nvim",
+
+  "https://github.com/pbrisbin/vim-mkdir",
+
+  "https://github.com/folke/persistence.nvim",
+
+  "https://github.com/raimon49/requirements.txt.vim",
+
+  "https://github.com/majutsushi/tagbar",
+
+  {
+    "https://github.com/nvim-telescope/telescope.nvim",
+    dependencies = {
+      { "https://github.com/nvim-lua/popup.nvim" },
+      { "https://github.com/nvim-lua/plenary.nvim" },
+    },
+  },
+
+  "https://github.com/folke/todo-comments.nvim",
+}
+if vim.fn.executable("tmux") > 0 then
+  table.insert(plugins, "https://github.com/aserowy/tmux.nvim")
+end
+
+local options = {
+  git = {
+    -- This allows me to specify the full URL for all of my plugins without
+    -- having to use a table with a url field for each one.
+    url_format = "%s.git",
+  },
+}
+
+require("lazy").setup(plugins, options)
