@@ -216,7 +216,12 @@ local plugins = {
 
   "https://github.com/pbrisbin/vim-mkdir",
 
-  "https://github.com/folke/persistence.nvim",
+  {
+    "https://github.com/dhruvasagar/vim-prosession",
+    dependencies = {
+      "https://github.com/tpope/vim-obsession",
+    },
+  },
 
   "https://github.com/raimon49/requirements.txt.vim",
 
