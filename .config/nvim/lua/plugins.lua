@@ -181,7 +181,12 @@ local plugins = {
       {
         "<leader>ht",
         function()
-          require("harpoon.ui").toggle_quick_menu()
+          local ok, telescope = pcall(require, "telescope")
+          if ok then
+            telescope.extensions.harpoon.marks()
+          else
+            require("harpoon.ui").toggle_quick_menu()
+          end
         end,
         noremap = true,
         silent = true,
@@ -191,7 +196,13 @@ local plugins = {
       "https://github.com/nvim-lua/plenary.nvim",
       "https://github.com/nvim-lua/popup.nvim",
     },
-    config = true,
+    config = function()
+      local ok, telescope = pcall(require, "telescope")
+      if ok then
+        telescope.load_extension("harpoon")
+      end
+      require("harpoon").setup()
+    end,
   },
 
   {
