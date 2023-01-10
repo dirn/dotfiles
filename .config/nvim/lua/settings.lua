@@ -109,8 +109,23 @@ vim.opt.diffopt = vim.opt.diffopt + "vertical"
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = vim.api.nvim_create_augroup("last-position-jump", { clear = true }),
   callback = function()
-    local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
-    if { row, col } ~= { 0, 0 } then
+    local row
+    if vim.bo.filetype == "gitcommit" then
+      row = 1
+    else
+      row, _ = unpack(vim.api.nvim_buf_get_mark(0, '"'))
+      if row == nil then
+        row = 1
+      else
+        -- If the file has never lines than the previous position, go to the end.
+        local last_line = vim.api.nvim_buf_line_count(0)
+        if row > last_line then
+          row = last_line
+        end
+      end
+    end
+
+    if row > 0 then
       vim.api.nvim_win_set_cursor(0, { row, 0 })
     end
   end,
