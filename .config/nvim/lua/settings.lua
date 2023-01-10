@@ -13,12 +13,7 @@ vim.opt.smarttab = true
 -- will reject the commit again or, even worse, I'll end up with merge
 -- conflicts. This will automatically reload it when something else changes it.
 vim.opt.autoread = true
-vim.api.nvim_create_autocmd("BufEnter", {
-  group = vim.api.nvim_create_augroup("autoread", { clear = true }),
-  callback = function()
-    vim.cmd("checktime")
-  end,
-})
+vim.api.nvim_create_autocmd("BufEnter", { command = "checktime" })
 
 -- Don't redraw the screen while executing macros (and other things).
 vim.opt.lazyredraw = true
