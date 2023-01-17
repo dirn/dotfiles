@@ -255,12 +255,4 @@ if vim.fn.executable("tmux") > 0 then
   table.insert(plugins, "https://github.com/aserowy/tmux.nvim")
 end
 
-local options = {
-  git = {
-    -- This allows me to specify the full URL for all of my plugins without
-    -- having to use a table with a url field for each one.
-    url_format = "%s.git",
-  },
-}
-
-require("lazy").setup(plugins, options)
+require("lazy").setup(plugins)
