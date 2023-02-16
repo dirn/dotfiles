@@ -249,7 +249,7 @@ local plugins = {
     },
   },
 
-  "https://github.com/folke/todo-comments.nvim",
+  { "https://github.com/folke/todo-comments.nvim", config = true },
 }
 if vim.fn.executable("tmux") > 0 then
   table.insert(plugins, "https://github.com/aserowy/tmux.nvim")
