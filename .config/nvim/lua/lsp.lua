@@ -109,8 +109,9 @@ if has_local_lsp then
 end
 
 lsp_augroup = vim.api.nvim_create_augroup("lsp", {})
-for _, config in pairs(configs) do
+for server, config in pairs(configs) do
   vim.api.nvim_create_autocmd("FileType", {
+    desc = "Associate the " .. server .. " client with its file types.",
     group = lsp_augroup,
     pattern = config.filetypes,
     callback = function()
@@ -125,6 +126,7 @@ for _, config in pairs(configs) do
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "Configure the buffer's capabilities.",
   callback = function(args)
     local opts = { buffer = args.buf, noremap = true, silent = true }
 
@@ -159,6 +161,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     if client.server_capabilities.documentFormattingProvider then
       vim.api.nvim_create_autocmd("BufWritePre", {
+        desc = "Format the buffer when saving it.",
         group = vim.api.nvim_create_augroup("format-on-save", {}),
         pattern = "<buffer>",
         callback = function()
@@ -168,6 +171,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     vim.api.nvim_create_autocmd("CursorHold", {
+      desc = "Show active diagnostics for the position under the cursor.",
       group = vim.api.nvim_create_augroup("show-diagnostics", { clear = true }),
       pattern = "<buffer>",
       callback = function()
