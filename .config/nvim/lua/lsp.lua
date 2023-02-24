@@ -128,36 +128,89 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Configure the buffer's capabilities.",
   callback = function(args)
-    local opts = { buffer = args.buf, noremap = true, silent = true }
-
     -- Navigate diagnostics.
     vim.keymap.set("n", "[a", function()
       require("lspsaga.diagnostic").navigate("prev")({ wrap = false })
-    end, opts)
+    end, {
+      desc = "Go to the previous diagnostics.",
+      buffer = args.buf,
+      noremap = true,
+      silent = true,
+    })
     vim.keymap.set("n", "]a", function()
       require("lspsaga.diagnostic").navigate("next")({ wrap = false })
-    end, opts)
+    end, {
+      desc = "Go to the next diagnostics.",
+      buffer = args.buf,
+      noremap = true,
+      silent = true,
+    })
     vim.keymap.set("n", "<leader>a", function()
       require("lspsaga.diagnostic").show_line_diagnostics()
-    end, opts)
+    end, {
+      desc = "Show active diagnostics for the position under the cursor.",
+      buffer = args.buf,
+      noremap = true,
+      silent = true,
+    })
 
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
     -- Navigate code.
     if client.server_capabilities.definitionProvider then
-      vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+      vim.keymap.set(
+        "n",
+        "gy",
+        vim.lsp.buf.type_definition,
+        {
+          desc = "Go to the definition of the type under the cursor.",
+          buffer = args.buf,
+          noremap = true,
+          silent = true,
+        }
+      )
+      vim.keymap.set(
+        "n",
+        "gr",
+        vim.lsp.buf.references,
+        {
+          desc = "Show references to the identifier under the cursor.",
+          buffer = args.buf,
+          noremap = true,
+          silent = true,
+        }
+      )
     end
 
     -- Show documentation.
-    vim.keymap.set("n", "K", function()
-      require("lspsaga.hover").render_hover_doc()
-    end, opts)
+    vim.keymap.set(
+      "n",
+      "K",
+      function()
+        require("lspsaga.hover").render_hover_doc()
+      end,
+      {
+        desc = "Show documentation for the identifier under the cursor.",
+        buffer = args.buf,
+        noremap = true,
+        silent = true,
+      }
+    )
 
     -- Refactor code.
-    vim.keymap.set("n", "<leader>rn", function()
-      require("lspsaga.rename").rename()
-    end, opts)
+    vim.keymap.set(
+      "n",
+      "<leader>rn",
+      function()
+        require("lspsaga.rename").rename()
+      end,
+      {
+        desc = "Rename the identifier under the cursor.",
+        buffer = args.buf,
+        noremap = true,
+        silent = true,
+      }
+    )
 
     if client.server_capabilities.documentFormattingProvider then
       vim.api.nvim_create_autocmd("BufWritePre", {

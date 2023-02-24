@@ -1,5 +1,3 @@
-local options = { noremap = true, silent = true }
-
 local ok, telescope = pcall(require, "telescope")
 if not ok then
   return
@@ -19,20 +17,29 @@ telescope.setup({
 
 vim.keymap.set("n", "<leader>bf", function()
   require("telescope.builtin").current_buffer_fuzzy_find()
-end, options)
+end, { desc = "List the open buffers.", noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>h", function()
   require("telescope.builtin").help_tags()
-end, options)
+end, { desc = "List available help tags.", noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>km", function()
   require("telescope.builtin").keymaps()
-end, options)
+end, { desc = "List normal mode keymappings.", noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>cp", function()
   require("telescope.builtin").registers()
-end, options)
+end, {
+  desc = "List registers, pasting the contents on <cr>.",
+  noremap = true,
+  silent = true,
+})
 
-vim.keymap.set("n", "<leader>/", function()
-  require("telescope.builtin").search_history()
-end, options)
+vim.keymap.set(
+  "n",
+  "<leader>/",
+  function()
+    require("telescope.builtin").search_history()
+  end,
+  { desc = "List recently executed searches.", noremap = true, silent = true }
+)
