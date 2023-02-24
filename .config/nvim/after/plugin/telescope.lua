@@ -16,7 +16,7 @@ telescope.setup({
 })
 
 vim.keymap.set("n", "<leader>bf", function()
-  require("telescope.builtin").current_buffer_fuzzy_find()
+  require("telescope.builtin").buffers()
 end, { desc = "List the open buffers.", noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>h", function()
