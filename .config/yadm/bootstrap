@@ -22,8 +22,22 @@ if command -v asdf >/dev/null 2>&1; then
     asdf install
 
     echo "Installing Python libraries."
-    python -m pip install --upgrade pip wheel >/dev/null
-    pip install black bpython flake8 flake8_bugbear isort mypy pre-commit pudb pynvim virtualfish >/dev/null
+    python -m pip install --upgrade \
+        pip \
+	wheel \
+	>/dev/null
+    pip install \
+        black \
+	bpython \
+	flake8 \
+	flake8_bugbear \
+	isort \
+	mypy \
+	pre-commit \
+	pudb \
+	pynvim \
+	virtualfish \
+	>/dev/null
 
     echo "Installing Rust libraries."
     cargo install stylua
