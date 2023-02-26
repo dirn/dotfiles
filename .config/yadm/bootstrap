@@ -49,6 +49,13 @@ if command -v asdf >/dev/null 2>&1; then
     asdf reshim
 fi
 
+if command -v fzf >/dev/null 2>&1; then
+  echo "Installing fzf."
+  # Update shell configurations but skip fish since that's managed by source
+  # control.
+  $(brew --prefix)/opt/fzf/install --key-bindings --completion --update-rc --no-fish
+fi
+
 if command -v fish >/dev/null 2>&1; then
   if command -v vf >/dev/null 2>&1; then
       echo "Installing virtualfish."
