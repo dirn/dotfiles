@@ -60,7 +60,7 @@ set --global --export ASDF_CONFIG_FILE ~/.config/asdf/config
 # Use asdf to manage versions of things.
 set asdffix (brew --prefix asdf)
 if test -e $asdffix
-    source $asdffix/asdf.fish
+    source $asdffix/libexec/asdf.fish
 end
 
 # PuDB is a nicer debugger than pdb.
