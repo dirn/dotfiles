@@ -14,6 +14,15 @@ if [ -f "$HOMEBREW_BUNDLE_FILE" ]; then
     brew cleanup >/dev/null
 fi
 
+if [[ "$SHELL" != *fish ]]; then
+  if ! grep --quiet "$(brew --prefix)/bin/fish" /etc/shells; then
+    echo "Adding fish to /etc/shells."
+    echo $(brew --prefix)/bin/fish | sudo tee -a /etc/shells
+  fi
+  echo "Making fish the default shell. (Did you remember to log out and back in?)"
+  chsh -s $(brew --prefix)/bin/fish
+fi
+
 if command -v asdf >/dev/null 2>&1; then
     echo "Install versions of things."
     asdf plugin add python
