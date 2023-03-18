@@ -13,7 +13,23 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   -- Colorscheme
-  "https://github.com/Mofiqul/dracula.nvim",
+  {
+    "https://github.com/Mofiqul/dracula.nvim",
+    config = function()
+      vim.g.dracula_show_end_of_buffer = true
+      vim.g.dracula_transparent_bg = false
+
+      vim.opt.termguicolors = true
+
+      vim.cmd.colorscheme("dracula")
+
+      if vim.fn.has("mac") > 0 then
+        vim.opt.background = "dark"
+      else
+        vim.opt.background = "light"
+      end
+    end,
+  },
 
   -- LSP
   {
@@ -24,7 +40,23 @@ local plugins = {
       },
     },
     "https://github.com/lithammer/nvim-diagnosticls",
-    "https://github.com/tami5/lspsaga.nvim",
+    {
+      "https://github.com/tami5/lspsaga.nvim",
+      opts = {
+        error_sign = ">>",
+        hint_sign = "--",
+        infor_sign = "--",
+        warn_sign = "--",
+        dianostic_header_icon = "",
+        rename_action_keys = {
+          quit = {
+            "<c-c>",
+            "<c-d>",
+            "<esc>",
+          },
+        },
+      },
+    },
   },
 
   -- Treesitter
@@ -35,6 +67,44 @@ local plugins = {
       "https://github.com/nvim-treesitter/playground",
     },
     build = ":TSUpdate",
+    main = "nvim-treesitter.configs",
+    opts = {
+      ensure_installed = "all",
+      highlight = {
+        enable = true,
+        custom_captures = { ["docstring"] = "TSString" },
+      },
+      indent = { enable = true },
+      playground = {
+        enable = true,
+        disable = {},
+        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+        persist_queries = false, -- Whether the query persists across vim sessions
+        keybindings = {
+          toggle_query_editor = "o",
+          toggle_hl_groups = "i",
+          toggle_injected_languages = "t",
+          toggle_anonymous_nodes = "a",
+          toggle_language_display = "I",
+          focus_language = "f",
+          unfocus_language = "F",
+          update = "R",
+          goto_node = "<cr>",
+          show_help = "?",
+        },
+      },
+      textobjects = {
+        select = {
+          enable = true,
+          keymaps = {
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+          },
+        },
+      },
+    },
   },
 
   -- Outside of the categories above, all plugins are listed here
@@ -57,12 +127,52 @@ local plugins = {
     dependencies = {
       "https://github.com/hrsh7th/cmp-buffer",
       "https://github.com/hrsh7th/cmp-calc",
-      "https://github.com/petertriho/cmp-git",
+      {
+        "https://github.com/petertriho/cmp-git",
+        opts = {
+          filetypes = { "gitcommit" },
+        },
+      },
       "https://github.com/hrsh7th/cmp-nvim-lsp",
       "https://github.com/hrsh7th/cmp-nvim-lua",
       "https://github.com/hrsh7th/cmp-path",
       "https://github.com/nvim-lua/plenary.nvim",
     },
+    config = function()
+      local cmp = require("cmp")
+      cmp.setup({
+        formatting = {
+          format = function(entry, vim_item)
+            -- Show the source of the completion.
+            vim_item.menu = ({
+              buffer = "[Buffer]",
+              calc = "[Calc]",
+              cmp_git = "[Git]",
+              nvim_lsp = "[LSP]",
+              nvim_lua = "[Lua]",
+              path = "[Path]",
+            })[entry.source.name]
+            return vim_item
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<c-space>"] = cmp.mapping.complete(),
+          ["<c-e>"] = cmp.mapping.close(),
+          ["<cr>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          }),
+        }),
+        sources = {
+          { name = "nvim_lsp" },
+          { name = "nvim_lua" },
+          { name = "buffer" },
+          { name = "git" },
+          { name = "path" },
+          { name = "calc" },
+        },
+      })
+    end,
   },
 
   {
@@ -110,6 +220,31 @@ local plugins = {
   {
     "https://github.com/lewis6991/gitsigns.nvim",
     dependencies = { "https://github.com/nvim-lua/plenary.nvim" },
+    cond = function()
+      return os.getenv("NVIM_DISABLE_GITSIGNS") == nil
+    end,
+    opts = {
+      signs = {
+        add = {
+          text = "+",
+        },
+        change = {
+          text = "D",
+        },
+        delete = {
+          text = "_",
+        },
+        topdelete = {
+          text = "‾",
+        },
+        changedelete = {
+          text = "~_",
+        },
+      },
+      yadm = {
+        enable = true,
+      },
+    },
   },
 
   {
@@ -157,6 +292,14 @@ local plugins = {
       "https://github.com/nvim-lua/plenary.nvim",
       "https://github.com/nvim-lua/popup.nvim",
     },
+    config = function()
+      local ok, telescope = pcall(require, "telescope")
+      if ok then
+        telescope.load_extension("harpoon")
+      end
+
+      require("harpoon").setup()
+    end,
   },
 
   {
@@ -201,12 +344,81 @@ local plugins = {
       { "https://github.com/nvim-lua/popup.nvim" },
       { "https://github.com/nvim-lua/plenary.nvim" },
     },
+    keys = {
+      {
+        "<leader>bf",
+        function()
+          require("telescope.builtin").buffers()
+        end,
+        desc = "List the open buffers.",
+        noremap = true,
+        silent = true,
+      },
+      {
+        "<leader>?",
+        function()
+          require("telescope.builtin").help_tags()
+        end,
+        desc = "List available help tags.",
+        noremap = true,
+        silent = true,
+      },
+      {
+        "<leader>km",
+        function()
+          require("telescope.builtin").keymaps()
+        end,
+        desc = "List normal mode keymappings.",
+        noremap = true,
+        silent = true,
+      },
+      {
+        "<leader>cp",
+        function()
+          require("telescope.builtin").registers()
+        end,
+        desc = "List registers, pasting the contents on <cr>.",
+        noremap = true,
+        silent = true,
+      },
+      {
+        "<leader>/",
+        function()
+          require("telescope.builtin").search_history()
+        end,
+        desc = "List recently executed searches.",
+        noremap = true,
+        silent = true,
+      },
+    },
+    config = function()
+      local actions = require("telescope.actions")
+
+      require("telescope").setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<esc>"] = actions.close,
+            },
+          },
+        },
+      })
+    end,
   },
 
   { "https://github.com/folke/todo-comments.nvim", config = true },
 }
 if vim.fn.executable("tmux") > 0 then
-  table.insert(plugins, "https://github.com/aserowy/tmux.nvim")
+  table.insert(plugins, {
+    "https://github.com/aserowy/tmux.nvim",
+    opts = {
+      navigation = {
+        cycle_navigation = false,
+        enable_default_keybindings = true,
+        persist_zoom = true,
+      },
+    },
+  })
 end
 
 require("lazy").setup(plugins)
