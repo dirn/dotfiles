@@ -24,6 +24,7 @@
   "nvim-diagnosticls": { "branch": "master", "commit": "63efd44290d3c149868a7ed444ad812ca0e6d58f" },
   "nvim-treesitter": { "branch": "master", "commit": "dcb9a89ab4f0091bf87aed4e6801423d3667f76a" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "5b2bcb9ca8315879181f468b37a897100d631005" },
+  "persistence.nvim": { "branch": "main", "commit": "c814fae5c37aa0aba9cd9da05df6e52b88d612c3" },
   "playground": { "branch": "master", "commit": "4044b53c4d4fcd7a78eae20b8627f78ce7dc6f56" },
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
   "popup.nvim": { "branch": "master", "commit": "b7404d35d5d3548a82149238289fa71f7f6de4ac" },
@@ -35,7 +36,5 @@
   "vim-diminactive": { "branch": "master", "commit": "6f2e14e6ff6a038285937c378ec3685e6ff7ee36" },
   "vim-exchange": { "branch": "master", "commit": "784d63083ad7d613aa96f00021cd0dfb126a781a" },
   "vim-fetch": { "branch": "master", "commit": "0a6ab17e84c7f4808bf05ec380121bce40b40d21" },
-  "vim-mkdir": { "branch": "master", "commit": "f0ba7a7dc190a0cedf1d827958c99f3718109cf0" },
-  "vim-obsession": { "branch": "master", "commit": "fe9d3e1a9a50171e7d316a52e1e56d868e4c1fe5" },
-  "vim-prosession": { "branch": "master", "commit": "249b635d7483c8e1f8fcdcc50e1457b65a2bbf29" }
+  "vim-mkdir": { "branch": "master", "commit": "f0ba7a7dc190a0cedf1d827958c99f3718109cf0" }
 }

@@ -229,7 +229,7 @@ local plugins = {
           text = "+",
         },
         change = {
-          text = "D",
+          text = "~",
         },
         delete = {
           text = "_",
@@ -305,10 +305,18 @@ local plugins = {
   "https://github.com/pbrisbin/vim-mkdir",
 
   {
-    "https://github.com/dhruvasagar/vim-prosession",
-    dependencies = {
-      "https://github.com/tpope/vim-obsession",
-    },
+    "https://github.com/folke/persistence.nvim",
+    event = "BufReadPre",
+    config = true,
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("do-not-persist", { clear = true }),
+        pattern = { "diff", "gitcommit", "gitrebase", "mail" },
+        callback = function()
+          require("persistence").stop()
+        end,
+      })
+    end,
   },
 
   "https://github.com/raimon49/requirements.txt.vim",
