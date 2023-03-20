@@ -409,4 +409,23 @@ if vim.fn.executable("tmux") > 0 then
   })
 end
 
-require("lazy").setup(plugins)
+local opts = {
+  ui = {
+    icons = {
+      cmd = "⌘",
+      config = "🛠",
+      event = "📅",
+      ft = "📂",
+      init = "⚙",
+      keys = "🗝",
+      plugin = "🔌",
+      runtime = "💻",
+      source = "📄",
+      start = "🚀",
+      task = "📌",
+      lazy = "💤 ",
+    },
+  },
+}
+
+require("lazy").setup(plugins, opts)
