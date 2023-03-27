@@ -54,13 +54,8 @@ set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 # repositories.
 set --global --export HOMEBREW_INSTALL_FROM_API
 
-# Set the location of the asdf configuration.
-set --global --export ASDF_CONFIG_FILE ~/.config/asdf/config
-
-# Use asdf to manage versions of things.
-set asdffix (brew --prefix asdf)
-if test -e $asdffix
-    source $asdffix/libexec/asdf.fish
+if type --query rtx
+    rtx activate fish | source
 end
 
 # PuDB is a nicer debugger than pdb.

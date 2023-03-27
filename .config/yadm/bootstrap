@@ -23,39 +23,32 @@ if [[ "$SHELL" != *fish ]]; then
   chsh -s $(brew --prefix)/bin/fish
 fi
 
-if command -v asdf >/dev/null 2>&1; then
-    echo "Install versions of things."
-    asdf plugin add python
-    asdf plugin add rust
-    asdf plugin update --all
-    asdf install
+if command -v rtx >/dev/null 2>&1; then
+    echo "Installing rtx completions."
+    rtx complete --shell fish > $HOME/.config/fish/completions/rtx.fish
 
-    for version in $(asdf list python); do
+    echo "Installing rtx runtimes."
+    rtx install
+
+    for version in $(rtx list python | cut -d " " -f 4); do
         echo "Installing Python $version libraries."
-        $(asdf where python $version)/bin/python -m pip install --upgrade \
-            pip \
-	    wheel \
-	    >/dev/null
-	# Some of these may error on pre-release versions.
-        $(asdf where python $version)/bin/pip install \
+        rtx exec python@$version -- python -m pip install --upgrade pip wheel >/dev/null
+        rtx exec python@$version -- pip install \
             black \
-	    bpython \
-	    flake8 \
-	    flake8_bugbear \
-	    isort \
-	    mypy \
-	    pre-commit \
-	    pudb \
-	    pynvim \
-	    virtualfish \
-	    >/dev/null
+            bpython \
+            flake8 \
+            flake8_bugbear \
+            isort \
+            mypy \
+            pre-commit \
+            pudb \
+            pynvim \
+            virtualfish \
+            >/dev/null
     done
 
     echo "Installing Rust libraries."
     cargo install stylua
-
-    echo "Regenerating shims."
-    asdf reshim
 fi
 
 if command -v fzf >/dev/null 2>&1; then
