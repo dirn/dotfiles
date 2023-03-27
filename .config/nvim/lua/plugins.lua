@@ -343,6 +343,15 @@ local plugins = {
         silent = true,
       },
       {
+        "<leader>:",
+        function()
+          require("telescope.builtin").command_history()
+        end,
+        desc = "List command history.",
+        noremap = true,
+        silent = true,
+      },
+      {
         "<leader>?",
         function()
           require("telescope.builtin").help_tags()
