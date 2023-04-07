@@ -187,8 +187,6 @@ local plugins = {
 
   "https://github.com/blueyed/vim-diminactive",
 
-  "https://github.com/gpanders/editorconfig.nvim",
-
   {
     "https://github.com/tommcdo/vim-exchange",
     keys = { "cx" },
