@@ -122,6 +122,13 @@ local plugins = {
   -- keep things organized regardless.
 
   {
+    "https://github.com/goolord/alpha-nvim",
+    config = function()
+      require("alpha").setup(require("dashboard").config)
+    end,
+  },
+
+  {
     "https://github.com/hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
