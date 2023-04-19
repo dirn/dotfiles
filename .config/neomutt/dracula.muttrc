@@ -69,4 +69,3 @@ color sidebar_ordinary blue default
 color sidebar_spoolfile green default
 # Color to give mailboxes containing no unread mail
 color sidebar_unread color136 default
-

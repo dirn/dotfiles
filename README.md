@@ -28,6 +28,15 @@ only available for x86-based processors.
 
     $ /usr/sbin/softwareupdate --install-rosetta --agree-to-license
 
+### pre-commit
+
+This repository uses [pre-commit] to keep the files nicely formatted. pre-commit
+and yadm play together nicely when committing, but since yadm stores the git
+repository away from the working copy, anytime `pre-commit` is invoked, it needs
+to be told where the repository is.
+
+    $ env GIT_DIR=$HOME/.local/share/yadm/repo.git pre-commit install
+
 #### GNU
 
 macOS ships with the BSD version of some tools rather than the [GNU] version.
@@ -38,4 +47,5 @@ tools will be updated as well.
 [gnu]: https://www.gnu.com
 [gnuclt]: https://www.topbug.net/blog/2013/04/14/install-and-use-gnu-command-line-tools-in-mac-os-x/
 [mas]: https://github.com/mas-cli/mas
+[pre-commit]: https://pre-commit.com
 [yadm]: https://yadm.io
