@@ -47,11 +47,11 @@ local function footer()
     {
       type = "text",
       val = "Neovim v"
-          .. version.major
-          .. "."
-          .. version.minor
-          .. "."
-          .. version.patch,
+        .. version.major
+        .. "."
+        .. version.minor
+        .. "."
+        .. version.patch,
       opts = { position = "center", hl = "Comment" },
     },
   }
@@ -120,10 +120,10 @@ local function plugins()
   end
 
   opts.val = "You are using "
-      .. stats.count
-      .. " plugins, "
-      .. loaded
-      .. " of them are loaded. Open [L]azy to see more."
+    .. stats.count
+    .. " plugins, "
+    .. loaded
+    .. " of them are loaded. Open [L]azy to see more."
 
   return { opts }
 end
@@ -152,7 +152,7 @@ local function recents()
 
     local function on_press()
       local key =
-          vim.api.nvim_replace_termcodes(action .. "<ignore>", true, false, true)
+        vim.api.nvim_replace_termcodes(action .. "<ignore>", true, false, true)
       vim.api.nvim_feedkeys(key, "t", false)
     end
 
@@ -167,30 +167,36 @@ local function recents()
   local cwd = vim.fn.getcwd()
   local is_home = vim.fn.fnamemodify(cwd, ":~") == "~"
 
-  local oldfiles = {}
-  local recents_limit = 10
-  for _, v in pairs(vim.v.oldfiles) do
-    if not vim.startswith(v, cwd) then
-      goto continue
+  local function include_recent(recent)
+    if not vim.startswith(recent, cwd) then
+      return false
     end
-    if string.find(v, "COMMIT_EDITMSG") then
-      goto continue
+    if string.find(recent, "COMMIT_EDITMSG") then
+      return false
     end
     -- My code lives inside src. If my current working directory is ~, I don't
     -- want things in src to take up the whole recents less.
-    if is_home and vim.startswith(vim.fn.fnamemodify(v, ":~"), "~/src") then
-      goto continue
+    if
+      is_home and vim.startswith(vim.fn.fnamemodify(recent, ":~"), "~/src")
+    then
+      return false
     end
-    if vim.fn.filereadable(v) ~= 1 then
-      goto continue
-    end
-
-    table.insert(oldfiles, v)
-    if #oldfiles == recents_limit then
-      break
+    if vim.fn.filereadable(recent) ~= 1 then
+      return false
     end
 
-    ::continue::
+    return true
+  end
+
+  local oldfiles = {}
+  local recents_limit = 10
+  for _, v in pairs(vim.v.oldfiles) do
+    if include_recent(v) then
+      table.insert(oldfiles, v)
+      if #oldfiles == recents_limit then
+        break
+      end
+    end
   end
 
   local recents = {}
