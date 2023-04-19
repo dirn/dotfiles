@@ -38,3 +38,7 @@ indent_style = space
 [*.vim]
 indent_size = 4
 indent_style = space
+
+[*.yaml]
+indent_size = 2
+indent_style = space
