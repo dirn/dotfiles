@@ -189,9 +189,7 @@ local plugins = {
   },
 
   "https://github.com/rhysd/committia.vim",
-
   "https://github.com/rhysd/conflict-marker.vim",
-
   "https://github.com/blueyed/vim-diminactive",
 
   {

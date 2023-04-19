@@ -14,8 +14,14 @@ indent_size = 4
 indent_style = space
 
 [*.lua]
+align_array_table = false
+align_continuous_assign_statement = false
+align_continuous_rect_table_field = false
+continuation_indent = 2
 indent_size = 2
 indent_style = space
+max_line_length = 88
+quote_style = double
 
 [.mbsyncrc]
 indent_size = 4
