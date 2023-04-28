@@ -30,7 +30,7 @@ if command -v rtx >/dev/null 2>&1; then
     echo "Installing rtx runtimes."
     rtx install
 
-    for version in $(rtx list python --parseable); do
+    for version in $(rtx list python | cut -d " " -f 2); do
         echo "Installing Python $version libraries."
         rtx exec python@$version -- python -m pip install --upgrade pip wheel >/dev/null
         rtx exec python@$version -- pip install \
