@@ -13,15 +13,12 @@ local server_path = require("mason-core.path").bin_prefix
 mason.setup()
 installer.setup({
   ensure_installed = {
-    "autoflake",
     "black",
     "diagnostic-languageserver",
-    "flake8",
-    "isort",
-    "jedi-language-server",
     "lua-language-server",
     "mypy",
     "prettier",
+    "ruff-lsp",
     "rust-analyzer",
     "stylua",
     "yamllint",
@@ -33,9 +30,9 @@ local find_root_dir = function(files)
 end
 
 local configs = {
-  jedi_language_server = {
-    name = "jedi_language_server",
-    cmd = { server_path("jedi-language-server") },
+  ruff_lsp = {
+    name = "ruff_lsp",
+    cmd = { server_path("ruff-lsp") },
     filetypes = { "python" },
     root_dir = find_root_dir({
       "pyproject.toml",
@@ -44,6 +41,12 @@ local configs = {
       "setup.py",
     }),
     single_file_support = true,
+    init_options = {
+      settings = {
+        -- Enable isort-like behavior.
+        args = { "--extend-select=I" },
+      },
+    },
   },
   rust_analyzer = {
     name = "rust_analyzer",
@@ -90,13 +93,13 @@ if has_diagnosticls then
       formatters = diagnosticls.formatters,
       filetypes = {
         fish = { "fish" },
-        python = { "flake8", "mypy" },
+        python = { "mypy" },
         yaml = { "yamllint" },
       },
       formatFiletypes = {
         fish = { "fish_indent" },
         lua = { "stylua" },
-        python = { "autoflake", "black", "isort" },
+        python = { "black" },
         yaml = { "prettier" },
       },
     },
@@ -187,6 +190,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       require("lspsaga.rename").rename()
     end, {
       desc = "Rename the identifier under the cursor.",
+      buffer = args.buf,
+      noremap = true,
+      silent = true,
+    })
+    vim.keymap.set("n", "<leader>fx", vim.lsp.buf.code_action, {
+      desc = "Apply code actions.",
       buffer = args.buf,
       noremap = true,
       silent = true,
