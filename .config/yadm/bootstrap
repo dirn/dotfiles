@@ -15,12 +15,12 @@ if [ -f "$HOMEBREW_BUNDLE_FILE" ]; then
 fi
 
 if [[ "$SHELL" != *fish ]]; then
-  if ! grep --quiet "$(brew --prefix)/bin/fish" /etc/shells; then
-    echo "Adding fish to /etc/shells."
-    echo $(brew --prefix)/bin/fish | sudo tee -a /etc/shells
-  fi
-  echo "Making fish the default shell. (Did you remember to log out and back in?)"
-  chsh -s $(brew --prefix)/bin/fish
+    if ! grep --quiet "$(brew --prefix)/bin/fish" /etc/shells; then
+        echo "Adding fish to /etc/shells."
+        echo $(brew --prefix)/bin/fish | sudo tee -a /etc/shells
+    fi
+    echo "Making fish the default shell. (Did you remember to log out and back in?)"
+    chsh -s $(brew --prefix)/bin/fish
 fi
 
 if command -v rtx >/dev/null 2>&1; then
@@ -45,38 +45,38 @@ if command -v rtx >/dev/null 2>&1; then
             pynvim \
             virtualfish \
             >/dev/null
-    done
+        done
 
-    echo "Installing Rust libraries."
-    cargo install stylua
+        echo "Installing Rust libraries."
+        cargo install stylua
 fi
 
 if command -v fzf >/dev/null 2>&1; then
-  echo "Installing fzf."
-  # Update shell configurations but skip fish since that's managed by source
-  # control.
-  $(brew --prefix)/opt/fzf/install --key-bindings --completion --update-rc --no-fish
+    echo "Installing fzf."
+    # Update shell configurations but skip fish since that's managed by source
+    # control.
+    $(brew --prefix)/opt/fzf/install --key-bindings --completion --update-rc --no-fish
 fi
 
 if command -v fish >/dev/null 2>&1; then
-  if command -v vf >/dev/null 2>&1; then
-      echo "Installing virtualfish."
-      fish -c "vf install" >/dev/null
-  fi
-  echo "Registering virtualfish plugins."
-  fish -c "vf addplugins auto_activation" >/dev/null
-  fish -c "vf addplugins global_requirements" >/dev/null
+    if command -v vf >/dev/null 2>&1; then
+        echo "Installing virtualfish."
+        fish -c "vf install" >/dev/null
+    fi
+    echo "Registering virtualfish plugins."
+    fish -c "vf addplugins auto_activation" >/dev/null
+    fish -c "vf addplugins global_requirements" >/dev/null
 
-  if [ -f "$HOME/.virtualenvs/global_requirements.txt" ]; then
-      echo "Installing requirements into virtual environments."
-      # The only entry point to installing the requirements is through
-      # `vf requirements`. This opens the global requirements file into $EDITOR
-      # and then runs `pip install` after the editor exits. By using `echo` as the
-      # editor instead, we can install the requirements without further user
-      # interaction.
-      # TODO: This can be switched to `true` in fish 3.2.
-      fish -c "set EDITOR echo; vf requirements" >/dev/null
-  fi
+    if [ -f "$HOME/.virtualenvs/global_requirements.txt" ]; then
+        echo "Installing requirements into virtual environments."
+        # The only entry point to installing the requirements is through
+        # `vf requirements`. This opens the global requirements file into $EDITOR
+        # and then runs `pip install` after the editor exits. By using `echo` as the
+        # editor instead, we can install the requirements without further user
+        # interaction.
+        # TODO: This can be switched to `true` in fish 3.2.
+        fish -c "set EDITOR echo; vf requirements" >/dev/null
+    fi
 fi
 
 # Make the Maildir directories. isync seems to want them to exist rather than
