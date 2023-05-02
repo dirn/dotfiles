@@ -7,7 +7,7 @@ ci:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: v4.4.0
     hooks:
       - id: check-added-large-files
       - id: check-merge-conflict
@@ -24,7 +24,7 @@ repos:
       - id: fish_indent
 
   - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: v0.17.0
+    rev: v0.17.1
     hooks:
       - id: stylua
 
