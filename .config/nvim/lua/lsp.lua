@@ -15,6 +15,7 @@ installer.setup({
   ensure_installed = {
     "black",
     "diagnostic-languageserver",
+    "jedi-language-server",
     "lua-language-server",
     "mypy",
     "prettier",
@@ -30,6 +31,18 @@ local find_root_dir = function(files)
 end
 
 local configs = {
+  jedi_language_server = {
+    name = "jedi_language_server",
+    cmd = { server_path("jedi-language-server") },
+    filetypes = { "python" },
+    root_dir = find_root_dir({
+      "pyproject.toml",
+      "requirements.txt",
+      "setup.cfg",
+      "setup.py",
+    }),
+    single_file_support = true,
+  },
   ruff_lsp = {
     name = "ruff_lsp",
     cmd = { server_path("ruff-lsp") },
