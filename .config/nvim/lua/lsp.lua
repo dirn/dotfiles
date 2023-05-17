@@ -174,7 +174,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Navigate code.
     if client.server_capabilities.definitionProvider then
-      vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, {
+      vim.keymap.set("n", "gy", function()
+        local ok, telescope = pcall(require, "telescope.builtin")
+        if ok then
+          telescope.lsp_type_definitions()
+        else
+          vim.lsp.buf.type_definition()
+        end
+      end, {
         desc = "Go to the definition of the type under the cursor.",
         buffer = args.buf,
         noremap = true,
