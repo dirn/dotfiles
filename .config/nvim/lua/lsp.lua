@@ -180,7 +180,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
         noremap = true,
         silent = true,
       })
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, {
+      vim.keymap.set("n", "gr", function()
+        local ok, telescope = pcall(require, "telescope.builtin")
+        if ok then
+          telescope.lsp_references()
+        else
+          vim.lsp.buf.references()
+        end
+      end, {
         desc = "Show references to the identifier under the cursor.",
         buffer = args.buf,
         noremap = true,
