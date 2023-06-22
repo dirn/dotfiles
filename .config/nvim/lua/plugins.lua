@@ -308,6 +308,45 @@ local plugins = {
   "https://github.com/pbrisbin/vim-mkdir",
 
   {
+    "https://github.com/nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    dependencies = {
+      "https://github.com/nvim-lua/plenary.nvim",
+    },
+    opts = {
+      load = {
+        ["core.defaults"] = {},
+        ["core.completion"] = { config = { engine = "nvim-cmp" } },
+        ["core.concealer"] = {
+          config = {
+            icons = {
+              todo = {
+                cancelled = { icon = "_" },
+                done = { icon = "x" },
+                enabled = { icon = "e" },
+                on_hold = { icon = "=" },
+                pending = { icon = "-" },
+                recurring = { icon = "+" },
+                uncertain = { icon = "?" },
+                undone = { icon = " " },
+                urgent = { icon = "!" },
+              },
+            },
+          },
+        },
+        ["core.dirman"] = {
+          config = {
+            workspaces = {
+              home = "~/.local/share/nvim/neorg/home",
+              work = "~/.local/share/nvim/neorg/work",
+            },
+          },
+        },
+      },
+    },
+  },
+
+  {
     "https://github.com/folke/persistence.nvim",
     event = "BufReadPre",
     config = true,
