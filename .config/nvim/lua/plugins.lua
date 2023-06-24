@@ -184,7 +184,7 @@ local plugins = {
 
   {
     "https://github.com/numToStr/Comment.nvim",
-    keys = { "gc" },
+    keys = { { "gc", mode = { "n", "v" } } },
     config = true,
   },
 
