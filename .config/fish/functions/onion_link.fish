@@ -20,6 +20,11 @@ function onion_link
             set --function _dumper EPILOGUE
             set --function _extension $system
             set --function _destination (string upper $system)
+        case sgb
+            set --function _dumper $EPILOGUE
+            set --function _extension gb
+            set --function _destination SGB
+            set --function system gb
 
         case gamegear
             set --function _dumper $CART_READER
