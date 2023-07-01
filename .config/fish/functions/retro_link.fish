@@ -7,98 +7,98 @@ function retro_link
         return 1
     end
 
-    set --local CART_READER cartreader
-    set --local CIPL cIPL
-    set --local CLEANRIP CleanRip
-    set --local DUMPLING dumpling
-    set --local EPILOGUE Epilogue
-    set --local GODMODE9 GodMode9
-    set --local ISOBUSTER IsoBuster
-    set --local MPF MPF
-    set --local MULTIMAN multiMAN
-    set --local NXDUMPTOOL NXDumpTool
-    set --local RETROARCH RetroArch
+    set --function CART_READER cartreader
+    set --function CIPL cIPL
+    set --function CLEANRIP CleanRip
+    set --function DUMPLING dumpling
+    set --function EPILOGUE Epilogue
+    set --function GODMODE9 GodMode9
+    set --function ISOBUSTER IsoBuster
+    set --function MPF MPF
+    set --function MULTIMAN multiMAN
+    set --function NXDUMPTOOL NXDumpTool
+    set --function RETROARCH RetroArch
 
-    set --global _extra_path ""
+    set --function _extra_path ""
 
-    set --local system $argv[1]
+    set --function system $argv[1]
     # The systems here are grouped by the program used to create the backups.
     # The more often I use it, the higher up in the list it appears.
     switch $system
         case atari2600
-            set --global _dumper $CART_READER
-            set --global _extension a26
+            set --function _dumper $CART_READER
+            set --function _extension a26
         case coleco
-            set --global _dumper $CART_READER
-            set --global _extension col
+            set --function _dumper $CART_READER
+            set --function _extension col
         case gamegear
-            set --global _dumper $CART_READER
-            set --global _extension gg
+            set --function _dumper $CART_READER
+            set --function _extension gg
         case genesis
-            set --global _dumper $CART_READER
-            set --global _extension md
+            set --function _dumper $CART_READER
+            set --function _extension md
         case mastersystem
-            set --global _dumper $CART_READER
-            set --global _extension sms
+            set --function _dumper $CART_READER
+            set --function _extension sms
         case n64
-            set --global _dumper $CART_READER
-            set --global _extension z64
+            set --function _dumper $CART_READER
+            set --function _extension z64
         case nes
-            set --global _dumper $CART_READER
-            set --global _extension nes
+            set --function _dumper $CART_READER
+            set --function _extension nes
         case pcengine tg16
-            set --global _dumper $CART_READER
-            set --global _extension pce
+            set --function _dumper $CART_READER
+            set --function _extension pce
         case sega32x
-            set --global _dumper $CART_READER
-            set --global _extension 32x
+            set --function _dumper $CART_READER
+            set --function _extension 32x
         case sfc snes
-            set --global _dumper $CART_READER
-            set --global _extension sfc
+            set --function _dumper $CART_READER
+            set --function _extension sfc
 
         case gb gba gbc
-            set --global _dumper EPILOGUE
-            set --global _extension $system
+            set --function _dumper EPILOGUE
+            set --function _extension $system
 
         case switch
-            set --global _dumper NXDUMPTOOL
-            set --global _extension nsp xci
+            set --function _dumper NXDUMPTOOL
+            set --function _extension nsp xci
 
         case wiiu
-            set --global _dumper $DUMPLING
-            set --global _extension wua
-            set --global _extra_path /roms
+            set --function _dumper $DUMPLING
+            set --function _extension wua
+            set --function _extra_path /roms
 
         case gc wii
-            set --global _dumper CLEANRIP
-            set --global _extension rvz
+            set --function _dumper CLEANRIP
+            set --function _extension rvz
 
         case pcenginecd psx saturn segacd
-            set --global _dumper $RETROARCH
-            set --global _extension chd m3u
+            set --function _dumper $RETROARCH
+            set --function _extension chd m3u
 
         case ps2
-            set --global _dumper $MPF
-            set --global _extension chd
+            set --function _dumper $MPF
+            set --function _extension chd
 
         case ps3
-            set --global _dumper MULTIMAN
-            set --global _extension ps3
+            set --function _dumper MULTIMAN
+            set --function _extension ps3
 
         case psp
-            set --global _dumper CIPL
-            set --global _extension iso
+            set --function _dumper CIPL
+            set --function _extension iso
 
         case n3ds
-            set --global _dumper $GODMODE9
-            set --global _extension 3ds cxi
+            set --function _dumper $GODMODE9
+            set --function _extension 3ds cxi
         case nds
-            set --global _dumper $GODMODE9
-            set --global _extension nds
+            set --function _dumper $GODMODE9
+            set --function _extension nds
 
         case cdi
-            set --global _dumper $ISOBUSTER
-            set --global _extension chd
+            set --function _dumper $ISOBUSTER
+            set --function _extension chd
 
         case "*"
             echo "'$argv' is an unknown system"
@@ -110,10 +110,6 @@ function retro_link
         ln -s -F -f -v $f
     end
     popd
-
-    set --erase _dumper
-    set --erase _extension
-    set --erase _extra_path
 
     echo "Done."
 end

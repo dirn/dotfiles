@@ -5,7 +5,7 @@ function retro --description "Sync retro games to an SD card"
         set_color normal
     end
 
-    set --local options
+    set --function options
     set options $options (fish_opt --short h --long help)
     set options $options (fish_opt --short s --long system --multiple-vals)
     set options $options (fish_opt --short a --long sd --long-only)
@@ -43,7 +43,7 @@ function retro --description "Sync retro games to an SD card"
         return 1
     end
 
-    set --local source $RETRO_GAMES
+    set --function source $RETRO_GAMES
 
     if not set --query _flag_system
         exa $source
@@ -57,7 +57,7 @@ function retro --description "Sync retro games to an SD card"
         end
     end
 
-    set --local method
+    set --function method
     if set --query _flag_sd
         set method sd
     else if set --query _flag_ssh
@@ -81,9 +81,9 @@ function retro --description "Sync retro games to an SD card"
                 return 1
             end
 
-            set --global _destination "/Volumes/$_flag_dest"
+            set --function _destination "/Volumes/$_flag_dest"
         case ssh
-            set --local hosts (grep "^Host .*\$" $HOME/.ssh/config | sed "s/Host //" | string split " ")
+            set --function hosts (grep "^Host .*\$" $HOME/.ssh/config | sed "s/Host //" | string split " ")
 
             if not set --query _flag_dest
                 _to_table $hosts
@@ -95,7 +95,7 @@ function retro --description "Sync retro games to an SD card"
                 return 1
             end
 
-            set --global _destination "$_flag_dest:roms/"
+            set --function _destination "$_flag_dest:roms/"
         case "*"
             echo "'$_flag_method' is not a valid choice"
             return 1
@@ -114,7 +114,6 @@ function retro --description "Sync retro games to an SD card"
         --progress \
         --relative \
         $_systems $_destination
-    set --erase _destination
 
     if test $method = sd
         dot_clean "/Volumes/$_flag_dest"

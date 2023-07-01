@@ -24,7 +24,7 @@ function git-prune
         echo \t$branch
     end
     echo
-    read --local --prompt-str "Continue [yN]? " REPLY
+    read --function --prompt-str "Continue [yN]? " REPLY
     if test (string lower "$REPLY") != y
         return
     end

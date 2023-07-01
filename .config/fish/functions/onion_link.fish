@@ -8,60 +8,60 @@ function onion_link
         return 1
     end
 
-    set --local CART_READER cartreader
-    set --local EPILOGUE Epilogue
-    set --local RETROARCH RetroArch
+    set --function CART_READER cartreader
+    set --function EPILOGUE Epilogue
+    set --function RETROARCH RetroArch
 
-    set --local system $argv[1]
+    set --function system $argv[1]
     # The systems here are grouped by the program used to create the backups.
     # The more often I use it, the higher up in the list it appears.
     switch $system
         case gb gba gbc
-            set --global _dumper EPILOGUE
-            set --global _extension $system
-            set --global _destination (string upper $system)
+            set --function _dumper EPILOGUE
+            set --function _extension $system
+            set --function _destination (string upper $system)
 
         case gamegear
-            set --global _dumper $CART_READER
-            set --global _extension gg
-            set --global _destination GG
+            set --function _dumper $CART_READER
+            set --function _extension gg
+            set --function _destination GG
         case genesis
-            set --global _dumper $CART_READER
-            set --global _extension md
-            set --global _destination MD
+            set --function _dumper $CART_READER
+            set --function _extension md
+            set --function _destination MD
         case mastersystem
-            set --global _dumper $CART_READER
-            set --global _extension sms
-            set --global _destination MS
+            set --function _dumper $CART_READER
+            set --function _extension sms
+            set --function _destination MS
         case nes
-            set --global _dumper $CART_READER
-            set --global _extension nes
-            set --global _destination FC
+            set --function _dumper $CART_READER
+            set --function _extension nes
+            set --function _destination FC
         case pcengine tg16
-            set --global _dumper $CART_READER
-            set --global _extension pce
-            set --global _destination PCE
+            set --function _dumper $CART_READER
+            set --function _extension pce
+            set --function _destination PCE
         case sega32x
-            set --global _dumper $CART_READER
-            set --global _extension 32x
-            set --global _destination THIRTYTWOX
+            set --function _dumper $CART_READER
+            set --function _extension 32x
+            set --function _destination THIRTYTWOX
         case sfc snes
-            set --global _dumper $CART_READER
-            set --global _extension sfc
-            set --global _destination SFC
+            set --function _dumper $CART_READER
+            set --function _extension sfc
+            set --function _destination SFC
 
         case pcenginecd
-            set --global _dumper $RETROARCH
-            set --global _extension chd m3u
-            set --global _destination PCECD
+            set --function _dumper $RETROARCH
+            set --function _extension chd m3u
+            set --function _destination PCECD
         case psx
-            set --global _dumper $RETROARCH
-            set --global _extension chd m3u
-            set --global _destination PS
+            set --function _dumper $RETROARCH
+            set --function _extension chd m3u
+            set --function _destination PS
         case segacd
-            set --global _dumper $RETROARCH
-            set --global _extension chd m3u
-            set --global _destination SEGACD
+            set --function _dumper $RETROARCH
+            set --function _extension chd m3u
+            set --function _destination SEGACD
 
         case "*"
             echo "'$argv' is an unknown system"
@@ -79,10 +79,6 @@ function onion_link
             *.$ext $ONION_GAMES/$_destination/
     end
     popd
-
-    set --erase _destination
-    set --erase _dumper
-    set --erase _extension
 
     echo "Done."
 end
