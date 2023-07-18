@@ -24,7 +24,7 @@ repos:
       - id: fish_indent
 
   - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: v0.18.0
+    rev: v0.18.1
     hooks:
       - id: stylua
 
