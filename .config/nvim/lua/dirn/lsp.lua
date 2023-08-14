@@ -119,7 +119,7 @@ if has_diagnosticls then
   }
 end
 
-local has_local_lsp, local_lsp = pcall(require, "lspextras")
+local has_local_lsp, local_lsp = pcall(require, "dirn.lspextras")
 if has_local_lsp then
   configs = local_lsp.merge(configs)
 end
