@@ -40,6 +40,9 @@ function retro_link
         case mastersystem
             set --function _dumper $CART_READER
             set --function _extension sms
+        case msx2
+            set --function _dumper $CART_READER
+            set --function _extension mx2
         case n64
             set --function _dumper $CART_READER
             set --function _extension z64
