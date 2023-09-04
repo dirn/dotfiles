@@ -305,6 +305,11 @@ local plugins = {
     end,
   },
 
+  {
+    "https://github.com/tzachar/highlight-undo.nvim",
+    config = true,
+  },
+
   "https://github.com/pbrisbin/vim-mkdir",
 
   {
