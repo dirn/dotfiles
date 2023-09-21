@@ -14,6 +14,7 @@ function retro_link
     set --function EPILOGUE Epilogue
     set --function GODMODE9 GodMode9
     set --function ISOBUSTER IsoBuster
+    set --function JOEY_LYNX JoeyLynx
     set --function MPF MPF
     set --function MULTIMAN multiMAN
     set --function NXDUMPTOOL NXDumpTool
@@ -98,6 +99,10 @@ function retro_link
         case nds
             set --function _dumper $GODMODE9
             set --function _extension nds
+
+        case atarilynx
+            set --function _dumper $JOEY_LYNX
+            set --function _extension lnx
 
         case cdi
             set --function _dumper $ISOBUSTER

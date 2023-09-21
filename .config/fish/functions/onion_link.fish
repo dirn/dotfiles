@@ -10,6 +10,7 @@ function onion_link
 
     set --function CART_READER cartreader
     set --function EPILOGUE Epilogue
+    set --function JOEY_LYNX JoeyLynx
     set --function RETROARCH RetroArch
 
     set --function system $argv[1]
@@ -71,6 +72,11 @@ function onion_link
             set --function _dumper $RETROARCH
             set --function _extension chd m3u
             set --function _destination SEGACD
+
+        case atarilynx
+            set --function _dumper $JOEY_LYNX
+            set --function _extension lnx
+            set --function _destination LYNX
 
         case "*"
             echo "'$argv' is an unknown system"
