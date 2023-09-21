@@ -45,7 +45,7 @@ function onion_link
             set --function _destination MSX
         case msx2
             set --function _dumper $CART_READER
-            set --function _extension mx2
+            set --function _extension mx2 rom
             set --function _destination MSX
         case nes
             set --function _dumper $CART_READER

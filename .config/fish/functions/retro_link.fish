@@ -46,7 +46,7 @@ function retro_link
             set --function _extension rom
         case msx2
             set --function _dumper $CART_READER
-            set --function _extension mx2
+            set --function _extension mx2 rom
         case n64
             set --function _dumper $CART_READER
             set --function _extension z64
