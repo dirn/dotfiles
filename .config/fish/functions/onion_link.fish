@@ -39,6 +39,10 @@ function onion_link
             set --function _dumper $CART_READER
             set --function _extension sms
             set --function _destination MS
+        case msx
+            set --function _dumper $CART_READER
+            set --function _extension rom
+            set --function _destination MSX
         case msx2
             set --function _dumper $CART_READER
             set --function _extension mx2

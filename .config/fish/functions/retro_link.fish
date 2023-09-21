@@ -41,6 +41,9 @@ function retro_link
         case mastersystem
             set --function _dumper $CART_READER
             set --function _extension sms
+        case msx
+            set --function _dumper $CART_READER
+            set --function _extension rom
         case msx2
             set --function _dumper $CART_READER
             set --function _extension mx2
