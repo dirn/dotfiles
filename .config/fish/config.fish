@@ -62,6 +62,7 @@ set --global --export PKG_CONFIG_PATH "$opensslfix/lib/pkgconfig"
 
 if type --query rtx
     rtx activate fish | source
+    set --global --export RTX_PYTHON_DEFAULT_PACKAGES_FILE ~/.config/rtx/default_python_packages
 end
 
 # PuDB is a nicer debugger than pdb.

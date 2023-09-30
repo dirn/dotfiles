@@ -1,0 +1,12 @@
+black
+bpython
+flake8
+flake8_bugbear
+isort
+mypy
+pip
+pre-commit
+pudb
+pynvim
+virtualfish
+wheel
