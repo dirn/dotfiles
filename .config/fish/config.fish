@@ -55,7 +55,7 @@ set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 set --global --export HOMEBREW_INSTALL_FROM_API
 
 # Make sure the right OpenSSL is used when installing Python.
-set opensslfix (brew --prefix openssl@1.1)
+set opensslfix (brew --prefix openssl)
 set --global --export LDFLAGS "-L$opensslfix/lib"
 set --global --export CPPFLAGS "-I$opensslfix/include"
 set --global --export PKG_CONFIG_PATH "$opensslfix/lib/pkgconfig"
