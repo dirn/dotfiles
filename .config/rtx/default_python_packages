@@ -2,6 +2,7 @@ black
 bpython
 flake8
 flake8_bugbear
+greenlet>=3.0.0rc3; python_version>='3.12'
 isort
 mypy
 pip
