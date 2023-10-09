@@ -50,10 +50,6 @@ fish_add_path --append \
 # Manage Homebrew formulae.
 set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
 
-# Install homerew/core and homebrew/cask via the API rather than cloning their
-# repositories.
-set --global --export HOMEBREW_INSTALL_FROM_API
-
 # Make sure the right OpenSSL is used when installing Python.
 set opensslfix (brew --prefix openssl)
 set --global --export LDFLAGS "-L$opensslfix/lib"
