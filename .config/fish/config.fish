@@ -74,7 +74,7 @@ fish_add_path --append \
     "$brewfix/opt/make/libexec/gnubin"
 
 # Manage Homebrew formulae.
-set --global --export HOMEBREW_BUNDLE_FILE ~/.config/brew/Brewfile
+set --global --export HOMEBREW_BUNDLE_FILE $XDG_CONFIG_HOME/brew/Brewfile
 
 # Make sure the right OpenSSL is used when installing Python.
 set opensslfix (brew --prefix openssl)
@@ -84,7 +84,7 @@ set --global --export PKG_CONFIG_PATH "$opensslfix/lib/pkgconfig"
 
 if type --query rtx
     rtx activate fish | source
-    set --global --export RTX_PYTHON_DEFAULT_PACKAGES_FILE ~/.config/rtx/default_python_packages
+    set --global --export RTX_PYTHON_DEFAULT_PACKAGES_FILE $XDG_CONFIG_HOME/rtx/default_python_packages
 end
 
 # PuDB is a nicer debugger than pdb.
@@ -116,8 +116,8 @@ fish_add_path --prepend --move "$HOME/.local/bin"
 direnv hook fish | source
 
 # Allow for system-specific configuration.
-if test -e ~/.config/fish/extras.fish
-    source ~/.config/fish/extras.fish
+if test -e $XDG_CONFIG_HOME/fish/extras.fish
+    source $XDG_CONFIG_HOME/fish/extras.fish
 end
 
 # Use tmux for all new sessions. This should be done last in case extras.fish

@@ -25,7 +25,7 @@ fi
 
 if command -v rtx >/dev/null 2>&1; then
     echo "Installing rtx completions."
-    rtx complete --shell fish > $HOME/.config/fish/completions/rtx.fish
+    rtx complete --shell fish > $XDG_CONFIG_HOME/fish/completions/rtx.fish
 
     echo "Installing rtx runtimes."
     rtx install
@@ -33,7 +33,7 @@ if command -v rtx >/dev/null 2>&1; then
     for version in $(rtx list python --installed | cut -d " " -f 2); do
         echo "Installing Python $version libraries."
         rtx exec python@$version -- python -m pip install --upgrade pip wheel >/dev/null
-        rtx exec python@$version -- pip install --upgrade --requirement $HOME/.config/rtx/default_python_packages >/dev/null
+        rtx exec python@$version -- pip install --upgrade --requirement $XDG_CONFIG_HOME/rtx/default_python_packages >/dev/null
     done
 
     echo "Installing Rust libraries."
@@ -79,17 +79,17 @@ fi
 # Make the Maildir directories. isync seems to want them to exist rather than
 # just creating them if they aren't there.
 echo "Creating mailboxes."
-mkdir -p ~/Mail/bigapplepy >/dev/null
-mkdir -p ~/Mail/dirnonline >/dev/null
-mkdir -p ~/Mail/gmail >/dev/null
-mkdir -p ~/Mail/pygotham >/dev/null
+mkdir -p $HOME/Mail/bigapplepy >/dev/null
+mkdir -p $HOME/Mail/dirnonline >/dev/null
+mkdir -p $HOME/Mail/gmail >/dev/null
+mkdir -p $HOME/Mail/pygotham >/dev/null
 
 echo "Updating Tmux Plugin Manager"
-if test ! -d ~/.config/tmux/plugins/tpm; then
-    mkdir ~/.config/tmux/plugins
-    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+if test ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm; then
+    mkdir $XDG_CONFIG_HOME/tmux/plugins
+    git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
 fi
-~/.config/tmux/plugins/tpm/bin/install_plugins
+$XDG_CONFIG_HOME/tmux/plugins/tpm/bin/install_plugins
 
 if command -v softwareupdate >/dev/null 2>&1; then
     echo "Installing software updates"
