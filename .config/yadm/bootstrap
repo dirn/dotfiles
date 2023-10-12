@@ -68,6 +68,14 @@ if command -v fish >/dev/null 2>&1; then
     fi
 fi
 
+echo "Installing Neovim plugins and packages."
+if command -v nvim >/dev/null 2>&1; then
+    nvim --headless \
+        -c "Lazy" \
+        -c "Mason" \
+        -c "qall"
+fi
+
 # Make the Maildir directories. isync seems to want them to exist rather than
 # just creating them if they aren't there.
 echo "Creating mailboxes."
