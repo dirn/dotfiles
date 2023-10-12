@@ -101,3 +101,28 @@ if type --query tmux
         exec env tmux new-session
     end
 end
+
+if not set --query XDG_CONFIG_HOME
+    set --global --export XDG_CONFIG_HOME $HOME/.config
+end
+if not set --query XDG_DATA_HOME
+    set --global --export XDG_DATA_HOME $HOME/.local/share
+end
+if not set --query XDG_STATE_HOME
+    set --global --export XDG_STATE_HOME $HOME/.local/state
+end
+if not set --query XDG_DATA_DIRS
+    set --global --export XDG_DATA_DIRS /usr/local/share/:/usr/share/
+end
+if not set --query XDG_CONFIG_DIRS
+    set --global --export XDG_CONFIG_DIRS /etc/xdg
+end
+if not set --query XDG_CACHE_HOME
+    set --global --export XDG_CACHE_HOME $HOME/.cache
+end
+if not set --query XDG_RUNTIME_DIR
+    if not set --query UID
+        set --function UID (id -u (whoami))
+    end
+    set --global --export XDG_RUNTIME_DIR /run/user/$UID
+end
