@@ -4,6 +4,9 @@ vim.g.mapleader = [[ ]]
 -- Install plugins.
 require("dirn.plugins")
 
+-- Initialize file types.
+require("dirn.filetypes")
+
 -- Use my own idea of sensible defaults.
 require("dirn.settings")
 
