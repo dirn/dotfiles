@@ -71,7 +71,7 @@ fi
 echo "Installing Neovim plugins and packages."
 if command -v nvim >/dev/null 2>&1; then
     nvim --headless \
-        -c "Lazy" \
+        -c "Lazy restore" \
         -c "Mason" \
         -c "qall"
 fi
