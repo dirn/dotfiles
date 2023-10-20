@@ -2,8 +2,7 @@ function onion_link
     if test -z "$RETRO_BACKUPS"
         echo "\$RETRO_BACKUPS not set"
         return 1
-    end
-    if test -z "$ONION_GAMES"
+    else if test -z "$ONION_GAMES"
         echo "\$ONION_GAMES not set"
         return 1
     end
