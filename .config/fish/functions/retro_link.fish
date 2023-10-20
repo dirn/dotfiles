@@ -2,7 +2,7 @@ function retro_link
     if test -z "$RETRO_BACKUPS"
         echo "\$RETRO_BACKUPS not set"
         return 1
-        elif test -z "$RETRO_GAMES"
+    else if test -z "$RETRO_GAMES"
         echo "\$RETRO_GAMES not set"
         return 1
     end
