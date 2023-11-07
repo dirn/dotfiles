@@ -79,10 +79,12 @@ fi
 # Make the Maildir directories. isync seems to want them to exist rather than
 # just creating them if they aren't there.
 echo "Creating mailboxes."
-mkdir -p $HOME/Mail/bigapplepy >/dev/null
-mkdir -p $HOME/Mail/dirnonline >/dev/null
-mkdir -p $HOME/Mail/gmail >/dev/null
-mkdir -p $HOME/Mail/pygotham >/dev/null
+if command -v neomutt >/dev/null 2>&1; then
+    mkdir -p $HOME/Mail/bigapplepy >/dev/null
+    mkdir -p $HOME/Mail/dirnonline >/dev/null
+    mkdir -p $HOME/Mail/gmail >/dev/null
+    mkdir -p $HOME/Mail/pygotham >/dev/null
+fi
 
 echo "Updating Tmux Plugin Manager"
 if test ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm; then
