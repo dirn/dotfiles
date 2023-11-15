@@ -146,7 +146,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     -- Navigate diagnostics.
     vim.keymap.set("n", "[a", function()
-      require("lspsaga.diagnostic").navigate("prev")({ wrap = false })
+      vim.diagnostic.goto_prev({ float = true, wrap = false })
     end, {
       desc = "Go to the previous diagnostics.",
       buffer = args.buf,
@@ -154,16 +154,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
       silent = true,
     })
     vim.keymap.set("n", "]a", function()
-      require("lspsaga.diagnostic").navigate("next")({ wrap = false })
+      vim.diagnostic.goto_next({ float = true, wrap = false })
     end, {
       desc = "Go to the next diagnostics.",
       buffer = args.buf,
       noremap = true,
       silent = true,
     })
-    vim.keymap.set("n", "<leader>a", function()
-      require("lspsaga.diagnostic").show_line_diagnostics()
-    end, {
+    vim.keymap.set("n", "<leader>a", vim.diagnostic.open_float, {
       desc = "Show active diagnostics for the position under the cursor.",
       buffer = args.buf,
       noremap = true,
@@ -203,9 +201,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     -- Show documentation.
-    vim.keymap.set("n", "K", function()
-      require("lspsaga.hover").render_hover_doc()
-    end, {
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {
       desc = "Show documentation for the identifier under the cursor.",
       buffer = args.buf,
       noremap = true,
@@ -213,9 +209,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
 
     -- Refactor code.
-    vim.keymap.set("n", "<leader>rn", function()
-      require("lspsaga.rename").rename()
-    end, {
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {
       desc = "Rename the identifier under the cursor.",
       buffer = args.buf,
       noremap = true,
@@ -243,15 +237,39 @@ vim.api.nvim_create_autocmd("LspAttach", {
       desc = "Show active diagnostics for the position under the cursor.",
       group = vim.api.nvim_create_augroup("show-diagnostics", { clear = true }),
       pattern = "<buffer>",
-      callback = function()
-        require("lspsaga.diagnostic").show_line_diagnostics()
-      end,
+      callback = vim.diagnostic.open_float,
     })
   end,
+})
+
+vim.diagnostic.config({
+  float = {
+    border = "single",
+    focusable = false,
+    scope = "cursor",
+    separator = true,
+  },
+})
+
+local signs = { Error = ">>", Warn = "--", Hint = "--", Info = "--" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "single",
+  separator = true,
 })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     -- Disable virtual text globally.
     virtual_text = false,
+  })
+
+vim.lsp.handlers["textDocument/signatureHelp"] =
+  vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "single",
+    separator = true,
   })

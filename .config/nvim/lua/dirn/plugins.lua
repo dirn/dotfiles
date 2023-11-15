@@ -40,23 +40,6 @@ local plugins = {
       },
     },
     "https://github.com/lithammer/nvim-diagnosticls",
-    {
-      "https://github.com/tami5/lspsaga.nvim",
-      opts = {
-        error_sign = ">>",
-        hint_sign = "--",
-        infor_sign = "--",
-        warn_sign = "--",
-        dianostic_header_icon = "",
-        rename_action_keys = {
-          quit = {
-            "<c-c>",
-            "<c-d>",
-            "<esc>",
-          },
-        },
-      },
-    },
   },
 
   -- Treesitter
