@@ -173,6 +173,28 @@ local plugins = {
 
   "https://github.com/rhysd/committia.vim",
   "https://github.com/rhysd/conflict-marker.vim",
+
+  {
+    "https://github.com/stevearc/dressing.nvim",
+    lazy = true,
+    init = function()
+      vim.ui.input = function(...)
+        require("lazy").load({ plugins = { "dressing.nvim" } })
+        vim.ui.input(...)
+      end
+
+      vim.ui.select = function(...)
+        require("lazy").load({ plugins = { "dressing.nvim" } })
+        vim.ui.select(...)
+      end
+    end,
+    opts = {
+      input = {
+        border = "single",
+      },
+    },
+  },
+
   "https://github.com/blueyed/vim-diminactive",
 
   {
