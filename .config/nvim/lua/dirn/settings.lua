@@ -18,9 +18,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
   command = "checktime",
 })
 
--- Don't redraw the screen while executing macros (and other things).
-vim.opt.lazyredraw = true
-
 -- Set the maximum length of lines.
 vim.opt.textwidth = 80
 -- Wrap lines based on characters, not line length.

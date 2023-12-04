@@ -173,28 +173,6 @@ local plugins = {
 
   "https://github.com/rhysd/committia.vim",
   "https://github.com/rhysd/conflict-marker.vim",
-
-  {
-    "https://github.com/stevearc/dressing.nvim",
-    lazy = true,
-    init = function()
-      vim.ui.input = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        vim.ui.input(...)
-      end
-
-      vim.ui.select = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        vim.ui.select(...)
-      end
-    end,
-    opts = {
-      input = {
-        border = "single",
-      },
-    },
-  },
-
   "https://github.com/blueyed/vim-diminactive",
 
   {
@@ -352,6 +330,57 @@ local plugins = {
             },
           },
         },
+      },
+    },
+  },
+
+  {
+    "https://github.com/folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "https://github.com/MunifTanjim/nui.nvim",
+      "https://github.com/rcarriga/nvim-notify",
+    },
+    opts = {
+      cmdline = {
+        format = {
+          cmdline = { icon = ":" },
+          help = { icon = ":h" },
+          filter = { icon = "!" },
+          lua = { icon = ">" },
+          search_down = { icon = "/" },
+          search_up = { icon = "?" },
+        },
+      },
+      format = {
+        level = {
+          icons = {
+            error = "X",
+            warn = "!",
+            info = " ",
+          },
+        },
+      },
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+        signature = { auto_open = { enabled = false } },
+      },
+      messages = { view_search = false },
+      popupmenu = { kind_icons = false },
+      presets = {
+        command_palette = true,
+        lsp_doc_border = true,
+      },
+      routes = {
+        filter = {
+          event = "msg_show",
+          kind = "search_count",
+        },
+        opts = { skip = true },
       },
     },
   },
