@@ -117,17 +117,10 @@ if has_diagnosticls then
           },
         },
       }),
-      formatters = diagnosticls.formatters,
       filetypes = {
         fish = { "fish" },
         python = { "mypy", "ruff" },
         yaml = { "yamllint" },
-      },
-      formatFiletypes = {
-        fish = { "fish_indent" },
-        lua = { "stylua" },
-        python = { "black" },
-        yaml = { "prettier" },
       },
     },
   }
@@ -235,17 +228,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       noremap = true,
       silent = true,
     })
-
-    if client.server_capabilities.documentFormattingProvider then
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        desc = "Format the buffer when saving it.",
-        group = vim.api.nvim_create_augroup("format-on-save", {}),
-        pattern = "<buffer>",
-        callback = function()
-          vim.lsp.buf.format({ timeout_ms = 5000 })
-        end,
-      })
-    end
 
     vim.api.nvim_create_autocmd("CursorHold", {
       desc = "Show active diagnostics for the position under the cursor.",
