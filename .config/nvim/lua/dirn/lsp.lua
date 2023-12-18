@@ -19,7 +19,7 @@ installer.setup({
     "lua-language-server",
     "mypy",
     "prettier",
-    "ruff-lsp",
+    "ruff",
     "rust-analyzer",
     "stylua",
     "yamllint",
@@ -42,24 +42,6 @@ local configs = {
       "setup.py",
     }),
     single_file_support = true,
-  },
-  ruff_lsp = {
-    name = "ruff_lsp",
-    cmd = { server_path("ruff-lsp") },
-    filetypes = { "python" },
-    root_dir = find_root_dir({
-      "pyproject.toml",
-      "requirements.txt",
-      "setup.cfg",
-      "setup.py",
-    }),
-    single_file_support = true,
-    init_options = {
-      settings = {
-        -- Enable isort-like behavior.
-        args = { "--extend-select=I" },
-      },
-    },
   },
   rust_analyzer = {
     name = "rust_analyzer",
@@ -102,11 +84,43 @@ if has_diagnosticls then
     root_dir = find_root_dir({ ".editorconfig", "stylua.toml", ".git" }),
     single_file_support = true,
     init_options = {
-      linters = diagnosticls.linters,
+      linters = vim.tbl_deep_extend("force", diagnosticls.linters, {
+        ruff = {
+          sourceName = "ruff",
+          command = server_path("ruff"),
+          args = { "--extend-select=ASYNC,B,I,N", "%file" },
+          rootPatterns = {
+            "pyproject.toml",
+            "requirements.txt",
+            "setup.cfg",
+            "setup.py",
+          },
+          formatPattern = {
+            -- "^.*:(\\d+?):(\\d+?): ([A-Z]+)\\d+?: \\[\\*\\] (.*)$",
+            "(\\d+):(\\d+): (([A-Z]+)(.*))(\\r|\\n)*$",
+            {
+              line = 1,
+              column = 2,
+              security = 4,
+              message = 3,
+            },
+          },
+          securities = {
+            ASYNC = "error",
+            B = "error",
+            C = "error",
+            E = "error",
+            F = "error",
+            I = "warning",
+            N = "error",
+            W = "warning",
+          },
+        },
+      }),
       formatters = diagnosticls.formatters,
       filetypes = {
         fish = { "fish" },
-        python = { "mypy" },
+        python = { "mypy", "ruff" },
         yaml = { "yamllint" },
       },
       formatFiletypes = {
