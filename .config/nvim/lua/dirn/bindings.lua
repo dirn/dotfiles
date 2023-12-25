@@ -131,6 +131,11 @@ vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', {
   noremap = true,
   silent = true,
 })
+vim.keymap.set({ "n", "v" }, "<c-v>", '"0p', {
+  desc = "Paste the most recent yank.",
+  noremap = true,
+  silent = true,
+})
 
 -- Selected the text that was just pasted.
 vim.keymap.set(
