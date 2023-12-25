@@ -258,3 +258,29 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     -- Disable virtual text globally.
     virtual_text = false,
   })
+
+-- This is a low fidelity version of :LspInfo from
+-- https://github.com/neovim/nvim-lspconfig.
+vim.api.nvim_create_user_command("LspClients", function()
+  local clients = vim.inspect(vim.lsp.get_active_clients())
+
+  -- If Noice is installed, printing this will be rendered as a notice, making it
+  -- impossibly to see the content. It needs to be redirected instead.
+  local has_noice, noice = pcall(require, "noice")
+  if has_noice then
+    noice.redirect(function()
+      print(clients)
+    end)
+  else
+    print(clients)
+  end
+end, {
+  desc = "Shows the attached Language Server clients.",
+})
+
+-- This is borrowed from https://github.com/neovim/nvim-lspconfig.
+vim.api.nvim_create_user_command("LspLog", function()
+  vim.cmd(string.format("tabnew %s", vim.lsp.get_log_path()))
+end, {
+  desc = "Opens the LSP client log.",
+})
