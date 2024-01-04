@@ -30,7 +30,7 @@ if command -v mise >/dev/null 2>&1; then
     echo "Installing mise runtimes."
     mise install
 
-    for version in $(mise list python --installed | cut -d " " -f 2); do
+    for version in $(mise list python --installed | cut -d " " -f 3); do
         echo "Installing Python $version libraries."
         mise exec python@$version -- python -m pip install --upgrade pip wheel >/dev/null
         mise exec python@$version -- pip install --upgrade --requirement $XDG_CONFIG_HOME/mise/default_python_packages >/dev/null
