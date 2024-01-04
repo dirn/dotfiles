@@ -23,17 +23,17 @@ if [ "${SHELL: -4:4}" != "fish" ]; then
     chsh -s $(brew --prefix)/bin/fish
 fi
 
-if command -v rtx >/dev/null 2>&1; then
-    echo "Installing rtx completions."
-    rtx complete --shell fish > $XDG_CONFIG_HOME/fish/completions/rtx.fish
+if command -v mise >/dev/null 2>&1; then
+    echo "Installing mise completions."
+    mise complete --shell fish > $XDG_CONFIG_HOME/fish/completions/mise.fish
 
-    echo "Installing rtx runtimes."
-    rtx install
+    echo "Installing mise runtimes."
+    mise install
 
-    for version in $(rtx list python --installed | cut -d " " -f 2); do
+    for version in $(mise list python --installed | cut -d " " -f 2); do
         echo "Installing Python $version libraries."
-        rtx exec python@$version -- python -m pip install --upgrade pip wheel >/dev/null
-        rtx exec python@$version -- pip install --upgrade --requirement $XDG_CONFIG_HOME/rtx/default_python_packages >/dev/null
+        mise exec python@$version -- python -m pip install --upgrade pip wheel >/dev/null
+        mise exec python@$version -- pip install --upgrade --requirement $XDG_CONFIG_HOME/mise/default_python_packages >/dev/null
     done
 
     echo "Installing Rust libraries."

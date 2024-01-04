@@ -82,9 +82,9 @@ set --global --export LDFLAGS "-L$opensslfix/lib"
 set --global --export CPPFLAGS "-I$opensslfix/include"
 set --global --export PKG_CONFIG_PATH "$opensslfix/lib/pkgconfig"
 
-if type --query rtx
-    rtx activate fish | source
-    set --global --export RTX_PYTHON_DEFAULT_PACKAGES_FILE $XDG_CONFIG_HOME/rtx/default_python_packages
+if type --query mise
+    mise activate fish | source
+    set --global --export MISE_PYTHON_DEFAULT_PACKAGES_FILE $XDG_CONFIG_HOME/mise/default_python_packages
 end
 
 # PuDB is a nicer debugger than pdb.
