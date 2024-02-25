@@ -93,11 +93,13 @@ alias g git
 # I'm used to using gh to work with GitHub. Why type more to work with GitLab?
 alias gl glab
 
-# I like using exa but all of my muscle memory is for ls aliases.
-alias ls exa
-alias la "exa --all"
-alias ll "exa --long"
-alias tree "exa --tree --ignore-glob='.git|.mypy_cache|*.pyc' --all"
+# I like using eza but all of my muscle memory is for ls aliases.
+if type --query eza
+    alias ls eza
+    alias la "eza --all"
+    alias ll "eza --long"
+    alias tree "eza --tree --ignore-glob='.git|.mypy_cache|*.pyc' --all"
+end
 
 # Sometimes I have a hard time finding particular files in ls. Highlight them.
 set --global --export LS_COLORS "extras.fish=32;1;4:*extras.lua=32;1;4:retro.toml=32;1;4"
