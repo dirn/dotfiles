@@ -130,6 +130,7 @@ cask "slack"
 cask "steam"
 cask "transmit"
 mas "1Password for Safari", id: 1569813296
+mas "Adblock Plus", id: 1432731683
 mas "Baking Soda", id: 1601151613
 mas "Consent-O-Matic", id: 1606897889
 mas "Keynote", id: 409183694
