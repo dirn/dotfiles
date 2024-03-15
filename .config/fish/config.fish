@@ -110,6 +110,9 @@ if type --no-functions --query bat
 end
 
 # Configure fzf.
+if type --query fzf
+    fzf --fish | source
+end
 set --global --export FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --glob="!.git/*" --glob="!.mypy_cache/*"'
 
 fish_add_path --prepend --move "$HOME/.local/bin"
