@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if ! command -v brew >/dev/null 2>&1; then
-    echo "Installing Homebrew."
+    echo "Installing Homebrew. If it appears stuck, press Enter."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" >/dev/null
 fi
 
