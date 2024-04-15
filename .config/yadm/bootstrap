@@ -24,6 +24,9 @@ if [ "${SHELL: -4:4}" != "fish" ]; then
 fi
 
 if command -v mise >/dev/null 2>&1; then
+    echo "Install CLI completions"
+    mise use --global usage
+
     echo "Installing mise completions."
     mise complete --shell fish > $XDG_CONFIG_HOME/fish/completions/mise.fish
 
