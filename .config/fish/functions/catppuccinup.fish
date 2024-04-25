@@ -40,7 +40,7 @@ function catppuccinup
     for flavor in $flavors
         curl --silent --location \
             --create-dirs --output "$XDG_CONFIG_HOME/fish/themes/Catppuccin $(capitalize $flavor).theme" \
-            https://github.com/catppuccin/fish/blob/main/themes/Catppuccin%20$(capitalize $flavor).theme
+            https://raw.githubusercontent.com/catppuccin/fish/main/themes/Catppuccin%20$(capitalize $flavor).theme
     end
 
     echo "Updating Neomutt themes"
