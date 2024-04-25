@@ -48,12 +48,12 @@
     editor = nvim
     pager = delta
 [delta]
+    features = catppuccin-mocha
     file-decoration-style = underline
     hunk-header-decoration-style = yellow box
     line-numbers = true
     navigate = true
     side-by-side = true
-    syntax-theme = Dracula
     zero-style = dim syntax
 [diff]
     algorithm = patience
@@ -69,6 +69,7 @@
     defaultKeyCommand = ssh-add -L
 [include]
     path = ~/.config/git/local.inc
+    path = ~/.config/git/catppuccin.gitconfig
 [init]
     defaultBranch = main
     templateDir = ~/.config/git/template

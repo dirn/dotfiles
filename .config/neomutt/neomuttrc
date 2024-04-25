@@ -100,8 +100,7 @@ set sidebar_short_path
 set mail_check_stats
 set sidebar_format = "%B %?N?(%N)?%* %S"
 
-# See https://github.com/dracula/mutt.
-source dracula.muttrc
+source catppuccin.muttrc
 
 # # The noop bind is needed so that the line editor accepts IMAP folders with
 # spaces in their names.

@@ -14,14 +14,14 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
   -- Colorscheme
   {
-    "https://github.com/Mofiqul/dracula.nvim",
+    "https://github.com/catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    setup = true,
     config = function()
-      vim.g.dracula_show_end_of_buffer = true
-      vim.g.dracula_transparent_bg = false
-
       vim.opt.termguicolors = true
 
-      vim.cmd.colorscheme("dracula")
+      vim.cmd.colorscheme("catppuccin")
 
       if vim.fn.has("mac") > 0 then
         vim.opt.background = "dark"

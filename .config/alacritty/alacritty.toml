@@ -1,4 +1,4 @@
-import = ["dracula.toml"]
+import = ["catppuccin-mocha.toml"]
 
 [font]
 size = 19.0
