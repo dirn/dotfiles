@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Generated using
+# https://textkool.com/en/ascii-art-generator?hl=default&vl=default&font=DOS%20Rebel&text=YADM%20bootstrap
 cat <<EOF
 
  █████ █████   █████████   ██████████   ██████   ██████
