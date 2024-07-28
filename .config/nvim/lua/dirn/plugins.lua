@@ -174,7 +174,7 @@ local plugins = {
   "https://github.com/rhysd/committia.vim",
 
   {
-    "stevearc/conform.nvim",
+    "https://github.com/stevearc/conform.nvim",
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     opts = {
@@ -189,7 +189,7 @@ local plugins = {
         fish = { "fish_indent" },
         lua = { "stylua" },
         -- Let ruff make any changes before Black formats the code.
-        python = { "ruff_fix", "black" },
+        python = { "ruff_format", "black" },
         yaml = { "prettier" },
       },
     },
