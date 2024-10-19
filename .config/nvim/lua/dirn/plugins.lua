@@ -313,7 +313,16 @@ local plugins = {
 
   {
     "https://github.com/tzachar/highlight-undo.nvim",
-    config = true,
+    opts = {
+      keymaps = {
+        paste = {
+          disabled = true,
+        },
+        Paste = {
+          disabled = true,
+        },
+      },
+    },
   },
 
   "https://github.com/pbrisbin/vim-mkdir",
