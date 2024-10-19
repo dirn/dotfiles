@@ -1,0 +1,13 @@
+[tools]
+lua = "5.1"
+python = ["3.13", "3.12", "3.11", "3.10", "3.9"]
+rust = "1"
+usage = "latest"
+
+[settings]
+always_keep_download = true
+experimental = true
+legacy_version_file = true
+
+[settings.python]
+default_packages_file = "/Users/dirn/.config/mise/default_python_packages"
