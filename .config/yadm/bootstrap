@@ -20,9 +20,14 @@ if ! command -v brew >/dev/null 2>&1; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" >/dev/null
 fi
 
-# TODO: This is set in a file that is sourced by something installed by brew
-# bundle.
-if [ -f "$HOMEBREW_BUNDLE_FILE" ]; then
+if [ -z "$HOMEBREW_BUNDLE_FILE" ]; then
+    echo "The Brewfile must be specified before this script can be run. Try"
+    echo "running the script again with a value specified."
+    echo ""
+    echo "    env HOMEBREW_BUNDLE_FILE=~/.config/brew/Brewfile yadm bootstrap"
+    echo ""
+    exit 1
+elif [ -f "$HOMEBREW_BUNDLE_FILE" ]; then
     echo "Updating Homebrew bundle."
     brew update >/dev/null
     brew bundle
