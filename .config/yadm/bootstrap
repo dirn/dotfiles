@@ -48,7 +48,7 @@ if command -v mise >/dev/null 2>&1; then
     mise use --global usage
 
     echo "Installing mise completions."
-    mise complete --shell fish > $XDG_CONFIG_HOME/fish/completions/mise.fish
+    mise completetion fish > $XDG_CONFIG_HOME/fish/completions/mise.fish
 
     echo "Installing mise runtimes."
     mise install
