@@ -44,6 +44,11 @@ if [ "${SHELL: -4:4}" != "fish" ]; then
     chsh -s $(brew --prefix)/bin/fish
 fi
 
+if [ -z "$XDG_CONFIG_HOME" ]; then
+    echo "You must restart your session to continue."
+    exit 1
+fi
+
 if command -v mise >/dev/null 2>&1; then
     echo "Install CLI completions"
     mise use --global usage
