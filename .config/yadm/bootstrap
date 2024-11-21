@@ -24,7 +24,8 @@ if [ -z "$HOMEBREW_BUNDLE_FILE" ]; then
     echo "The Brewfile must be specified before this script can be run. Try"
     echo "running the script again with a value specified."
     echo ""
-    echo "    env HOMEBREW_BUNDLE_FILE=~/.config/brew/Brewfile yadm bootstrap"
+    echo "    export HOMEBREW_BUNDLE_FILE=~/.config/brew/Brewfile"
+    echo "    yadm bootstrap"
     echo ""
     exit 1
 elif [ -f "$HOMEBREW_BUNDLE_FILE" ]; then
