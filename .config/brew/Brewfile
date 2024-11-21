@@ -1,6 +1,5 @@
 tap "emmercm/igir"
 tap "homebrew/bundle"
-tap "homebrew/cask-versions"
 tap "homebrew/services"
 brew "xz"
 brew "jpeg-xl"
