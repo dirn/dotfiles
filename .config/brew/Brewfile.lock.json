@@ -5056,12 +5056,6 @@
           "full_name": "moom"
         }
       },
-      "openemu-experimental": {
-        "version": "2.4.1",
-        "options": {
-          "full_name": "openemu-experimental"
-        }
-      },
       "ppsspp": {
         "version": "1.18.1",
         "options": {
