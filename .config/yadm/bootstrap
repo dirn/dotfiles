@@ -133,3 +133,11 @@ if command -v softwareupdate >/dev/null 2>&1; then
 fi
 
 echo "Completed" $(date)
+
+LOCKFILE_STATUS=$(yadm status --porcelain -- $HOMEBREW_BUNDLE_FILE.lock.json)
+if [ -n "$LOCKFILE_STATUS" ]; then
+    echo ""
+    echo "${RED}There are changes to your Homebrew bundle's lock file. You should consider committing them.${NC}"
+    echo ""
+    exit 1
+fi
