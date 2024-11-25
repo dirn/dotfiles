@@ -1,5 +1,8 @@
 #!/bin/sh
 
+RED='\033[0;31m'
+NC='\033[0m'
+
 # Generated using
 # https://textkool.com/en/ascii-art-generator?hl=default&vl=default&font=DOS%20Rebel&text=YADM%20bootstrap
 cat <<EOF
@@ -21,8 +24,8 @@ if ! command -v brew >/dev/null 2>&1; then
 fi
 
 if [ -z "$HOMEBREW_BUNDLE_FILE" ]; then
-    echo "The Brewfile must be specified before this script can be run. Try"
-    echo "running the script again with a value specified."
+    echo "${RED}The Brewfile must be specified before this script can be run. Try"
+    echo "running the script again with a value specified.${NC}"
     echo ""
     echo "    export HOMEBREW_BUNDLE_FILE=~/.config/brew/Brewfile"
     echo "    yadm bootstrap"
@@ -45,7 +48,7 @@ if [ "${SHELL: -4:4}" != "fish" ]; then
 fi
 
 if [ -z "$XDG_CONFIG_HOME" ]; then
-    echo "You must restart your session to continue."
+    echo "${RED}You must restart your session to continue.${NC}"
     exit 1
 fi
 
