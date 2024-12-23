@@ -23,6 +23,9 @@ alias rm "rm -i"
 # Create intermediate directories.
 alias mkdir "mkdir -p"
 
+# Let's play some games.
+set --global --export ES_ROMS $HOME/ROMs
+
 # Set XDG environment variables to their default values if not already set.
 if not set --query XDG_CONFIG_HOME
     set --global --export XDG_CONFIG_HOME $HOME/.config
