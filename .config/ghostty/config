@@ -1,0 +1,6 @@
+font-size = 19
+fullscreen = true
+macos-option-as-alt = true
+quit-after-last-window-closed = true
+theme = catppuccin-mocha
+window-decoration = true
