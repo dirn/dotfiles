@@ -26,9 +26,9 @@ brew "direnv"
 brew "docutils"
 brew "ed"
 brew "p11-kit"
-brew "unbound", restart_service: true
+brew "unbound", restart_service: :changed
 brew "gnutls"
-brew "emacs", restart_service: true
+brew "emacs", restart_service: :changed
 brew "eza"
 brew "fd"
 brew "harfbuzz"
@@ -61,7 +61,7 @@ brew "grep"
 brew "guile"
 brew "gzip"
 brew "htop"
-brew "isync", restart_service: true
+brew "isync", restart_service: :changed
 brew "keyring"
 brew "less"
 brew "libfido2"
