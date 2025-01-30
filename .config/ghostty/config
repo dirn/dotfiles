@@ -1,3 +1,4 @@
+font-feature = -calt
 font-size = 19
 fullscreen = true
 macos-option-as-alt = true
