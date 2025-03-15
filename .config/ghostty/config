@@ -1,3 +1,4 @@
+confirm-close-surface = false
 font-feature = -calt
 font-size = 19
 fullscreen = true
