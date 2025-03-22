@@ -15,6 +15,7 @@
   "fzf": { "branch": "master", "commit": "f92f9f137a7a222465892f30776db48a7ecc8ad9" },
   "fzf.vim": { "branch": "master", "commit": "245eaf8e50fe440729056ce8d4e7e2bb5b1ff9c9" },
   "gitlinker.nvim": { "branch": "master", "commit": "cc59f732f3d043b626c8702cb725c82e54d35c25" },
+  "gitsigns-yadm.nvim": { "branch": "main", "commit": "3b8ede03dbd4ea04c17a0b1b241ffb19ca597427" },
   "gitsigns.nvim": { "branch": "main", "commit": "011dc6718bcebdf92a5336bb0da79189c3afe621" },
   "harpoon": { "branch": "master", "commit": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3" },
   "highlight-undo.nvim": { "branch": "main", "commit": "a5e2e2d43f6d131bf526619baeeeec32397b0789" },
