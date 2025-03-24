@@ -1,1 +1,4 @@
-return { "https://github.com/folke/todo-comments.nvim", config = true }
+return {
+  "https://github.com/folke/todo-comments.nvim",
+  opts = {},
+}
