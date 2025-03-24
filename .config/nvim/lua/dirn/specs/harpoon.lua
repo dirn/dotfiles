@@ -1,3 +1,7 @@
+-- Dependencies
+-- plenary.nvim
+-- popup.nvim
+
 return {
   "https://github.com/ThePrimeagen/harpoon",
   keys = {
@@ -38,10 +42,6 @@ return {
       noremap = true,
       silent = true,
     },
-  },
-  dependencies = {
-    "https://github.com/nvim-lua/plenary.nvim",
-    "https://github.com/nvim-lua/popup.nvim",
   },
   config = function()
     local ok, telescope = pcall(require, "telescope")

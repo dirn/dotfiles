@@ -1,3 +1,6 @@
+-- Dependencies
+-- plenary.nvim
+
 return {
   "https://github.com/hrsh7th/nvim-cmp",
   event = "InsertEnter",
@@ -13,7 +16,6 @@ return {
     "https://github.com/hrsh7th/cmp-nvim-lsp",
     "https://github.com/hrsh7th/cmp-nvim-lua",
     "https://github.com/hrsh7th/cmp-path",
-    "https://github.com/nvim-lua/plenary.nvim",
   },
   config = function()
     local cmp = require("cmp")
