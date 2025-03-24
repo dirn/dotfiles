@@ -21,8 +21,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local plugins = { { import = "dirn.specs" } }
-
 local opts = {
   ui = {
     icons = {
@@ -42,4 +40,4 @@ local opts = {
   },
 }
 
-require("lazy").setup(plugins, opts)
+require("lazy").setup({ import = "dirn.specs" }, opts)
