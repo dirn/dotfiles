@@ -1,8 +1,8 @@
 return {
   "https://github.com/catppuccin/nvim",
   name = "catppuccin",
+  lazy = false,
   priority = 1000,
-  setup = true,
   config = function()
     vim.opt.termguicolors = true
 
