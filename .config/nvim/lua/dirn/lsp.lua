@@ -8,8 +8,6 @@ if not has_installer then
   return
 end
 
-local server_path = require("mason-core.path").bin_prefix
-
 mason.setup()
 installer.setup({
   ensure_installed = {
@@ -26,134 +24,26 @@ installer.setup({
   },
 })
 
-local find_root_dir = function(files)
-  return vim.fs.dirname(vim.fs.find(files, { upward = true })[1])
-end
-
-local configs = {
-  jedi_language_server = {
-    name = "jedi_language_server",
-    cmd = { server_path("jedi-language-server") },
-    filetypes = { "python" },
-    root_dir = find_root_dir({
-      "pyproject.toml",
-      "requirements.txt",
-      "setup.cfg",
-      "setup.py",
-    }),
-    single_file_support = true,
-  },
-  rust_analyzer = {
-    name = "rust_analyzer",
-    cmd = { server_path("rust-analyzer") },
-    filetypes = { "rust" },
-    root_dir = find_root_dir({ "Cargo.toml" }),
-  },
-  sumneko_lua = {
-    name = "sumneko_lua",
-    cmd = { server_path("lua-language-server") },
-    filetypes = { "lua" },
-    root_dir = find_root_dir({ "stylua.toml" }),
-    single_file_support = true,
-    settings = {
-      Lua = {
-        diagnostics = {
-          disable = { "lowercase-global" },
-          globals = { "vim" },
-        },
-        runtime = {
-          version = "LuaJIT",
-        },
-        telemetry = {
-          enable = false,
-        },
-        workspace = {
-          library = vim.api.nvim_get_runtime_file("", true),
-        },
-      },
-    },
-  },
+local servers = {
+  "diagnosticls",
+  "jedi_language_server",
+  "lua_ls",
+  "rust_analyzer",
 }
-
-local has_diagnosticls, diagnosticls = pcall(require, "diagnosticls")
-if has_diagnosticls then
-  configs["diagnosticls"] = {
-    name = "diagnosticls",
-    cmd = { server_path("diagnostic-languageserver"), "--stdio" },
-    filetypes = { "fish", "lua", "python", "yaml" },
-    root_dir = find_root_dir({ ".editorconfig", "stylua.toml", ".git" }),
-    single_file_support = true,
-    init_options = {
-      linters = vim.tbl_deep_extend("force", diagnosticls.linters, {
-        ruff = {
-          sourceName = "ruff",
-          command = server_path("ruff"),
-          args = { "--extend-select=ASYNC,B,I,N", "%file" },
-          rootPatterns = {
-            "pyproject.toml",
-            "requirements.txt",
-            "setup.cfg",
-            "setup.py",
-          },
-          formatPattern = {
-            -- "^.*:(\\d+?):(\\d+?): ([A-Z]+)\\d+?: \\[\\*\\] (.*)$",
-            "(\\d+):(\\d+): (([A-Z]+)(.*))(\\r|\\n)*$",
-            {
-              line = 1,
-              column = 2,
-              security = 4,
-              message = 3,
-            },
-          },
-          securities = {
-            ASYNC = "error",
-            B = "error",
-            C = "error",
-            E = "error",
-            F = "error",
-            I = "warning",
-            N = "error",
-            W = "warning",
-          },
-        },
-      }),
-      filetypes = {
-        fish = { "fish" },
-        python = { "mypy", "ruff" },
-        yaml = { "yamllint" },
-      },
-    },
-  }
-end
 
 local has_local_lsp, local_lsp = pcall(require, "dirn.lspextras")
 if has_local_lsp then
-  configs = local_lsp.merge(configs)
+  servers = local_lsp.merge(servers)
 end
 
-lsp_augroup = vim.api.nvim_create_augroup("lsp", {})
-for server, config in pairs(configs) do
-  vim.api.nvim_create_autocmd("FileType", {
-    desc = "Associate the " .. server .. " client with its file types.",
-    group = lsp_augroup,
-    pattern = config.filetypes,
-    callback = function()
-      vim.lsp.start(config, {
-        reuse_client = function(client, conf)
-          return client.name == conf.name
-            and client.config.root_dir == conf.root_dir
-        end,
-      })
-    end,
-  })
-end
+vim.lsp.enable(servers)
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Configure the buffer's capabilities.",
   callback = function(args)
     -- Navigate diagnostics.
     vim.keymap.set("n", "[a", function()
-      vim.diagnostic.goto_prev({ float = true, wrap = false })
+      vim.diagnostic.jump({ count = -1, float = true, wrap = false })
     end, {
       desc = "Go to the previous diagnostics.",
       buffer = args.buf,
@@ -161,7 +51,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       silent = true,
     })
     vim.keymap.set("n", "]a", function()
-      vim.diagnostic.goto_next({ float = true, wrap = false })
+      vim.diagnostic.jump({ count = 1, float = true, wrap = false })
     end, {
       desc = "Go to the next diagnostics.",
       buffer = args.buf,
@@ -175,10 +65,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       silent = true,
     })
 
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
     -- Navigate code.
-    if client.server_capabilities.definitionProvider then
+    if client:supports_method("textDocument/definition") then
       vim.keymap.set("n", "gy", function()
         local ok, telescope = pcall(require, "telescope.builtin")
         if ok then
@@ -206,14 +96,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         silent = true,
       })
     end
-
-    -- Show documentation.
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, {
-      desc = "Show documentation for the identifier under the cursor.",
-      buffer = args.buf,
-      noremap = true,
-      silent = true,
-    })
 
     -- Refactor code.
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {
@@ -253,27 +135,11 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- Disable virtual text globally.
-    virtual_text = false,
-  })
-
--- This is a low fidelity version of :LspInfo from
--- https://github.com/neovim/nvim-lspconfig.
-vim.api.nvim_create_user_command("LspClients", function()
-  local clients = vim.inspect(vim.lsp.get_active_clients())
-
-  -- If Noice is installed, printing this will be rendered as a notice, making it
-  -- impossibly to see the content. It needs to be redirected instead.
-  local has_noice, noice = pcall(require, "noice")
-  if has_noice then
-    noice.redirect(function()
-      print(clients)
-    end)
-  else
-    print(clients)
-  end
+vim.api.nvim_create_user_command("LspInfo", function()
+  -- TODO: This require should show the health check. Find out why it isn't. Then
+  -- replace the vim.cmd with it.
+  -- require("vim.lsp.health").check()
+  vim.cmd([[:checkhealth vim.lsp]])
 end, {
   desc = "Shows the attached Language Server clients.",
 })
