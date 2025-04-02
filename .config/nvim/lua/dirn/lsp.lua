@@ -31,9 +31,9 @@ local servers = {
   "rust_analyzer",
 }
 
-local has_local_lsp, local_lsp = pcall(require, "dirn.lspextras")
-if has_local_lsp then
-  servers = local_lsp.merge(servers)
+local has_lspextras, lspextras = pcall(require, "dirn.lspextras")
+if has_lspextras then
+  vim.list_extend(servers, lspextras)
 end
 
 vim.lsp.enable(servers)
