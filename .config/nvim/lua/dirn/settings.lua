@@ -50,6 +50,9 @@ if vim.fn.exists("&colorcolumn") > 0 then
   vim.opt.colorcolumn = "+1"
 end
 
+-- Show checkhealth in a floating window instead of a new tab.
+vim.g.health = { style = "float" }
+
 -- Replace all matches in a line, not just the first.
 vim.opt.gdefault = true
 -- Highlight all matches.
