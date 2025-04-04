@@ -53,6 +53,9 @@ end
 -- Show checkhealth in a floating window instead of a new tab.
 vim.g.health = { style = "float" }
 
+-- Give floating windows a rounded border.
+vim.o.winborder = "rounded"
+
 -- Replace all matches in a line, not just the first.
 vim.opt.gdefault = true
 -- Highlight all matches.
