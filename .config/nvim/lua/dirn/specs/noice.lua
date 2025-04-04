@@ -36,7 +36,7 @@ return {
     popupmenu = { kind_icons = false },
     presets = {
       command_palette = true,
-      lsp_doc_border = true,
+      lsp_doc_border = false,
     },
     routes = {
       filter = {
