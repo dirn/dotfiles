@@ -45,13 +45,5 @@ return {
       },
       opts = { skip = true },
     },
-    -- nui.nvim's borders conflict with winborder. This is the workaround.
-    -- https://github.com/MunifTanjim/nui.nvim/pull/403
-    -- https://github.com/folke/noice.nvim/issues/1082
-    views = {
-      cmdline_popup = {
-        border = { style = "none" },
-      },
-    },
   },
 }
