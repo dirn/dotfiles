@@ -105,9 +105,9 @@ end
 # Sometimes I have a hard time finding particular files in ls. Highlight them.
 set --global --export LS_COLORS "extras.fish=32;1;4:*extras.lua=32;1;4:retro.toml=32;1;4"
 
-# Use bat for manpages.
-if type --no-functions --query bat
-    set --global --export MANPAGER "sh -c 'col -bx | bat -l man -p'"
+# Use Neovim for manpages.
+if type --no-functions --query nvim
+    set --global --export MANPAGER "nvim +Man!"
 end
 
 # Configure fzf.
