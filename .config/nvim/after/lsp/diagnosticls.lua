@@ -11,13 +11,7 @@ if not has_diagnosticls then
 end
 
 return {
-  cmd = { server_path("diagnostic-languageserver"), "--stdio" },
   filetypes = { "fish", "lua", "python", "yaml" },
-  root_markers = {
-    ".editorconfig",
-    "stylua.toml",
-    ".git",
-  },
   init_options = {
     linters = vim.tbl_deep_extend("force", diagnosticls.linters, {
       ruff = {

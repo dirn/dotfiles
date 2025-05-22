@@ -134,19 +134,3 @@ for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
-
-vim.api.nvim_create_user_command("LspInfo", function()
-  -- TODO: This require should show the health check. Find out why it isn't. Then
-  -- replace the vim.cmd with it.
-  -- require("vim.lsp.health").check()
-  vim.cmd([[:checkhealth vim.lsp]])
-end, {
-  desc = "Shows the attached Language Server clients.",
-})
-
--- This is borrowed from https://github.com/neovim/nvim-lspconfig.
-vim.api.nvim_create_user_command("LspLog", function()
-  vim.cmd(string.format("tabnew %s", vim.lsp.get_log_path()))
-end, {
-  desc = "Opens the LSP client log.",
-})
