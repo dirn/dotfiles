@@ -12,7 +12,7 @@ mason.setup()
 installer.setup({
   ensure_installed = {
     "black",
-    "diagnostic-languageserver",
+    "diagnosticls",
     "jedi-language-server",
     "lua-language-server",
     "mypy",

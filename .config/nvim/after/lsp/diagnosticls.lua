@@ -1,10 +1,3 @@
-local has_mason, _ = pcall(require, "mason")
-if not has_mason then
-  return
-end
-
-local server_path = require("mason-core.path").bin_prefix
-
 local has_diagnosticls, diagnosticls = pcall(require, "diagnosticls")
 if not has_diagnosticls then
   return {}
@@ -16,7 +9,7 @@ return {
     linters = vim.tbl_deep_extend("force", diagnosticls.linters, {
       ruff = {
         sourceName = "ruff",
-        command = server_path("ruff"),
+        command = "ruff",
         args = { "--extend-select=ASYNC,B,I,N", "%file" },
         rootPatterns = {
           "pyproject.toml",

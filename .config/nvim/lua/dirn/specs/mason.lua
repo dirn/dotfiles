@@ -1,1 +1,1 @@
-return { "https://github.com/williamboman/mason.nvim" }
+return { "https://github.com/mason-org/mason.nvim" }
