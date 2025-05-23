@@ -11,7 +11,6 @@ end
 mason.setup()
 installer.setup({
   ensure_installed = {
-    "black",
     "diagnosticls",
     "jedi-language-server",
     "lua-language-server",

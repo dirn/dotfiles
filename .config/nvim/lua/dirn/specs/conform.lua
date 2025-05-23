@@ -3,18 +3,12 @@ return {
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
   opts = {
-    format_on_save = { lsp_fallback = true, timeout_ms = 5000 },
-    formatters = {
-      ruff_fix = {
-        -- Enable isort-like behavior.
-        prepend_args = { "--extend-select=I" },
-      },
-    },
+    format_on_save = { lsp_format = "fallback", timeout_ms = 5000 },
     formatters_by_ft = {
       fish = { "fish_indent" },
       lua = { "stylua" },
       -- Let ruff make any changes before Black formats the code.
-      python = { "ruff_format", "black" },
+      python = { lsp_format = "first" },
       yaml = { "prettier" },
     },
   },
