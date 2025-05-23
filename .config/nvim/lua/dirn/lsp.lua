@@ -28,6 +28,7 @@ local servers = {
   "diagnosticls",
   "jedi_language_server",
   "lua_ls",
+  "ruff",
   "rust_analyzer",
 }
 
