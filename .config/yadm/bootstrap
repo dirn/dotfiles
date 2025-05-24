@@ -126,6 +126,7 @@ if test ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm; then
     git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
 fi
 $XDG_CONFIG_HOME/tmux/plugins/tpm/bin/install_plugins
+$XDG_CONFIG_HOME/tmux/plugins/tpm/bin/update_plugins all
 
 if command -v softwareupdate >/dev/null 2>&1; then
     echo "Installing software updates"
