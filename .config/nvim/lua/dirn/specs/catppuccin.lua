@@ -3,6 +3,19 @@ return {
   name = "catppuccin",
   lazy = false,
   priority = 1000,
+  opts = {
+    integrations = {
+      alpha = true,
+      cmp = true,
+      copilot = true,
+      gitsigns = true,
+      mason = true,
+      noice = true,
+      notify = true,
+      telescope = { enabled = true },
+      treesitter = true,
+    },
+  },
   config = function()
     vim.opt.termguicolors = true
 
