@@ -1,3 +1,8 @@
 [link]
 source = "$RETRO_BACKUPS"
-destinations = ["$RETRO_GAMES", "$ONION_GAMES", "$ANALOGUE_GAMES"]
+destinations = [
+	"$RETRO_GAMES",
+	"$ONION_GAMES",
+	"$ANALOGUE_GAMES",
+	"$MU_GAMES",
+]

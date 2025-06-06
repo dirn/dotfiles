@@ -133,6 +133,8 @@ cask "retroarch-metal"
 cask "sdformatter"
 cask "slack"
 cask "steam"
+cask "syncthing"
+cask "transmission"
 cask "transmit"
 mas "1Password for Safari", id: 1569813296
 mas "Adblock Plus", id: 1432731683
