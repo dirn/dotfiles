@@ -10,6 +10,10 @@ end
 # Use Vim bindings.
 fish_vi_key_bindings
 
+# With the release of version 4, fish no longer sets a color for commands. I
+# preferred the previous behavior. This restores it.
+set fish_color_command blue
+
 # Use Neovim for all the things.
 set --global --export EDITOR nvim
 set --global --export VISUAL nvim
