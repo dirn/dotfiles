@@ -12,7 +12,7 @@ return {
       mason = true,
       noice = true,
       notify = true,
-      telescope = { enabled = true },
+      snacks = { enabled = true },
       treesitter = true,
     },
   },

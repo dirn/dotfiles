@@ -251,7 +251,7 @@ local function shortcuts()
     pattern = { "AlphaReady" },
     callback = function()
       vim.keymap.set("n", "B", function()
-        require("telescope.builtin").current_buffer_fuzzy_find()
+        Snacks.picker.buffers()
       end, { silent = true, noremap = true, buffer = true })
       vim.keymap.set("n", "F", function()
         vim.cmd.GitFiles()

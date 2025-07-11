@@ -70,9 +70,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Navigate code.
     if client:supports_method("textDocument/definition") then
       vim.keymap.set("n", "gy", function()
-        local ok, telescope = pcall(require, "telescope.builtin")
+        local ok, _ = pcall(require, "snacks")
         if ok then
-          telescope.lsp_type_definitions()
+          Snacks.picker.lsp_type_definitions()
         else
           vim.lsp.buf.type_definition()
         end
@@ -83,9 +83,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         silent = true,
       })
       vim.keymap.set("n", "gr", function()
-        local ok, telescope = pcall(require, "telescope.builtin")
+        local ok, _ = pcall(require, "snacks")
         if ok then
-          telescope.lsp_references()
+          Snacks.picker.lsp_references()
         else
           vim.lsp.buf.references()
         end
