@@ -23,6 +23,14 @@ function catppuccinup
             https://raw.githubusercontent.com/catppuccin/alfred/main/dist/Catppuccin-macOS-$flavor.alfredappearance
     end
 
+    echo "Updating bat themes"
+    for flavor in $flavors
+        curl --silent --location \
+            --create-dirs --output "$(bat --config-dir)/themes/Catppuccin $(capitalize $flavor).tmTheme" \
+            https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20$(capitalize $flavor).tmTheme
+    end
+    bat cache --build
+
     echo "Updating delta themes"
     curl --silent --location --remote-name \
         --create-dirs --output-dir $XDG_CONFIG_HOME/git \
