@@ -123,6 +123,24 @@ return {
       noremap = true,
       silent = true,
     },
+    {
+      "<leader>s",
+      function()
+        Snacks.scratch()
+      end,
+      desc = "Toggle a scratch buffer.",
+      noremap = true,
+      silent = true,
+    },
+    {
+      "<leader>S",
+      function()
+        Snacks.scratch.select()
+      end,
+      desc = "Select a scratch buffer.",
+      noremap = true,
+      silent = true,
+    },
   },
   opts = {
     notifier = {
@@ -139,5 +157,6 @@ return {
       },
     },
     quickfile = {},
+    scratch = {},
   },
 }
