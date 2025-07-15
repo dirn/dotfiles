@@ -3,6 +3,15 @@ return {
   lazy = false, -- Keymaps make plugins lazy. This makes it eager to make `:lua Snacks` work.
   keys = {
     {
+      "<leader><leader>",
+      function()
+        Snacks.notifier.hide()
+      end,
+      desc = "Dismiss all notifications",
+      noremap = true,
+      silent = true,
+    },
+    {
       "<leader>ls",
       function()
         Snacks.picker.buffers()
@@ -116,6 +125,9 @@ return {
     },
   },
   opts = {
+    notifier = {
+      style = "compact",
+    },
     picker = {
       layout = "ivy",
       win = {
