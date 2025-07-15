@@ -68,7 +68,7 @@ return {
     {
       "<leader>?",
       function()
-        Snacks.picker.grep()
+        Snacks.picker.help()
       end,
       desc = "Search the help tags.",
       noremap = true,
@@ -77,7 +77,7 @@ return {
     {
       "<leader>km",
       function()
-        Snacks.picker.grep()
+        Snacks.picker.keymaps()
       end,
       desc = "Search the keymappings.",
       noremap = true,
@@ -86,7 +86,7 @@ return {
     {
       "<leader>rc",
       function()
-        Snacks.picker.grep()
+        Snacks.picker.recent()
       end,
       desc = "Search the recent files.",
       noremap = true,
