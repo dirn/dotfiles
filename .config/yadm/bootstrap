@@ -105,9 +105,9 @@ fi
 echo "Installing Neovim plugins and packages."
 if command -v nvim >/dev/null 2>&1; then
     nvim --headless \
-        -c "Lazy restore" \
-        -c "Mason" \
-        -c "qall"
+        "+Lazy! restore" \
+        "+Mason" \
+        "+qall"
 fi
 
 # Make the Maildir directories. isync seems to want them to exist rather than
