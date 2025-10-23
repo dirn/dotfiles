@@ -12,7 +12,7 @@ return {
       silent = true,
     },
     {
-      "<leader>ls",
+      "<c-s>",
       function()
         Snacks.picker.buffers()
       end,
