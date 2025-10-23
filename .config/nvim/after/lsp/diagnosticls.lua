@@ -6,5 +6,8 @@ return {
       python = { "mypy" },
       yaml = { "yamllint" },
     },
+    formatFiletypes = {
+      python = "", -- Don't try to format Python files.
+    },
   },
 }
