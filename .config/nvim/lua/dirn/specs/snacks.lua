@@ -1,6 +1,7 @@
 return {
   "https://github.com/folke/snacks.nvim",
   lazy = false, -- Keymaps make plugins lazy. This makes it eager to make `:lua Snacks` work.
+  priority = 1000,
   keys = {
     {
       "<leader><leader>",
