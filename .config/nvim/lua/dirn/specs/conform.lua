@@ -8,7 +8,7 @@ return {
       fish = { "fish_indent" },
       lua = { "stylua" },
       -- Let ruff make any changes before Black formats the code.
-      python = { lsp_format = "first" },
+      python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
       yaml = { "prettier" },
     },
   },
