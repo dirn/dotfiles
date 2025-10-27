@@ -1,7 +1,9 @@
 return {
-  settings = {
-    lint = {
-      extendSelect = { "ASYNC", "B", "I", "N" },
+  init_options = {
+    settings = {
+      lint = {
+        extendSelect = { "ASYNC", "B", "F", "I", "N" },
+      },
     },
   },
 }
