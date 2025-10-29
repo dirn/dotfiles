@@ -1,11 +1,8 @@
 # Disable the greeting.
 set fish_greeting
 
-# This is needed to fix CursorShape inside tmux. See
-# https://github.com/neovim/neovim/issues/7067 which links to
-# https://github.com/junegunn/fzf/issues/881#issuecomment-318576205.
-function fish_vi_cursor
-end
+# Without this, the cursor is just an outline when in insert mode.
+set fish_cursor_insert block
 
 # Use Vim bindings.
 fish_vi_key_bindings
