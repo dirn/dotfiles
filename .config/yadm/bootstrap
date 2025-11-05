@@ -53,9 +53,6 @@ if [ -z "$XDG_CONFIG_HOME" ]; then
 fi
 
 if command -v mise >/dev/null 2>&1; then
-    echo "Install CLI completions"
-    mise use --global usage
-
     echo "Installing mise completions."
     mise completion fish > $XDG_CONFIG_HOME/fish/completions/mise.fish
 
