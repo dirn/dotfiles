@@ -61,6 +61,8 @@ if command -v mise >/dev/null 2>&1; then
 
     echo "Installing mise runtimes."
     mise install
+    # Keep runtimes up-to-date.
+    mise upgrade
 
     for version in $(mise list python --installed | cut -d " " -f 3); do
         echo "Installing Python $version libraries."
