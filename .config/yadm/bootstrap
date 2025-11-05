@@ -69,6 +69,7 @@ if command -v mise >/dev/null 2>&1; then
 
     echo "Installing Rust libraries."
     cargo install \
+        cargo-edit \
         retro \
         stylua
 fi
