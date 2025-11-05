@@ -12,7 +12,6 @@ mason.setup()
 installer.setup({
   ensure_installed = {
     "diagnosticls",
-    "jedi-language-server",
     "lua-language-server",
     "mypy",
     "prettier",
@@ -20,15 +19,16 @@ installer.setup({
     "rust-analyzer",
     "stylua",
     "yamllint",
+    "zuban",
   },
 })
 
 local servers = {
   "diagnosticls",
-  "jedi_language_server",
   "lua_ls",
   "ruff",
   "rust_analyzer",
+  "zuban",
 }
 
 local has_lspextras, lspextras = pcall(require, "dirn.lspextras")
