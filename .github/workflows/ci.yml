@@ -7,4 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+      # fish is needed to run the fish_syntax and fish_indent hooks.
+      - uses: fish-shop/install-fish-shell@v1
       - uses: j178/prek-action@v1
