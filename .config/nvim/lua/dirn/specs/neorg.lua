@@ -3,8 +3,6 @@
 
 return {
   "https://github.com/nvim-neorg/neorg",
-  version = "v7.0.0",
-  build = ":Neorg sync-parsers",
   opts = {
     load = {
       ["core.defaults"] = {},
