@@ -106,9 +106,6 @@ vim.opt.splitbelow = true
 -- Always open diff in vertical splits.
 vim.opt.diffopt = vim.opt.diffopt + "vertical"
 
--- Let Neorg hide text and show symbols and labels in its place.
-vim.o.conceallevel = 2
-
 -- Jump to the last known cursor position if it's valid (from the docs).
 vim.api.nvim_create_autocmd("BufReadPost", {
   desc = "Restore the cursor position when reopening the buffer.",
