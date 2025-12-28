@@ -66,12 +66,6 @@ if command -v mise >/dev/null 2>&1; then
         mise exec python@$version -- python -m pip install --upgrade pip wheel >/dev/null
         mise exec python@$version -- pip install --upgrade --requirement $XDG_CONFIG_HOME/mise/default_python_packages >/dev/null
     done
-
-    echo "Installing Rust libraries."
-    cargo install \
-        cargo-edit \
-        retro \
-        stylua
 fi
 
 if command -v fzf >/dev/null 2>&1; then

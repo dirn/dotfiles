@@ -148,3 +148,6 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Vinegar", id: 1591303229
 mas "Xcode", id: 497799835
+cargo "cargo-edit"
+cargo "retro"
+cargo "stylua"
