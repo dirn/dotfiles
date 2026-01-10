@@ -18,8 +18,8 @@ installer.setup({
     "ruff",
     "rust-analyzer",
     "stylua",
+    "ty",
     "yamllint",
-    "zuban",
   },
 })
 
@@ -28,7 +28,7 @@ local servers = {
   "lua_ls",
   "ruff",
   "rust_analyzer",
-  "zuban",
+  "ty",
 }
 
 local has_lspextras, lspextras = pcall(require, "dirn.lspextras")
