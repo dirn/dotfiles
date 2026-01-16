@@ -110,6 +110,12 @@ local function plugins()
       vim.keymap.set("n", "L", function()
         vim.cmd.Lazy()
       end, { silent = true, noremap = true, buffer = true })
+      local ok, _ = pcall(require, "mason")
+      if ok then
+        vim.keymap.set("n", "M", function()
+          vim.cmd.Mason()
+        end, { silent = true, noremap = true, buffer = true })
+      end
     end,
   })
 
