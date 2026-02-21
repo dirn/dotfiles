@@ -28,14 +28,14 @@ only available for x86-based processors.
 
     $ /usr/sbin/softwareupdate --install-rosetta --agree-to-license
 
-### pre-commit
+### Linting and Fixing
 
-This repository uses [pre-commit] to keep the files nicely formatted. pre-commit
-and yadm play together nicely when committing, but since yadm stores the git
-repository away from the working copy, anytime `pre-commit` is invoked, it needs
-to be told where the repository is.
+This repository uses [prek] to keep the files nicely formatted. prek and yadm
+play together nicely when committing, but since yadm stores the git repository
+away from the working copy, anytime `prek` is invoked, it needs to be told where
+the repository is.
 
-    $ env GIT_DIR=$HOME/.local/share/yadm/repo.git pre-commit install
+    $ env GIT_DIR=$HOME/.local/share/yadm/repo.git prek install
 
 #### GNU
 
@@ -47,5 +47,5 @@ tools will be updated as well.
 [gnu]: https://www.gnu.com
 [gnuclt]: https://www.topbug.net/blog/2013/04/14/install-and-use-gnu-command-line-tools-in-mac-os-x/
 [mas]: https://github.com/mas-cli/mas
-[pre-commit]: https://pre-commit.com
+[prek]: https://prek.j178.dev
 [yadm]: https://yadm.io
