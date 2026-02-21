@@ -149,5 +149,6 @@ mas "Pages", id: 409201541
 mas "Vinegar", id: 1591303229
 mas "Xcode", id: 497799835
 cargo "cargo-edit"
+cargo "claude-statusline"
 cargo "retro"
 cargo "stylua"
