@@ -145,12 +145,13 @@ if command -v neomutt >/dev/null 2>&1; then
 fi
 
 echo "Updating Tmux Plugin Manager"
-if test ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm; then
+if test ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm-redux; then
     mkdir $XDG_CONFIG_HOME/tmux/plugins
-    git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
+    git clone https://github.com/RyanMacG/tpm-redux $XDG_CONFIG_HOME/tmux/plugins/tpm-redux
 fi
-$XDG_CONFIG_HOME/tmux/plugins/tpm/bin/install_plugins
-$XDG_CONFIG_HOME/tmux/plugins/tpm/bin/update_plugins all
+$XDG_CONFIG_HOME/tmux/plugins/tpm-redux/bin/install
+$XDG_CONFIG_HOME/tmux/plugins/tpm-redux/bin/clean
+$XDG_CONFIG_HOME/tmux/plugins/tpm-redux/bin/update all
 
 if command -v softwareupdate >/dev/null 2>&1; then
     echo "Installing software updates"
