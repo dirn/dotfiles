@@ -151,7 +151,7 @@ if test ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm-redux; then
 fi
 $XDG_CONFIG_HOME/tmux/plugins/tpm-redux/bin/install
 $XDG_CONFIG_HOME/tmux/plugins/tpm-redux/bin/clean
-$XDG_CONFIG_HOME/tmux/plugins/tpm-redux/bin/update all
+$XDG_CONFIG_HOME/tmux/plugins/tpm-redux/bin/update
 
 if command -v softwareupdate >/dev/null 2>&1; then
     echo "Installing software updates"
