@@ -30,6 +30,7 @@ brew "unbound", restart_service: :changed
 brew "gnutls"
 brew "emacs", restart_service: :changed
 brew "eza"
+brew "fastfetch"
 brew "fd"
 brew "harfbuzz"
 brew "leptonica"

@@ -139,3 +139,7 @@ if type --query tmux
         exec env tmux new-session
     end
 end
+
+if status is-interactive; and test "$PWD" = "$HOME"
+    fastfetch
+end
