@@ -20,3 +20,5 @@ ehthumbs.db
 \#*\#
 /tags
 /.bundle/
+
+**/.claude/settings.local.json
