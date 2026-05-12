@@ -129,10 +129,12 @@ fi
 echo "Installing Neovim plugins and packages."
 if command -v nvim >/dev/null 2>&1; then
     nvim --headless \
-        "+Lazy restore" \
+        "+PackUpdate" \
         "+Mason" \
         "+qall"
 fi
+# PackUpdate sends output that doesn't end in a newline.
+echo ""
 
 # Make the Maildir directories. isync seems to want them to exist rather than
 # just creating them if they aren't there.

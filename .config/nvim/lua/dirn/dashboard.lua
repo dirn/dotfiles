@@ -99,17 +99,9 @@ local function plugins()
     opts = { position = "center", hl = "Comment" },
   }
 
-  local ok, lazy = pcall(require, "lazy")
-  if not ok then
-    return { opts }
-  end
-
   vim.api.nvim_create_autocmd({ "User" }, {
     pattern = { "AlphaReady" },
     callback = function()
-      vim.keymap.set("n", "L", function()
-        vim.cmd.Lazy()
-      end, { silent = true, noremap = true, buffer = true })
       local ok, _ = pcall(require, "mason")
       if ok then
         vim.keymap.set("n", "M", function()
@@ -119,17 +111,28 @@ local function plugins()
     end,
   })
 
-  local stats = lazy.stats()
-  local loaded = tostring(stats.loaded)
-  if stats.loaded == stats.count then
-    loaded = "All"
-  end
+  local all = vim.pack.get()
+  if #all > 0 then
+    local total = #all
 
-  opts.val = "You are using "
-    .. stats.count
-    .. " plugins, "
-    .. loaded
-    .. " of them are loaded. Open [L]azy to see more."
+    local active = vim
+      .iter(all)
+      :filter(function(x)
+        return x.active
+      end)
+      :totable()
+
+    local loaded = "All"
+    if total ~= #active then
+      loaded = tostring(#active)
+    end
+
+    opts.val = "You are using "
+      .. total
+      .. " plugins. "
+      .. loaded
+      .. " of them are loaded."
+  end
 
   return { opts }
 end

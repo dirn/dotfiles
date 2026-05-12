@@ -1,28 +1,3 @@
-local has_mason, mason = pcall(require, "mason")
-if not has_mason then
-  return
-end
-
-local has_installer, installer = pcall(require, "mason-tool-installer")
-if not has_installer then
-  return
-end
-
-mason.setup()
-installer.setup({
-  ensure_installed = {
-    "diagnosticls",
-    "lua-language-server",
-    "mypy",
-    "prettier",
-    "ruff",
-    "rust-analyzer",
-    "stylua",
-    "ty",
-    "yamllint",
-  },
-})
-
 local servers = {
   "diagnosticls",
   "lua_ls",
@@ -35,8 +10,6 @@ local has_lspextras, lspextras = pcall(require, "dirn.lspextras")
 if has_lspextras then
   vim.list_extend(servers, lspextras)
 end
-
-vim.lsp.enable(servers)
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Configure the buffer's capabilities.",
