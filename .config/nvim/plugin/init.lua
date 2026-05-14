@@ -17,7 +17,7 @@ end, {
 })
 
 vim.api.nvim_create_user_command("PackRestore", function()
-  vim.pack.update(nil, { target = "lockfile" })
+  vim.pack.update(nil, { target = "lockfile", force = true })
 end, {
   desc = "Restore the pack to the state of the lock file.",
 })
