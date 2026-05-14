@@ -1,4 +1,4 @@
-vim.schedule(function()
+load_on({ "BufReadPost", "BufNewFile" }, function()
   vim.pack.add({
     "https://github.com/nvim-lua/plenary.nvim",
     "https://github.com/ruifm/gitlinker.nvim",

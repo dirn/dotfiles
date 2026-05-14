@@ -1,4 +1,4 @@
-vim.schedule(function()
+load_on("InsertEnter", function()
   vim.pack.add({
     "https://github.com/hrsh7th/nvim-cmp",
 

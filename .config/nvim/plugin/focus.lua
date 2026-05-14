@@ -1,7 +1,7 @@
-vim.schedule(function()
+load_on("BufWinEnter", function()
   vim.pack.add({
     "https://github.com/beauwilliams/focus.nvim",
   })
 
   require("focus").setup()
-end)
+end, { schedule = true })

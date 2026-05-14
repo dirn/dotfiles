@@ -92,51 +92,6 @@ local function header()
   }
 end
 
-local function plugins()
-  local opts = {
-    type = "text",
-    val = "You don't appear to be using any plugins.",
-    opts = { position = "center", hl = "Comment" },
-  }
-
-  vim.api.nvim_create_autocmd({ "User" }, {
-    pattern = { "AlphaReady" },
-    callback = function()
-      local ok, _ = pcall(require, "mason")
-      if ok then
-        vim.keymap.set("n", "M", function()
-          vim.cmd.Mason()
-        end, { silent = true, noremap = true, buffer = true })
-      end
-    end,
-  })
-
-  local all = vim.pack.get()
-  if #all > 0 then
-    local total = #all
-
-    local active = vim
-      .iter(all)
-      :filter(function(x)
-        return x.active
-      end)
-      :totable()
-
-    local loaded = "All"
-    if total ~= #active then
-      loaded = tostring(#active)
-    end
-
-    opts.val = "You are using "
-      .. total
-      .. " plugins. "
-      .. loaded
-      .. " of them are loaded."
-  end
-
-  return { opts }
-end
-
 local function recents()
   function recent(filename, label, shortcut)
     local action = "<cmd>e " .. filename .. "<cr>"
@@ -301,7 +256,6 @@ local sections = {
   footer = { type = "group", val = footer },
   greeting = { type = "group", val = greeting },
   header = { type = "group", val = header },
-  plugins = { type = "group", val = plugins },
   recents = { type = "group", val = recents },
   shortcuts = { type = "group", val = shortcuts },
 }
@@ -317,8 +271,6 @@ local config = {
     padding[1],
     sections.recents,
     padding[4],
-    sections.plugins,
-    padding[1],
     sections.footer,
   },
   opts = { margin = 3, redraw_on_resize = false },

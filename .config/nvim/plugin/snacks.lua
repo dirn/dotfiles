@@ -1,4 +1,4 @@
-vim.schedule(function()
+load_on("UIEnter", function()
   vim.pack.add({
     "https://github.com/folke/lazydev.nvim",
 
@@ -82,8 +82,7 @@ vim.schedule(function()
       lhs = "<leader>td",
       -- Use a function here because the todo_comments picker comes from an extension.
       -- This only seems to be an issue when running headless (which I do from my
-      -- bootstrap script). This happens regardless of whether or not vim.schedule is
-      -- used.
+      -- bootstrap script).
       rhs = function()
         Snacks.picker.todo_comments()
       end,
@@ -130,4 +129,4 @@ vim.schedule(function()
     quickfile = {},
     scratch = {},
   })
-end)
+end, { schedule = true })

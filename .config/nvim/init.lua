@@ -1,6 +1,9 @@
 -- Set the leader first so that any plugins providing mappings will pick it up.
 vim.g.mapleader = [[ ]]
 
+-- Load plugin helpers.
+require("dirn.plugins")
+
 -- Initialize file types.
 require("dirn.filetypes")
 

@@ -2,13 +2,13 @@ local function gitsigns_enabled()
   return os.getenv("NVIM_DISABLE_GITSIGNS") == nil
 end
 
-vim.schedule(function()
-  vim.pack.add({
-    "https://github.com/lewis6991/gitsigns.nvim",
-    "https://github.com/purarue/gitsigns-yadm.nvim",
-  }, { load = gitsigns_enabled() })
+if gitsigns_enabled() then
+  load_on({ "BufReadPost", "BufNewFile" }, function()
+    vim.pack.add({
+      "https://github.com/lewis6991/gitsigns.nvim",
+      "https://github.com/purarue/gitsigns-yadm.nvim",
+    })
 
-  if gitsigns_enabled() then
     require("gitsigns").setup({
       _on_attach_pre = function(bufnr, callback)
         require("gitsigns-yadm").yadm_signs(callback, { bufnr = bufnr })
@@ -31,5 +31,5 @@ vim.schedule(function()
         },
       },
     })
-  end
-end)
+  end)
+end

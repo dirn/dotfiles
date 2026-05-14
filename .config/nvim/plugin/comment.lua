@@ -1,5 +1,7 @@
-vim.pack.add({
-  "https://github.com/numToStr/Comment.nvim",
-})
+load_on({ "BufReadPost", "BufNewFile" }, function()
+  vim.pack.add({
+    "https://github.com/numToStr/Comment.nvim",
+  })
 
-require("comment").setup()
+  require("comment").setup()
+end)

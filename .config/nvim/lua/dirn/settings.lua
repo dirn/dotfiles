@@ -81,7 +81,12 @@ vim.opt.number = true
 vim.opt.title = true
 
 -- Use spell check.
-vim.opt.spell = true
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  once = true,
+  callback = function()
+    vim.opt.spell = true
+  end,
+})
 
 -- Make horizontal scrolling smoother.
 vim.opt.sidescroll = 1

@@ -1,4 +1,4 @@
-vim.schedule(function()
+load_on("BufWritePre", function()
   vim.pack.add({
     "https://github.com/stevearc/conform.nvim",
   })

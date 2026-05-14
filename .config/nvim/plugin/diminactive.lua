@@ -1,4 +1,4 @@
-vim.schedule(function()
+load_on("UIEnter", function()
   vim.pack.add({
     "https://github.com/blueyed/vim-diminactive",
   })
