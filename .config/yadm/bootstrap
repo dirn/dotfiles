@@ -129,7 +129,7 @@ fi
 echo "Installing Neovim plugins and packages."
 if command -v nvim >/dev/null 2>&1; then
     nvim --headless \
-        "+PackUpdate" \
+        "+PackRestore" \
         "+Mason" \
         "+qall"
 fi
