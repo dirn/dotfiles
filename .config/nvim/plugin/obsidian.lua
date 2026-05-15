@@ -32,4 +32,20 @@ load_on("UIEnter", function()
       },
     })
   end)
+
+  -- Hide text and show symbols and labels for Obsidian files.
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function(args)
+      local path = vim.api.nvim_buf_get_name(args.buf):lower()
+      if not path:find("obsidian", 1, true) then
+        return
+      end
+
+      local win = vim.fn.bufwinid(args.buf)
+      if win ~= -1 then
+        vim.wo[win].conceallevel = 2
+      end
+    end,
+  })
 end)
