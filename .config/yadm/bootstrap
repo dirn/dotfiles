@@ -126,11 +126,10 @@ if command -v fish >/dev/null 2>&1; then
     fi
 fi
 
-echo "Installing Neovim plugins and packages."
+echo "Installing Neovim plugins."
 if command -v nvim >/dev/null 2>&1; then
     nvim --headless \
         "+PackRestore" \
-        "+Mason" \
         "+qall"
 fi
 # PackUpdate sends output that doesn't end in a newline.
