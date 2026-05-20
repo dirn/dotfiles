@@ -135,16 +135,6 @@ fi
 # PackUpdate sends output that doesn't end in a newline.
 echo ""
 
-# Make the Maildir directories. isync seems to want them to exist rather than
-# just creating them if they aren't there.
-echo "Creating mailboxes."
-if command -v neomutt >/dev/null 2>&1; then
-    mkdir -p $HOME/Mail/bigapplepy >/dev/null
-    mkdir -p $HOME/Mail/dirnonline >/dev/null
-    mkdir -p $HOME/Mail/gmail >/dev/null
-    mkdir -p $HOME/Mail/pygotham >/dev/null
-fi
-
 echo "Updating Tmux Plugin Manager."
 if test ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm-redux; then
     mkdir $XDG_CONFIG_HOME/tmux/plugins
