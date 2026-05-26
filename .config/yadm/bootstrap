@@ -1,6 +1,7 @@
 #!/bin/bash
 
 RED='\033[0;31m'
+CYAN='\033[36m'
 NC='\033[0m'
 
 # Generated using
@@ -54,7 +55,7 @@ if ! command -v brew >/dev/null 2>&1; then
 fi
 
 if [ -z "$HOMEBREW_BUNDLE_FILE" ]; then
-    echo "${RED}The Brewfile must be specified before this script can be run. Try"
+    echo -e "${RED}The Brewfile must be specified before this script can be run. Try"
     echo "running the script again with a value specified.${NC}"
     echo ""
     echo "    export HOMEBREW_BUNDLE_FILE=~/.config/brew/Brewfile"
@@ -62,7 +63,7 @@ if [ -z "$HOMEBREW_BUNDLE_FILE" ]; then
     echo ""
     exit 1
 elif [ -f "$HOMEBREW_BUNDLE_FILE" ]; then
-    echo "Updating Homebrew bundle."
+    echo -e "${CYAN}Updating Homebrew bundle.${NC}"
     brew update >/dev/null
     brew bundle
     brew cleanup >/dev/null
@@ -70,36 +71,36 @@ fi
 
 if [ "${SHELL: -4:4}" != "fish" ]; then
     if ! grep --quiet "$(brew --prefix)/bin/fish" /etc/shells; then
-        echo "Adding fish to /etc/shells."
+        echo -e "${CYAN}Adding fish to /etc/shells.${NC}"
         echo $(brew --prefix)/bin/fish | sudo tee -a /etc/shells
     fi
-    echo "Making fish the default shell. (Did you remember to log out and back in?)"
+    echo -e "${CYAN}Making fish the default shell. (Did you remember to log out and back in?)${NC}"
     chsh -s $(brew --prefix)/bin/fish
 fi
 
 if [ -z "$XDG_CONFIG_HOME" ]; then
-    echo "${RED}You must restart your session to continue.${NC}"
+    echo -e "${RED}You must restart your session to continue.${NC}"
     exit 1
 fi
 
 if command -v mise >/dev/null 2>&1; then
-    echo "Installing mise completions."
+    echo -e "${CYAN}Installing mise completions.${NC}"
     mise completion fish > $XDG_CONFIG_HOME/fish/completions/mise.fish
 
-    echo "Installing mise runtimes."
+    echo -e "${CYAN}Installing mise runtimes.${NC}"
     mise install
     # Keep runtimes up-to-date.
     mise upgrade
 
     for version in $(mise list python --installed | cut -d " " -f 3); do
-        echo "Installing Python $version libraries."
+        echo -e "${CYAN}Installing Python $version libraries.${NC}"
         mise exec python@$version -- python -m pip install --upgrade pip wheel >/dev/null
         mise exec python@$version -- pip install --upgrade --requirement $XDG_CONFIG_HOME/mise/default_python_packages >/dev/null
     done
 fi
 
 if command -v fzf >/dev/null 2>&1; then
-    echo "Installing fzf."
+    echo -e "${CYAN}Installing fzf.${NC}"
     # Update shell configurations but skip fish since that's managed by source
     # control.
     $(brew --prefix)/opt/fzf/install --key-bindings --completion --update-rc --no-fish
@@ -107,15 +108,15 @@ fi
 
 if command -v fish >/dev/null 2>&1; then
     if command -v vf >/dev/null 2>&1; then
-        echo "Installing virtualfish."
+        echo -e "${CYAN}Installing virtualfish.${NC}"
         fish -c "vf install" >/dev/null
     fi
-    echo "Registering virtualfish plugins."
+    echo -e "${CYAN}Registering virtualfish plugins.${NC}"
     fish -c "vf addplugins auto_activation" >/dev/null
     fish -c "vf addplugins global_requirements" >/dev/null
 
     if [ -f "$HOME/.virtualenvs/global_requirements.txt" ]; then
-        echo "Installing requirements into virtual environments."
+        echo -e "${CYAN}Installing requirements into virtual environments.${NC}"
         # The only entry point to installing the requirements is through
         # `vf requirements`. This opens the global requirements file into $EDITOR
         # and then runs `pip install` after the editor exits. By using `echo` as the
@@ -126,7 +127,7 @@ if command -v fish >/dev/null 2>&1; then
     fi
 fi
 
-echo "Installing Neovim plugins."
+echo -e "${CYAN}Installing Neovim plugins.${NC}"
 if command -v nvim >/dev/null 2>&1; then
     nvim --headless \
         "+PackRestore" \
@@ -135,7 +136,7 @@ fi
 # PackUpdate sends output that doesn't end in a newline.
 echo ""
 
-echo "Updating Tmux Plugin Manager."
+echo -e "${CYAN}Updating Tmux Plugin Manager.${NC}"
 if test ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm-redux; then
     mkdir $XDG_CONFIG_HOME/tmux/plugins
     git clone https://github.com/RyanMacG/tpm-redux $XDG_CONFIG_HOME/tmux/plugins/tpm-redux
@@ -145,16 +146,16 @@ $XDG_CONFIG_HOME/tmux/plugins/tpm-redux/bin/clean
 $XDG_CONFIG_HOME/tmux/plugins/tpm-redux/bin/update
 
 if command -v softwareupdate >/dev/null 2>&1; then
-    echo "Installing software updates."
+    echo -e "${CYAN}Installing software updates.${NC}"
     softwareupdate --all --install --force
 fi
 
-echo "Completed" $(date)
+echo -e "${CYAN}Completed" $(date) "${NC}"
 
 LOCKFILE_STATUS=$(yadm status --porcelain -- $HOMEBREW_BUNDLE_FILE.lock.json)
 if [ -n "$LOCKFILE_STATUS" ]; then
     echo ""
-    echo "${RED}There are changes to your Homebrew bundle's lock file. You should consider committing them.${NC}"
+    echo -e "${RED}There are changes to your Homebrew bundle's lock file. You should consider committing them.${NC}"
     echo ""
     exit 1
 fi
