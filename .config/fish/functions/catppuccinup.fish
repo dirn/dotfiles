@@ -42,12 +42,4 @@ function catppuccinup
             --create-dirs --output "$XDG_CONFIG_HOME/fish/themes/Catppuccin $(capitalize $flavor).theme" \
             https://raw.githubusercontent.com/catppuccin/fish/main/themes/Catppuccin%20$(capitalize $flavor).theme
     end
-
-    echo "Updating Neomutt themes"
-    curl --silent --location \
-        --create-dirs --output $XDG_CONFIG_HOME/neomutt/catppuccin.muttrc \
-        https://raw.githubusercontent.com/catppuccin/neomutt/main/neomuttrc
-    curl --silent --location \
-        --create-dirs --output $XDG_CONFIG_HOME/neomutt/catppuccin-latte.muttrc \
-        https://raw.githubusercontent.com/catppuccin/neomutt/main/latte-neomuttrc
 end
