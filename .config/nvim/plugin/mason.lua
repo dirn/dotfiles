@@ -1,4 +1,10 @@
-load_on({ "BufReadPost", "BufNewFile" }, function()
+local mason_loaded = false
+
+local function load_mason()
+  if mason_loaded then
+    return
+  end
+
   vim.pack.add({
     "https://github.com/mason-org/mason.nvim",
 
@@ -25,4 +31,9 @@ load_on({ "BufReadPost", "BufNewFile" }, function()
       "yamllint",
     },
   })
-end)
+
+  mason_loaded = true
+end
+
+load_on({ "BufReadPost", "BufNewFile" }, load_mason)
+load_on_user("AlphaReady", load_mason)
