@@ -125,7 +125,7 @@
       "src": "https://github.com/folke/snacks.nvim"
     },
     "tmux.nvim": {
-      "rev": "32ceaf2793582955ef9576809730878c4d2d9426",
+      "rev": "5971292e1322c1ae1c305bd6df58e6d1bf7527bb",
       "src": "https://github.com/aserowy/tmux.nvim"
     },
     "todo-comments.nvim": {
