@@ -1,5 +1,5 @@
 local function has_tmux()
-  return vim.fn.executable("tmux") > 0
+  return vim.fn.executable("tmux") > 0 and (vim.env.TMUX or "") ~= ""
 end
 
 if has_tmux() then
