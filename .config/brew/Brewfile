@@ -1,6 +1,4 @@
 tap "emmercm/igir"
-tap "homebrew/bundle"
-tap "homebrew/services"
 brew "aspell"
 brew "bash"
 brew "bat"
